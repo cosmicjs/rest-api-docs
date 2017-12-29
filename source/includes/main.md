@@ -1,11 +1,7 @@
 # Introduction
 
 
-```bash
-https://api.cosmicjs.com/v1
-```
-
-Connect to Cosmic JS through RESTful requests to the Cosmic JS API.  All requests use the base URL:
+Connect to Cosmic JS through RESTful requests to the Cosmic JS API.
 
 ### Base URL
 
@@ -22,7 +18,6 @@ curl -X POST https://api.cosmicjs.com/v1/authenticate -d "email=user@myservice.c
 
 ```javascript
 const Cosmic = require('cosmicjs');
-
 const response = await Cosmic.authenticate({ email: "user@myservice.com", password: "mypassword" });
 ```
 
@@ -48,15 +43,14 @@ Send your `email` and `password` to receive your access token. Your access token
 > Example Request
 
 ```bash
-curl -X POST https://api.cosmicjs.com/v1/buckets\
--H "Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXV.eyJlbWFpbCI6InNwaXJvbnlAZ21haWwuY29tIiwicGFzc3dvcmQiOiIxNzlhZDQ1YzZjZTJjYjk3Y2YxMDI5ZTIxMjA0NmU4MSIsImlhdCI6MTUxNDQ5NzI3N30.ep4cEgH_SqItQ5McJArJtljS3GSJedyEcDRlnu9yb-U"\
--H "Content-Type: application/json"\
+curl -X POST https://api.cosmicjs.com/v1/buckets \
+-H "Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXV.eyJlbWFpbCI6InNwaXJvbnlAZ21haWwuY29tIiwicGFzc3dvcmQiOiIxNzlhZDQ1YzZjZTJjYjk3Y2YxMDI5ZTIxMjA0NmU4MSIsImlhdCI6MTUxNDQ5NzI3N30.ep4cEgH_SqItQ5McJArJtljS3GSJedyEcDRlnu9yb-U" \
+-H "Content-Type: application/json" \
 -d '{"title": "My New Bucket"}'
 ```
 
 ```javascript
 const Cosmic = require('cosmicjs');
-
 const response = await Cosmic.authenticate({ email: "user@myservice.com", password: "mypassword" });
 ```
 
@@ -100,7 +94,7 @@ If you would like to view a revision, you can add `revision=revision_id` at the 
 ### Metafields and Metadata
 Metafields extend your Object data. From the API response, the Metafields parameter provides you with additional form field values including title, key and type and is provided in an array format. The Metadata parameter returns a key / value response and is the recommended way to get Metafield values from your Object. To hide Metafields, add the parameter hide_metafields=true to the endpoint URL. All of the following example responses below show results from having hide_metafields=true. Hidden Metafields will be the default behavior in a future API release.
 
-## Bucket
+## Get Bucket
 
 > Example Request
 
