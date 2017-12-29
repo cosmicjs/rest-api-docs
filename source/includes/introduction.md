@@ -1,6 +1,6 @@
 # Introduction
 
-Connect to Cosmic JS through RESTful requests to the Cosmic JS API.  The Cosmic JS API offers powerful tools to help you easily manage data and files for your applications.
+The Cosmic JS REST API offers powerful tools to help you easily manage data and files for your applications.  We support cross-origin resource sharing, allowing you to interact securely with our API from a client-side web application (though you should never expose your private keys or credentials in any public website's client-side code). JSON is returned by all API responses, including errors.
 
 > API Endpoint
 
