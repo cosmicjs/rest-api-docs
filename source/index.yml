@@ -8,8 +8,16 @@ toc_footers:
   - 
 
 includes:
-  - main
+  - introduction
   - _errors
+  - authentication
+  - buckets
+  - object-types
+  - objects
+  - metafields
+  - media
+  - webhooks
+  - extensions
 
 search: true
 
