@@ -283,7 +283,7 @@ html, body {
   .lang-selector {
     position: fixed;
     z-index: 50;
-    border-bottom: 5px solid $lang-select-active-bg;
+    // border-bottom: 5px solid $lang-select-active-bg;
   }
 }
 
@@ -296,7 +296,7 @@ html, body {
     float:left;
     color: $lang-select-text;
     text-decoration: none;
-    padding: 0 10px;
+    padding: 10px 20px;
     line-height: 30px;
     outline: 0;
 
@@ -553,10 +553,10 @@ html, body {
   blockquote {
     &>p {
       background-color: $code-annotation-bg;
-      border-radius: 5px;
+      // border-radius: 5px;
       padding: $code-annotation-padding;
       color: #ccc;
-      margin: 0 -28px;
+      margin: 0 -30px;
       // border-top: 1px solid #000;
       // border-bottom: 1px solid #404040;
     }
@@ -625,4 +625,9 @@ html, body {
 
 .highlight, .highlight .w {
   background-color: $code-bg;
+}
+
+// Override
+.highlight.javascript .hljs-comment {
+  color: #fff !important;
 }
