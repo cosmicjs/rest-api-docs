@@ -626,8 +626,3 @@ html, body {
 .highlight, .highlight .w {
   background-color: $code-bg;
 }
-
-// Override
-.highlight.javascript .hljs-comment {
-  color: #fff !important;
-}

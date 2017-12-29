@@ -5,11 +5,7 @@ Connect to Cosmic JS through RESTful requests to the Cosmic JS API.  All request
 
 > API Endpoint
 
-```bash
-https://api.cosmicjs.com
-```
-
-```javascript
+```json
 https://api.cosmicjs.com
 ```
 
@@ -81,6 +77,10 @@ password | false | `String` | Your Cosmic JS login password
 POST https://api.cosmicjs.com/v1/buckets
 ```
 
+```javascript
+Cosmic.addBucket()
+```
+
 > Example Request
 
 ```bash
@@ -91,8 +91,7 @@ curl -X POST https://api.cosmicjs.com/v1/buckets \
 ```
 
 ```javascript
-const Cosmic = require('cosmicjs');
-const response = await Cosmic.authenticate({ email: "user@myservice.com", password: "mypassword" });
+const response = await Cosmic.addBucket({ title: "My New Bucket" });
 ```
 
 > Example Response
@@ -125,7 +124,7 @@ extensions | false | `Array` | Populate your Bucket with <a href="https://cosmic
 
 > Definition
 
-```bash
+```json
 GET https://api.cosmicjs.com/:bucket-slug
 ```
 
@@ -136,14 +135,11 @@ curl "https://api.cosmicjs.com/v1/wedding-site"
 ```
 
 ```javascript
-const config = {
-  bucket: {
-    slug: 'test-bucket',
-    read_key: '1234asdf'
-  }
-}
 const Cosmic = require('cosmicjs');
-const api = Cosmic.config(config);
+const api = Cosmic.config({
+  bucket: 'test-bucket',
+  read_key: '1234asdf'
+});
 const response = await api.getBucket();
 ```
 
@@ -192,7 +188,7 @@ hide_metafields | false | `Enum` | true, Hides metafields
 
 > Definition
 
-```bash
+```json
 POST https://api.cosmicjs.com/v1/:bucket-slug/add-object-type
 ```
 
@@ -251,7 +247,7 @@ POST https://api.cosmicjs.com/v1/:bucket-slug/add-object-type
 
 Add a new Object Type to your Bucket.
 
-title is the only required field. You can add Metafields which will be available as default Metafields for each new Object in this Object Type. If a write key is enabled on the requested Bucket, the variable write_key will need to be present in the Body.
+`title` is the only required field. You can add Metafields which will be available as default Metafields for each new Object in this Object Type. If a write key is enabled on the requested Bucket, `write_key` will need to be present in the Body.
 
 Parameter | Required | Type | Description
 --------- | ------- | ----------- | -----------
@@ -259,15 +255,13 @@ title | true | `String` | Plural title of your Object Type
 slug | false | `String` | Plural slug of your Object Type
 singular | false | `String` | Singular title of your Object Type
 metafields | false | `Array` | Default Metafields for each Object in this type
+write_key | false | `String` | Restrict write access to your Bucket
 
 ## Get Object Types
 
 > Definition
 
-```bash
-GET https://api.cosmicjs.com/v1/:bucket-slug/object-types
-```
-```javascript
+```json
 GET https://api.cosmicjs.com/v1/:bucket-slug/object-types
 ```
 
@@ -349,6 +343,11 @@ Get all Object Types in your Bucket.
 
 
 
+
+
+
+
+
 # Objects
 
 The following endpoints allow you to add, edit and delete Objects in your Bucket.  If you would like to restrict read or write access to your Bucket, you can do so in Your Bucket > Basic Settings.
@@ -411,7 +410,10 @@ POST https://api.cosmicjs.com/v1/:bucket-slug/add-object
     "bucket": "568c5bbefd0dce302c000001",
     "type_slug": "examples",
     "created_at": "2016-01-06T00:28:39.982Z",
-    "_id": "568c5fb72f0c5d532d000001"
+    "_id": "568c5fb72f0c5d532d000001",
+    "options": {
+      "slug_field": false
+    }
   }
 }
 ```
@@ -515,7 +517,135 @@ sort | false | `Enum` | created_at,-created_at,modified_at,-modified_at,random
 
 
 
+## Get Objects in Type
 
+> Definition
+
+```json
+GET https://api.cosmicjs.com/v1/:bucket-slug/object-type/:type-slug
+```
+
+> Example Request
+
+```bash
+curl "https://api.cosmicjs.com/v1/wedding-site/object-type/groomsmen?limit=3"
+```
+```javascript
+Cosmic.getObjectType()
+```
+
+> Example Response
+
+```json
+{
+  "objects": [
+    {
+      "_id": "55b3da7740d7a3791b000009",
+      "bucket": "55b3d557df0fb1df7600004b",
+      "slug": "chad-henly",
+      "title": "Chad Henly",
+      "content": "<p>&nbsp;&nbsp;&nbsp;&nbsp;<br></p>",
+      "type_slug": "groomsmen",
+      "created": "2015-07-25T18:50:31.820Z",
+      "modified": "2015-07-25T18:51:44.249Z",
+      "metadata": {
+        "image": {
+          "url": "https://s3-us-west-2.amazonaws.com/cosmicjs/3181a814-93d9-ad8f-74ce-1eeb64023b61-1420162840289-mke.jpg",
+          "imgix_url": "https://cosmic-s3.imgix.net/3181a814-93d9-ad8f-74ce-1eeb64023b61-1420162840289-mke.jpg"
+        },
+        "official-title": "Best Man"
+      }
+    },
+    {
+      "_id": "55b3da7740d7a3791b00000a",
+      "bucket": "55b3d557df0fb1df7600004b",
+      "slug": "eric-harland",
+      "title": "Eric Harland",
+      "content": "<p>&nbsp;&nbsp;&nbsp;&nbsp;<br></p>",
+      "type_slug": "groomsmen",
+      "created": "2015-07-25T18:50:31.821Z",
+      "modified": "2015-07-25T18:52:35.032Z",
+      "metadata": {
+        "image": {
+          "url": "https://s3-us-west-2.amazonaws.com/cosmicjs/a499fdab-10b5-5168-9ef1-8981c8e93da4-1420162840650-dave.jpg",
+          "imgix_url": "https://cosmic-s3.imgix.net/a499fdab-10b5-5168-9ef1-8981c8e93da4-1420162840650-dave.jpg"
+        },
+        "official-title": "Groomsman"
+      }
+    }
+  ],
+  "total": 5,
+  "limit": 3
+}
+```
+
+
+Get Objects from an Object Type.
+
+
+
+## Search Objects
+
+> Definition
+
+```json
+GET https://api.cosmicjs.com/v1/:bucket-slug/object-type/:type-slug/search
+```
+
+> Example Request
+
+```bash
+curl "https://api.cosmicjs.com/v1/wedding-site/object-type/groomsmen/search?metafield_key=official-title&metafield_value=Best%20Man"
+```
+```javascript
+Cosmic.searchObjectType()
+```
+
+> Example Response
+
+```json
+{
+  "objects": [
+    {
+      "_id": "55b3da7740d7a3791b000009",
+      "bucket": "55b3d557df0fb1df7600004b",
+      "slug": "chad-henly",
+      "title": "Chad Henly",
+      "content": "<p>&nbsp;&nbsp;&nbsp;&nbsp;<br></p>",
+      "type_slug": "groomsmen",
+      "created": "2015-07-25T18:50:31.820Z",
+      "user_id": "55767c3ffbcf5cbb13000001",
+      "order": 7,
+      "modified": "2015-07-25T18:51:44.249Z",
+      "metadata": {
+        "image": {
+          "url": "https://s3-us-west-2.amazonaws.com/cosmicjs/3181a814-93d9-ad8f-74ce-1eeb64023b61-1420162840289-mke.jpg",
+          "imgix_url": "https://cosmic-s3.imgix.net/3181a814-93d9-ad8f-74ce-1eeb64023b61-1420162840289-mke.jpg"
+        },
+        "official-title": "Best Man"
+      }
+    }
+  ],
+  "total": 1
+}
+```
+
+
+Search Objects in an Object Type.
+
+Parameter | Required | Type | Description
+--------- | ------- | ----------- | -----------
+pretty | false | `Enum` | true, Makes the response more reader-friendly
+limit | false | `Number` | The number of Objects to return
+skip | false | `Number` | The number of Objects to skip
+status | false | `Enum` | all, Return published and draft status Objects
+read_key | false | `String` | Restrict read access to your Bucket
+hide_metafields | false | `Enum` | true, Hides metafields
+sort | false | `Enum` | created_at,-created_at,modified_at,<br />-modified_at,random
+metafield_key | false | `String` | Metafield key to search for
+metafield_value | false | `String` | Exact Metafield value to match
+metafield_value_has | false | `String` | Metafield value contains this string
+metafield_object_slug | false | `String` | Object Metafield Object slug
 
 
 
@@ -643,6 +773,12 @@ For Single Object type Metafields, you can add the Object ID as the value to con
 
 # Media
 
+> Definition
+
+```json
+POST https://api.cosmicjs.com/v1/:bucket-slug/media
+```
+
 > Example Request
 
 ```json
@@ -671,9 +807,6 @@ For Single Object type Metafields, you can add the Object ID as the value to con
 }
 ```
 
-### Endpoint
-
-`POST https://api.cosmicjs.com/v1/:bucket-slug/media`
 
 Required post values include media which is the name of your media sent. If a write key is enabled on the requested bucket, the variable `write_key` will need to be present in the Body. You can also add an optional folder param to add the Media to a specific folder.
 
