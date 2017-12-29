@@ -74,7 +74,7 @@ POST https://api.cosmicjs.com/v1/:bucket-slug/add-object-type
 ```
 
 
-## Add to Object
+## Connect Objects
 
 > Definition
 
@@ -112,4 +112,5 @@ POST https://api.cosmicjs.com/v1/:bucket-slug/add-object
 }
 ```
 
-For Single Object type Metafields, you can add the Object ID as the value to connect the Object.  For Multiple Object type Metafields, you can add the Object IDs as comma-separated values to connect the Object.
+You can connect Objects using Single and Mulpile Object Metafields.  For a Single Object Metafield, add the Object ID (`_id`) as the value to connect the Object.  The full Object will be returned on the Metadata response.  For Multiple Object type Metafields, you can add the Object IDs as comma-separated values which will return the full Objects as an Array on the response.
+
