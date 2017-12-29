@@ -1,14 +1,11 @@
-title: API Reference
+title: Cosmic JS API Docs
 
 language_tabs:
   - bash
-  - ruby
-  - python
   - javascript
 
 toc_footers:
-  - <a href='#'>Sign Up for a Developer Key</a>
-  - <a href='https://github.com/tripit/slate'>Documentation Powered by Slate</a>
+  - <a href='https://cosmicjs.com/signup'>Sign Up to use the Cosmic JS API</a>
 
 includes:
   - main
