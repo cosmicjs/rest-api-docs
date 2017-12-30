@@ -1,21 +1,23 @@
 # Metafields
 
-Metafields can be added to Objects and Object Types via the API. The model matches the Metafields model on API GET requests which includes minimum properties `type`, `title`, `key` and `value`. For text and textarea Metafields, you can also add validation via the `regex` and `regex_message` properties.
+## Model
+
+Metafields are powerful properties of Objects and Object Types.
 
 As a general rule, you can copy the Metafields response model on GET requests and send it in a request body to add Metafields via the API.
 
 Parameter | Required | Type | Description
 --------- | ------- | ----------- | -----------
-type | true | `Enum` | text, textarea, html-textarea, <br />select-dropdown, object, objects, <br />file, date, radio-buttons, check-boxes, <br />repeater, parent, markdown
-title | true | `String` | Your Bucket title
-key | true | `String` | Unique identifier for your Bucket
-value | false | `String` | Metafield value
-required | false | `Bool` | A value is required
-regex | false | `String` | Restrict the value to match a regular expresssion
-regex_message | false | `Array` | The message displayed when the value fails the regex
-children | false | `Array` | Add nested Metafields
-minlength | false | `Number` | Add minlength to `text` or `textarea` Metafields
-maxlength | false | `Number` | Add maxlength to `text` or `textarea` Metafields
+type | true | Enum | text, textarea, html-textarea, <br />select-dropdown, object, objects, <br />file, date, radio-buttons, check-boxes, <br />repeater, parent, markdown
+title | true | String | Your Bucket title
+key | true | String | Unique identifier for your Bucket
+value | false | String | Metafield value
+required | false | Bool | A value is required
+regex | false | String | Restrict the value to match a regular expresssion
+regex_message | false | Array | The message displayed when the value fails the regex
+children | false | Array | Add nested Metafields
+minlength | false | Number | Add minlength to text or textarea Metafields
+maxlength | false | Number | Add maxlength to text or textarea Metafields
 
 ## Add to Object Type
 

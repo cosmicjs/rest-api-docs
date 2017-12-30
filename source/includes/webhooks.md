@@ -35,6 +35,6 @@ Sends a POST request to the endpoint of your choice when the event occurs.  Read
 
 Parameter | Required | Type | Description
 --------- | ------- | ----------- | -----------
-write_key | false | `String` | Your Bucket write key
-event | true | `Enum` | object.created.draft, object.created.published<br />object.edited.draft, object.edited.published<br />object.deleted, media.created<br />media.edited, media.deleted<br />
-endpoint | true | `String` | The endpoint that will receive the data
+write_key | false | String | Your Bucket write key
+event | true | Enum | object.created.draft, object.created.published<br />object.edited.draft, object.edited.published<br />object.deleted, media.created<br />media.edited, media.deleted<br />
+endpoint | true | String | The endpoint that will receive the data

@@ -41,9 +41,9 @@ Required post values include media which is the name of your media sent. If a wr
 
 Parameter | Required | Type | Description
 --------- | ------- | ----------- | -----------
-media | true | `File` | Media object
-write_key | false | `String` | Your Bucket write key
-folder | false | `String` | Media folder slug
+media | true | File | Media object
+write_key | false | String | Your Bucket write key
+folder | false | String | Media folder slug
 
 
 ## Delete Media
@@ -77,4 +77,4 @@ Required post values include media which is the name of your media sent. If a wr
 
 Parameter | Required | Type | Description
 --------- | ------- | ----------- | -----------
-write_key | false | `String` | Your Bucket write key
+write_key | false | String | Your Bucket write key

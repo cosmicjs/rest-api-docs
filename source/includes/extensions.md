@@ -39,8 +39,8 @@ Adds an Extension to your Bucket.  Read more about Extensions on the <a href="ht
 
 Parameter | Required | Type | Description
 --------- | ------- | ----------- | -----------
-zip | true | `File` | Media object
-write_key | false | `String` | Your Bucket write key
+zip | true | File | Media object
+write_key | false | String | Your Bucket write key
 
 
 ## Delete an Extension
@@ -74,4 +74,4 @@ Required post values include media which is the name of your media sent. If a wr
 
 Parameter | Required | Type | Description
 --------- | ------- | ----------- | -----------
-write_key | false | `String` | Your Bucket write key
+write_key | false | String | Your Bucket write key

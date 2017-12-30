@@ -38,5 +38,5 @@ Send your `email` and `password` to receive your access token. Your access token
 
 Parameter | Required | Type | Description
 --------- | ------- | ----------- | -----------
-email | true | `String` | Your Cosmic JS login email
-password | false | `String` | Your Cosmic JS login password
+email | true | String | Your Cosmic JS login email
+password | false | String | Your Cosmic JS login password

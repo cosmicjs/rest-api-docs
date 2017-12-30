@@ -67,11 +67,11 @@ Add a new Object Type to your Bucket.
 
 Parameter | Required | Type | Description
 --------- | ------- | ----------- | -----------
-title | true | `String` | Plural title of your Object Type
-slug | false | `String` | Plural slug of your Object Type
-singular | false | `String` | Singular title of your Object Type
-metafields | false | `Array` | Default Metafields for each Object in this type
-write_key | false | `String` | Restrict write access to your Bucket
+title | true | String | Plural title of your Object Type
+slug | false | String | Plural slug of your Object Type
+singular | false | String | Singular title of your Object Type
+metafields | false | Array | Default Metafields for each Object in this type
+write_key | false | String | Restrict write access to your Bucket
 
 ## Get Object Types
 

@@ -42,16 +42,16 @@ const response = await Cosmic.addBucket({ title: "My New Bucket" });
 
 Parameter | Required | Type | Description
 --------- | ------- | ----------- | -----------
-title | true | `String` | Your Bucket title
-slug | false | `String` | Unique identifier for your Bucket
-read_key | false | `String` | Restrict read access to your Bucket
-write_key | false | `String` | Restrict write access to your Bucket
-object_types | false | `Array` | Populate your Bucket with Object Types
-objects | false | `Array` | Populate your Bucket with Objects
-media | false | `Array` | Populate your Bucket with Media
-media_folders | false | `Array` | Populate your Bucket with Media Folders
-webhooks | false | `Array` | Populate your Bucket with <a href="https://cosmicjs.com/docs/webhooks" target="_blank">Webhooks</a>
-extensions | false | `Array` | Populate your Bucket with <a href="https://cosmicjs.com/docs/extensions" target="_blank">Extensions</a>
+title | true | String | Your Bucket title
+slug | false | String | Unique identifier for your Bucket
+read_key | false | String | Restrict read access to your Bucket
+write_key | false | String | Restrict write access to your Bucket
+object_types | false | Array | Populate your Bucket with Object Types
+objects | false | Array | Populate your Bucket with Objects
+media | false | Array | Populate your Bucket with Media
+media_folders | false | Array | Populate your Bucket with Media Folders
+webhooks | false | Array | Populate your Bucket with <a href="https://cosmicjs.com/docs/webhooks" target="_blank">Webhooks</a>
+extensions | false | Array | Populate your Bucket with <a href="https://cosmicjs.com/docs/extensions" target="_blank">Extensions</a>
 
 
 ## Get Bucket
@@ -109,5 +109,5 @@ Returns the entire Bucket.  If you would like to restrict read access to your Bu
 
 Parameter | Required | Type | Description
 --------- | ------- | ----------- | -----------
-read_key | false | `String` | Restrict read access to your Bucket
-hide_metafields | false | `Enum` | true, Hides metafields
+read_key | false | String | Restrict read access to your Bucket
+hide_metafields | false | Enum | true, Hides metafields
