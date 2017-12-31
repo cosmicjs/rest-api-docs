@@ -37,11 +37,12 @@ api.addObjectType()
 ```
 
 ```javascript
-const api = require('cosmicjs').config({
+const Cosmic = require('cosmicjs')
+const api = Cosmic.config({
   bucket: 'bucket-slug',
-  read_key: ''
+  write_key: ''
 })
-const request_body = {
+const params = {
   "title": "Pages",
   "singular": "Page",
   "slug": "pages",
@@ -60,7 +61,15 @@ const request_body = {
     }
   ]
 }
-const response = await api.addObjectType(request_body)
+const api = Cosmic.config({
+  bucket: 'bucket-slug',
+  write_key: ''
+})
+api.addObjectType(params).then(data => {
+  console.log(data)
+}).catch(err => {
+  console.log(err)
+})
 ```
 
 > Example Response
@@ -111,7 +120,7 @@ GET https://api.cosmicjs.com/v1/:bucket-slug/object-types
 ```
 
 ```javascript
-Cosmic.getObjectTypes()
+api.getObjectTypes()
 ```
 
 > Example Request
@@ -124,9 +133,13 @@ curl "https://api.cosmicjs.com/v1/wedding-site/object-types"
 const Cosmic = require('cosmicjs')
 const api = Cosmic.config({
   bucket: 'wedding-site',
-  read_key: '1234asdf'
+  read_key: ''
 })
-const response = await Cosmic.getObjectTypes()
+api.getObjectTypes().then(data => {
+  console.log(data)
+}).catch(err => {
+  console.log(err)
+})
 ```
 
 > Example Response
@@ -193,10 +206,6 @@ const response = await Cosmic.getObjectTypes()
 }
 ```
 
-```javascript
-const response = await Cosmic.getObjectTypes(params);
-```
-
 Get all Object Types in your Bucket.
 
 Parameter | Required | Type | Description
@@ -209,14 +218,17 @@ read_key | false | String | Restrict read access to your Bucket
 
 > Definition
 
-```json
+```bash
 PUT https://api.cosmicjs.com/v1/:bucket-slug/edit-object-type
 ```
 
+```javascript
+api.editObjectType()
+  ```
 
-> Example Request Body
+> Example Request
 
-```json
+```bash
 {
   "slug": "pages",
   "metafields": [
@@ -240,6 +252,23 @@ PUT https://api.cosmicjs.com/v1/:bucket-slug/edit-object-type
     }
   ]
 }
+```
+
+
+```javascript
+const Cosmic = require('cosmicjs')
+const api = Cosmic.config({
+  bucket: 'bucket-slug',
+  read_key: ''
+})
+api.editObjectType({
+  slug: 'posts',
+  title: 'New Posts Title'
+}).then(data => {
+  console.log(data)
+}).catch(err => {
+  console.log(err)
+})
 ```
 
 > Example Response
@@ -292,17 +321,36 @@ write_key | false | String | Restrict write access to your Bucket
 
 > Definition
 
-```json
+```bash
 DELETE https://api.cosmicjs.com/v1/:bucket-slug/object-types/:object-type-slug
+```
+
+```javascript
+api.deleteObjectType()
 ```
 
 
 > Example Request Body
 
-```json
+```bash
 {
   "write_key": "your-key-added-in-bucket-settings" // optional
 }
+```
+
+```javascript
+const Cosmic = require('cosmicjs')
+const api = Cosmic.config({
+  bucket: 'bucket-slug',
+  write_key: ''
+})
+api.deleteObjectType({
+  slug: 'posts'
+}).then(data => {
+  console.log(data)
+}).catch(err => {
+  console.log(err)
+})
 ```
 
 > Example Response

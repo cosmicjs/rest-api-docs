@@ -20,7 +20,7 @@ curl -X POST https://api.cosmicjs.com/v1/authenticate \
 ```
 
 ```javascript
-var Cosmic = require('cosmicjs')
+const Cosmic = require('cosmicjs')
 Cosmic.authenticate({
   email: 'user@myservice.com',
   password: 'mypassword'

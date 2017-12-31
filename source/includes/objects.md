@@ -92,6 +92,10 @@ write_key | false | String | Your Bucket write key
 GET https://api.cosmicjs.com/:bucket-slug/objects
 ```
 
+```javascript
+api.getObjects()
+```
+
 > Example Request
 
 ```bash
@@ -99,15 +103,15 @@ curl "https://api.cosmicjs.com/v1/wedding-site/objects?pretty=true&hide_metafiel
 ```
 
 ```javascript
-const config = {
-  bucket: {
-    slug: 'test-bucket',
-    read_key: '1234asdf'
-  }
-}
-const Cosmic = require('cosmicjs');
-const api = Cosmic.config(config);
-const response = await api.getObjects();
+const api = Cosmic.config({
+  bucket: 'wedding-site',
+  read_key: ''
+})
+api.getObjects({ limit: 2 }).then(data => {
+  console.log(data)
+}).catch(err => {
+  console.log(err)
+})
 ```
 
 > Example Response
@@ -120,7 +124,7 @@ const response = await api.getObjects();
       "bucket": "55b3d557df0fb1df7600004b",
       "slug": "main-menu",
       "title": "Main Menu",
-      "content": "<p><br></p>",
+      "content": "",
       "type_slug": "sections",
       "created": "2015-07-25T18:50:31.809Z",
       "metadata": {
@@ -134,7 +138,7 @@ const response = await api.getObjects();
       "bucket": "55b3d557df0fb1df7600004b",
       "slug": "global",
       "title": "Global",
-      "content": "<p><br></p>",
+      "content": "",
       "type_slug": "sections",
       "created": "2015-07-25T18:50:31.812Z",
       "metadata": {
@@ -164,7 +168,7 @@ locale | false | String | Filter by locale
 pretty | false | Enum | true, Makes the response more reader-friendly
 read_key | false | String | Your Bucket read key
 
-## Get Objects in Type
+## Get Objects by Type
 
 > Definition
 
@@ -178,7 +182,15 @@ GET https://api.cosmicjs.com/v1/:bucket-slug/object-type/:type-slug
 curl "https://api.cosmicjs.com/v1/wedding-site/object-type/groomsmen?limit=3"
 ```
 ```javascript
-Cosmic.getObjectType()
+const api = Cosmic.config({
+  bucket: 'wedding-site',
+  read_key: ''
+})
+api.getObjectsByType({ type_slug: 'groomsmen', limit: 3 }).then(data => {
+  console.log(data)
+}).catch(err => {
+  console.log(err)
+})
 ```
 
 > Example Response
@@ -216,6 +228,23 @@ Cosmic.getObjectType()
         "image": {
           "url": "https://s3-us-west-2.amazonaws.com/cosmicjs/a499fdab-10b5-5168-9ef1-8981c8e93da4-1420162840650-dave.jpg",
           "imgix_url": "https://cosmic-s3.imgix.net/a499fdab-10b5-5168-9ef1-8981c8e93da4-1420162840650-dave.jpg"
+        },
+        "official-title": "Groomsman"
+      }
+    },
+    {
+      "_id": "55b3da7740d7a3791b00000c",
+      "bucket": "55b3d557df0fb1df7600004b",
+      "slug": "lance-bergstrom",
+      "title": "Lance Bergstrom",
+      "content": "<p><br></p>",
+      "type_slug": "groomsmen",
+      "created": "2015-07-25T18:50:31.823Z",
+      "modified": "2015-07-25T18:53:26.148Z",
+      "metadata": {
+        "image": {
+          "url": "https://s3-us-west-2.amazonaws.com/cosmicjs/4c6a5b21-e335-237f-2731-a455d361ddd1-1420162839613-colin.jpg",
+          "imgix_url": "https://cosmic-s3.imgix.net/4c6a5b21-e335-237f-2731-a455d361ddd1-1420162839613-colin.jpg"
         },
         "official-title": "Groomsman"
       }
