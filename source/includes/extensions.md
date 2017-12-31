@@ -28,7 +28,6 @@ POST https://api.cosmicjs.com/v1/:bucket-slug/extensions
     "url": "http://localhost:3000/extensions/c62defe0-5f93-11e7-8054-873245f0e98d/dist",
     "zip_url": "http://localhost:3000/extensions/c62defe0-5f93-11e7-8054-873245f0e98d/src/build.zip",
     "installed_at": "2017-07-03T02:03:14.825Z",
-    "installed_by": null,
     "font_awesome_class": "fa-shopping-basket"
   }
 }

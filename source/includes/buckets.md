@@ -43,15 +43,15 @@ const response = await Cosmic.addBucket({ title: "My New Bucket" });
 Parameter | Required | Type | Description
 --------- | ------- | ----------- | -----------
 title | true | String | Your Bucket title
-slug | false | String | Unique identifier for your Bucket
-read_key | false | String | Restrict read access to your Bucket
-write_key | false | String | Restrict write access to your Bucket
-object_types | false | Array | Populate your Bucket with Object Types
-objects | false | Array | Populate your Bucket with Objects
-media | false | Array | Populate your Bucket with Media
-media_folders | false | Array | Populate your Bucket with Media Folders
-webhooks | false | Array | Populate your Bucket with <a href="https://cosmicjs.com/docs/webhooks" target="_blank">Webhooks</a>
-extensions | false | Array | Populate your Bucket with <a href="https://cosmicjs.com/docs/extensions" target="_blank">Extensions</a>
+slug | false | String | URL-friendly unique identifier
+read_key | false | String | Restrict read access
+write_key | false | String | Restrict write access
+object_types | false | Array | Populate your Bucket with Object Types.  See <a href="/#object-types">Object Types</a> for model.
+objects | false | Array | Populate your Bucket with Objects. See <a href="/#objects">Objects</a> for model.
+media | false | Array | Populate your Bucket with Media. See <a href="/#media">Media</a> for model.
+media_folders | false | Array | Populate your Bucket with Media Folders. See <a href="/#media">Media</a> for model.
+webhooks | false | Array | Populate your Bucket with <a href="https://cosmicjs.com/docs/webhooks" target="_blank">Webhooks</a>. See <a href="/#webhooks">Webhooks</a> for model.
+extensions | false | Array | Populate your Bucket with <a href="https://cosmicjs.com/docs/extensions" target="_blank">Extensions</a>. See <a href="/#extensions">Extensions</a> for model.
 
 
 ## Get Bucket

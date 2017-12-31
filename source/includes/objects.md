@@ -81,6 +81,7 @@ options.slug_field | false | Bool | Set to false to hide the slug field
 options.content_editor | false | Bool | Set to false to hide the content editor
 write_key | false | String | Restrict write access to your Bucket
 metafields | false | Array | Add Metafields to your Object
+locale | false | String | Add localization to the Object
 
 
 Required post values include type_slug and title. You can add Metafields (and children of metafields). If a write key is enabled on the requested Bucket, the property `write_key` will need to be present in the Body.
@@ -164,7 +165,7 @@ read_key | false | String | Restrict read access to your Bucket
 revision | false | String | The revision_id of the Object Revision
 hide_metafields | false | Enum | true, Hides metafields
 sort | false | Enum | created_at,-created_at,modified_at,-modified_at,random
-
+locale | false | String | Filter by locale
 
 
 ## Get Objects in Type
@@ -296,6 +297,7 @@ metafield_key | false | String | Metafield key to search for
 metafield_value | false | String | Exact Metafield value to match
 metafield_value_has | false | String | Metafield value contains this string
 metafield_object_slug | false | String | Object Metafield Object slug
+locale | false | String | Filter by locale
 
 ## Edit Object
 
@@ -370,6 +372,7 @@ options.slug_field | false | Bool | Set to false to hide the slug field
 options.content_editor | false | Bool | Set to false to hide the content editor
 write_key | false | String | Restrict write access to your Bucket
 metafields | false | Array | Add Metafields to your Object
+locale | false | String | Edit Object locale
 
 Edit an existing Object in your Bucket.
 

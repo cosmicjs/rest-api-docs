@@ -13,7 +13,17 @@ POST https://api.cosmicjs.com/v1/:bucket-slug/media
 ```json
 {
   "media": "your-media-multipart-form-data",
-  "folder": "your-folder-slug"
+  "folder": "your-folder-slug",
+  "metadata": [
+    {
+      "key": "caption",
+      "value": "Beautiful picture of the beach"
+    },
+    {
+      "key": "credit",
+      "value": "Tyler Jackson"
+    }
+  ]
 }
 ```
 
@@ -31,7 +41,17 @@ POST https://api.cosmicjs.com/v1/:bucket-slug/media
     "created": "2016-12-02T15:34:05.054Z",
     "location": "https://cosmicjs.com/uploads",
     "url": "https://s3-us-west-2.amazonaws.com/cosmicjs/c20391e0-b8a4-11e6-8836-fbdfd6956b31-bird.jpg",
-    "imgix_url": "https://cosmic-s3.imgix.net/c20391e0-b8a4-11e6-8836-fbdfd6956b31-bird.jpg"
+    "imgix_url": "https://cosmic-s3.imgix.net/c20391e0-b8a4-11e6-8836-fbdfd6956b31-bird.jpg",
+    "metadata": [
+      {
+        "key": "caption",
+        "value": "Beautiful picture of the beach"
+      },
+      {
+        "key": "credit",
+        "value": "Tyler Jackson"
+      }
+    ]
   }
 }
 ```
@@ -44,6 +64,7 @@ Parameter | Required | Type | Description
 media | true | File | Media object
 write_key | false | String | Your Bucket write key
 folder | false | String | Media folder slug
+metadata | false | Array | Key / value data store
 
 
 ## Delete Media
