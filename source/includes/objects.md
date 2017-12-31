@@ -74,17 +74,14 @@ Add a new Object to your Bucket.
 Parameter | Required | Type | Description
 --------- | ------- | ----------- | -----------
 type_slug | true | String | Add Object to Object Type
-title | true | String | Your Bucket title
+title | true | String | Your Object title
 slug | false | String | Unique identifier for your Object
 content | false | String | Add Content to your Object
 options.slug_field | false | Bool | Set to false to hide the slug field
 options.content_editor | false | Bool | Set to false to hide the content editor
-write_key | false | String | Restrict write access to your Bucket
 metafields | false | Array | Add Metafields to your Object
 locale | false | String | Add localization to the Object
-
-
-Required post values include type_slug and title. You can add Metafields (and children of metafields). If a write key is enabled on the requested Bucket, the property `write_key` will need to be present in the Body.
+write_key | false | String | Your Bucket write key
 
 
 ## Get Objects
@@ -152,21 +149,20 @@ const response = await api.getObjects();
 }
 ```
 
-This endpoint returns all Objects from the specified Bucket.
+Returns all Objects from your Bucket.
 
 
 Parameter | Required | Type | Description
 --------- | ------- | ----------- | -----------
-pretty | false | Enum | true, Makes the response more reader-friendly
 limit | false | Number | The number of Objects to return
 skip | false | Number | The number of Objects to skip
 status | false | Enum | all, Return published and draft status Objects
-read_key | false | String | Restrict read access to your Bucket
 revision | false | String | The revision_id of the Object Revision
 hide_metafields | false | Enum | true, Hides metafields
 sort | false | Enum | created_at,-created_at,modified_at,-modified_at,random
 locale | false | String | Filter by locale
-
+pretty | false | Enum | true, Makes the response more reader-friendly
+read_key | false | String | Your Bucket read key
 
 ## Get Objects in Type
 
@@ -233,7 +229,17 @@ Cosmic.getObjectType()
 
 Get Objects from an Object Type.
 
-
+Parameter | Required | Type | Description
+--------- | ------- | ----------- | -----------
+limit | false | Number | The number of Objects to return
+skip | false | Number | The number of Objects to skip
+status | false | Enum | all, Return published and draft status Objects
+revision | false | String | The revision_id of the Object Revision
+hide_metafields | false | Enum | true, Hides metafields
+sort | false | Enum | created_at,-created_at,modified_at,-modified_at,random
+locale | false | String | Filter by locale
+pretty | false | Enum | true, Makes the response more reader-friendly
+read_key | false | String | Your Bucket read key
 
 ## Search Objects
 
@@ -290,7 +296,6 @@ pretty | false | Enum | true, Makes the response more reader-friendly
 limit | false | Number | The number of Objects to return
 skip | false | Number | The number of Objects to skip
 status | false | Enum | all, Return published and draft status Objects
-read_key | false | String | Restrict read access to your Bucket
 hide_metafields | false | Enum | true, Hides metafields
 sort | false | Enum | created_at,-created_at,modified_at,<br />-modified_at,random
 metafield_key | false | String | Metafield key to search for
@@ -298,6 +303,7 @@ metafield_value | false | String | Exact Metafield value to match
 metafield_value_has | false | String | Metafield value contains this string
 metafield_object_slug | false | String | Object Metafield Object slug
 locale | false | String | Filter by locale
+read_key | false | String | Your Bucket read key
 
 ## Edit Object
 
@@ -361,6 +367,7 @@ PUT https://api.cosmicjs.com/v1/:bucket-slug/edit-object
 }
 ```
 
+Edit an existing Object in your Bucket.
 
 Parameter | Required | Type | Description
 --------- | ------- | ----------- | -----------
@@ -370,11 +377,9 @@ slug | false | String | Unique identifier for your Object
 content | false | String | Add Content to your Object
 options.slug_field | false | Bool | Set to false to hide the slug field
 options.content_editor | false | Bool | Set to false to hide the content editor
-write_key | false | String | Restrict write access to your Bucket
 metafields | false | Array | Add Metafields to your Object
 locale | false | String | Edit Object locale
-
-Edit an existing Object in your Bucket.
+write_key | false | String | Your Bucket write key
 
 
 ## Delete Object
@@ -403,8 +408,8 @@ DELETE https://api.cosmicjs.com/v1/:bucket-slug/objects/:object-slug
 ```
 
 
+Edit an existing Object in your Bucket.
+
 Parameter | Required | Type | Description
 --------- | ------- | ----------- | -----------
-write_key | false | String | Restrict write access to your Bucket
-
-Edit an existing Object in your Bucket.
+write_key | false | String | Your Bucket write key

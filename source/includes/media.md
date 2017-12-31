@@ -57,15 +57,14 @@ POST https://api.cosmicjs.com/v1/:bucket-slug/media
 ```
 
 
-Required post values include media which is the name of your media sent. If a write key is enabled on the requested bucket, the variable `write_key` will need to be present in the Body. You can also add an optional folder param to add the Media to a specific folder.
+The only required post value is `media` which is the name of your media sent. If a write key is enabled on the requested bucket, the parameter `write_key` will need to be present in the Body. You can also add an optional `folder` and `metadata` params.
 
 Parameter | Required | Type | Description
 --------- | ------- | ----------- | -----------
 media | true | File | Media object
-write_key | false | String | Your Bucket write key
 folder | false | String | Media folder slug
 metadata | false | Array | Key / value data store
-
+write_key | false | String | Your Bucket write key
 
 ## Delete Media
 

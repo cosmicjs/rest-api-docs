@@ -109,5 +109,5 @@ Returns the entire Bucket.  If you would like to restrict read access to your Bu
 
 Parameter | Required | Type | Description
 --------- | ------- | ----------- | -----------
-read_key | false | String | Restrict read access to your Bucket
 hide_metafields | false | Enum | true, Hides metafields
+read_key | false | String | Restrict read access to your Bucket

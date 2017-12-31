@@ -320,6 +320,8 @@ POST https://api.cosmicjs.com/v1/:bucket-slug/add-object-type
 }
 ```
 
+Reference the <a href="/#model">Metafield model</a> to learn more.
+
 ## Add to Object
 
 Add Metafields to Objects via the API.
@@ -375,7 +377,7 @@ POST https://api.cosmicjs.com/v1/:bucket-slug/add-object
 }
 ```
 
-
+Reference the <a href="/#model">Metafield model</a> to learn more.
 
 ## Connect Objects
 

@@ -63,14 +63,13 @@ POST https://api.cosmicjs.com/v1/:bucket-slug/add-object-type
 
 Add a new Object Type to your Bucket.
 
-`title` is the only required field. You can add Metafields which will be available as default Metafields for each new Object in this Object Type. If a write key is enabled on the requested Bucket, `write_key` will need to be present in the Body.
-
 Parameter | Required | Type | Description
 --------- | ------- | ----------- | -----------
 title | true | String | Plural title of your Object Type
 slug | false | String | Plural slug of your Object Type
 singular | false | String | Singular title of your Object Type
 metafields | false | Array | Default Metafields for each Object in this type
+pretty | false | Enum | true, Makes the response more reader-friendly
 write_key | false | String | Restrict write access to your Bucket
 
 ## Get Object Types
@@ -157,6 +156,10 @@ Cosmic.getObjectTypes()
 
 Get all Object Types in your Bucket.
 
+Parameter | Required | Type | Description
+--------- | ------- | ----------- | -----------
+pretty | false | Enum | true, Makes the response more reader-friendly
+read_key | false | String | Restrict read access to your Bucket
 
 
 ## Edit Object Type
@@ -231,8 +234,15 @@ PUT https://api.cosmicjs.com/v1/:bucket-slug/edit-object-type
 }
 ```
 
-Edit an exiting Object Type to your Bucket.
+Edit an exiting Object Type in your Bucket.
 
+Parameter | Required | Type | Description
+--------- | ------- | ----------- | -----------
+slug | true | String | Plural slug of your Object Type
+title | false | String | Plural title of your Object Type
+singular | false | String | Singular title of your Object Type
+metafields | false | Array | Default Metafields for each Object in this type
+write_key | false | String | Restrict write access to your Bucket
 
 
 ## Delete Object Type
@@ -262,3 +272,7 @@ DELETE https://api.cosmicjs.com/v1/:bucket-slug/object-types/:object-type-slug
 ```
 
 Delete an exiting Object Type from your Bucket.  * This does not delete Objects in this Object Type.
+
+Parameter | Required | Type | Description
+--------- | ------- | ----------- | -----------
+write_key | false | String | Restrict write access to your Bucket
