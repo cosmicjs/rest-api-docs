@@ -25,7 +25,14 @@ curl -X POST https://api.cosmicjs.com/v1/buckets \
 ```
 
 ```javascript
-const response = await Cosmic.addBucket({ title: "My New Bucket" });
+var Cosmic = require('cosmicjs')
+Cosmic.addBucket({
+  title: 'Test New API',
+  token: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXV.eyJlbWFpbCI6InNwaXJvbnlAZ21haWwuY29tIiwicGFzc3dvcmQiOiIxNzlhZDQ1YzZjZTJjYjk3Y2YxMDI5ZTIxMjA0NmU4MSIsImlhdCI6MTUxNDQ5NzI3N30.ep4cEgH_SqItQ5McJArJtljS3GSJedyEcDRlnu9yb-U' }).then(data => {
+  console.log(data)
+}).catch(err => {
+  console.log(err)
+})
 ```
 
 > Example Response
@@ -69,12 +76,15 @@ curl "https://api.cosmicjs.com/v1/wedding-site"
 ```
 
 ```javascript
-const Cosmic = require('cosmicjs');
 const api = Cosmic.config({
-  bucket: 'test-bucket',
-  read_key: '1234asdf'
-});
-const response = await api.getBucket();
+  bucket: 'wedding-site',
+  read_key: ''
+})
+api.getBucket().then(data => {
+  console.log(data)
+}).catch(err => {
+  console.log(err)
+})
 ```
 
 > Example Response

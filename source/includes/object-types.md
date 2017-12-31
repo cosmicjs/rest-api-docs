@@ -4,14 +4,17 @@
 
 > Definition
 
-```json
+```bash
 POST https://api.cosmicjs.com/v1/:bucket-slug/add-object-type
 ```
 
+```javascript
+api.addObjectType()
+```
 
-> Example Request Body
+> Example Request
 
-```json
+```bash
 {
   "title": "Pages",
   "singular": "Page",
@@ -31,6 +34,33 @@ POST https://api.cosmicjs.com/v1/:bucket-slug/add-object-type
     }
   ]
 }
+```
+
+```javascript
+const api = require('cosmicjs').config({
+  bucket: 'bucket-slug',
+  read_key: ''
+})
+const request_body = {
+  "title": "Pages",
+  "singular": "Page",
+  "slug": "pages",
+  "metafields": [
+    {
+      "type": "text",
+      "title": "Headline",
+      "key": "headline",
+      "required": true
+    },
+    {
+      "type": "file",
+      "title": "Hero",
+      "key": "hero",
+      "required": true
+    }
+  ]
+}
+const response = await api.addObjectType(request_body)
 ```
 
 > Example Response
@@ -76,8 +106,12 @@ write_key | false | String | Restrict write access to your Bucket
 
 > Definition
 
-```json
+```bash
 GET https://api.cosmicjs.com/v1/:bucket-slug/object-types
+```
+
+```javascript
+Cosmic.getObjectTypes()
 ```
 
 > Example Request
@@ -85,8 +119,14 @@ GET https://api.cosmicjs.com/v1/:bucket-slug/object-types
 ```bash
 curl "https://api.cosmicjs.com/v1/wedding-site/object-types"
 ```
+
 ```javascript
-Cosmic.getObjectTypes()
+const Cosmic = require('cosmicjs')
+const api = Cosmic.config({
+  bucket: 'wedding-site',
+  read_key: '1234asdf'
+})
+const response = await Cosmic.getObjectTypes()
 ```
 
 > Example Response
@@ -153,6 +193,9 @@ Cosmic.getObjectTypes()
 }
 ```
 
+```javascript
+const response = await Cosmic.getObjectTypes(params);
+```
 
 Get all Object Types in your Bucket.
 
