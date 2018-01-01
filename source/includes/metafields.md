@@ -4,7 +4,7 @@ Metafields are powerful components that can be added to Objects and Object Types
 
 ## Model
 
-> Example Request
+> Example Metafields
 
 ```json
 {
@@ -174,7 +174,7 @@ children | false | Array | Add nested Metafields
 
 You can use optional validation parameters to make sure editors on the Web Dashboard enter the correct values.
 
-> Example Request with Validations
+> Example Metafields with Validations
 
 ```json
 {

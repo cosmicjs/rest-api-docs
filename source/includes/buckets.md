@@ -104,9 +104,6 @@ api.getBucket().then(data => {
     "object_types": [
       ...
     ],
-    "links": [
-      ...
-    ],
     "objects": [
       ...
     ],
