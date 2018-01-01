@@ -40,15 +40,32 @@ api.addObject()
 ```
 
 ```javascript
+const params = {
+  "title": "Cosmic JS Example",
+  "type_slug": "examples",
+  "content": "Learning the Cosmic JS API is really fun and so easy",
+  "metafields": [
+    {
+      "key": "Headline",
+      "type": "text",
+      "value": "Learn Cosmic JS!"
+    },
+    {
+      "key": "Author",
+      "type": "text",
+      "value": "Quasar Jones"
+    }
+  ],
+  "options": {
+    "slug_field": false
+  }
+}
 const Cosmic = require('cosmicjs')
 const api = Cosmic.config({
   bucket: 'bucket-slug',
   write_key: ''
 })
-api.addObject({
-  type_slug: 'posts',
-  title: 'Post Title'
-}).then(data => {
+api.addObject(params).then(data => {
   console.log(data)
 }).catch(err => {
   console.log(err)

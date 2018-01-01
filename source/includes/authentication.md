@@ -41,7 +41,9 @@ Cosmic.authenticate({
 }
 ```
 
-Send your `email` and `password` to receive your access token. Your access token will be used to add Buckets to your account as well as other account-related access. You do not need to use the token to edit your Bucket. Your Bucket has its own read and write keys for restricted access.  Go to https://cosmicjs.com/signup to create an account.
+Send your `email` and `password` to receive your access token. Your access token will be used to add Buckets to your account as well as other account-related access. <b>You do not need to use the token to edit your Bucket. Your Bucket has its own read and write keys for restricted access</b>.
+
+Go to https://cosmicjs.com/signup to create an account.
 
 Parameter | Required | Type | Description
 --------- | ------- | ----------- | -----------
