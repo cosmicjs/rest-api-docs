@@ -10,9 +10,13 @@ The following endpoints allow you to add, edit and delete Objects in your Bucket
 POST https://api.cosmicjs.com/v1/:bucket-slug/add-object
 ```
 
-> Example Request Body
+```javascript
+api.addObject()
+```
 
-```json
+> Example Request
+
+```bash
 {
   "title": "Cosmic JS Example",
   "type_slug": "examples",
@@ -33,6 +37,22 @@ POST https://api.cosmicjs.com/v1/:bucket-slug/add-object
     "slug_field": false
   }
 }
+```
+
+```javascript
+const Cosmic = require('cosmicjs')
+const api = Cosmic.config({
+  bucket: 'bucket-slug',
+  write_key: ''
+})
+api.addObject({
+  type_slug: 'posts',
+  title: 'Post Title'
+}).then(data => {
+  console.log(data)
+}).catch(err => {
+  console.log(err)
+})
 ```
 
 > Example Response
@@ -103,11 +123,14 @@ curl "https://api.cosmicjs.com/v1/wedding-site/objects?pretty=true&hide_metafiel
 ```
 
 ```javascript
+const Cosmic = require('cosmicjs')
 const api = Cosmic.config({
   bucket: 'wedding-site',
   read_key: ''
 })
-api.getObjects({ limit: 2 }).then(data => {
+api.getObjects({
+  limit: 2
+}).then(data => {
   console.log(data)
 }).catch(err => {
   console.log(err)
@@ -172,8 +195,12 @@ read_key | false | String | Your Bucket read key
 
 > Definition
 
-```json
+```bash
 GET https://api.cosmicjs.com/v1/:bucket-slug/object-type/:type-slug
+```
+
+```javascript
+api.getObjectsByType()
 ```
 
 > Example Request
@@ -182,11 +209,15 @@ GET https://api.cosmicjs.com/v1/:bucket-slug/object-type/:type-slug
 curl "https://api.cosmicjs.com/v1/wedding-site/object-type/groomsmen?limit=3"
 ```
 ```javascript
+const Cosmic = require('cosmicjs')
 const api = Cosmic.config({
   bucket: 'wedding-site',
   read_key: ''
 })
-api.getObjectsByType({ type_slug: 'groomsmen', limit: 3 }).then(data => {
+api.getObjectsByType({
+  type_slug: 'groomsmen',
+  limit: 3
+}).then(data => {
   console.log(data)
 }).catch(err => {
   console.log(err)
@@ -274,8 +305,12 @@ read_key | false | String | Your Bucket read key
 
 > Definition
 
-```json
+```bash
 GET https://api.cosmicjs.com/v1/:bucket-slug/object-type/:type-slug/search
+```
+
+```javascript
+api.searchObjectType()
 ```
 
 > Example Request
@@ -283,8 +318,22 @@ GET https://api.cosmicjs.com/v1/:bucket-slug/object-type/:type-slug/search
 ```bash
 curl "https://api.cosmicjs.com/v1/wedding-site/object-type/groomsmen/search?metafield_key=official-title&metafield_value=Best%20Man"
 ```
+
 ```javascript
-Cosmic.searchObjectType()
+const Cosmic = require('cosmicjs')
+const api = Cosmic.config({
+  bucket: 'wedding-site',
+  read_key: ''
+})
+api.searchObjectType({
+  type_slug: 'groomsmen',
+  metafield_key: 'official-title',
+  metafield_value: 'Best Man'
+}).then(data => {
+  console.log(data)
+}).catch(err => {
+  console.log(err)
+})
 ```
 
 > Example Response
@@ -338,13 +387,17 @@ read_key | false | String | Your Bucket read key
 
 > Definition
 
-```json
+```bash
 PUT https://api.cosmicjs.com/v1/:bucket-slug/edit-object
 ```
 
-> Example Request Body
+```javascript
+api.editObject()
+```
 
-```json
+> Example Request
+
+```bash
 {
   "slug": "cosmic-js-example",
   "title": "New Title Edit",
@@ -364,6 +417,22 @@ PUT https://api.cosmicjs.com/v1/:bucket-slug/edit-object
     }
   ]
 }
+```
+
+```javascript
+const Cosmic = require('cosmicjs')
+const api = Cosmic.config({
+  bucket: 'bucket-slug',
+  write_key: ''
+})
+api.editObject({
+  slug: 'cosmic-js-example',
+  title: 'New Title Edit'
+}).then(data => {
+  console.log(data)
+}).catch(err => {
+  console.log(err)
+})
 ```
 
 > Example Response
@@ -415,16 +484,35 @@ write_key | false | String | Your Bucket write key
 
 > Definition
 
-```json
+```bash
 DELETE https://api.cosmicjs.com/v1/:bucket-slug/objects/:object-slug
 ```
 
-> Example Request Body
+```javascript
+api.deleteObject()
+```
 
-```json
+> Example Request
+
+```bash
 {
   "write_key": "your-key-added-in-bucket-settings"
 }
+```
+
+```javascript
+const Cosmic = require('cosmicjs')
+const api = Cosmic.config({
+  bucket: 'bucket-slug',
+  write_key: ''
+})
+api.deleteObject({
+  slug: 'cosmic-js-example'
+}).then(data => {
+  console.log(data)
+}).catch(err => {
+  console.log(err)
+})
 ```
 
 > Example Response

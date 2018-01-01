@@ -259,7 +259,7 @@ api.editObjectType()
 const Cosmic = require('cosmicjs')
 const api = Cosmic.config({
   bucket: 'bucket-slug',
-  read_key: ''
+  write_key: ''
 })
 api.editObjectType({
   slug: 'posts',
