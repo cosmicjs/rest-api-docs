@@ -9,7 +9,7 @@ POST https://api.cosmicjs.com/v1/:bucket-slug/add-object-type
 ```
 
 ```javascript
-api.addObjectType()
+Cosmic.addObjectType()
 ```
 
 > Example Request
@@ -37,8 +37,7 @@ api.addObjectType()
 ```
 
 ```javascript
-const Cosmic = require('cosmicjs')
-const api = Cosmic.config({
+const Cosmic = require('cosmicjs')({
   bucket: 'bucket-slug',
   write_key: ''
 })
@@ -61,11 +60,7 @@ const params = {
     }
   ]
 }
-const api = Cosmic.config({
-  bucket: 'bucket-slug',
-  write_key: ''
-})
-api.addObjectType(params).then(data => {
+Cosmic.addObjectType(params).then(data => {
   console.log(data)
 }).catch(err => {
   console.log(err)
@@ -120,7 +115,7 @@ GET https://api.cosmicjs.com/v1/:bucket-slug/object-types
 ```
 
 ```javascript
-api.getObjectTypes()
+Cosmic.getObjectTypes()
 ```
 
 > Example Request
@@ -130,12 +125,11 @@ curl "https://api.cosmicjs.com/v1/wedding-site/object-types"
 ```
 
 ```javascript
-const Cosmic = require('cosmicjs')
-const api = Cosmic.config({
+const Cosmic = require('cosmicjs')({
   bucket: 'wedding-site',
   read_key: ''
 })
-api.getObjectTypes().then(data => {
+Cosmic.getObjectTypes().then(data => {
   console.log(data)
 }).catch(err => {
   console.log(err)
@@ -153,20 +147,16 @@ api.getObjectTypes().then(data => {
       "singular": "Groomsman",
       "metafields": [
         {
-          "edit": "",
-          "value": "",
-          "key": "image",
-          "title": "Image",
           "type": "file",
-          "children": null
+          "title": "Image",
+          "key": "image",
+          "value": ""
         },
         {
-          "edit": "",
-          "value": "",
           "key": "official-title",
           "title": "Official Title",
           "type": "text",
-          "children": null
+          "value": ""
         }
       ],
       "order": 2
@@ -177,20 +167,16 @@ api.getObjectTypes().then(data => {
       "singular": "Bridesmaid",
       "metafields": [
         {
-          "edit": 1,
-          "value": "",
-          "key": "",
-          "title": "Image",
           "type": "file",
-          "children": null
+          "title": "Image",
+          "key": "image",
+          "value": ""
         },
         {
-          "edit": 1,
-          "value": "",
-          "key": "",
-          "title": "Official Title",
           "type": "text",
-          "children": null
+          "title": "Official Title",
+          "key": "",
+          "value": ""
         }
       ],
       "order": 3
@@ -223,7 +209,7 @@ PUT https://api.cosmicjs.com/v1/:bucket-slug/edit-object-type
 ```
 
 ```javascript
-api.editObjectType()
+Cosmic.editObjectType()
   ```
 
 > Example Request
@@ -256,12 +242,11 @@ api.editObjectType()
 
 
 ```javascript
-const Cosmic = require('cosmicjs')
-const api = Cosmic.config({
+const Cosmic = require('cosmicjs')({
   bucket: 'bucket-slug',
   write_key: ''
 })
-api.editObjectType({
+Cosmic.editObjectType({
   slug: 'posts',
   title: 'New Posts Title'
 }).then(data => {
@@ -326,7 +311,7 @@ DELETE https://api.cosmicjs.com/v1/:bucket-slug/object-types/:object-type-slug
 ```
 
 ```javascript
-api.deleteObjectType()
+Cosmic.deleteObjectType()
 ```
 
 
@@ -339,12 +324,11 @@ api.deleteObjectType()
 ```
 
 ```javascript
-const Cosmic = require('cosmicjs')
-const api = Cosmic.config({
+const Cosmic = require('cosmicjs')({
   bucket: 'bucket-slug',
   write_key: ''
 })
-api.deleteObjectType({
+Cosmic.deleteObjectType({
   slug: 'posts'
 }).then(data => {
   console.log(data)

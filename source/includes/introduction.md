@@ -5,9 +5,11 @@ The Cosmic JS REST API helps you easily manage data and files for your applicati
 > Starting Point
 
 ```bash
+# API Endpoint
 https://api.cosmicjs.com
 ```
 
 ```javascript
+// Install the NPM package
 npm install cosmicjs
 ```

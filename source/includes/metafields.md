@@ -244,7 +244,7 @@ POST https://api.cosmicjs.com/v1/:bucket-slug/add-object
 ```
 
 ```javascript
-api.addObject()
+Cosmic.addObject()
 ```
 
 > Example Request
@@ -307,12 +307,11 @@ const params = {
     }
   ]
 }
-const Cosmic = require('cosmicjs')
-const api = Cosmic.config({
+const Cosmic = require('cosmicjs')({
   bucket: 'bucket-slug',
   write_key: ''
 })
-api.addObject(params).then(data => {
+Cosmic.addObject(params).then(data => {
   console.log(data)
 }).catch(err => {
   console.log(err)

@@ -22,11 +22,11 @@ POST https://api.cosmicjs.com/v1/:bucket-slug/media
 ```
 
 ```javascript
-const api = Cosmic.config({
-  bucket: 'test-bucket',
+const Cosmic = require('cosmicjs')({
+  bucket: 'bucket-slug',
   write_key: ''
 })
-api.addMedia({
+Cosmic.addMedia({
   media: '<FILE_DATA>',
   folder: 'your-folder-slug',
   metadata: {

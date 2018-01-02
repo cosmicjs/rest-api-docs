@@ -71,7 +71,7 @@ GET https://api.cosmicjs.com/:bucket-slug
 ```
 
 ```javascript
-api.getBucket()
+Cosmic.getBucket()
 ```
 
 > Example Request
@@ -81,12 +81,11 @@ curl "https://api.cosmicjs.com/v1/wedding-site"
 ```
 
 ```javascript
-const Cosmic = require('cosmicjs')
-const api = Cosmic.config({
+const Cosmic = require('cosmicjs')({
   bucket: 'wedding-site',
   read_key: ''
 })
-api.getBucket().then(data => {
+Cosmic.getBucket().then(data => {
   console.log(data)
 }).catch(err => {
   console.log(err)
