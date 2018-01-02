@@ -10,21 +10,34 @@ POST https://api.cosmicjs.com/v1/:bucket-slug/media
 
 > Example Request
 
-```json
+```bash
 {
   "media": "your-media-multipart-form-data",
   "folder": "your-folder-slug",
-  "metadata": [
-    {
-      "key": "caption",
-      "value": "Beautiful picture of the beach"
-    },
-    {
-      "key": "credit",
-      "value": "Tyler Jackson"
-    }
-  ]
+  "metadata": {
+    "caption": "Beautiful picture of the beach",
+    "credit": "Tyler Jackson"
+  }
 }
+```
+
+```javascript
+const api = Cosmic.config({
+  bucket: 'test-bucket',
+  write_key: ''
+})
+api.addMedia({
+  media: '<FILE_DATA>',
+  folder: 'your-folder-slug',
+  metadata: {
+    caption: 'Beautiful picture of the beach',
+    credit: 'Tyler Jackson'
+  }
+}).then(data => {
+  console.log(data)
+}).catch(err => {
+  console.log(err)
+})
 ```
 
 
@@ -63,7 +76,7 @@ Parameter | Required | Type | Description
 --------- | ------- | ----------- | -----------
 media | true | File | Media object
 folder | false | String | Media folder slug
-metadata | false | Array | Key / value data store
+metadata | false | Object | Key / value data store
 write_key | false | String | Your Bucket write key
 
 ## Delete Media
