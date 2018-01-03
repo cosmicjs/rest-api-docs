@@ -1,6 +1,6 @@
 # Webhooks
 
-## Add Webhooks
+## Add Webhook
 
 > Definition
 
