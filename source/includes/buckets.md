@@ -54,12 +54,12 @@ slug |  | String | URL-friendly unique identifier
 read_key |  | String | Restrict read access
 write_key |  | String | Restrict write access
 cluster |  | String | Add this Bucket to a Cluster.  ID of existing Cluster
-object_types |  | Array | Populate your Bucket with Object Types.  See <a href="/#object-types">Object Types</a> for model.
-objects |  | Array | Populate your Bucket with Objects. See <a href="/#objects">Objects</a> for model.
-media |  | Array | Populate your Bucket with Media. See <a href="/#media">Media</a> for model.
-media_folders |  | Array | Populate your Bucket with Media Folders. See <a href="/#media">Media</a> for model.
-webhooks |  | Array | Populate your Bucket with <a href="https://cosmicjs.com/docs/webhooks" target="_blank">Webhooks</a>. See <a href="/#webhooks">Webhooks</a> for model.
-extensions |  | Array | Populate your Bucket with <a href="https://cosmicjs.com/docs/extensions" target="_blank">Extensions</a>. See <a href="/#extensions">Extensions</a> for model.
+object_types |  | Array | Populate your Bucket with Object Types.  See <a href="#object-types">Object Types</a> for model.
+objects |  | Array | Populate your Bucket with Objects. See <a href="#objects">Objects</a> for model.
+media |  | Array | Populate your Bucket with Media. See <a href="#media">Media</a> for model.
+media_folders |  | Array | Populate your Bucket with Media Folders. See <a href="#media">Media</a> for model.
+webhooks |  | Array | Populate your Bucket with <a href="https://cosmicjs.com/docs/webhooks" target="_blank">Webhooks</a>. See <a href="#webhooks">Webhooks</a> for model.
+extensions |  | Array | Populate your Bucket with <a href="https://cosmicjs.com/docs/extensions" target="_blank">Extensions</a>. See <a href="#extensions">Extensions</a> for model.
 
 
 ## Get Bucket

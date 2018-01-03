@@ -223,7 +223,7 @@ You can use optional validation parameters to make sure editors on the Web Dashb
 }
 ```
 
-Reference the <a href="/#model">Metafield model</a> to learn more.
+Reference the <a href="#model">Metafield model</a> to learn more.
 
 ### Optional Validation Parmeters
 Parameter | Required | Type | Description
