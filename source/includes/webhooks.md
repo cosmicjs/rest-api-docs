@@ -5,7 +5,7 @@
 > Definition
 
 ```bash
-POST https://api.cosmicjs.com/v1/:bucket-slug/webhooks
+POST https://api.cosmicjs.com/v1/:bucket_slug/webhooks
 ```
 
 ```javascript
@@ -17,7 +17,8 @@ Cosmic.addWebhooks()
 ```bash
 {
   "event": "object.created.published",
-  "endpoint": "http://my-listener.com"
+  "endpoint": "http://my-listener.com",
+  "write_key": "your-key-added-in-bucket-settings"
 }
 ```
 
@@ -54,6 +55,56 @@ Sends a POST request to the endpoint of your choice when the event occurs.  The 
 
 Parameter | Required | Type | Description
 --------- | ------- | ----------- | -----------
-event | true | Enum | object.created.draft, object.created.published<br />object.edited.draft, object.edited.published<br />object.deleted, media.created<br />media.edited, media.deleted<br />
-endpoint | true | String | The endpoint that will receive the data
-write_key | false | String | Your Bucket write key
+event | required | Enum | object.created.draft, object.created.published<br />object.edited.draft, object.edited.published<br />object.deleted, media.created<br />media.edited, media.deleted<br />
+endpoint | required | String | The endpoint that will receive the data
+write_key | | String | Your Bucket write key
+
+## Delete a Webhook
+
+> Definition
+
+```bash
+DELETE https://api.cosmicjs.com/v1/:bucket_slug/webhooks/:webhook_id
+```
+
+```javascript
+Cosmic.deleteWebhook()
+```
+
+> Example Request
+
+```bash
+{
+  "write_key": "your-key-added-in-bucket-settings"
+}
+```
+
+```javascript
+const Cosmic = require('cosmicjs')({
+  bucket: 'bucket-slug',
+  write_key: ''
+})
+Cosmic.deleteWebhook({
+  id: 'c62defe0-5f93-11e7-8054-873245f0e98d'
+}).then(data => {
+  console.log(data)
+}).catch(err => {
+  console.log(err)
+})
+```
+
+
+> Example Response
+
+```json
+{
+  "status": "200",
+  "message": "Webhook deleted."
+}
+```
+
+If a write key is enabled on the requested bucket, the variable `write_key` will need to be present in the Body.
+
+Parameter | Required | Type | Description
+--------- | ------- | ----------- | -----------
+write_key | | String | Your Bucket write key

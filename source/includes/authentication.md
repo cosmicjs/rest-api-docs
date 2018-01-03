@@ -47,5 +47,5 @@ Go to https://cosmicjs.com/signup to create an account.
 
 Parameter | Required | Type | Description
 --------- | ------- | ----------- | -----------
-email | true | String | Your Cosmic JS login email
-password | false | String | Your Cosmic JS login password
+email | required | String | Your Cosmic JS login email
+password | required | String | Your Cosmic JS login password

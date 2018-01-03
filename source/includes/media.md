@@ -5,7 +5,7 @@
 > Definition
 
 ```bash
-POST https://api.cosmicjs.com/v1/:bucket-slug/media
+POST https://api.cosmicjs.com/v1/:bucket_slug/media
 ```
 
 ```javascript
@@ -78,17 +78,17 @@ The only required post value is `media` which is the name of your media sent. If
 
 Parameter | Required | Type | Description
 --------- | ------- | ----------- | -----------
-media | true | File | Media object
-folder | false | String | Media folder slug
-metadata | false | Object | Key / value data store
-write_key | false | String | Your Bucket write key
+media | required | File | Media object
+folder | | String | Media folder slug
+metadata | | Object | Key / value data store
+write_key | | String | Your Bucket write key
 
 ## Delete Media
 
 > Definition
 
 ```bash
-DELETE https://api.cosmicjs.com/v1/:bucket-slug/media/:media_id
+DELETE https://api.cosmicjs.com/v1/:bucket_slug/media/:media_id
 ```
 
 ```javascript
@@ -132,4 +132,4 @@ Required post values include media which is the name of your media sent. If a wr
 
 Parameter | Required | Type | Description
 --------- | ------- | ----------- | -----------
-write_key | false | String | Your Bucket write key
+write_key | | String | Your Bucket write key

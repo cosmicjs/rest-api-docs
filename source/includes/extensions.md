@@ -5,7 +5,7 @@
 > Definition
 
 ```bash
-POST https://api.cosmicjs.com/v1/:bucket-slug/extensions
+POST https://api.cosmicjs.com/v1/:bucket_slug/extensions
 ```
 
 ```javascript
@@ -16,7 +16,8 @@ Cosmic.addExtension()
 
 ```bash
 {
-  "zip": "your-media-multipart-form-data"
+  "zip": "your-media-multipart-form-data",
+  "write_key": "your-key-added-in-bucket-settings"
 }
 ```
 
@@ -52,12 +53,12 @@ Cosmic.addExtension({
 ```
 
 
-Adds an Extension to your Bucket.  Read more about Extensions on the <a href="https://cosmicjs.com/docs/extensions" target="_blank">Extensions documentation page</a>.
+Adds an Extension to your Bucket.  Required post values include zip which is the name of your file sent.   Read more about Extensions on the <a href="https://cosmicjs.com/docs/extensions" target="_blank">Extensions documentation page</a>.
 
 Parameter | Required | Type | Description
 --------- | ------- | ----------- | -----------
-zip | true | File | Media object
-write_key | false | String | Your Bucket write key
+zip | required| File | Media object
+write_key | | String | Your Bucket write key
 
 
 ## Delete an Extension
@@ -65,7 +66,7 @@ write_key | false | String | Your Bucket write key
 > Definition
 
 ```bash
-DELETE https://api.cosmicjs.com/v1/:bucket-slug/extensions/:extension_id
+DELETE https://api.cosmicjs.com/v1/:bucket_slug/extensions/:extension_id
 ```
 
 ```javascript
@@ -105,8 +106,8 @@ Cosmic.deleteExtension({
 ```
 
 
-Required post values include media which is the name of your media sent. If a write key is enabled on the requested bucket, the variable `write_key` will need to be present in the Body. You can also add an optional folder param to add the Media to a specific folder.
+If a write key is enabled on the requested bucket, the variable `write_key` will need to be present in the Body.
 
 Parameter | Required | Type | Description
 --------- | ------- | ----------- | -----------
-write_key | false | String | Your Bucket write key
+write_key | | String | Your Bucket write key

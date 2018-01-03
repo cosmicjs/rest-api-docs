@@ -5,7 +5,7 @@
 > Definition
 
 ```bash
-POST https://api.cosmicjs.com/v1/:bucket-slug/add-object-type
+POST https://api.cosmicjs.com/v1/:bucket_slug/add-object-type
 ```
 
 ```javascript
@@ -99,19 +99,19 @@ Add a new Object Type to your Bucket.
 
 Parameter | Required | Type | Description
 --------- | ------- | ----------- | -----------
-title | true | String | Plural title of your Object Type
-slug | false | String | Plural slug of your Object Type
-singular | false | String | Singular title of your Object Type
-metafields | false | Array | Default Metafields for each Object in this type
-pretty | false | Enum | true, Makes the response more reader-friendly
-write_key | false | String | Restrict write access to your Bucket
+title | required | String | Plural title of your Object Type
+slug |  | String | Plural slug of your Object Type
+singular |  | String | Singular title of your Object Type
+metafields |  | Array | Default Metafields for each Object in this type
+pretty |  | Enum | true, Makes the response more reader-friendly
+write_key |  | String | Restrict write access to your Bucket
 
 ## Get Object Types
 
 > Definition
 
 ```bash
-GET https://api.cosmicjs.com/v1/:bucket-slug/object-types
+GET https://api.cosmicjs.com/v1/:bucket_slug/object-types
 ```
 
 ```javascript
@@ -196,8 +196,8 @@ Get all Object Types in your Bucket.
 
 Parameter | Required | Type | Description
 --------- | ------- | ----------- | -----------
-pretty | false | Enum | true, Makes the response more reader-friendly
-read_key | false | String | Restrict read access to your Bucket
+pretty |  | Enum | true, Makes the response more reader-friendly
+read_key |  | String | Restrict read access to your Bucket
 
 
 ## Edit Object Type
@@ -205,7 +205,7 @@ read_key | false | String | Restrict read access to your Bucket
 > Definition
 
 ```bash
-PUT https://api.cosmicjs.com/v1/:bucket-slug/edit-object-type
+PUT https://api.cosmicjs.com/v1/:bucket_slug/edit-object-type
 ```
 
 ```javascript
@@ -295,11 +295,11 @@ Edit an exiting Object Type in your Bucket.
 
 Parameter | Required | Type | Description
 --------- | ------- | ----------- | -----------
-slug | true | String | Plural slug of your Object Type
-title | false | String | Plural title of your Object Type
-singular | false | String | Singular title of your Object Type
-metafields | false | Array | Default Metafields for each Object in this type
-write_key | false | String | Restrict write access to your Bucket
+slug | required | String | Plural slug of your Object Type
+title |  | String | Plural title of your Object Type
+singular |  | String | Singular title of your Object Type
+metafields |  | Array | Default Metafields for each Object in this type
+write_key |  | String | Restrict write access to your Bucket
 
 
 ## Delete Object Type
@@ -307,7 +307,7 @@ write_key | false | String | Restrict write access to your Bucket
 > Definition
 
 ```bash
-DELETE https://api.cosmicjs.com/v1/:bucket-slug/object-types/:object-type-slug
+DELETE https://api.cosmicjs.com/v1/:bucket_slug/object-types/:type_slug
 ```
 
 ```javascript
@@ -350,4 +350,4 @@ Delete an exiting Object Type from your Bucket.  * This does not delete Objects 
 
 Parameter | Required | Type | Description
 --------- | ------- | ----------- | -----------
-write_key | false | String | Restrict write access to your Bucket
+write_key |  | String | Restrict write access to your Bucket

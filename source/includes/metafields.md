@@ -159,16 +159,16 @@ Metafields are powerful components that can be added to Objects and Object Types
 
 Parameter | Required | Type | Description
 --------- | ------- | ----------- | -----------
-type | true | Enum | text, textarea, html-textarea, <br />select-dropdown, object, objects, <br />file, date, radio-buttons, check-boxes, <br />repeater, parent, markdown
-title | true | String | Your Bucket title
-key | true | String | Unique identifier for your Bucket
-value | false | String | Metafield value
-required | false | Bool | A value is required
-regex | false | String | Restrict the value to match a regular expresssion
-regex_message | false | Array | The message displayed when the value fails the regex
-minlength | false | Number | Add minlength to text or textarea Metafields
-maxlength | false | Number | Add maxlength to text or textarea Metafields
-children | false | Array | Add nested Metafields
+type | required | Enum | text, textarea, html-textarea, <br />select-dropdown, object, objects, <br />file, date, radio-buttons, check-boxes, <br />repeater, parent, markdown
+title | required | String | Your Bucket title
+key | required | String | Unique identifier for your Bucket
+value | | String | Metafield value
+required | | Bool | A value is required
+regex | | String | Restrict the value to match a regular expresssion
+regex_message | | Array | The message displayed when the value fails the regex
+minlength | | Number | Add minlength to text or textarea Metafields
+maxlength | | Number | Add maxlength to text or textarea Metafields
+children | | Array | Add nested Metafields
 
 ## Validation
 
@@ -228,11 +228,11 @@ Reference the <a href="/#model">Metafield model</a> to learn more.
 ### Optional Validation Parmeters
 Parameter | Required | Type | Description
 --------- | ------- | ----------- | -----------
-required | false | Bool | A value is required
-regex | false | String | Restrict the value to match a regular expresssion
-regex_message | false | Array | The message displayed when the value fails the regex
-minlength | false | Number | Add minlength to text or textarea Metafields
-maxlength | false | Number | Add maxlength to text or textarea Metafields
+required | | Bool | A value is required
+regex | | String | Restrict the value to match a regular expresssion
+regex_message | | Array | The message displayed when the value fails the regex
+minlength | | Number | Add minlength to text or textarea Metafields
+maxlength | | Number | Add maxlength to text or textarea Metafields
 
 
 ## Connect Objects
@@ -240,7 +240,7 @@ maxlength | false | Number | Add maxlength to text or textarea Metafields
 > Definition
 
 ```bash
-POST https://api.cosmicjs.com/v1/:bucket-slug/add-object
+POST https://api.cosmicjs.com/v1/:bucket_slug/add-object
 ```
 
 ```javascript

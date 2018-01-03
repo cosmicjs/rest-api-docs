@@ -49,17 +49,17 @@ Cosmic.addBucket({
 
 Parameter | Required | Type | Description
 --------- | ------- | ----------- | -----------
-title | true | String | Your Bucket title
-slug | false | String | URL-friendly unique identifier
-read_key | false | String | Restrict read access
-write_key | false | String | Restrict write access
-cluster | false | String | Add this Bucket to a Cluster.  ID of existing Cluster
-object_types | false | Array | Populate your Bucket with Object Types.  See <a href="/#object-types">Object Types</a> for model.
-objects | false | Array | Populate your Bucket with Objects. See <a href="/#objects">Objects</a> for model.
-media | false | Array | Populate your Bucket with Media. See <a href="/#media">Media</a> for model.
-media_folders | false | Array | Populate your Bucket with Media Folders. See <a href="/#media">Media</a> for model.
-webhooks | false | Array | Populate your Bucket with <a href="https://cosmicjs.com/docs/webhooks" target="_blank">Webhooks</a>. See <a href="/#webhooks">Webhooks</a> for model.
-extensions | false | Array | Populate your Bucket with <a href="https://cosmicjs.com/docs/extensions" target="_blank">Extensions</a>. See <a href="/#extensions">Extensions</a> for model.
+title | required | String | Your Bucket title
+slug |  | String | URL-friendly unique identifier
+read_key |  | String | Restrict read access
+write_key |  | String | Restrict write access
+cluster |  | String | Add this Bucket to a Cluster.  ID of existing Cluster
+object_types |  | Array | Populate your Bucket with Object Types.  See <a href="/#object-types">Object Types</a> for model.
+objects |  | Array | Populate your Bucket with Objects. See <a href="/#objects">Objects</a> for model.
+media |  | Array | Populate your Bucket with Media. See <a href="/#media">Media</a> for model.
+media_folders |  | Array | Populate your Bucket with Media Folders. See <a href="/#media">Media</a> for model.
+webhooks |  | Array | Populate your Bucket with <a href="https://cosmicjs.com/docs/webhooks" target="_blank">Webhooks</a>. See <a href="/#webhooks">Webhooks</a> for model.
+extensions |  | Array | Populate your Bucket with <a href="https://cosmicjs.com/docs/extensions" target="_blank">Extensions</a>. See <a href="/#extensions">Extensions</a> for model.
 
 
 ## Get Bucket
@@ -67,7 +67,7 @@ extensions | false | Array | Populate your Bucket with <a href="https://cosmicjs
 > Definition
 
 ```bash
-GET https://api.cosmicjs.com/:bucket-slug
+GET https://api.cosmicjs.com/:bucket_slug
 ```
 
 ```javascript
@@ -121,5 +121,5 @@ Returns the entire Bucket.  If you would like to restrict read access to your Bu
 
 Parameter | Required | Type | Description
 --------- | ------- | ----------- | -----------
-hide_metafields | false | Enum | true, Hides metafields
-read_key | false | String | Restrict read access to your Bucket
+hide_metafields |  | Enum | true, Hides metafields
+read_key |  | String | Restrict read access to your Bucket

@@ -7,7 +7,7 @@ The following endpoints allow you to add, edit and delete Objects in your Bucket
 > Definition
 
 ```bash
-POST https://api.cosmicjs.com/v1/:bucket-slug/add-object
+POST https://api.cosmicjs.com/v1/:bucket_slug/add-object
 ```
 
 ```javascript
@@ -109,15 +109,15 @@ Add a new Object to your Bucket.
 
 Parameter | Required | Type | Description
 --------- | ------- | ----------- | -----------
-type_slug | true | String | Add Object to Object Type
-title | true | String | Your Object title
-slug | false | String | Unique identifier for your Object
-content | false | String | Add Content to your Object
-options.slug_field | false | Bool | Set to false to hide the slug field
-options.content_editor | false | Bool | Set to false to hide the content editor
-metafields | false | Array | Add Metafields to your Object
-locale | false | String | Add localization to the Object
-write_key | false | String | Your Bucket write key
+type_slug | required | String | Add Object to Object Type
+title | required | String | Your Object title
+slug | | String | Unique identifier for your Object
+content | | String | Add Content to your Object
+options.slug_field | | Bool | Set to false to hide the slug field
+options.content_editor | | Bool | Set to false to hide the content editor
+metafields | | Array | Add Metafields to your Object
+locale | | String | Add localization to the Object
+write_key | | String | Your Bucket write key
 
 
 ## Get Objects
@@ -125,11 +125,11 @@ write_key | false | String | Your Bucket write key
 > Definition
 
 ```bash
-GET https://api.cosmicjs.com/:bucket-slug/objects
+GET https://api.cosmicjs.com/:bucket_slug/objects
 ```
 
 ```javascript
-api.getObjects()
+Cosmic.getObjects()
 ```
 
 > Example Request
@@ -196,22 +196,22 @@ Returns all Objects from your Bucket.
 
 Parameter | Required | Type | Description
 --------- | ------- | ----------- | -----------
-limit | false | Number | The number of Objects to return
-skip | false | Number | The number of Objects to skip
-status | false | Enum | all, Return published and draft status Objects
-revision | false | String | The revision_id of the Object Revision
-hide_metafields | false | Enum | true, Hides metafields
-sort | false | Enum | created_at,-created_at,modified_at,-modified_at,random
-locale | false | String | Filter by locale
-pretty | false | Enum | true, Makes the response more reader-friendly
-read_key | false | String | Your Bucket read key
+limit | | Number | The number of Objects to return
+skip | | Number | The number of Objects to skip
+status | | Enum | all, Return published and draft status Objects
+revision | | String | The revision_id of the Object Revision
+hide_metafields | | Enum | true, Hides metafields
+sort | | Enum | created_at,-created_at,modified_at,-modified_at,random
+locale | | String | Filter by locale
+pretty | | Enum | true, Makes the response more reader-friendly
+read_key | | String | Your Bucket read key
 
 ## Get Objects by Type
 
 > Definition
 
 ```bash
-GET https://api.cosmicjs.com/v1/:bucket-slug/object-type/:type-slug
+GET https://api.cosmicjs.com/v1/:bucket_slug/object-type/:type_slug
 ```
 
 ```javascript
@@ -305,22 +305,22 @@ Get Objects from an Object Type.
 
 Parameter | Required | Type | Description
 --------- | ------- | ----------- | -----------
-limit | false | Number | The number of Objects to return
-skip | false | Number | The number of Objects to skip
-status | false | Enum | all, Return published and draft status Objects
-revision | false | String | The revision_id of the Object Revision
-hide_metafields | false | Enum | true, Hides metafields
-sort | false | Enum | created_at,-created_at,modified_at,-modified_at,random
-locale | false | String | Filter by locale
-pretty | false | Enum | true, Makes the response more reader-friendly
-read_key | false | String | Your Bucket read key
+limit | | Number | The number of Objects to return
+skip | | Number | The number of Objects to skip
+status | | Enum | all, Return published and draft status Objects
+revision | | String | The revision_id of the Object Revision
+hide_metafields | | Enum | true, Hides metafields
+sort | | Enum | created_at,-created_at,modified_at,-modified_at,random
+locale | | String | Filter by locale
+pretty | | Enum | true, Makes the response more reader-friendly
+read_key | | String | Your Bucket read key
 
 ## Search Objects
 
 > Definition
 
 ```bash
-GET https://api.cosmicjs.com/v1/:bucket-slug/object-type/:type-slug/search
+GET https://api.cosmicjs.com/v1/:bucket_slug/object-type/:type_slug/search
 ```
 
 ```javascript
@@ -383,25 +383,25 @@ Search Objects in an Object Type.
 
 Parameter | Required | Type | Description
 --------- | ------- | ----------- | -----------
-pretty | false | Enum | true, Makes the response more reader-friendly
-limit | false | Number | The number of Objects to return
-skip | false | Number | The number of Objects to skip
-status | false | Enum | all, Return published and draft status Objects
-hide_metafields | false | Enum | true, Hides metafields
-sort | false | Enum | created_at,-created_at,modified_at,<br />-modified_at,random
-metafield_key | false | String | Metafield key to search for
-metafield_value | false | String | Exact Metafield value to match
-metafield_value_has | false | String | Metafield value contains this string
-metafield_object_slug | false | String | Object Metafield Object slug
-locale | false | String | Filter by locale
-read_key | false | String | Your Bucket read key
+limit | | Number | The number of Objects to return
+skip | | Number | The number of Objects to skip
+status | | Enum | all, Return published and draft status Objects
+hide_metafields | | Enum | true, Hides metafields
+sort | | Enum | created_at,-created_at,modified_at,<br />-modified_at,random
+metafield_key | | String | Metafield key to search for
+metafield_value | | String | Exact Metafield value to match
+metafield_value_has | | String | Metafield value contains this string
+metafield_object_slug | | String | Object Metafield Object slug
+locale | | String | Filter by locale
+pretty | | Enum | true, Makes the response more reader-friendly
+read_key | | String | Your Bucket read key
 
 ## Edit Object
 
 > Definition
 
 ```bash
-PUT https://api.cosmicjs.com/v1/:bucket-slug/edit-object
+PUT https://api.cosmicjs.com/v1/:bucket_slug/edit-object
 ```
 
 ```javascript
@@ -481,15 +481,15 @@ Edit an existing Object in your Bucket.
 
 Parameter | Required | Type | Description
 --------- | ------- | ----------- | -----------
-type_slug | true | String | Add Object to Object Type
-title | true | String | Your Bucket title
-slug | false | String | Unique identifier for your Object
-content | false | String | Add Content to your Object
-options.slug_field | false | Bool | Set to false to hide the slug field
-options.content_editor | false | Bool | Set to false to hide the content editor
-metafields | false | Array | Add Metafields to your Object
-locale | false | String | Edit Object locale
-write_key | false | String | Your Bucket write key
+type_slug | required | String | Add Object to Object Type
+title | required | String | Your Bucket title
+slug | | String | Unique identifier for your Object
+content | | String | Add Content to your Object
+options.slug_field | | Bool | Set to false to hide the slug field
+options.content_editor | | Bool | Set to false to hide the content editor
+metafields | | Array | Add Metafields to your Object
+locale | | String | Edit Object locale
+write_key | | String | Your Bucket write key
 
 
 ## Delete Object
@@ -497,7 +497,7 @@ write_key | false | String | Your Bucket write key
 > Definition
 
 ```bash
-DELETE https://api.cosmicjs.com/v1/:bucket-slug/objects/:object-slug
+DELETE https://api.cosmicjs.com/v1/:bucket_slug/objects/:object_slug
 ```
 
 ```javascript
@@ -540,4 +540,4 @@ Edit an existing Object in your Bucket.
 
 Parameter | Required | Type | Description
 --------- | ------- | ----------- | -----------
-write_key | false | String | Your Bucket write key
+write_key | | String | Your Bucket write key
