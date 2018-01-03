@@ -1,0 +1,2185 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>Cosmic JS API Docs</title>
+    <link href="stylesheets/screen.css" rel="stylesheet" type="text/css" media="screen" />
+    <link href="stylesheets/print.css" rel="stylesheet" type="text/css" media="print" />
+    <link href="stylesheets/highlight-monokai.css" rel="stylesheet" type="text/css" media="screen, print" />
+    <script src="javascripts/all.js" type="text/javascript"></script>
+  </head>
+  <body class="" data-languages="[&#34;bash&#34;,&#34;javascript&#34;]">
+    <a href="#" id="nav-button">
+      <span> NAV
+        <img alt="undefined" class="undefined" src="images/navbar.png"> </span>
+    </a>
+    <div class="tocify-wrapper">
+      <div style="text-align: center; margin-top: 15px">
+        <a href="https://cosmicjs.com" style="text-decoration: none">
+          <img src="https://cosmicjs.com/images/logo.svg" width="60" />
+          <br />
+          <h2 style="color: #fff;">REST API</h2>
+        </a>
+      </div>
+      <div class="lang-selector">
+        <a href="#" data-language-name="bash">bash</a>
+        <a href="#" data-language-name="javascript">javascript</a>
+      </div>
+      <div class="search">
+        <input type="text" class="search" id="input-search" placeholder="Search"> </div>
+      <ul class="search-results"></ul>
+      <div id="toc"> </div>
+      <ul class="toc-footer">
+        <li></li>
+        <li style="font-size: 15px; padding-top: 10px">
+          <a href='https://cosmicjs.com'>← Back to Cosmic JS</a>
+        </li>
+      </ul>
+    </div>
+    <div class="page-wrapper">
+      <div class="dark-box"></div>
+      <div class="content">
+        <h1 id="introduction">Introduction</h1>
+        <p>The Cosmic JS REST API helps you easily manage data and files for your applications. We support cross-origin resource sharing, allowing you to interact securely with our API from a client-side web application (though you should never expose your
+          private keys or credentials in any public website&#39;s client-side code). JSON is returned by all API responses, including errors.</p>
+        <blockquote>
+          <p>Starting Point</p>
+        </blockquote> <pre class="highlight bash"><code><span class="hljs-comment"># API Endpoint</span>
+https://api.cosmicjs.com</code></pre><pre class="highlight javascript"><code><span class="hljs-comment">// Install the NPM package</span>
+npm install cosmicjs</code></pre>
+        <h1 id="errors">Errors</h1>
+        <p>The Cosmic JS API uses the following error codes:</p>
+        <table>
+          <thead>
+            <tr>
+              <th>Error Code</th>
+              <th>Meaning</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>200</td>
+              <td>OK - Everything worked as expected.</td>
+            </tr>
+            <tr>
+              <td>400</td>
+              <td>Bad Request - Your request is invalid.</td>
+            </tr>
+            <tr>
+              <td>401</td>
+              <td>Unauthorized - Your access key is incorrect.</td>
+            </tr>
+            <tr>
+              <td>402</td>
+              <td>Payment Required - Your Bucket needs to be upgraded to continue use.</td>
+            </tr>
+            <tr>
+              <td>403</td>
+              <td>Forbidden - You are not allowed to access this content.</td>
+            </tr>
+            <tr>
+              <td>404</td>
+              <td>Not Found - The requested resource doesn&#39;t exist.</td>
+            </tr>
+            <tr>
+              <td>429</td>
+              <td>Too Many Requests - Too many requests hit the API too quickly.</td>
+            </tr>
+            <tr>
+              <td>500, 502, 503, 504</td>
+              <td>Internal Server Error - Something went wrong on our end.</td>
+            </tr>
+          </tbody>
+        </table>
+        <h1 id="authentication">Authentication</h1>
+        <blockquote>
+          <p>Definition</p>
+        </blockquote> <pre class="highlight bash"><code>POST https://api.cosmicjs.com/v1/authenticate</code></pre><pre class="highlight javascript"><code>Cosmic.authenticate()</code></pre>
+        <blockquote>
+          <p>Example Request</p>
+        </blockquote> <pre class="highlight bash"><code><span class="hljs-comment"># With shell, you can just pass your email and password</span>
+curl -X POST https://api.cosmicjs.com/v1/authenticate \
+-d email=myname@myservice.com \
+-d password=mypassword</code></pre><pre class="highlight javascript"><code><span class="hljs-keyword">const</span> Cosmic = <span class="hljs-built_in">require</span>(<span class="hljs-string">'cosmicjs'</span>)() <span class="hljs-comment">// double parentheses to init function without config</span>
+Cosmic.authenticate({
+  <span class="hljs-attr">email</span>: <span class="hljs-string">'user@myservice.com'</span>,
+  <span class="hljs-attr">password</span>: <span class="hljs-string">'mypassword'</span>
+}).then(<span class="hljs-function"><span class="hljs-params">data</span> =&gt;</span> {
+    <span class="hljs-built_in">console</span>.log(data)
+}).catch(<span class="hljs-function"><span class="hljs-params">err</span> =&gt;</span> {
+    <span class="hljs-built_in">console</span>.log(err)
+})</code></pre>
+        <blockquote>
+          <p>Example Response</p>
+        </blockquote> <pre class="highlight json"><code>{
+  <span class="hljs-attr">"success"</span>: <span class="hljs-literal">true</span>,
+  <span class="hljs-attr">"message"</span>: <span class="hljs-string">"Token created successfully."</span>,
+  <span class="hljs-attr">"token"</span>: <span class="hljs-string">"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXV.eyJlbWFpbCI6InNwaXJvbnlAZ21haWwuY29tIiwicGFzc3dvcmQiOiIxNzlhZDQ1YzZjZTJjYjk3Y2YxMDI5ZTIxMjA0NmU4MSIsImlhdCI6MTUxNDQ5NzI3N30.ep4cEgH_SqItQ5McJArJtljS3GSJedyEcDRlnu9yb-U"</span>
+}</code></pre>
+        <p>Send your <code>email</code> and <code>password</code> to receive your access token. Your access token will be used to add Buckets to your account as well as other account-related access.
+          <b>You do not need to use the token to edit your Bucket. Your Bucket has its own read and write keys for restricted access</b>.</p>
+        <p>Go to
+          <a href="https://cosmicjs.com/signup">https://cosmicjs.com/signup</a> to create an account.</p>
+        <table>
+          <thead>
+            <tr>
+              <th>Parameter</th>
+              <th>Required</th>
+              <th>Type</th>
+              <th>Description</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>email</td>
+              <td>required</td>
+              <td>String</td>
+              <td>Your Cosmic JS login email</td>
+            </tr>
+            <tr>
+              <td>password</td>
+              <td>required</td>
+              <td>String</td>
+              <td>Your Cosmic JS login password</td>
+            </tr>
+          </tbody>
+        </table>
+        <h1 id="buckets">Buckets</h1>
+        <h2 id="add-bucket">Add Bucket</h2>
+        <p><code>title</code> is the only required property. See the table below for the other optional properties. The Bucket request matches the <code>bucket.json</code> file located in Your Bucket Dashboard &gt; Import Export.</p>
+        <blockquote>
+          <p>Definition</p>
+        </blockquote> <pre class="highlight bash"><code>POST https://api.cosmicjs.com/v1/buckets</code></pre><pre class="highlight javascript"><code>Cosmic.addBucket()</code></pre>
+        <blockquote>
+          <p>Example Request</p>
+        </blockquote> <pre class="highlight bash"><code>curl -X POST https://api.cosmicjs.com/v1/buckets \
+-H <span class="hljs-string">"Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXV.eyJlbWFpbCI6InNwaXJvbnlAZ21haWwuY29tIiwicGFzc3dvcmQiOiIxNzlhZDQ1YzZjZTJjYjk3Y2YxMDI5ZTIxMjA0NmU4MSIsImlhdCI6MTUxNDQ5NzI3N30.ep4cEgH_SqItQ5McJArJtljS3GSJedyEcDRlnu9yb-U"</span> \
+-H <span class="hljs-string">"Content-Type: application/json"</span> \
+-d <span class="hljs-string">'{"title": "My New Bucket"}'</span></code></pre><pre class="highlight javascript"><code><span class="hljs-keyword">const</span> Cosmic = <span class="hljs-built_in">require</span>(<span class="hljs-string">'cosmicjs'</span>)() <span class="hljs-comment">// double parentheses to init function without config</span>
+Cosmic.addBucket({
+  <span class="hljs-attr">title</span>: <span class="hljs-string">'My New Bucket'</span>,
+  <span class="hljs-attr">token</span>: <span class="hljs-string">'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXV.eyJlbWFpbCI6InNwaXJvbnlAZ21haWwuY29tIiwicGFzc3dvcmQiOiIxNzlhZDQ1YzZjZTJjYjk3Y2YxMDI5ZTIxMjA0NmU4MSIsImlhdCI6MTUxNDQ5NzI3N30.ep4cEgH_SqItQ5McJArJtljS3GSJedyEcDRlnu9yb-U'</span> }).then(<span class="hljs-function"><span class="hljs-params">data</span> =&gt;</span> {
+  <span class="hljs-built_in">console</span>.log(data)
+}).catch(<span class="hljs-function"><span class="hljs-params">err</span> =&gt;</span> {
+  <span class="hljs-built_in">console</span>.log(err)
+})</code></pre>
+        <blockquote>
+          <p>Example Response</p>
+        </blockquote> <pre class="highlight json"><code>{
+  <span class="hljs-attr">"bucket"</span>: {
+    <span class="hljs-attr">"_id"</span>: <span class="hljs-string">"55b3d557df0fb1df7600004b"</span>,
+    <span class="hljs-attr">"slug"</span>: <span class="hljs-string">"my-new-bucket"</span>,
+    <span class="hljs-attr">"title"</span>: <span class="hljs-string">"My New Bucket"</span>
+  }
+}</code></pre>
+        <table>
+          <thead>
+            <tr>
+              <th>Parameter</th>
+              <th>Required</th>
+              <th>Type</th>
+              <th>Description</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>title</td>
+              <td>required</td>
+              <td>String</td>
+              <td>Your Bucket title</td>
+            </tr>
+            <tr>
+              <td>slug</td>
+              <td></td>
+              <td>String</td>
+              <td>URL-friendly unique identifier</td>
+            </tr>
+            <tr>
+              <td>read_key</td>
+              <td></td>
+              <td>String</td>
+              <td>Restrict read access</td>
+            </tr>
+            <tr>
+              <td>write_key</td>
+              <td></td>
+              <td>String</td>
+              <td>Restrict write access</td>
+            </tr>
+            <tr>
+              <td>cluster</td>
+              <td></td>
+              <td>String</td>
+              <td>Add this Bucket to a Cluster. ID of existing Cluster</td>
+            </tr>
+            <tr>
+              <td>object_types</td>
+              <td></td>
+              <td>Array</td>
+              <td>Populate your Bucket with Object Types. See
+                <a href="/#object-types">Object Types</a> for model.</td>
+            </tr>
+            <tr>
+              <td>objects</td>
+              <td></td>
+              <td>Array</td>
+              <td>Populate your Bucket with Objects. See
+                <a href="/#objects">Objects</a> for model.</td>
+            </tr>
+            <tr>
+              <td>media</td>
+              <td></td>
+              <td>Array</td>
+              <td>Populate your Bucket with Media. See
+                <a href="/#media">Media</a> for model.</td>
+            </tr>
+            <tr>
+              <td>media_folders</td>
+              <td></td>
+              <td>Array</td>
+              <td>Populate your Bucket with Media Folders. See
+                <a href="/#media">Media</a> for model.</td>
+            </tr>
+            <tr>
+              <td>webhooks</td>
+              <td></td>
+              <td>Array</td>
+              <td>Populate your Bucket with
+                <a href="https://cosmicjs.com/docs/webhooks" target="_blank">Webhooks</a>. See
+                <a href="/#webhooks">Webhooks</a> for model.</td>
+            </tr>
+            <tr>
+              <td>extensions</td>
+              <td></td>
+              <td>Array</td>
+              <td>Populate your Bucket with
+                <a href="https://cosmicjs.com/docs/extensions" target="_blank">Extensions</a>. See
+                <a href="/#extensions">Extensions</a> for model.</td>
+            </tr>
+          </tbody>
+        </table>
+        <h2 id="get-bucket">Get Bucket</h2>
+        <blockquote>
+          <p>Definition</p>
+        </blockquote> <pre class="highlight bash"><code>GET https://api.cosmicjs.com/:bucket_slug</code></pre><pre class="highlight javascript"><code>Cosmic.getBucket()</code></pre>
+        <blockquote>
+          <p>Example Request</p>
+        </blockquote> <pre class="highlight bash"><code>curl <span class="hljs-string">"https://api.cosmicjs.com/v1/wedding-site"</span></code></pre><pre class="highlight javascript"><code><span class="hljs-keyword">const</span> Cosmic = <span class="hljs-built_in">require</span>(<span class="hljs-string">'cosmicjs'</span>)({
+  <span class="hljs-attr">bucket</span>: <span class="hljs-string">'wedding-site'</span>,
+  <span class="hljs-attr">read_key</span>: <span class="hljs-string">''</span>
+})
+Cosmic.getBucket().then(<span class="hljs-function"><span class="hljs-params">data</span> =&gt;</span> {
+  <span class="hljs-built_in">console</span>.log(data)
+}).catch(<span class="hljs-function"><span class="hljs-params">err</span> =&gt;</span> {
+  <span class="hljs-built_in">console</span>.log(err)
+})</code></pre>
+        <blockquote>
+          <p>Example Response</p>
+        </blockquote> <pre class="highlight json"><code>{
+  <span class="hljs-attr">"bucket"</span>: {
+    <span class="hljs-attr">"_id"</span>: <span class="hljs-string">"55b3d557df0fb1df7600004b"</span>,
+    <span class="hljs-attr">"slug"</span>: <span class="hljs-string">"wedding-site"</span>,
+    <span class="hljs-attr">"title"</span>: <span class="hljs-string">"Wedding Site"</span>,
+    <span class="hljs-attr">"object_types"</span>: [
+      ...
+    ],
+    <span class="hljs-attr">"objects"</span>: [
+      ...
+    ],
+    <span class="hljs-attr">"media"</span>: [
+      ...
+    ],
+    <span class="hljs-attr">"media_folders"</span>: [
+      ...
+    ]
+  }
+}</code></pre>
+        <p>Returns the entire Bucket. If you would like to restrict read access to your Bucket, you can do so in Your Bucket &gt; Basic Settings.</p>
+        <table>
+          <thead>
+            <tr>
+              <th>Parameter</th>
+              <th>Required</th>
+              <th>Type</th>
+              <th>Description</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>hide_metafields</td>
+              <td></td>
+              <td>Enum</td>
+              <td>true, Hides metafields</td>
+            </tr>
+            <tr>
+              <td>read_key</td>
+              <td></td>
+              <td>String</td>
+              <td>Restrict read access to your Bucket</td>
+            </tr>
+          </tbody>
+        </table>
+        <h1 id="object-types">Object Types</h1>
+        <h2 id="add-object-type">Add Object Type</h2>
+        <blockquote>
+          <p>Definition</p>
+        </blockquote> <pre class="highlight bash"><code>POST https://api.cosmicjs.com/v1/:bucket_slug/add-object-type</code></pre><pre class="highlight javascript"><code>Cosmic.addObjectType()</code></pre>
+        <blockquote>
+          <p>Example Request</p>
+        </blockquote> <pre class="highlight bash"><code>{
+  <span class="hljs-string">"title"</span>: <span class="hljs-string">"Pages"</span>,
+  <span class="hljs-string">"singular"</span>: <span class="hljs-string">"Page"</span>,
+  <span class="hljs-string">"slug"</span>: <span class="hljs-string">"pages"</span>,
+  <span class="hljs-string">"metafields"</span>: [
+    {
+      <span class="hljs-string">"type"</span>: <span class="hljs-string">"text"</span>,
+      <span class="hljs-string">"title"</span>: <span class="hljs-string">"Headline"</span>,
+      <span class="hljs-string">"key"</span>: <span class="hljs-string">"headline"</span>,
+      <span class="hljs-string">"required"</span>: <span class="hljs-literal">true</span>
+    },
+    {
+      <span class="hljs-string">"type"</span>: <span class="hljs-string">"file"</span>,
+      <span class="hljs-string">"title"</span>: <span class="hljs-string">"Hero"</span>,
+      <span class="hljs-string">"key"</span>: <span class="hljs-string">"hero"</span>,
+      <span class="hljs-string">"required"</span>: <span class="hljs-literal">true</span>
+    }
+  ]
+}</code></pre><pre class="highlight javascript"><code><span class="hljs-keyword">const</span> Cosmic = <span class="hljs-built_in">require</span>(<span class="hljs-string">'cosmicjs'</span>)({
+  <span class="hljs-attr">bucket</span>: <span class="hljs-string">'bucket-slug'</span>,
+  <span class="hljs-attr">write_key</span>: <span class="hljs-string">''</span>
+})
+<span class="hljs-keyword">const</span> params = {
+  <span class="hljs-string">"title"</span>: <span class="hljs-string">"Pages"</span>,
+  <span class="hljs-string">"singular"</span>: <span class="hljs-string">"Page"</span>,
+  <span class="hljs-string">"slug"</span>: <span class="hljs-string">"pages"</span>,
+  <span class="hljs-string">"metafields"</span>: [
+    {
+      <span class="hljs-string">"type"</span>: <span class="hljs-string">"text"</span>,
+      <span class="hljs-string">"title"</span>: <span class="hljs-string">"Headline"</span>,
+      <span class="hljs-string">"key"</span>: <span class="hljs-string">"headline"</span>,
+      <span class="hljs-string">"required"</span>: <span class="hljs-literal">true</span>
+    },
+    {
+      <span class="hljs-string">"type"</span>: <span class="hljs-string">"file"</span>,
+      <span class="hljs-string">"title"</span>: <span class="hljs-string">"Hero"</span>,
+      <span class="hljs-string">"key"</span>: <span class="hljs-string">"hero"</span>,
+      <span class="hljs-string">"required"</span>: <span class="hljs-literal">true</span>
+    }
+  ]
+}
+Cosmic.addObjectType(params).then(<span class="hljs-function"><span class="hljs-params">data</span> =&gt;</span> {
+  <span class="hljs-built_in">console</span>.log(data)
+}).catch(<span class="hljs-function"><span class="hljs-params">err</span> =&gt;</span> {
+  <span class="hljs-built_in">console</span>.log(err)
+})</code></pre>
+        <blockquote>
+          <p>Example Response</p>
+        </blockquote> <pre class="highlight json"><code>{
+  <span class="hljs-attr">"object_type"</span>: {
+    <span class="hljs-attr">"slug"</span>: <span class="hljs-string">"pages"</span>,
+    <span class="hljs-attr">"title"</span>: <span class="hljs-string">"Pages"</span>,
+    <span class="hljs-attr">"singular"</span>: <span class="hljs-string">"Page"</span>,
+    <span class="hljs-attr">"metafields"</span>: [
+      {
+        <span class="hljs-attr">"type"</span>: <span class="hljs-string">"text"</span>,
+        <span class="hljs-attr">"title"</span>: <span class="hljs-string">"Headline"</span>,
+        <span class="hljs-attr">"key"</span>: <span class="hljs-string">"headline"</span>,
+        <span class="hljs-attr">"required"</span>: <span class="hljs-literal">true</span>
+      },
+      {
+        <span class="hljs-attr">"type"</span>: <span class="hljs-string">"file"</span>,
+        <span class="hljs-attr">"title"</span>: <span class="hljs-string">"Hero"</span>,
+        <span class="hljs-attr">"key"</span>: <span class="hljs-string">"hero"</span>,
+        <span class="hljs-attr">"required"</span>: <span class="hljs-literal">true</span>
+      }
+    ],
+    <span class="hljs-attr">"created_at"</span>: <span class="hljs-string">"2017-05-30T02:06:35.373Z"</span>,
+    <span class="hljs-attr">"metadata"</span>: <span class="hljs-literal">null</span>
+  }
+}</code></pre>
+        <p>Add a new Object Type to your Bucket.</p>
+        <table>
+          <thead>
+            <tr>
+              <th>Parameter</th>
+              <th>Required</th>
+              <th>Type</th>
+              <th>Description</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>title</td>
+              <td>required</td>
+              <td>String</td>
+              <td>Plural title of your Object Type</td>
+            </tr>
+            <tr>
+              <td>slug</td>
+              <td></td>
+              <td>String</td>
+              <td>Plural slug of your Object Type</td>
+            </tr>
+            <tr>
+              <td>singular</td>
+              <td></td>
+              <td>String</td>
+              <td>Singular title of your Object Type</td>
+            </tr>
+            <tr>
+              <td>metafields</td>
+              <td></td>
+              <td>Array</td>
+              <td>Default Metafields for each Object in this type</td>
+            </tr>
+            <tr>
+              <td>pretty</td>
+              <td></td>
+              <td>Enum</td>
+              <td>true, Makes the response more reader-friendly</td>
+            </tr>
+            <tr>
+              <td>write_key</td>
+              <td></td>
+              <td>String</td>
+              <td>Restrict write access to your Bucket</td>
+            </tr>
+          </tbody>
+        </table>
+        <h2 id="get-object-types">Get Object Types</h2>
+        <blockquote>
+          <p>Definition</p>
+        </blockquote> <pre class="highlight bash"><code>GET https://api.cosmicjs.com/v1/:bucket_slug/object-types</code></pre><pre class="highlight javascript"><code>Cosmic.getObjectTypes()</code></pre>
+        <blockquote>
+          <p>Example Request</p>
+        </blockquote> <pre class="highlight bash"><code>curl <span class="hljs-string">"https://api.cosmicjs.com/v1/wedding-site/object-types"</span></code></pre><pre class="highlight javascript"><code><span class="hljs-keyword">const</span> Cosmic = <span class="hljs-built_in">require</span>(<span class="hljs-string">'cosmicjs'</span>)({
+  <span class="hljs-attr">bucket</span>: <span class="hljs-string">'wedding-site'</span>,
+  <span class="hljs-attr">read_key</span>: <span class="hljs-string">''</span>
+})
+Cosmic.getObjectTypes().then(<span class="hljs-function"><span class="hljs-params">data</span> =&gt;</span> {
+  <span class="hljs-built_in">console</span>.log(data)
+}).catch(<span class="hljs-function"><span class="hljs-params">err</span> =&gt;</span> {
+  <span class="hljs-built_in">console</span>.log(err)
+})</code></pre>
+        <blockquote>
+          <p>Example Response</p>
+        </blockquote> <pre class="highlight json"><code>{ 
+  <span class="hljs-attr">"object_types"</span>: [
+    {
+      <span class="hljs-attr">"title"</span>: <span class="hljs-string">"Groomsmen"</span>,
+      <span class="hljs-attr">"slug"</span>: <span class="hljs-string">"groomsmen"</span>,
+      <span class="hljs-attr">"singular"</span>: <span class="hljs-string">"Groomsman"</span>,
+      <span class="hljs-attr">"metafields"</span>: [
+        {
+          <span class="hljs-attr">"type"</span>: <span class="hljs-string">"file"</span>,
+          <span class="hljs-attr">"title"</span>: <span class="hljs-string">"Image"</span>,
+          <span class="hljs-attr">"key"</span>: <span class="hljs-string">"image"</span>,
+          <span class="hljs-attr">"value"</span>: <span class="hljs-string">""</span>
+        },
+        {
+          <span class="hljs-attr">"key"</span>: <span class="hljs-string">"official-title"</span>,
+          <span class="hljs-attr">"title"</span>: <span class="hljs-string">"Official Title"</span>,
+          <span class="hljs-attr">"type"</span>: <span class="hljs-string">"text"</span>,
+          <span class="hljs-attr">"value"</span>: <span class="hljs-string">""</span>
+        }
+      ],
+      <span class="hljs-attr">"order"</span>: <span class="hljs-number">2</span>
+    },
+    {
+      <span class="hljs-attr">"title"</span>: <span class="hljs-string">"Bridesmaids"</span>,
+      <span class="hljs-attr">"slug"</span>: <span class="hljs-string">"bridesmaids"</span>,
+      <span class="hljs-attr">"singular"</span>: <span class="hljs-string">"Bridesmaid"</span>,
+      <span class="hljs-attr">"metafields"</span>: [
+        {
+          <span class="hljs-attr">"type"</span>: <span class="hljs-string">"file"</span>,
+          <span class="hljs-attr">"title"</span>: <span class="hljs-string">"Image"</span>,
+          <span class="hljs-attr">"key"</span>: <span class="hljs-string">"image"</span>,
+          <span class="hljs-attr">"value"</span>: <span class="hljs-string">""</span>
+        },
+        {
+          <span class="hljs-attr">"type"</span>: <span class="hljs-string">"text"</span>,
+          <span class="hljs-attr">"title"</span>: <span class="hljs-string">"Official Title"</span>,
+          <span class="hljs-attr">"key"</span>: <span class="hljs-string">""</span>,
+          <span class="hljs-attr">"value"</span>: <span class="hljs-string">""</span>
+        }
+      ],
+      <span class="hljs-attr">"order"</span>: <span class="hljs-number">3</span>
+    },
+    {
+      <span class="hljs-attr">"title"</span>: <span class="hljs-string">"Sections"</span>,
+      <span class="hljs-attr">"slug"</span>: <span class="hljs-string">"sections"</span>,
+      <span class="hljs-attr">"singular"</span>: <span class="hljs-string">"Section"</span>,
+      <span class="hljs-attr">"metafields"</span>: [],
+      <span class="hljs-attr">"order"</span>: <span class="hljs-number">1</span>
+    }
+  ]
+}</code></pre>
+        <p>Get all Object Types in your Bucket.</p>
+        <table>
+          <thead>
+            <tr>
+              <th>Parameter</th>
+              <th>Required</th>
+              <th>Type</th>
+              <th>Description</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>pretty</td>
+              <td></td>
+              <td>Enum</td>
+              <td>true, Makes the response more reader-friendly</td>
+            </tr>
+            <tr>
+              <td>read_key</td>
+              <td></td>
+              <td>String</td>
+              <td>Restrict read access to your Bucket</td>
+            </tr>
+          </tbody>
+        </table>
+        <h2 id="edit-object-type">Edit Object Type</h2>
+        <blockquote>
+          <p>Definition</p>
+        </blockquote> <pre class="highlight bash"><code>PUT https://api.cosmicjs.com/v1/:bucket_slug/edit-object-type</code></pre><pre class="highlight javascript"><code>Cosmic.editObjectType()</code></pre>
+        <blockquote>
+          <p>Example Request</p>
+        </blockquote> <pre class="highlight bash"><code>{
+  <span class="hljs-string">"slug"</span>: <span class="hljs-string">"pages"</span>,
+  <span class="hljs-string">"metafields"</span>: [
+    {
+      <span class="hljs-string">"type"</span>: <span class="hljs-string">"text"</span>,
+      <span class="hljs-string">"title"</span>: <span class="hljs-string">"Headline"</span>,
+      <span class="hljs-string">"key"</span>: <span class="hljs-string">"headline"</span>,
+      <span class="hljs-string">"required"</span>: <span class="hljs-literal">true</span>
+    },
+    {
+      <span class="hljs-string">"type"</span>: <span class="hljs-string">"file"</span>,
+      <span class="hljs-string">"title"</span>: <span class="hljs-string">"Hero"</span>,
+      <span class="hljs-string">"key"</span>: <span class="hljs-string">"hero"</span>,
+      <span class="hljs-string">"required"</span>: <span class="hljs-literal">true</span>
+    },
+    {
+      <span class="hljs-string">"type"</span>: <span class="hljs-string">"text"</span>,
+      <span class="hljs-string">"title"</span>: <span class="hljs-string">"Tagline"</span>,
+      <span class="hljs-string">"key"</span>: <span class="hljs-string">"tagline"</span>,
+      <span class="hljs-string">"required"</span>: <span class="hljs-literal">true</span>
+    }
+  ]
+}</code></pre><pre class="highlight javascript"><code><span class="hljs-keyword">const</span> Cosmic = <span class="hljs-built_in">require</span>(<span class="hljs-string">'cosmicjs'</span>)({
+  <span class="hljs-attr">bucket</span>: <span class="hljs-string">'bucket-slug'</span>,
+  <span class="hljs-attr">write_key</span>: <span class="hljs-string">''</span>
+})
+Cosmic.editObjectType({
+  <span class="hljs-attr">slug</span>: <span class="hljs-string">'posts'</span>,
+  <span class="hljs-attr">title</span>: <span class="hljs-string">'New Posts Title'</span>
+}).then(<span class="hljs-function"><span class="hljs-params">data</span> =&gt;</span> {
+  <span class="hljs-built_in">console</span>.log(data)
+}).catch(<span class="hljs-function"><span class="hljs-params">err</span> =&gt;</span> {
+  <span class="hljs-built_in">console</span>.log(err)
+})</code></pre>
+        <blockquote>
+          <p>Example Response</p>
+        </blockquote> <pre class="highlight json"><code>{
+  <span class="hljs-attr">"object_type"</span>: {
+    <span class="hljs-attr">"slug"</span>: <span class="hljs-string">"pages"</span>,
+    <span class="hljs-attr">"title"</span>: <span class="hljs-string">"Pages"</span>,
+    <span class="hljs-attr">"singular"</span>: <span class="hljs-string">"Page"</span>,
+    <span class="hljs-attr">"metafields"</span>: [
+      {
+        <span class="hljs-attr">"type"</span>: <span class="hljs-string">"text"</span>,
+        <span class="hljs-attr">"title"</span>: <span class="hljs-string">"Headline"</span>,
+        <span class="hljs-attr">"key"</span>: <span class="hljs-string">"headline"</span>,
+        <span class="hljs-attr">"required"</span>: <span class="hljs-literal">true</span>
+      },
+      {
+        <span class="hljs-attr">"type"</span>: <span class="hljs-string">"file"</span>,
+        <span class="hljs-attr">"title"</span>: <span class="hljs-string">"Hero"</span>,
+        <span class="hljs-attr">"key"</span>: <span class="hljs-string">"hero"</span>,
+        <span class="hljs-attr">"required"</span>: <span class="hljs-literal">true</span>
+      },
+      {
+        <span class="hljs-attr">"type"</span>: <span class="hljs-string">"text"</span>,
+        <span class="hljs-attr">"title"</span>: <span class="hljs-string">"Tagline"</span>,
+        <span class="hljs-attr">"key"</span>: <span class="hljs-string">"tagline"</span>,
+        <span class="hljs-attr">"required"</span>: <span class="hljs-literal">true</span>
+      }
+    ],
+    <span class="hljs-attr">"modified_at"</span>: <span class="hljs-string">"2017-05-30T02:10:35.373Z"</span>,
+    <span class="hljs-attr">"created_at"</span>: <span class="hljs-string">"2017-05-30T02:06:35.373Z"</span>,
+    <span class="hljs-attr">"metadata"</span>: <span class="hljs-literal">null</span>
+  }
+}</code></pre>
+        <p>Edit an exiting Object Type in your Bucket.</p>
+        <table>
+          <thead>
+            <tr>
+              <th>Parameter</th>
+              <th>Required</th>
+              <th>Type</th>
+              <th>Description</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>slug</td>
+              <td>required</td>
+              <td>String</td>
+              <td>Plural slug of your Object Type</td>
+            </tr>
+            <tr>
+              <td>title</td>
+              <td></td>
+              <td>String</td>
+              <td>Plural title of your Object Type</td>
+            </tr>
+            <tr>
+              <td>singular</td>
+              <td></td>
+              <td>String</td>
+              <td>Singular title of your Object Type</td>
+            </tr>
+            <tr>
+              <td>metafields</td>
+              <td></td>
+              <td>Array</td>
+              <td>Default Metafields for each Object in this type</td>
+            </tr>
+            <tr>
+              <td>write_key</td>
+              <td></td>
+              <td>String</td>
+              <td>Restrict write access to your Bucket</td>
+            </tr>
+          </tbody>
+        </table>
+        <h2 id="delete-object-type">Delete Object Type</h2>
+        <blockquote>
+          <p>Definition</p>
+        </blockquote> <pre class="highlight bash"><code>DELETE https://api.cosmicjs.com/v1/:bucket_slug/object-types/:type_slug</code></pre><pre class="highlight javascript"><code>Cosmic.deleteObjectType()</code></pre>
+        <blockquote>
+          <p>Example Request Body</p>
+        </blockquote> <pre class="highlight bash"><code>{
+  <span class="hljs-string">"write_key"</span>: <span class="hljs-string">"your-key-added-in-bucket-settings"</span> // optional
+}</code></pre><pre class="highlight javascript"><code><span class="hljs-keyword">const</span> Cosmic = <span class="hljs-built_in">require</span>(<span class="hljs-string">'cosmicjs'</span>)({
+  <span class="hljs-attr">bucket</span>: <span class="hljs-string">'bucket-slug'</span>,
+  <span class="hljs-attr">write_key</span>: <span class="hljs-string">''</span>
+})
+Cosmic.deleteObjectType({
+  <span class="hljs-attr">slug</span>: <span class="hljs-string">'posts'</span>
+}).then(<span class="hljs-function"><span class="hljs-params">data</span> =&gt;</span> {
+  <span class="hljs-built_in">console</span>.log(data)
+}).catch(<span class="hljs-function"><span class="hljs-params">err</span> =&gt;</span> {
+  <span class="hljs-built_in">console</span>.log(err)
+})</code></pre>
+        <blockquote>
+          <p>Example Response</p>
+        </blockquote> <pre class="highlight json"><code>{
+  <span class="hljs-attr">"status"</span>: <span class="hljs-string">"200"</span>,
+  <span class="hljs-attr">"message"</span>: <span class="hljs-string">"Object Type deleted."</span>
+}</code></pre>
+        <p>Delete an exiting Object Type from your Bucket. * This does not delete Objects in this Object Type.</p>
+        <table>
+          <thead>
+            <tr>
+              <th>Parameter</th>
+              <th>Required</th>
+              <th>Type</th>
+              <th>Description</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>write_key</td>
+              <td></td>
+              <td>String</td>
+              <td>Restrict write access to your Bucket</td>
+            </tr>
+          </tbody>
+        </table>
+        <h1 id="objects">Objects</h1>
+        <p>The following endpoints allow you to add, edit and delete Objects in your Bucket. If you would like to restrict read or write access to your Bucket, you can do so in Your Bucket &gt; Basic Settings.</p>
+        <h2 id="add-object">Add Object</h2>
+        <blockquote>
+          <p>Definition</p>
+        </blockquote> <pre class="highlight bash"><code>POST https://api.cosmicjs.com/v1/:bucket_slug/add-object</code></pre><pre class="highlight javascript"><code>Cosmic.addObject()</code></pre>
+        <blockquote>
+          <p>Example Request</p>
+        </blockquote> <pre class="highlight bash"><code>{
+  <span class="hljs-string">"title"</span>: <span class="hljs-string">"Cosmic JS Example"</span>,
+  <span class="hljs-string">"type_slug"</span>: <span class="hljs-string">"examples"</span>,
+  <span class="hljs-string">"content"</span>: <span class="hljs-string">"Learning the Cosmic JS API is really fun and so easy"</span>,
+  <span class="hljs-string">"metafields"</span>: [
+    {
+      <span class="hljs-string">"key"</span>: <span class="hljs-string">"Headline"</span>,
+      <span class="hljs-string">"type"</span>: <span class="hljs-string">"text"</span>,
+      <span class="hljs-string">"value"</span>: <span class="hljs-string">"Learn Cosmic JS!"</span>
+    },
+    {
+      <span class="hljs-string">"key"</span>: <span class="hljs-string">"Author"</span>,
+      <span class="hljs-string">"type"</span>: <span class="hljs-string">"text"</span>,
+      <span class="hljs-string">"value"</span>: <span class="hljs-string">"Quasar Jones"</span>
+    }
+  ],
+  <span class="hljs-string">"options"</span>: {
+    <span class="hljs-string">"slug_field"</span>: <span class="hljs-literal">false</span>
+  }
+}</code></pre><pre class="highlight javascript"><code><span class="hljs-keyword">const</span> params = {
+  <span class="hljs-string">"title"</span>: <span class="hljs-string">"Cosmic JS Example"</span>,
+  <span class="hljs-string">"type_slug"</span>: <span class="hljs-string">"examples"</span>,
+  <span class="hljs-string">"content"</span>: <span class="hljs-string">"Learning the Cosmic JS API is really fun and so easy"</span>,
+  <span class="hljs-string">"metafields"</span>: [
+    {
+      <span class="hljs-string">"key"</span>: <span class="hljs-string">"Headline"</span>,
+      <span class="hljs-string">"type"</span>: <span class="hljs-string">"text"</span>,
+      <span class="hljs-string">"value"</span>: <span class="hljs-string">"Learn Cosmic JS!"</span>
+    },
+    {
+      <span class="hljs-string">"key"</span>: <span class="hljs-string">"Author"</span>,
+      <span class="hljs-string">"type"</span>: <span class="hljs-string">"text"</span>,
+      <span class="hljs-string">"value"</span>: <span class="hljs-string">"Quasar Jones"</span>
+    }
+  ],
+  <span class="hljs-string">"options"</span>: {
+    <span class="hljs-string">"slug_field"</span>: <span class="hljs-literal">false</span>
+  }
+}
+<span class="hljs-keyword">const</span> Cosmic = <span class="hljs-built_in">require</span>(<span class="hljs-string">'cosmicjs'</span>)({
+  <span class="hljs-attr">bucket</span>: <span class="hljs-string">'bucket-slug'</span>,
+  <span class="hljs-attr">write_key</span>: <span class="hljs-string">''</span>
+})
+Cosmic.addObject(params).then(<span class="hljs-function"><span class="hljs-params">data</span> =&gt;</span> {
+  <span class="hljs-built_in">console</span>.log(data)
+}).catch(<span class="hljs-function"><span class="hljs-params">err</span> =&gt;</span> {
+  <span class="hljs-built_in">console</span>.log(err)
+})</code></pre>
+        <blockquote>
+          <p>Example Response</p>
+        </blockquote> <pre class="highlight json"><code>{
+  <span class="hljs-attr">"object"</span>: {
+    <span class="hljs-attr">"slug"</span>: <span class="hljs-string">"cosmic-js-example"</span>,
+    <span class="hljs-attr">"title"</span>: <span class="hljs-string">"Cosmic JS Example"</span>,
+    <span class="hljs-attr">"content"</span>: <span class="hljs-string">"Learning the Cosmic JS API is really fun and so easy"</span>,
+    <span class="hljs-attr">"metafields"</span>: [
+      {
+        <span class="hljs-attr">"title"</span>: <span class="hljs-string">"Headline"</span>,
+        <span class="hljs-attr">"key"</span>: <span class="hljs-string">"headline"</span>,
+        <span class="hljs-attr">"type"</span>: <span class="hljs-string">"text"</span>,
+        <span class="hljs-attr">"value"</span>: <span class="hljs-string">"Learn Cosmic JS!"</span>
+      },
+      {
+        <span class="hljs-attr">"title"</span>: <span class="hljs-string">"Author"</span>,
+        <span class="hljs-attr">"key"</span>: <span class="hljs-string">"author"</span>,
+        <span class="hljs-attr">"type"</span>: <span class="hljs-string">"text"</span>,
+        <span class="hljs-attr">"value"</span>: <span class="hljs-string">"Quasar Jones"</span>
+      }
+    ],
+    <span class="hljs-attr">"bucket"</span>: <span class="hljs-string">"568c5bbefd0dce302c000001"</span>,
+    <span class="hljs-attr">"type_slug"</span>: <span class="hljs-string">"examples"</span>,
+    <span class="hljs-attr">"created_at"</span>: <span class="hljs-string">"2016-01-06T00:28:39.982Z"</span>,
+    <span class="hljs-attr">"_id"</span>: <span class="hljs-string">"568c5fb72f0c5d532d000001"</span>,
+    <span class="hljs-attr">"options"</span>: {
+      <span class="hljs-attr">"slug_field"</span>: <span class="hljs-literal">false</span>
+    }
+  }
+}</code></pre>
+        <p>Add a new Object to your Bucket.</p>
+        <table>
+          <thead>
+            <tr>
+              <th>Parameter</th>
+              <th>Required</th>
+              <th>Type</th>
+              <th>Description</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>type_slug</td>
+              <td>required</td>
+              <td>String</td>
+              <td>Add Object to Object Type</td>
+            </tr>
+            <tr>
+              <td>title</td>
+              <td>required</td>
+              <td>String</td>
+              <td>Your Object title</td>
+            </tr>
+            <tr>
+              <td>slug</td>
+              <td></td>
+              <td>String</td>
+              <td>Unique identifier for your Object</td>
+            </tr>
+            <tr>
+              <td>content</td>
+              <td></td>
+              <td>String</td>
+              <td>Add Content to your Object</td>
+            </tr>
+            <tr>
+              <td>options.slug_field</td>
+              <td></td>
+              <td>Bool</td>
+              <td>Set to false to hide the slug field</td>
+            </tr>
+            <tr>
+              <td>options.content_editor</td>
+              <td></td>
+              <td>Bool</td>
+              <td>Set to false to hide the content editor</td>
+            </tr>
+            <tr>
+              <td>metafields</td>
+              <td></td>
+              <td>Array</td>
+              <td>Add Metafields to your Object</td>
+            </tr>
+            <tr>
+              <td>locale</td>
+              <td></td>
+              <td>String</td>
+              <td>Add localization to the Object</td>
+            </tr>
+            <tr>
+              <td>write_key</td>
+              <td></td>
+              <td>String</td>
+              <td>Your Bucket write key</td>
+            </tr>
+          </tbody>
+        </table>
+        <h2 id="get-objects">Get Objects</h2>
+        <blockquote>
+          <p>Definition</p>
+        </blockquote> <pre class="highlight bash"><code>GET https://api.cosmicjs.com/:bucket_slug/objects</code></pre><pre class="highlight javascript"><code>Cosmic.getObjects()</code></pre>
+        <blockquote>
+          <p>Example Request</p>
+        </blockquote> <pre class="highlight bash"><code>curl <span class="hljs-string">"https://api.cosmicjs.com/v1/wedding-site/objects?pretty=true&amp;hide_metafields=true&amp;limit=2"</span></code></pre><pre class="highlight javascript"><code><span class="hljs-keyword">const</span> Cosmic = <span class="hljs-built_in">require</span>(<span class="hljs-string">'cosmicjs'</span>)({
+  <span class="hljs-attr">bucket</span>: <span class="hljs-string">'wedding-site'</span>,
+  <span class="hljs-attr">read_key</span>: <span class="hljs-string">''</span>
+})
+Cosmic.getObjects({
+  <span class="hljs-attr">limit</span>: <span class="hljs-number">2</span>
+}).then(<span class="hljs-function"><span class="hljs-params">data</span> =&gt;</span> {
+  <span class="hljs-built_in">console</span>.log(data)
+}).catch(<span class="hljs-function"><span class="hljs-params">err</span> =&gt;</span> {
+  <span class="hljs-built_in">console</span>.log(err)
+})</code></pre>
+        <blockquote>
+          <p>Example Response</p>
+        </blockquote> <pre class="highlight json"><code>{
+  <span class="hljs-attr">"objects"</span>: [
+    {
+      <span class="hljs-attr">"_id"</span>: <span class="hljs-string">"55b3da7740d7a3791b000002"</span>,
+      <span class="hljs-attr">"bucket"</span>: <span class="hljs-string">"55b3d557df0fb1df7600004b"</span>,
+      <span class="hljs-attr">"slug"</span>: <span class="hljs-string">"main-menu"</span>,
+      <span class="hljs-attr">"title"</span>: <span class="hljs-string">"Main Menu"</span>,
+      <span class="hljs-attr">"content"</span>: <span class="hljs-string">""</span>,
+      <span class="hljs-attr">"type_slug"</span>: <span class="hljs-string">"sections"</span>,
+      <span class="hljs-attr">"created"</span>: <span class="hljs-string">"2015-07-25T18:50:31.809Z"</span>,
+      <span class="hljs-attr">"metadata"</span>: {
+        <span class="hljs-attr">"our-story"</span>: <span class="hljs-string">"Our Story"</span>,
+        <span class="hljs-attr">"accomodations"</span>: <span class="hljs-string">"Accomodations"</span>,
+        <span class="hljs-attr">"registry"</span>: <span class="hljs-string">"Registry"</span>
+      }
+    },
+    {
+      <span class="hljs-attr">"_id"</span>: <span class="hljs-string">"55b3da7740d7a3791b000003"</span>,
+      <span class="hljs-attr">"bucket"</span>: <span class="hljs-string">"55b3d557df0fb1df7600004b"</span>,
+      <span class="hljs-attr">"slug"</span>: <span class="hljs-string">"global"</span>,
+      <span class="hljs-attr">"title"</span>: <span class="hljs-string">"Global"</span>,
+      <span class="hljs-attr">"content"</span>: <span class="hljs-string">""</span>,
+      <span class="hljs-attr">"type_slug"</span>: <span class="hljs-string">"sections"</span>,
+      <span class="hljs-attr">"created"</span>: <span class="hljs-string">"2015-07-25T18:50:31.812Z"</span>,
+      <span class="hljs-attr">"metadata"</span>: {
+        <span class="hljs-attr">"site-title"</span>: <span class="hljs-string">"Carol and Jack Wedding Website"</span>,
+        <span class="hljs-attr">"menu-title"</span>: <span class="hljs-string">"Carol &amp; Jack"</span>,
+        <span class="hljs-attr">"description"</span>: <span class="hljs-string">"This is the wedding website for the Jack and Carol Wedding on November 22, 2014 in Dallas, TX."</span>,
+        <span class="hljs-attr">"author"</span>: <span class="hljs-string">"Tony Spiro"</span>,
+        <span class="hljs-attr">"footer-text"</span>: <span class="hljs-string">"Cosmic JS &amp;copy; 2015"</span>
+      }
+    }
+  ]
+}</code></pre>
+        <p>Returns all Objects from your Bucket.</p>
+        <table>
+          <thead>
+            <tr>
+              <th>Parameter</th>
+              <th>Required</th>
+              <th>Type</th>
+              <th>Description</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>limit</td>
+              <td></td>
+              <td>Number</td>
+              <td>The number of Objects to return</td>
+            </tr>
+            <tr>
+              <td>skip</td>
+              <td></td>
+              <td>Number</td>
+              <td>The number of Objects to skip</td>
+            </tr>
+            <tr>
+              <td>status</td>
+              <td></td>
+              <td>Enum</td>
+              <td>all, Return published and draft status Objects</td>
+            </tr>
+            <tr>
+              <td>revision</td>
+              <td></td>
+              <td>String</td>
+              <td>The revision_id of the Object Revision</td>
+            </tr>
+            <tr>
+              <td>hide_metafields</td>
+              <td></td>
+              <td>Enum</td>
+              <td>true, Hides metafields</td>
+            </tr>
+            <tr>
+              <td>sort</td>
+              <td></td>
+              <td>Enum</td>
+              <td>created_at,-created_at,modified_at,-modified_at,random</td>
+            </tr>
+            <tr>
+              <td>locale</td>
+              <td></td>
+              <td>String</td>
+              <td>Filter by locale</td>
+            </tr>
+            <tr>
+              <td>pretty</td>
+              <td></td>
+              <td>Enum</td>
+              <td>true, Makes the response more reader-friendly</td>
+            </tr>
+            <tr>
+              <td>read_key</td>
+              <td></td>
+              <td>String</td>
+              <td>Your Bucket read key</td>
+            </tr>
+          </tbody>
+        </table>
+        <h2 id="get-objects-by-type">Get Objects by Type</h2>
+        <blockquote>
+          <p>Definition</p>
+        </blockquote> <pre class="highlight bash"><code>GET https://api.cosmicjs.com/v1/:bucket_slug/object-type/:type_slug</code></pre><pre class="highlight javascript"><code>Cosmic.getObjectsByType()</code></pre>
+        <blockquote>
+          <p>Example Request</p>
+        </blockquote> <pre class="highlight bash"><code>curl <span class="hljs-string">"https://api.cosmicjs.com/v1/wedding-site/object-type/groomsmen?limit=3"</span></code></pre><pre class="highlight javascript"><code><span class="hljs-keyword">const</span> Cosmic = <span class="hljs-built_in">require</span>(<span class="hljs-string">'cosmicjs'</span>)({
+  <span class="hljs-attr">bucket</span>: <span class="hljs-string">'wedding-site'</span>,
+  <span class="hljs-attr">read_key</span>: <span class="hljs-string">''</span>
+})
+Cosmic.getObjectsByType({
+  <span class="hljs-attr">type_slug</span>: <span class="hljs-string">'groomsmen'</span>,
+  <span class="hljs-attr">limit</span>: <span class="hljs-number">3</span>
+}).then(<span class="hljs-function"><span class="hljs-params">data</span> =&gt;</span> {
+  <span class="hljs-built_in">console</span>.log(data)
+}).catch(<span class="hljs-function"><span class="hljs-params">err</span> =&gt;</span> {
+  <span class="hljs-built_in">console</span>.log(err)
+})</code></pre>
+        <blockquote>
+          <p>Example Response</p>
+        </blockquote> <pre class="highlight json"><code>{
+  <span class="hljs-attr">"objects"</span>: [
+    {
+      <span class="hljs-attr">"_id"</span>: <span class="hljs-string">"55b3da7740d7a3791b000009"</span>,
+      <span class="hljs-attr">"bucket"</span>: <span class="hljs-string">"55b3d557df0fb1df7600004b"</span>,
+      <span class="hljs-attr">"slug"</span>: <span class="hljs-string">"chad-henly"</span>,
+      <span class="hljs-attr">"title"</span>: <span class="hljs-string">"Chad Henly"</span>,
+      <span class="hljs-attr">"content"</span>: <span class="hljs-string">"&lt;p&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;br&gt;&lt;/p&gt;"</span>,
+      <span class="hljs-attr">"type_slug"</span>: <span class="hljs-string">"groomsmen"</span>,
+      <span class="hljs-attr">"created"</span>: <span class="hljs-string">"2015-07-25T18:50:31.820Z"</span>,
+      <span class="hljs-attr">"modified"</span>: <span class="hljs-string">"2015-07-25T18:51:44.249Z"</span>,
+      <span class="hljs-attr">"metadata"</span>: {
+        <span class="hljs-attr">"image"</span>: {
+          <span class="hljs-attr">"url"</span>: <span class="hljs-string">"https://s3-us-west-2.amazonaws.com/cosmicjs/3181a814-93d9-ad8f-74ce-1eeb64023b61-1420162840289-mke.jpg"</span>,
+          <span class="hljs-attr">"imgix_url"</span>: <span class="hljs-string">"https://cosmic-s3.imgix.net/3181a814-93d9-ad8f-74ce-1eeb64023b61-1420162840289-mke.jpg"</span>
+        },
+        <span class="hljs-attr">"official-title"</span>: <span class="hljs-string">"Best Man"</span>
+      }
+    },
+    {
+      <span class="hljs-attr">"_id"</span>: <span class="hljs-string">"55b3da7740d7a3791b00000a"</span>,
+      <span class="hljs-attr">"bucket"</span>: <span class="hljs-string">"55b3d557df0fb1df7600004b"</span>,
+      <span class="hljs-attr">"slug"</span>: <span class="hljs-string">"eric-harland"</span>,
+      <span class="hljs-attr">"title"</span>: <span class="hljs-string">"Eric Harland"</span>,
+      <span class="hljs-attr">"content"</span>: <span class="hljs-string">"&lt;p&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;br&gt;&lt;/p&gt;"</span>,
+      <span class="hljs-attr">"type_slug"</span>: <span class="hljs-string">"groomsmen"</span>,
+      <span class="hljs-attr">"created"</span>: <span class="hljs-string">"2015-07-25T18:50:31.821Z"</span>,
+      <span class="hljs-attr">"modified"</span>: <span class="hljs-string">"2015-07-25T18:52:35.032Z"</span>,
+      <span class="hljs-attr">"metadata"</span>: {
+        <span class="hljs-attr">"image"</span>: {
+          <span class="hljs-attr">"url"</span>: <span class="hljs-string">"https://s3-us-west-2.amazonaws.com/cosmicjs/a499fdab-10b5-5168-9ef1-8981c8e93da4-1420162840650-dave.jpg"</span>,
+          <span class="hljs-attr">"imgix_url"</span>: <span class="hljs-string">"https://cosmic-s3.imgix.net/a499fdab-10b5-5168-9ef1-8981c8e93da4-1420162840650-dave.jpg"</span>
+        },
+        <span class="hljs-attr">"official-title"</span>: <span class="hljs-string">"Groomsman"</span>
+      }
+    },
+    {
+      <span class="hljs-attr">"_id"</span>: <span class="hljs-string">"55b3da7740d7a3791b00000c"</span>,
+      <span class="hljs-attr">"bucket"</span>: <span class="hljs-string">"55b3d557df0fb1df7600004b"</span>,
+      <span class="hljs-attr">"slug"</span>: <span class="hljs-string">"lance-bergstrom"</span>,
+      <span class="hljs-attr">"title"</span>: <span class="hljs-string">"Lance Bergstrom"</span>,
+      <span class="hljs-attr">"content"</span>: <span class="hljs-string">"&lt;p&gt;&lt;br&gt;&lt;/p&gt;"</span>,
+      <span class="hljs-attr">"type_slug"</span>: <span class="hljs-string">"groomsmen"</span>,
+      <span class="hljs-attr">"created"</span>: <span class="hljs-string">"2015-07-25T18:50:31.823Z"</span>,
+      <span class="hljs-attr">"modified"</span>: <span class="hljs-string">"2015-07-25T18:53:26.148Z"</span>,
+      <span class="hljs-attr">"metadata"</span>: {
+        <span class="hljs-attr">"image"</span>: {
+          <span class="hljs-attr">"url"</span>: <span class="hljs-string">"https://s3-us-west-2.amazonaws.com/cosmicjs/4c6a5b21-e335-237f-2731-a455d361ddd1-1420162839613-colin.jpg"</span>,
+          <span class="hljs-attr">"imgix_url"</span>: <span class="hljs-string">"https://cosmic-s3.imgix.net/4c6a5b21-e335-237f-2731-a455d361ddd1-1420162839613-colin.jpg"</span>
+        },
+        <span class="hljs-attr">"official-title"</span>: <span class="hljs-string">"Groomsman"</span>
+      }
+    }
+  ],
+  <span class="hljs-attr">"total"</span>: <span class="hljs-number">5</span>,
+  <span class="hljs-attr">"limit"</span>: <span class="hljs-number">3</span>
+}</code></pre>
+        <p>Get Objects from an Object Type.</p>
+        <table>
+          <thead>
+            <tr>
+              <th>Parameter</th>
+              <th>Required</th>
+              <th>Type</th>
+              <th>Description</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>limit</td>
+              <td></td>
+              <td>Number</td>
+              <td>The number of Objects to return</td>
+            </tr>
+            <tr>
+              <td>skip</td>
+              <td></td>
+              <td>Number</td>
+              <td>The number of Objects to skip</td>
+            </tr>
+            <tr>
+              <td>status</td>
+              <td></td>
+              <td>Enum</td>
+              <td>all, Return published and draft status Objects</td>
+            </tr>
+            <tr>
+              <td>revision</td>
+              <td></td>
+              <td>String</td>
+              <td>The revision_id of the Object Revision</td>
+            </tr>
+            <tr>
+              <td>hide_metafields</td>
+              <td></td>
+              <td>Enum</td>
+              <td>true, Hides metafields</td>
+            </tr>
+            <tr>
+              <td>sort</td>
+              <td></td>
+              <td>Enum</td>
+              <td>created_at,-created_at,modified_at,-modified_at,random</td>
+            </tr>
+            <tr>
+              <td>locale</td>
+              <td></td>
+              <td>String</td>
+              <td>Filter by locale</td>
+            </tr>
+            <tr>
+              <td>pretty</td>
+              <td></td>
+              <td>Enum</td>
+              <td>true, Makes the response more reader-friendly</td>
+            </tr>
+            <tr>
+              <td>read_key</td>
+              <td></td>
+              <td>String</td>
+              <td>Your Bucket read key</td>
+            </tr>
+          </tbody>
+        </table>
+        <h2 id="search-objects">Search Objects</h2>
+        <blockquote>
+          <p>Definition</p>
+        </blockquote> <pre class="highlight bash"><code>GET https://api.cosmicjs.com/v1/:bucket_slug/object-type/:type_slug/search</code></pre><pre class="highlight javascript"><code>Cosmic.searchObjectType()</code></pre>
+        <blockquote>
+          <p>Example Request</p>
+        </blockquote> <pre class="highlight bash"><code>curl <span class="hljs-string">"https://api.cosmicjs.com/v1/wedding-site/object-type/groomsmen/search?metafield_key=official-title&amp;metafield_value=Best%20Man"</span></code></pre><pre class="highlight javascript"><code><span class="hljs-keyword">const</span> Cosmic = <span class="hljs-built_in">require</span>(<span class="hljs-string">'cosmicjs'</span>)({
+  <span class="hljs-attr">bucket</span>: <span class="hljs-string">'wedding-site'</span>,
+  <span class="hljs-attr">read_key</span>: <span class="hljs-string">''</span>
+})
+Cosmic.searchObjectType({
+  <span class="hljs-attr">type_slug</span>: <span class="hljs-string">'groomsmen'</span>,
+  <span class="hljs-attr">metafield_key</span>: <span class="hljs-string">'official-title'</span>,
+  <span class="hljs-attr">metafield_value</span>: <span class="hljs-string">'Best Man'</span>
+}).then(<span class="hljs-function"><span class="hljs-params">data</span> =&gt;</span> {
+  <span class="hljs-built_in">console</span>.log(data)
+}).catch(<span class="hljs-function"><span class="hljs-params">err</span> =&gt;</span> {
+  <span class="hljs-built_in">console</span>.log(err)
+})</code></pre>
+        <blockquote>
+          <p>Example Response</p>
+        </blockquote> <pre class="highlight json"><code>{
+  <span class="hljs-attr">"objects"</span>: [
+    {
+      <span class="hljs-attr">"_id"</span>: <span class="hljs-string">"55b3da7740d7a3791b000009"</span>,
+      <span class="hljs-attr">"bucket"</span>: <span class="hljs-string">"55b3d557df0fb1df7600004b"</span>,
+      <span class="hljs-attr">"slug"</span>: <span class="hljs-string">"chad-henly"</span>,
+      <span class="hljs-attr">"title"</span>: <span class="hljs-string">"Chad Henly"</span>,
+      <span class="hljs-attr">"content"</span>: <span class="hljs-string">"&lt;p&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;br&gt;&lt;/p&gt;"</span>,
+      <span class="hljs-attr">"type_slug"</span>: <span class="hljs-string">"groomsmen"</span>,
+      <span class="hljs-attr">"created"</span>: <span class="hljs-string">"2015-07-25T18:50:31.820Z"</span>,
+      <span class="hljs-attr">"user_id"</span>: <span class="hljs-string">"55767c3ffbcf5cbb13000001"</span>,
+      <span class="hljs-attr">"order"</span>: <span class="hljs-number">7</span>,
+      <span class="hljs-attr">"modified"</span>: <span class="hljs-string">"2015-07-25T18:51:44.249Z"</span>,
+      <span class="hljs-attr">"metadata"</span>: {
+        <span class="hljs-attr">"image"</span>: {
+          <span class="hljs-attr">"url"</span>: <span class="hljs-string">"https://s3-us-west-2.amazonaws.com/cosmicjs/3181a814-93d9-ad8f-74ce-1eeb64023b61-1420162840289-mke.jpg"</span>,
+          <span class="hljs-attr">"imgix_url"</span>: <span class="hljs-string">"https://cosmic-s3.imgix.net/3181a814-93d9-ad8f-74ce-1eeb64023b61-1420162840289-mke.jpg"</span>
+        },
+        <span class="hljs-attr">"official-title"</span>: <span class="hljs-string">"Best Man"</span>
+      }
+    }
+  ],
+  <span class="hljs-attr">"total"</span>: <span class="hljs-number">1</span>
+}</code></pre>
+        <p>Search Objects in an Object Type.</p>
+        <table>
+          <thead>
+            <tr>
+              <th>Parameter</th>
+              <th>Required</th>
+              <th>Type</th>
+              <th>Description</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>limit</td>
+              <td></td>
+              <td>Number</td>
+              <td>The number of Objects to return</td>
+            </tr>
+            <tr>
+              <td>skip</td>
+              <td></td>
+              <td>Number</td>
+              <td>The number of Objects to skip</td>
+            </tr>
+            <tr>
+              <td>status</td>
+              <td></td>
+              <td>Enum</td>
+              <td>all, Return published and draft status Objects</td>
+            </tr>
+            <tr>
+              <td>hide_metafields</td>
+              <td></td>
+              <td>Enum</td>
+              <td>true, Hides metafields</td>
+            </tr>
+            <tr>
+              <td>sort</td>
+              <td></td>
+              <td>Enum</td>
+              <td>created_at,-created_at,modified_at,
+                <br />-modified_at,random</td>
+            </tr>
+            <tr>
+              <td>metafield_key</td>
+              <td></td>
+              <td>String</td>
+              <td>Metafield key to search for</td>
+            </tr>
+            <tr>
+              <td>metafield_value</td>
+              <td></td>
+              <td>String</td>
+              <td>Exact Metafield value to match</td>
+            </tr>
+            <tr>
+              <td>metafield_value_has</td>
+              <td></td>
+              <td>String</td>
+              <td>Metafield value contains this string</td>
+            </tr>
+            <tr>
+              <td>metafield_object_slug</td>
+              <td></td>
+              <td>String</td>
+              <td>Object Metafield Object slug</td>
+            </tr>
+            <tr>
+              <td>locale</td>
+              <td></td>
+              <td>String</td>
+              <td>Filter by locale</td>
+            </tr>
+            <tr>
+              <td>pretty</td>
+              <td></td>
+              <td>Enum</td>
+              <td>true, Makes the response more reader-friendly</td>
+            </tr>
+            <tr>
+              <td>read_key</td>
+              <td></td>
+              <td>String</td>
+              <td>Your Bucket read key</td>
+            </tr>
+          </tbody>
+        </table>
+        <h2 id="edit-object">Edit Object</h2>
+        <blockquote>
+          <p>Definition</p>
+        </blockquote> <pre class="highlight bash"><code>PUT https://api.cosmicjs.com/v1/:bucket_slug/edit-object</code></pre><pre class="highlight javascript"><code>Cosmic.editObject()</code></pre>
+        <blockquote>
+          <p>Example Request</p>
+        </blockquote> <pre class="highlight bash"><code>{
+  <span class="hljs-string">"slug"</span>: <span class="hljs-string">"cosmic-js-example"</span>,
+  <span class="hljs-string">"title"</span>: <span class="hljs-string">"New Title Edit"</span>,
+  <span class="hljs-string">"content"</span>: <span class="hljs-string">"This is some rad test content..."</span>,
+  <span class="hljs-string">"metafields"</span>: [
+    {
+      <span class="hljs-string">"title"</span>: <span class="hljs-string">"Headline"</span>,
+      <span class="hljs-string">"key"</span>: <span class="hljs-string">"headline"</span>,
+      <span class="hljs-string">"value"</span>: <span class="hljs-string">"Something Big is Coming"</span>,
+      <span class="hljs-string">"type"</span>: <span class="hljs-string">"text"</span>
+    },
+    {
+      <span class="hljs-string">"title"</span>: <span class="hljs-string">"Subheadline"</span>,
+      <span class="hljs-string">"key"</span>: <span class="hljs-string">"subheadline"</span>,
+      <span class="hljs-string">"value"</span>: <span class="hljs-string">"I bet you want to know what it is..."</span>,
+      <span class="hljs-string">"type"</span>: <span class="hljs-string">"text"</span>
+    }
+  ]
+}</code></pre><pre class="highlight javascript"><code><span class="hljs-keyword">const</span> Cosmic = <span class="hljs-built_in">require</span>(<span class="hljs-string">'cosmicjs'</span>)({
+  <span class="hljs-attr">bucket</span>: <span class="hljs-string">'bucket-slug'</span>,
+  <span class="hljs-attr">write_key</span>: <span class="hljs-string">''</span>
+})
+Cosmic.editObject({
+  <span class="hljs-attr">slug</span>: <span class="hljs-string">'cosmic-js-example'</span>,
+  <span class="hljs-attr">title</span>: <span class="hljs-string">'New Title Edit'</span>
+}).then(<span class="hljs-function"><span class="hljs-params">data</span> =&gt;</span> {
+  <span class="hljs-built_in">console</span>.log(data)
+}).catch(<span class="hljs-function"><span class="hljs-params">err</span> =&gt;</span> {
+  <span class="hljs-built_in">console</span>.log(err)
+})</code></pre>
+        <blockquote>
+          <p>Example Response</p>
+        </blockquote> <pre class="highlight json"><code>{
+  <span class="hljs-attr">"object"</span>: {
+    <span class="hljs-attr">"_id"</span>: <span class="hljs-string">"568c5fb72f0c5d532d000001"</span>,
+    <span class="hljs-attr">"slug"</span>: <span class="hljs-string">"cosmic-js-example"</span>,
+    <span class="hljs-attr">"title"</span>: <span class="hljs-string">"New Title Edit"</span>,
+    <span class="hljs-attr">"content"</span>: <span class="hljs-string">"This is some rad test content..."</span>,
+    <span class="hljs-attr">"metafields"</span>: [
+      {
+        <span class="hljs-attr">"title"</span>: <span class="hljs-string">"Headline"</span>,
+        <span class="hljs-attr">"key"</span>: <span class="hljs-string">"headline"</span>,
+        <span class="hljs-attr">"value"</span>: <span class="hljs-string">"Something Big is Coming"</span>,
+        <span class="hljs-attr">"type"</span>: <span class="hljs-string">"text"</span>
+      },
+      {
+        <span class="hljs-attr">"title"</span>: <span class="hljs-string">"Subheadline"</span>,
+        <span class="hljs-attr">"key"</span>: <span class="hljs-string">"subheadline"</span>,
+        <span class="hljs-attr">"value"</span>: <span class="hljs-string">"I bet you want to know what it is..."</span>,
+        <span class="hljs-attr">"type"</span>: <span class="hljs-string">"text"</span>
+      }
+    ],
+    <span class="hljs-attr">"bucket"</span>: <span class="hljs-string">"568c5bbefd0dce302c000001"</span>,
+    <span class="hljs-attr">"type_slug"</span>: <span class="hljs-string">"examples"</span>,
+    <span class="hljs-attr">"created"</span>: <span class="hljs-string">"2016-01-06T00:28:39.982Z"</span>
+  }
+}</code></pre>
+        <p>Edit an existing Object in your Bucket.</p>
+        <table>
+          <thead>
+            <tr>
+              <th>Parameter</th>
+              <th>Required</th>
+              <th>Type</th>
+              <th>Description</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>type_slug</td>
+              <td>required</td>
+              <td>String</td>
+              <td>Add Object to Object Type</td>
+            </tr>
+            <tr>
+              <td>title</td>
+              <td>required</td>
+              <td>String</td>
+              <td>Your Bucket title</td>
+            </tr>
+            <tr>
+              <td>slug</td>
+              <td></td>
+              <td>String</td>
+              <td>Unique identifier for your Object</td>
+            </tr>
+            <tr>
+              <td>content</td>
+              <td></td>
+              <td>String</td>
+              <td>Add Content to your Object</td>
+            </tr>
+            <tr>
+              <td>options.slug_field</td>
+              <td></td>
+              <td>Bool</td>
+              <td>Set to false to hide the slug field</td>
+            </tr>
+            <tr>
+              <td>options.content_editor</td>
+              <td></td>
+              <td>Bool</td>
+              <td>Set to false to hide the content editor</td>
+            </tr>
+            <tr>
+              <td>metafields</td>
+              <td></td>
+              <td>Array</td>
+              <td>Add Metafields to your Object</td>
+            </tr>
+            <tr>
+              <td>locale</td>
+              <td></td>
+              <td>String</td>
+              <td>Edit Object locale</td>
+            </tr>
+            <tr>
+              <td>write_key</td>
+              <td></td>
+              <td>String</td>
+              <td>Your Bucket write key</td>
+            </tr>
+          </tbody>
+        </table>
+        <h2 id="delete-object">Delete Object</h2>
+        <blockquote>
+          <p>Definition</p>
+        </blockquote> <pre class="highlight bash"><code>DELETE https://api.cosmicjs.com/v1/:bucket_slug/objects/:object_slug</code></pre><pre class="highlight javascript"><code>Cosmic.deleteObject()</code></pre>
+        <blockquote>
+          <p>Example Request</p>
+        </blockquote> <pre class="highlight bash"><code>{
+  <span class="hljs-string">"write_key"</span>: <span class="hljs-string">"your-key-added-in-bucket-settings"</span>
+}</code></pre><pre class="highlight javascript"><code><span class="hljs-keyword">const</span> Cosmic = <span class="hljs-built_in">require</span>(<span class="hljs-string">'cosmicjs'</span>)({
+  <span class="hljs-attr">bucket</span>: <span class="hljs-string">'bucket-slug'</span>,
+  <span class="hljs-attr">write_key</span>: <span class="hljs-string">''</span>
+})
+Cosmic.deleteObject({
+  <span class="hljs-attr">slug</span>: <span class="hljs-string">'cosmic-js-example'</span>
+}).then(<span class="hljs-function"><span class="hljs-params">data</span> =&gt;</span> {
+  <span class="hljs-built_in">console</span>.log(data)
+}).catch(<span class="hljs-function"><span class="hljs-params">err</span> =&gt;</span> {
+  <span class="hljs-built_in">console</span>.log(err)
+})</code></pre>
+        <blockquote>
+          <p>Example Response</p>
+        </blockquote> <pre class="highlight json"><code>{
+  <span class="hljs-attr">"status"</span>: <span class="hljs-string">"200"</span>,
+  <span class="hljs-attr">"message"</span>: <span class="hljs-string">"Object deleted"</span>
+}</code></pre>
+        <p>Edit an existing Object in your Bucket.</p>
+        <table>
+          <thead>
+            <tr>
+              <th>Parameter</th>
+              <th>Required</th>
+              <th>Type</th>
+              <th>Description</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>write_key</td>
+              <td></td>
+              <td>String</td>
+              <td>Your Bucket write key</td>
+            </tr>
+          </tbody>
+        </table>
+        <h1 id="metafields">Metafields</h1>
+        <p>Metafields are powerful components that can be added to Objects and Object Types. Metafields added to Object Types, will be default for all new Objects in the type.</p>
+        <h2 id="model">Model</h2>
+        <blockquote>
+          <p>Example Metafields</p>
+        </blockquote> <pre class="highlight json"><code>{
+  <span class="hljs-attr">"metafields"</span>: [
+    {
+      <span class="hljs-attr">"type"</span>: <span class="hljs-string">"text"</span>,
+      <span class="hljs-attr">"title"</span>: <span class="hljs-string">"Headline"</span>,
+      <span class="hljs-attr">"key"</span>: <span class="hljs-string">"headline"</span>,
+      <span class="hljs-attr">"value"</span>: <span class="hljs-string">"3030 Palo Alto Blvd."</span>,
+      <span class="hljs-attr">"required"</span>: <span class="hljs-literal">true</span>
+    },
+    {
+      <span class="hljs-attr">"type"</span>: <span class="hljs-string">"textarea"</span>,
+      <span class="hljs-attr">"title"</span>: <span class="hljs-string">"Basic Text"</span>,
+      <span class="hljs-attr">"key"</span>: <span class="hljs-string">"basic_text"</span>,
+      <span class="hljs-attr">"value"</span>: <span class="hljs-string">"This home is a must see!"</span>,
+      <span class="hljs-attr">"required"</span>: <span class="hljs-literal">true</span>
+    },
+    {
+      <span class="hljs-attr">"type"</span>: <span class="hljs-string">"html-textarea"</span>,
+      <span class="hljs-attr">"title"</span>: <span class="hljs-string">"Extended Text"</span>,
+      <span class="hljs-attr">"key"</span>: <span class="hljs-string">"extended_text"</span>,
+      <span class="hljs-attr">"value"</span>: <span class="hljs-string">"&lt;p&gt;Some &lt;strong&gt;HTML content&lt;/strong&gt; for &lt;em&gt;dramatic&lt;/em&gt; effect!&lt;/p&gt;"</span>
+    },
+    {
+      <span class="hljs-attr">"type"</span>: <span class="hljs-string">"markdown"</span>,
+      <span class="hljs-attr">"title"</span>: <span class="hljs-string">"Markdown Text"</span>,
+      <span class="hljs-attr">"key"</span>: <span class="hljs-string">"markdown_text"</span>,
+      <span class="hljs-attr">"value"</span>: <span class="hljs-string">"# Hello World!"</span>
+    },
+    {
+      <span class="hljs-attr">"type"</span>: <span class="hljs-string">"select-dropdown"</span>,
+      <span class="hljs-attr">"title"</span>: <span class="hljs-string">"State"</span>,
+      <span class="hljs-attr">"key"</span>: <span class="hljs-string">"state"</span>,
+      <span class="hljs-attr">"value"</span>: <span class="hljs-string">"California"</span>,
+      <span class="hljs-attr">"options"</span>: [
+        {
+          <span class="hljs-attr">"key"</span>: <span class="hljs-string">"CA"</span>,
+          <span class="hljs-attr">"value"</span>: <span class="hljs-string">"California"</span>
+        },
+        {
+          <span class="hljs-attr">"key"</span>: <span class="hljs-string">"TX"</span>,
+          <span class="hljs-attr">"value"</span>: <span class="hljs-string">"Texas"</span>
+        }
+      ]
+    },
+    {
+      <span class="hljs-attr">"type"</span>: <span class="hljs-string">"object"</span>,
+      <span class="hljs-attr">"title"</span>: <span class="hljs-string">"Pages"</span>,
+      <span class="hljs-attr">"key"</span>: <span class="hljs-string">"pages"</span>,
+      <span class="hljs-attr">"object_type"</span>: <span class="hljs-string">"pages"</span>,
+      <span class="hljs-attr">"value"</span>: <span class="hljs-string">"5a4806974fa85fc8a7000002"</span>
+    },
+    {
+      <span class="hljs-attr">"type"</span>: <span class="hljs-string">"objects"</span>,
+      <span class="hljs-attr">"title"</span>: <span class="hljs-string">"Other Listings"</span>,
+      <span class="hljs-attr">"key"</span>: <span class="hljs-string">"other_listings"</span>,
+      <span class="hljs-attr">"object_type"</span>: <span class="hljs-string">"listings"</span>,
+      <span class="hljs-attr">"value"</span>: <span class="hljs-string">"5a4806974fa85fc8a7000007,5a4806974fa85fc8a7000008"</span>
+    },
+    {
+      <span class="hljs-attr">"type"</span>: <span class="hljs-string">"file"</span>,
+      <span class="hljs-attr">"title"</span>: <span class="hljs-string">"Hero"</span>,
+      <span class="hljs-attr">"key"</span>: <span class="hljs-string">"hero"</span>,
+      <span class="hljs-attr">"value"</span>: <span class="hljs-string">"7d276450-5a95-11e7-b717-653f819d86b5.jpg"</span>,
+      <span class="hljs-attr">"url"</span>: <span class="hljs-string">"https://s3-us-west-2.amazonaws.com/cosmicjs/7d276450-5a95-11e7-b717-653f819d86b5.jpg"</span>,
+      <span class="hljs-attr">"imgix_url"</span>: <span class="hljs-string">"https://cosmic-s3.imgix.net/7d276450-5a95-11e7-b717-653f819d86b5.jpg"</span>
+    },
+    {
+      <span class="hljs-attr">"type"</span>: <span class="hljs-string">"date"</span>,
+      <span class="hljs-attr">"title"</span>: <span class="hljs-string">"Listing Start Date"</span>,
+      <span class="hljs-attr">"key"</span>: <span class="hljs-string">"listing_start_date"</span>,
+      <span class="hljs-attr">"value"</span>: <span class="hljs-string">""</span>
+    },
+    {
+      <span class="hljs-attr">"type"</span>: <span class="hljs-string">"radio-buttons"</span>,
+      <span class="hljs-attr">"title"</span>: <span class="hljs-string">"Deposit Required"</span>,
+      <span class="hljs-attr">"key"</span>: <span class="hljs-string">"deposit_required"</span>,
+      <span class="hljs-attr">"value"</span>: <span class="hljs-string">""</span>,
+      <span class="hljs-attr">"options"</span>: [
+        {
+          <span class="hljs-attr">"value"</span>: <span class="hljs-string">"True"</span>
+        },
+        {
+          <span class="hljs-attr">"value"</span>: <span class="hljs-string">"False"</span>
+        }
+      ]
+    },
+    {
+      <span class="hljs-attr">"type"</span>: <span class="hljs-string">"check-boxes"</span>,
+      <span class="hljs-attr">"title"</span>: <span class="hljs-string">"Amenities"</span>,
+      <span class="hljs-attr">"key"</span>: <span class="hljs-string">"amenities"</span>,
+      <span class="hljs-attr">"value"</span>: [
+        <span class="hljs-string">"Pool"</span>,
+        <span class="hljs-string">"Gym"</span>
+      ],
+      <span class="hljs-attr">"options"</span>: [
+        {
+          <span class="hljs-attr">"value"</span>: <span class="hljs-string">"Pool"</span>
+        },
+        {
+          <span class="hljs-attr">"value"</span>: <span class="hljs-string">"Gym"</span>
+        },
+        {
+          <span class="hljs-attr">"value"</span>: <span class="hljs-string">"Landscaping"</span>
+        }
+      ]
+    },
+    {
+      <span class="hljs-attr">"type"</span>: <span class="hljs-string">"repeater"</span>,
+      <span class="hljs-attr">"title"</span>: <span class="hljs-string">"Testimonials"</span>,
+      <span class="hljs-attr">"key"</span>: <span class="hljs-string">"testimonials"</span>,
+      <span class="hljs-attr">"value"</span>: <span class="hljs-string">"Fiona Apple"</span>,
+      <span class="hljs-attr">"repeater_fields"</span>: [
+        {
+          <span class="hljs-attr">"title"</span>: <span class="hljs-string">"Name"</span>,
+          <span class="hljs-attr">"key"</span>: <span class="hljs-string">"name"</span>,
+          <span class="hljs-attr">"value"</span>: <span class="hljs-string">""</span>,
+          <span class="hljs-attr">"type"</span>: <span class="hljs-string">"text"</span>,
+          <span class="hljs-attr">"required"</span>: <span class="hljs-literal">false</span>
+        },
+        {
+          <span class="hljs-attr">"title"</span>: <span class="hljs-string">"Quote"</span>,
+          <span class="hljs-attr">"key"</span>: <span class="hljs-string">"quote"</span>,
+          <span class="hljs-attr">"value"</span>: <span class="hljs-string">""</span>,
+          <span class="hljs-attr">"type"</span>: <span class="hljs-string">"text"</span>,
+          <span class="hljs-attr">"required"</span>: <span class="hljs-literal">false</span>
+        }
+      ],
+      <span class="hljs-attr">"children"</span>: [
+        {
+          <span class="hljs-attr">"children"</span>: [
+            {
+              <span class="hljs-attr">"type"</span>: <span class="hljs-string">"text"</span>,
+              <span class="hljs-attr">"title"</span>: <span class="hljs-string">"Name"</span>,
+              <span class="hljs-attr">"key"</span>: <span class="hljs-string">"name"</span>,
+              <span class="hljs-attr">"value"</span>: <span class="hljs-string">"Fiona Apple"</span>
+            },
+            {
+              <span class="hljs-attr">"type"</span>: <span class="hljs-string">"text"</span>,
+              <span class="hljs-attr">"title"</span>: <span class="hljs-string">"Name"</span>,
+              <span class="hljs-attr">"key"</span>: <span class="hljs-string">"name"</span>,
+              <span class="hljs-attr">"value"</span>: <span class="hljs-string">"Jon Brion"</span>
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}</code></pre>
+        <table>
+          <thead>
+            <tr>
+              <th>Parameter</th>
+              <th>Required</th>
+              <th>Type</th>
+              <th>Description</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>type</td>
+              <td>required</td>
+              <td>Enum</td>
+              <td>text, textarea, html-textarea,
+                <br />select-dropdown, object, objects,
+                <br />file, date, radio-buttons, check-boxes,
+                <br />repeater, parent, markdown</td>
+            </tr>
+            <tr>
+              <td>title</td>
+              <td>required</td>
+              <td>String</td>
+              <td>Your Bucket title</td>
+            </tr>
+            <tr>
+              <td>key</td>
+              <td>required</td>
+              <td>String</td>
+              <td>Unique identifier for your Bucket</td>
+            </tr>
+            <tr>
+              <td>value</td>
+              <td></td>
+              <td>String</td>
+              <td>Metafield value</td>
+            </tr>
+            <tr>
+              <td>required</td>
+              <td></td>
+              <td>Bool</td>
+              <td>A value is required</td>
+            </tr>
+            <tr>
+              <td>regex</td>
+              <td></td>
+              <td>String</td>
+              <td>Restrict the value to match a regular expresssion</td>
+            </tr>
+            <tr>
+              <td>regex_message</td>
+              <td></td>
+              <td>Array</td>
+              <td>The message displayed when the value fails the regex</td>
+            </tr>
+            <tr>
+              <td>minlength</td>
+              <td></td>
+              <td>Number</td>
+              <td>Add minlength to text or textarea Metafields</td>
+            </tr>
+            <tr>
+              <td>maxlength</td>
+              <td></td>
+              <td>Number</td>
+              <td>Add maxlength to text or textarea Metafields</td>
+            </tr>
+            <tr>
+              <td>children</td>
+              <td></td>
+              <td>Array</td>
+              <td>Add nested Metafields</td>
+            </tr>
+          </tbody>
+        </table>
+        <h2 id="validation">Validation</h2>
+        <p>You can use optional validation parameters to make sure editors on the Web Dashboard enter the correct values.</p>
+        <blockquote>
+          <p>Example Metafields with Validations</p>
+        </blockquote> <pre class="highlight json"><code>{
+  <span class="hljs-attr">"title"</span>: <span class="hljs-string">"Users"</span>,
+  <span class="hljs-attr">"singular"</span>: <span class="hljs-string">"User"</span>,
+  <span class="hljs-attr">"slug"</span>: <span class="hljs-string">"users"</span>,
+  <span class="hljs-attr">"metafields"</span>: [
+    {
+      <span class="hljs-attr">"key"</span>: <span class="hljs-string">"first_name"</span>,
+      <span class="hljs-attr">"title"</span>: <span class="hljs-string">"First Name"</span>,
+      <span class="hljs-attr">"type"</span>: <span class="hljs-string">"text"</span>,
+      <span class="hljs-attr">"value"</span>: <span class="hljs-string">""</span>,
+      <span class="hljs-attr">"required"</span>: <span class="hljs-literal">true</span>,
+      <span class="hljs-attr">"minlength"</span>: <span class="hljs-number">2</span>
+    },
+    {
+      <span class="hljs-attr">"key"</span>: <span class="hljs-string">"last_name"</span>,
+      <span class="hljs-attr">"title"</span>: <span class="hljs-string">"Last Name"</span>,
+      <span class="hljs-attr">"type"</span>: <span class="hljs-string">"text"</span>,
+      <span class="hljs-attr">"value"</span>: <span class="hljs-string">""</span>,
+      <span class="hljs-attr">"required"</span>: <span class="hljs-literal">true</span>,
+      <span class="hljs-attr">"minlength"</span>: <span class="hljs-number">2</span>
+    },
+    {
+      <span class="hljs-attr">"key"</span>: <span class="hljs-string">"email"</span>,
+      <span class="hljs-attr">"title"</span>: <span class="hljs-string">"Email"</span>,
+      <span class="hljs-attr">"type"</span>: <span class="hljs-string">"text"</span>,
+      <span class="hljs-attr">"value"</span>: <span class="hljs-string">""</span>,
+      <span class="hljs-attr">"regex"</span>: <span class="hljs-string">"/^([a-z0-9_\.-]+)@([\da-z\.-]+)\.([a-z\.]{2,6})$/"</span>,
+      <span class="hljs-attr">"regex_message"</span>: <span class="hljs-string">"You must enter a valid email."</span>
+    },
+    {
+      <span class="hljs-attr">"key"</span>: <span class="hljs-string">"avatar"</span>,
+      <span class="hljs-attr">"title"</span>: <span class="hljs-string">"Avatar"</span>,
+      <span class="hljs-attr">"type"</span>: <span class="hljs-string">"file"</span>,
+      <span class="hljs-attr">"value"</span>: <span class="hljs-string">""</span>
+    },
+    {
+      <span class="hljs-attr">"key"</span>: <span class="hljs-string">"tagline"</span>,
+      <span class="hljs-attr">"title"</span>: <span class="hljs-string">"Tagline"</span>,
+      <span class="hljs-attr">"type"</span>: <span class="hljs-string">"text"</span>,
+      <span class="hljs-attr">"value"</span>: <span class="hljs-string">""</span>,
+      <span class="hljs-attr">"maxlength"</span>: <span class="hljs-number">50</span>
+    }
+  ]
+}</code></pre>
+        <p>Reference the
+          <a href="/#model">Metafield model</a> to learn more.</p>
+        <h3 id="optional-validation-parmeters">Optional Validation Parmeters</h3>
+        <table>
+          <thead>
+            <tr>
+              <th>Parameter</th>
+              <th>Required</th>
+              <th>Type</th>
+              <th>Description</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>required</td>
+              <td></td>
+              <td>Bool</td>
+              <td>A value is required</td>
+            </tr>
+            <tr>
+              <td>regex</td>
+              <td></td>
+              <td>String</td>
+              <td>Restrict the value to match a regular expresssion</td>
+            </tr>
+            <tr>
+              <td>regex_message</td>
+              <td></td>
+              <td>Array</td>
+              <td>The message displayed when the value fails the regex</td>
+            </tr>
+            <tr>
+              <td>minlength</td>
+              <td></td>
+              <td>Number</td>
+              <td>Add minlength to text or textarea Metafields</td>
+            </tr>
+            <tr>
+              <td>maxlength</td>
+              <td></td>
+              <td>Number</td>
+              <td>Add maxlength to text or textarea Metafields</td>
+            </tr>
+          </tbody>
+        </table>
+        <h2 id="connect-objects">Connect Objects</h2>
+        <blockquote>
+          <p>Definition</p>
+        </blockquote> <pre class="highlight bash"><code>POST https://api.cosmicjs.com/v1/:bucket_slug/add-object</code></pre><pre class="highlight javascript"><code>Cosmic.addObject()</code></pre>
+        <blockquote>
+          <p>Example Request</p>
+        </blockquote> <pre class="highlight bash"><code>{
+  <span class="hljs-string">"title"</span>: <span class="hljs-string">"Blog Post Example"</span>,
+  <span class="hljs-string">"type_slug"</span>: <span class="hljs-string">"blog-posts"</span>,
+  <span class="hljs-string">"content"</span>: <span class="hljs-string">"This is some amazing blog content..."</span>,
+  <span class="hljs-string">"metafields"</span>: [
+    {
+      <span class="hljs-string">"title"</span>: <span class="hljs-string">"Headline"</span>,
+      <span class="hljs-string">"key"</span>: <span class="hljs-string">"headline"</span>,
+      <span class="hljs-string">"type"</span>: <span class="hljs-string">"text"</span>,
+      <span class="hljs-string">"value"</span>: <span class="hljs-string">"What I Learned Today"</span>
+    },
+    {
+      <span class="hljs-string">"title"</span>: <span class="hljs-string">"Author"</span>,
+      <span class="hljs-string">"key"</span>: <span class="hljs-string">"author"</span>,
+      <span class="hljs-string">"type"</span>: <span class="hljs-string">"object"</span>,
+      <span class="hljs-string">"object_type"</span>: <span class="hljs-string">"authors"</span>,
+      <span class="hljs-string">"value"</span>: <span class="hljs-string">"5a4ab6e0cf2289b18a2f7599"</span>
+    },
+    {
+      <span class="hljs-string">"title"</span>: <span class="hljs-string">"Categories"</span>,
+      <span class="hljs-string">"key"</span>: <span class="hljs-string">"categories"</span>,
+      <span class="hljs-string">"type"</span>: <span class="hljs-string">"objects"</span>,
+      <span class="hljs-string">"object_type"</span>: <span class="hljs-string">"categories"</span>,
+      <span class="hljs-string">"value"</span>: <span class="hljs-string">"5a4ab6e0cf2289b18a2f7599,5a49d524c1174db128ca2bce"</span>
+    }
+  ]
+}</code></pre><pre class="highlight javascript"><code><span class="hljs-keyword">const</span> params = {
+  <span class="hljs-string">"title"</span>: <span class="hljs-string">"Blog Post Example"</span>,
+  <span class="hljs-string">"type_slug"</span>: <span class="hljs-string">"blog-posts"</span>,
+  <span class="hljs-string">"content"</span>: <span class="hljs-string">"This is some amazing blog content..."</span>,
+  <span class="hljs-string">"metafields"</span>: [
+    {
+      <span class="hljs-string">"title"</span>: <span class="hljs-string">"Headline"</span>,
+      <span class="hljs-string">"key"</span>: <span class="hljs-string">"headline"</span>,
+      <span class="hljs-string">"type"</span>: <span class="hljs-string">"text"</span>,
+      <span class="hljs-string">"value"</span>: <span class="hljs-string">"What I Learned Today"</span>
+    },
+    {
+      <span class="hljs-string">"title"</span>: <span class="hljs-string">"Author"</span>,
+      <span class="hljs-string">"key"</span>: <span class="hljs-string">"author"</span>,
+      <span class="hljs-string">"type"</span>: <span class="hljs-string">"object"</span>,
+      <span class="hljs-string">"object_type"</span>: <span class="hljs-string">"authors"</span>,
+      <span class="hljs-string">"value"</span>: <span class="hljs-string">"5a4ab6e0cf2289b18a2f7599"</span>
+    },
+    {
+      <span class="hljs-string">"title"</span>: <span class="hljs-string">"Categories"</span>,
+      <span class="hljs-string">"key"</span>: <span class="hljs-string">"categories"</span>,
+      <span class="hljs-string">"type"</span>: <span class="hljs-string">"objects"</span>,
+      <span class="hljs-string">"object_type"</span>: <span class="hljs-string">"categories"</span>,
+      <span class="hljs-string">"value"</span>: <span class="hljs-string">"5a4ab6e0cf2289b18a2f7599,5a49d524c1174db128ca2bce"</span>
+    }
+  ]
+}
+<span class="hljs-keyword">const</span> Cosmic = <span class="hljs-built_in">require</span>(<span class="hljs-string">'cosmicjs'</span>)({
+  <span class="hljs-attr">bucket</span>: <span class="hljs-string">'bucket-slug'</span>,
+  <span class="hljs-attr">write_key</span>: <span class="hljs-string">''</span>
+})
+Cosmic.addObject(params).then(<span class="hljs-function"><span class="hljs-params">data</span> =&gt;</span> {
+  <span class="hljs-built_in">console</span>.log(data)
+}).catch(<span class="hljs-function"><span class="hljs-params">err</span> =&gt;</span> {
+  <span class="hljs-built_in">console</span>.log(err)
+})</code></pre>
+        <p>You can connect Objects to create &quot;one to many&quot; and &quot;many to many&quot; relationships using Single and Mulpile Object Metafields. </p>
+        <h3 id="single-objects">Single Objects</h3>
+        <p>For a Single Object Metafield, add the Object ID (<code>_id</code>) as the value to connect the Object. The full Object will be returned on the Metadata response in the <code>object</code> property.</p>
+        <h3 id="multiple-objects">Multiple Objects</h3>
+        <p>For Multiple Object type Metafields, you can add the Object IDs as comma-separated values which will return the full Objects as an Array on the response. The full Objects will be returned on the Metadata response in the <code>objects</code> property.</p>
+        <h1 id="media">Media</h1>
+        <h2 id="add-media">Add Media</h2>
+        <blockquote>
+          <p>Definition</p>
+        </blockquote> <pre class="highlight bash"><code>POST https://api.cosmicjs.com/v1/:bucket_slug/media</code></pre><pre class="highlight javascript"><code>Cosmic.addMedia()</code></pre>
+        <blockquote>
+          <p>Example Request</p>
+        </blockquote> <pre class="highlight bash"><code>{
+  <span class="hljs-string">"media"</span>: <span class="hljs-string">"your-media-multipart-form-data"</span>,
+  <span class="hljs-string">"folder"</span>: <span class="hljs-string">"your-folder-slug"</span>,
+  <span class="hljs-string">"metadata"</span>: {
+    <span class="hljs-string">"caption"</span>: <span class="hljs-string">"Beautiful picture of the beach"</span>,
+    <span class="hljs-string">"credit"</span>: <span class="hljs-string">"Tyler Jackson"</span>
+  }
+}</code></pre><pre class="highlight javascript"><code><span class="hljs-keyword">const</span> Cosmic = <span class="hljs-built_in">require</span>(<span class="hljs-string">'cosmicjs'</span>)({
+  <span class="hljs-attr">bucket</span>: <span class="hljs-string">'bucket-slug'</span>,
+  <span class="hljs-attr">write_key</span>: <span class="hljs-string">''</span>
+})
+Cosmic.addMedia({
+  <span class="hljs-attr">media</span>: <span class="hljs-string">'&lt;FILE_DATA&gt;'</span>,
+  <span class="hljs-attr">folder</span>: <span class="hljs-string">'your-folder-slug'</span>,
+  <span class="hljs-attr">metadata</span>: {
+    <span class="hljs-attr">caption</span>: <span class="hljs-string">'Beautiful picture of the beach'</span>,
+    <span class="hljs-attr">credit</span>: <span class="hljs-string">'Tyler Jackson'</span>
+  }
+}).then(<span class="hljs-function"><span class="hljs-params">data</span> =&gt;</span> {
+  <span class="hljs-built_in">console</span>.log(data)
+}).catch(<span class="hljs-function"><span class="hljs-params">err</span> =&gt;</span> {
+  <span class="hljs-built_in">console</span>.log(err)
+})</code></pre>
+        <blockquote>
+          <p>Example Response</p>
+        </blockquote> <pre class="highlight json"><code>{
+  <span class="hljs-attr">"media"</span>: {
+    <span class="hljs-attr">"name"</span>: <span class="hljs-string">"c20391e0-b8a4-11e6-8836-fbdfd6956b31-bird.jpg"</span>,
+    <span class="hljs-attr">"original_name"</span>: <span class="hljs-string">"bird.jpg"</span>,
+    <span class="hljs-attr">"size"</span>: <span class="hljs-number">457307</span>,
+    <span class="hljs-attr">"type"</span>: <span class="hljs-string">"image/jpeg"</span>,
+    <span class="hljs-attr">"bucket"</span>: <span class="hljs-string">"5839c67f0d3201c114000004"</span>,
+    <span class="hljs-attr">"created"</span>: <span class="hljs-string">"2016-12-02T15:34:05.054Z"</span>,
+    <span class="hljs-attr">"location"</span>: <span class="hljs-string">"https://cosmicjs.com/uploads"</span>,
+    <span class="hljs-attr">"url"</span>: <span class="hljs-string">"https://s3-us-west-2.amazonaws.com/cosmicjs/c20391e0-b8a4-11e6-8836-fbdfd6956b31-bird.jpg"</span>,
+    <span class="hljs-attr">"imgix_url"</span>: <span class="hljs-string">"https://cosmic-s3.imgix.net/c20391e0-b8a4-11e6-8836-fbdfd6956b31-bird.jpg"</span>,
+    <span class="hljs-attr">"metadata"</span>: [
+      {
+        <span class="hljs-attr">"key"</span>: <span class="hljs-string">"caption"</span>,
+        <span class="hljs-attr">"value"</span>: <span class="hljs-string">"Beautiful picture of the beach"</span>
+      },
+      {
+        <span class="hljs-attr">"key"</span>: <span class="hljs-string">"credit"</span>,
+        <span class="hljs-attr">"value"</span>: <span class="hljs-string">"Tyler Jackson"</span>
+      }
+    ]
+  }
+}</code></pre>
+        <p>The only required post value is <code>media</code> which is the name of your media sent. If a write key is enabled on the requested bucket, the parameter <code>write_key</code> will need to be present in the Body. You can also add an optional
+          <code>folder</code> and <code>metadata</code> params.</p>
+        <table>
+          <thead>
+            <tr>
+              <th>Parameter</th>
+              <th>Required</th>
+              <th>Type</th>
+              <th>Description</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>media</td>
+              <td>required</td>
+              <td>File</td>
+              <td>Media object</td>
+            </tr>
+            <tr>
+              <td>folder</td>
+              <td></td>
+              <td>String</td>
+              <td>Media folder slug</td>
+            </tr>
+            <tr>
+              <td>metadata</td>
+              <td></td>
+              <td>Object</td>
+              <td>Key / value data store</td>
+            </tr>
+            <tr>
+              <td>write_key</td>
+              <td></td>
+              <td>String</td>
+              <td>Your Bucket write key</td>
+            </tr>
+          </tbody>
+        </table>
+        <h2 id="delete-media">Delete Media</h2>
+        <blockquote>
+          <p>Definition</p>
+        </blockquote> <pre class="highlight bash"><code>DELETE https://api.cosmicjs.com/v1/:bucket_slug/media/:media_id</code></pre><pre class="highlight javascript"><code>Cosmic.deleteMedia()</code></pre>
+        <blockquote>
+          <p>Example Request</p>
+        </blockquote> <pre class="highlight bash"><code>{
+  <span class="hljs-string">"write_key"</span>: <span class="hljs-string">"your-key-added-in-bucket-settings"</span>
+}</code></pre><pre class="highlight javascript"><code><span class="hljs-keyword">const</span> Cosmic = <span class="hljs-built_in">require</span>(<span class="hljs-string">'cosmicjs'</span>)({
+  <span class="hljs-attr">bucket</span>: <span class="hljs-string">'bucket-slug'</span>,
+  <span class="hljs-attr">write_key</span>: <span class="hljs-string">''</span>
+})
+Cosmic.deleteMedia({
+ <span class="hljs-attr">id</span>: <span class="hljs-string">'5a4b18e12fff7ec0e3c13c65'</span>
+}).then(<span class="hljs-function"><span class="hljs-params">data</span> =&gt;</span> {
+  <span class="hljs-built_in">console</span>.log(data)
+}).catch(<span class="hljs-function"><span class="hljs-params">err</span> =&gt;</span> {
+  <span class="hljs-built_in">console</span>.log(err)
+})</code></pre>
+        <blockquote>
+          <p>Example Response</p>
+        </blockquote> <pre class="highlight json"><code>{
+  <span class="hljs-attr">"status"</span>: <span class="hljs-string">"200"</span>,
+  <span class="hljs-attr">"message"</span>: <span class="hljs-string">"Object Type deleted."</span>
+}</code></pre>
+        <p>Required post values include media which is the name of your media sent. If a write key is enabled on the requested bucket, the variable <code>write_key</code> will need to be present in the Body. You can also add an optional folder param to add
+          the Media to a specific folder.</p>
+        <table>
+          <thead>
+            <tr>
+              <th>Parameter</th>
+              <th>Required</th>
+              <th>Type</th>
+              <th>Description</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>write_key</td>
+              <td></td>
+              <td>String</td>
+              <td>Your Bucket write key</td>
+            </tr>
+          </tbody>
+        </table>
+        <h1 id="webhooks">Webhooks</h1>
+        <h2 id="add-webhook">Add Webhook</h2>
+        <blockquote>
+          <p>Definition</p>
+        </blockquote> <pre class="highlight bash"><code>POST https://api.cosmicjs.com/v1/:bucket_slug/webhooks</code></pre><pre class="highlight javascript"><code>Cosmic.addWebhooks()</code></pre>
+        <blockquote>
+          <p>Example Request</p>
+        </blockquote> <pre class="highlight bash"><code>{
+  <span class="hljs-string">"event"</span>: <span class="hljs-string">"object.created.published"</span>,
+  <span class="hljs-string">"endpoint"</span>: <span class="hljs-string">"http://my-listener.com"</span>,
+  <span class="hljs-string">"write_key"</span>: <span class="hljs-string">"your-key-added-in-bucket-settings"</span>
+}</code></pre><pre class="highlight javascript"><code><span class="hljs-keyword">const</span> Cosmic = <span class="hljs-built_in">require</span>(<span class="hljs-string">'cosmicjs'</span>)({
+  <span class="hljs-attr">bucket</span>: <span class="hljs-string">'bucket-slug'</span>,
+  <span class="hljs-attr">write_key</span>: <span class="hljs-string">''</span>
+})
+Cosmic.addWebhook({
+    <span class="hljs-attr">event</span>: <span class="hljs-string">'object.created.published'</span>,
+    <span class="hljs-attr">endpoint</span>: <span class="hljs-string">'http://my-listener.com'</span>
+}).then(<span class="hljs-function"><span class="hljs-params">data</span> =&gt;</span> {
+  <span class="hljs-built_in">console</span>.log(data)
+}).catch(<span class="hljs-function"><span class="hljs-params">err</span> =&gt;</span> {
+  <span class="hljs-built_in">console</span>.log(err)
+})</code></pre>
+        <blockquote>
+          <p>Example Response</p>
+        </blockquote> <pre class="highlight json"><code>{
+  <span class="hljs-attr">"webhook"</span>: {
+      <span class="hljs-attr">"id"</span>: <span class="hljs-string">"e39b2480-f043-11e7-ba08-234e3fae7762"</span>,
+      <span class="hljs-attr">"title"</span>: <span class="hljs-string">"Object created and published"</span>,
+      <span class="hljs-attr">"event"</span>: <span class="hljs-string">"object.created.published"</span>,
+      <span class="hljs-attr">"endpoint"</span>: <span class="hljs-string">"http://my-listener.com"</span>
+  }
+}</code></pre>
+        <p>Sends a POST request to the endpoint of your choice when the event occurs. The data payload in the same fomat as Object and Media. Read more about Webhooks including the payload sent to the endpoint on the
+          <a href="https://cosmicjs.com/docs/webhooks"
+            target="_blank">Webhooks documentation page</a>.</p>
+        <table>
+          <thead>
+            <tr>
+              <th>Parameter</th>
+              <th>Required</th>
+              <th>Type</th>
+              <th>Description</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>event</td>
+              <td>required</td>
+              <td>Enum</td>
+              <td>object.created.draft, object.created.published
+                <br />object.edited.draft, object.edited.published
+                <br />object.deleted, media.created
+                <br />media.edited, media.deleted
+                <br />
+              </td>
+            </tr>
+            <tr>
+              <td>endpoint</td>
+              <td>required</td>
+              <td>String</td>
+              <td>The endpoint that will receive the data</td>
+            </tr>
+            <tr>
+              <td>write_key</td>
+              <td></td>
+              <td>String</td>
+              <td>Your Bucket write key</td>
+            </tr>
+          </tbody>
+        </table>
+        <h2 id="delete-a-webhook">Delete a Webhook</h2>
+        <blockquote>
+          <p>Definition</p>
+        </blockquote> <pre class="highlight bash"><code>DELETE https://api.cosmicjs.com/v1/:bucket_slug/webhooks/:webhook_id</code></pre><pre class="highlight javascript"><code>Cosmic.deleteWebhook()</code></pre>
+        <blockquote>
+          <p>Example Request</p>
+        </blockquote> <pre class="highlight bash"><code>{
+  <span class="hljs-string">"write_key"</span>: <span class="hljs-string">"your-key-added-in-bucket-settings"</span>
+}</code></pre><pre class="highlight javascript"><code><span class="hljs-keyword">const</span> Cosmic = <span class="hljs-built_in">require</span>(<span class="hljs-string">'cosmicjs'</span>)({
+  <span class="hljs-attr">bucket</span>: <span class="hljs-string">'bucket-slug'</span>,
+  <span class="hljs-attr">write_key</span>: <span class="hljs-string">''</span>
+})
+Cosmic.deleteWebhook({
+  <span class="hljs-attr">id</span>: <span class="hljs-string">'c62defe0-5f93-11e7-8054-873245f0e98d'</span>
+}).then(<span class="hljs-function"><span class="hljs-params">data</span> =&gt;</span> {
+  <span class="hljs-built_in">console</span>.log(data)
+}).catch(<span class="hljs-function"><span class="hljs-params">err</span> =&gt;</span> {
+  <span class="hljs-built_in">console</span>.log(err)
+})</code></pre>
+        <blockquote>
+          <p>Example Response</p>
+        </blockquote> <pre class="highlight json"><code>{
+  <span class="hljs-attr">"status"</span>: <span class="hljs-string">"200"</span>,
+  <span class="hljs-attr">"message"</span>: <span class="hljs-string">"Webhook deleted."</span>
+}</code></pre>
+        <p>If a write key is enabled on the requested bucket, the variable <code>write_key</code> will need to be present in the Body.</p>
+        <table>
+          <thead>
+            <tr>
+              <th>Parameter</th>
+              <th>Required</th>
+              <th>Type</th>
+              <th>Description</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>write_key</td>
+              <td></td>
+              <td>String</td>
+              <td>Your Bucket write key</td>
+            </tr>
+          </tbody>
+        </table>
+        <h1 id="extensions">Extensions</h1>
+        <h2 id="add-extension">Add Extension</h2>
+        <blockquote>
+          <p>Definition</p>
+        </blockquote> <pre class="highlight bash"><code>POST https://api.cosmicjs.com/v1/:bucket_slug/extensions</code></pre><pre class="highlight javascript"><code>Cosmic.addExtension()</code></pre>
+        <blockquote>
+          <p>Example Request</p>
+        </blockquote> <pre class="highlight bash"><code>{
+  <span class="hljs-string">"zip"</span>: <span class="hljs-string">"your-media-multipart-form-data"</span>,
+  <span class="hljs-string">"write_key"</span>: <span class="hljs-string">"your-key-added-in-bucket-settings"</span>
+}</code></pre><pre class="highlight javascript"><code><span class="hljs-keyword">const</span> Cosmic = <span class="hljs-built_in">require</span>(<span class="hljs-string">'cosmicjs'</span>)({
+  <span class="hljs-attr">bucket</span>: <span class="hljs-string">'bucket-slug'</span>,
+  <span class="hljs-attr">write_key</span>: <span class="hljs-string">''</span>
+})
+Cosmic.addExtension({
+  <span class="hljs-attr">zip</span>: <span class="hljs-string">'&lt;ZIP_FILE_DATA&gt;'</span>
+}).then(<span class="hljs-function"><span class="hljs-params">data</span> =&gt;</span> {
+  <span class="hljs-built_in">console</span>.log(data)
+}).catch(<span class="hljs-function"><span class="hljs-params">err</span> =&gt;</span> {
+  <span class="hljs-built_in">console</span>.log(err)
+})</code></pre>
+        <blockquote>
+          <p>Example Response</p>
+        </blockquote> <pre class="highlight json"><code>{
+  <span class="hljs-attr">"extension"</span>: {
+    <span class="hljs-attr">"id"</span>: <span class="hljs-string">"c62defe0-5f93-11e7-8054-873245f0e98d"</span>,
+    <span class="hljs-attr">"title"</span>: <span class="hljs-string">"Amazon Product Search"</span>,
+    <span class="hljs-attr">"image_url"</span>: <span class="hljs-string">"https://s3-us-west-2.amazonaws.com/cosmicjs/f1f1bd40-5dcd-11e7-b529-51f126a4b6ee-shopping-cart.jpg"</span>,
+    <span class="hljs-attr">"url"</span>: <span class="hljs-string">"http://localhost:3000/extensions/c62defe0-5f93-11e7-8054-873245f0e98d/dist"</span>,
+    <span class="hljs-attr">"zip_url"</span>: <span class="hljs-string">"http://localhost:3000/extensions/c62defe0-5f93-11e7-8054-873245f0e98d/src/build.zip"</span>,
+    <span class="hljs-attr">"installed_at"</span>: <span class="hljs-string">"2017-07-03T02:03:14.825Z"</span>,
+    <span class="hljs-attr">"font_awesome_class"</span>: <span class="hljs-string">"fa-shopping-basket"</span>
+  }
+}</code></pre>
+        <p>Adds an Extension to your Bucket. Required post values include zip which is the name of your file sent. Read more about Extensions on the
+          <a href="https://cosmicjs.com/docs/extensions" target="_blank">Extensions documentation page</a>.</p>
+        <table>
+          <thead>
+            <tr>
+              <th>Parameter</th>
+              <th>Required</th>
+              <th>Type</th>
+              <th>Description</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>zip</td>
+              <td>required</td>
+              <td>File</td>
+              <td>Media object</td>
+            </tr>
+            <tr>
+              <td>write_key</td>
+              <td></td>
+              <td>String</td>
+              <td>Your Bucket write key</td>
+            </tr>
+          </tbody>
+        </table>
+        <h2 id="delete-an-extension">Delete an Extension</h2>
+        <blockquote>
+          <p>Definition</p>
+        </blockquote> <pre class="highlight bash"><code>DELETE https://api.cosmicjs.com/v1/:bucket_slug/extensions/:extension_id</code></pre><pre class="highlight javascript"><code>Cosmic.deleteExtension()</code></pre>
+        <blockquote>
+          <p>Example Request</p>
+        </blockquote> <pre class="highlight bash"><code>{
+  <span class="hljs-string">"write_key"</span>: <span class="hljs-string">"your-key-added-in-bucket-settings"</span>
+}</code></pre><pre class="highlight javascript"><code><span class="hljs-keyword">const</span> Cosmic = <span class="hljs-built_in">require</span>(<span class="hljs-string">'cosmicjs'</span>)({
+  <span class="hljs-attr">bucket</span>: <span class="hljs-string">'bucket-slug'</span>,
+  <span class="hljs-attr">write_key</span>: <span class="hljs-string">''</span>
+})
+Cosmic.deleteExtension({
+  <span class="hljs-attr">id</span>: <span class="hljs-string">'c62defe0-5f93-11e7-8054-873245f0e98d'</span>
+}).then(<span class="hljs-function"><span class="hljs-params">data</span> =&gt;</span> {
+  <span class="hljs-built_in">console</span>.log(data)
+}).catch(<span class="hljs-function"><span class="hljs-params">err</span> =&gt;</span> {
+  <span class="hljs-built_in">console</span>.log(err)
+})</code></pre>
+        <blockquote>
+          <p>Example Response</p>
+        </blockquote> <pre class="highlight json"><code>{
+  <span class="hljs-attr">"status"</span>: <span class="hljs-string">"200"</span>,
+  <span class="hljs-attr">"message"</span>: <span class="hljs-string">"Extension deleted."</span>
+}</code></pre>
+        <p>If a write key is enabled on the requested bucket, the variable <code>write_key</code> will need to be present in the Body.</p>
+        <table>
+          <thead>
+            <tr>
+              <th>Parameter</th>
+              <th>Required</th>
+              <th>Type</th>
+              <th>Description</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>write_key</td>
+              <td></td>
+              <td>String</td>
+              <td>Your Bucket write key</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="dark-box">
+        <div class="lang-selector">
+          <a href="#" data-language-name="bash">bash</a>
+          <a href="#" data-language-name="javascript">javascript</a>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
