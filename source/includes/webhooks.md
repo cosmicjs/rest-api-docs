@@ -4,17 +4,36 @@
 
 > Definition
 
-```json
+```bash
 POST https://api.cosmicjs.com/v1/:bucket-slug/webhooks
+```
+
+```javascript
+Cosmic.addWebhooks()
 ```
 
 > Example Request
 
-```json
+```bash
 {
   "event": "object.created.published",
   "endpoint": "http://my-listener.com"
 }
+```
+
+```javascript
+const Cosmic = require('cosmicjs')({
+  bucket: 'bucket-slug',
+  write_key: ''
+})
+Cosmic.addWebhook({
+	event: 'object.created.published',
+	endpoint: 'http://my-listener.com'
+}).then(data => {
+  console.log(data)
+}).catch(err => {
+  console.log(err)
+})
 ```
 
 
@@ -31,7 +50,7 @@ POST https://api.cosmicjs.com/v1/:bucket-slug/webhooks
 ```
 
 
-Sends a POST request to the endpoint of your choice when the event occurs.  Read more about Webhooks on the <a href="https://cosmicjs.com/docs/webhooks" target="_blank">Webhooks documentation page</a>.
+Sends a POST request to the endpoint of your choice when the event occurs.  The data payload in the same fomat as Object and Media.  Read more about Webhooks including the payload sent to the endpoint on the <a href="https://cosmicjs.com/docs/webhooks" target="_blank">Webhooks documentation page</a>.
 
 Parameter | Required | Type | Description
 --------- | ------- | ----------- | -----------

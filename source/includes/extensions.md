@@ -4,16 +4,34 @@
 
 > Definition
 
-```json
+```bash
 POST https://api.cosmicjs.com/v1/:bucket-slug/extensions
+```
+
+```javascript
+Cosmic.addExtension()
 ```
 
 > Example Request
 
-```json
+```bash
 {
   "zip": "your-media-multipart-form-data"
 }
+```
+
+```javascript
+const Cosmic = require('cosmicjs')({
+  bucket: 'bucket-slug',
+  write_key: ''
+})
+Cosmic.addExtension({
+  zip: '<ZIP_FILE_DATA>'
+}).then(data => {
+  console.log(data)
+}).catch(err => {
+  console.log(err)
+})
 ```
 
 
@@ -46,16 +64,34 @@ write_key | false | String | Your Bucket write key
 
 > Definition
 
-```json
+```bash
 DELETE https://api.cosmicjs.com/v1/:bucket-slug/extensions/:extension_id
+```
+
+```javascript
+Cosmic.deleteExtension()
 ```
 
 > Example Request
 
-```json
+```bash
 {
   "write_key": "your-key-added-in-bucket-settings"
 }
+```
+
+```javascript
+const Cosmic = require('cosmicjs')({
+  bucket: 'bucket-slug',
+  write_key: ''
+})
+Cosmic.deleteExtension({
+  id: 'c62defe0-5f93-11e7-8054-873245f0e98d'
+}).then(data => {
+  console.log(data)
+}).catch(err => {
+  console.log(err)
+})
 ```
 
 

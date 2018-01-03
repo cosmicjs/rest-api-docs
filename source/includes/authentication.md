@@ -20,7 +20,7 @@ curl -X POST https://api.cosmicjs.com/v1/authenticate \
 ```
 
 ```javascript
-const Cosmic = require('cosmicjs')
+const Cosmic = require('cosmicjs')() // double parentheses to init function without config
 Cosmic.authenticate({
   email: 'user@myservice.com',
   password: 'mypassword'

@@ -4,8 +4,12 @@
 
 > Definition
 
-```json
+```bash
 POST https://api.cosmicjs.com/v1/:bucket-slug/media
+```
+
+```javascript
+Cosmic.addMedia()
 ```
 
 > Example Request
@@ -83,16 +87,34 @@ write_key | false | String | Your Bucket write key
 
 > Definition
 
-```json
+```bash
 DELETE https://api.cosmicjs.com/v1/:bucket-slug/media/:media_id
+```
+
+```javascript
+Cosmic.deleteMedia()
 ```
 
 > Example Request
 
-```json
+```bash
 {
   "write_key": "your-key-added-in-bucket-settings"
 }
+```
+
+```javascript
+const Cosmic = require('cosmicjs')({
+  bucket: 'bucket-slug',
+  write_key: ''
+})
+Cosmic.deleteMedia({
+ id: '5a4b18e12fff7ec0e3c13c65'
+}).then(data => {
+  console.log(data)
+}).catch(err => {
+  console.log(err)
+})
 ```
 
 

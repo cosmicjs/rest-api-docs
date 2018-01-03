@@ -25,7 +25,7 @@ curl -X POST https://api.cosmicjs.com/v1/buckets \
 ```
 
 ```javascript
-const Cosmic = require('cosmicjs')
+const Cosmic = require('cosmicjs')() // double parentheses to init function without config
 Cosmic.addBucket({
   title: 'My New Bucket',
   token: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXV.eyJlbWFpbCI6InNwaXJvbnlAZ21haWwuY29tIiwicGFzc3dvcmQiOiIxNzlhZDQ1YzZjZTJjYjk3Y2YxMDI5ZTIxMjA0NmU4MSIsImlhdCI6MTUxNDQ5NzI3N30.ep4cEgH_SqItQ5McJArJtljS3GSJedyEcDRlnu9yb-U' }).then(data => {
