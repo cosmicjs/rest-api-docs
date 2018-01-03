@@ -43,9 +43,10 @@ Cosmic.addWebhook({
 ```json
 {
   "webhook": {
-    "title": "Object created and published",
-    "event": "object.created.published",
-    "endpoint": "http://my-listener.com"
+	  "id": "e39b2480-f043-11e7-ba08-234e3fae7762",
+	  "title": "Object created and published",
+	  "event": "object.created.published",
+	  "endpoint": "http://my-listener.com"
   }
 }
 ```
