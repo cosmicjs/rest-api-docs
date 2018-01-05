@@ -1909,6 +1909,101 @@ Cosmic.addMedia({
             </tr>
           </tbody>
         </table>
+        <h2 id="get-media">Get Media</h2>
+        <blockquote>
+          <p>Definition</p>
+        </blockquote> <pre class="highlight bash"><code>GET https://api.cosmicjs.com/v1/:bucket_slug/media</code></pre><pre class="highlight javascript"><code>Cosmic.getMedia()</code></pre>
+        <blockquote>
+          <p>Example Request</p>
+        </blockquote> <pre class="highlight bash"><code>curl <span class="hljs-string">"https://api.cosmicjs.com/v1/wedding-site/media?pretty=true&amp;folder=groomsmen&amp;limit=3"</span></code></pre><pre class="highlight javascript"><code><span class="hljs-keyword">const</span> Cosmic = <span class="hljs-built_in">require</span>(<span class="hljs-string">'cosmicjs'</span>)({
+  <span class="hljs-attr">bucket</span>: <span class="hljs-string">'wedding-site'</span>,
+  <span class="hljs-attr">write_key</span>: <span class="hljs-string">''</span>
+})
+Cosmic.getMedia({
+  <span class="hljs-attr">folder</span>: <span class="hljs-string">'groomsmen'</span>,
+  <span class="hljs-attr">limit</span>: <span class="hljs-number">3</span>
+}).then(<span class="hljs-function"><span class="hljs-params">data</span> =&gt;</span> {
+  <span class="hljs-built_in">console</span>.log(data)
+}).catch(<span class="hljs-function"><span class="hljs-params">err</span> =&gt;</span> {
+  <span class="hljs-built_in">console</span>.log(err)
+})</code></pre>
+        <blockquote>
+          <p>Example Response</p>
+        </blockquote> <pre class="highlight json"><code>{
+  <span class="hljs-attr">"media"</span>: [
+    {
+      <span class="hljs-attr">"_id"</span>: <span class="hljs-string">"55b3da7940d7a3791b00001f"</span>,
+      <span class="hljs-attr">"name"</span>: <span class="hljs-string">"069b9650-32fe-11e5-9f75-cb9b4016a019.jpg"</span>,
+      <span class="hljs-attr">"original_name"</span>: <span class="hljs-string">"mke.jpg"</span>,
+      <span class="hljs-attr">"size"</span>: <span class="hljs-number">30353</span>,
+      <span class="hljs-attr">"type"</span>: <span class="hljs-string">"image/jpeg"</span>,
+      <span class="hljs-attr">"bucket"</span>: <span class="hljs-string">"55b3d557df0fb1df7600004b"</span>,
+      <span class="hljs-attr">"created"</span>: <span class="hljs-string">"2015-01-02T01:40:40.903Z"</span>,
+      <span class="hljs-attr">"folder"</span>: <span class="hljs-string">"groomsmen"</span>,
+      <span class="hljs-attr">"location"</span>: <span class="hljs-string">"https://s3-us-west-2.amazonaws.com/cosmicjs"</span>,
+      <span class="hljs-attr">"url"</span>: <span class="hljs-string">"https://s3-us-west-2.amazonaws.com/cosmicjs/069b9650-32fe-11e5-9f75-cb9b4016a019.jpg"</span>,
+      <span class="hljs-attr">"imgix_url"</span>: <span class="hljs-string">"https://cosmic-s3.imgix.net/069b9650-32fe-11e5-9f75-cb9b4016a019.jpg"</span>
+    },
+    {
+      <span class="hljs-attr">"_id"</span>: <span class="hljs-string">"55b3da7940d7a3791b00001e"</span>,
+      <span class="hljs-attr">"name"</span>: <span class="hljs-string">"069b6f44-32fe-11e5-9f75-cb9b4016a019.jpg"</span>,
+      <span class="hljs-attr">"original_name"</span>: <span class="hljs-string">"dave.jpg"</span>,
+      <span class="hljs-attr">"size"</span>: <span class="hljs-number">21110</span>,
+      <span class="hljs-attr">"type"</span>: <span class="hljs-string">"image/jpeg"</span>,
+      <span class="hljs-attr">"bucket"</span>: <span class="hljs-string">"55b3d557df0fb1df7600004b"</span>,
+      <span class="hljs-attr">"created"</span>: <span class="hljs-string">"2015-01-02T01:40:40.814Z"</span>,
+      <span class="hljs-attr">"folder"</span>: <span class="hljs-string">"groomsmen"</span>,
+      <span class="hljs-attr">"location"</span>: <span class="hljs-string">"https://s3-us-west-2.amazonaws.com/cosmicjs"</span>,
+      <span class="hljs-attr">"url"</span>: <span class="hljs-string">"https://s3-us-west-2.amazonaws.com/cosmicjs/069b6f44-32fe-11e5-9f75-cb9b4016a019.jpg"</span>,
+      <span class="hljs-attr">"imgix_url"</span>: <span class="hljs-string">"https://cosmic-s3.imgix.net/069b6f44-32fe-11e5-9f75-cb9b4016a019.jpg"</span>
+    },
+    {
+      <span class="hljs-attr">"_id"</span>: <span class="hljs-string">"55b3da7840d7a3791b00001d"</span>,
+      <span class="hljs-attr">"name"</span>: <span class="hljs-string">"069b6f43-32fe-11e5-9f75-cb9b4016a019.jpg"</span>,
+      <span class="hljs-attr">"original_name"</span>: <span class="hljs-string">"selden.jpg"</span>,
+      <span class="hljs-attr">"size"</span>: <span class="hljs-number">26217</span>,
+      <span class="hljs-attr">"type"</span>: <span class="hljs-string">"image/jpeg"</span>,
+      <span class="hljs-attr">"bucket"</span>: <span class="hljs-string">"55b3d557df0fb1df7600004b"</span>,
+      <span class="hljs-attr">"created"</span>: <span class="hljs-string">"2015-01-02T01:40:40.655Z"</span>,
+      <span class="hljs-attr">"folder"</span>: <span class="hljs-string">"groomsmen"</span>,
+      <span class="hljs-attr">"location"</span>: <span class="hljs-string">"https://s3-us-west-2.amazonaws.com/cosmicjs"</span>,
+      <span class="hljs-attr">"url"</span>: <span class="hljs-string">"https://s3-us-west-2.amazonaws.com/cosmicjs/069b6f43-32fe-11e5-9f75-cb9b4016a019.jpg"</span>,
+      <span class="hljs-attr">"imgix_url"</span>: <span class="hljs-string">"https://cosmic-s3.imgix.net/069b6f43-32fe-11e5-9f75-cb9b4016a019.jpg"</span>
+    }
+  ]
+}</code></pre>
+        <p>You can add <code>folder</code> to get Media from a certain folder. You can use the full Imgix suite of image processing tools on the <code>imgix_url</code> property value. Check out the
+          <a href="https://docs.imgix.com/" target="_blank">Imgix documentation</a> for more info.</p>
+        <table>
+          <thead>
+            <tr>
+              <th>Parameter</th>
+              <th>Required</th>
+              <th>Type</th>
+              <th>Description</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>pretty</td>
+              <td></td>
+              <td>File</td>
+              <td>Media object</td>
+            </tr>
+            <tr>
+              <td>folder</td>
+              <td></td>
+              <td>String</td>
+              <td>Media folder slug</td>
+            </tr>
+            <tr>
+              <td>read_key</td>
+              <td></td>
+              <td>String</td>
+              <td>Your Bucket read key</td>
+            </tr>
+          </tbody>
+        </table>
         <h2 id="delete-media">Delete Media</h2>
         <blockquote>
           <p>Definition</p>
