@@ -5,7 +5,10 @@
 ## About
 This is the repo for the Cosmic JS REST API documentation.  Sign up or create a demo account to begin testing requests: https://cosmicjs.com/signup
 
-## Features Include:
+## Link
+[View the docs here](https://cosmicjs.github.io/rest-api-docs/)
+
+## REST API Features Include:
 🔐 Authentication
 
 ⚙️ Manage Buckets and Object Types
@@ -22,7 +25,7 @@ This is the repo for the Cosmic JS REST API documentation.  Sign up or create a 
 😀 PRs welcome!
 
 
-Getting Started
+Contributing
 ------------------------------
 
 ### Prerequisites
@@ -33,28 +36,10 @@ You're going to need:
 
 ### Getting Set Up
 
-1. `git clone https://github.com/cosmicjs/rest-api-docs`
-2. `cd rest-api-docs`
-3. Initialize and start:
-
 ```shell
+git clone https://github.com/cosmicjs/rest-api-docs
 npm install
-npm run build
 npm start
 ```
 
-You can now see the docs at http://localhost:4567. Whoa! That was fast!
-
-### Commands
-
-Compile documentation to static site in `./build`:
-
-```shell
-npm run build
-```
-
-Run a dev server that live-reloads at http://localhost:4567:
-
-```shell
-npm start
-```
+You can now see the docs at http://localhost:4567
