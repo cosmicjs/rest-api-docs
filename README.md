@@ -2,7 +2,8 @@
   <a href="https://cosmicjs.com"><img src="https://cosmic-s3.imgix.net/e18557d0-f3fc-11e7-b948-afa0abf2fc70-cosmicjs-logo.png?w=900" alt="Cosmic JS" width="400"></a>
 </p>
 
-Cosmic JS helps you and your team build apps faster.  Sign up or create a demo account here: https://cosmicjs.com/signup
+## About
+The Cosmic JS REST API helps you and your team build apps faster.  Sign up or create a demo account here: https://cosmicjs.com/signup
 
 ## REST API Features Include:
 🔐 Authentication
