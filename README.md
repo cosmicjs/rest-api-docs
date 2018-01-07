@@ -3,9 +3,9 @@
 </p>
 
 ## About
-The Cosmic JS REST API helps you and your team build apps faster.  Sign up or create a demo account here: https://cosmicjs.com/signup
+This is the repo for the Cosmic JS REST API documentation.  Sign up or create a demo account to begin testing requests: https://cosmicjs.com/signup
 
-## REST API Features Include:
+## Features Include:
 🔐 Authentication
 
 ⚙️ Manage Buckets and Object Types
