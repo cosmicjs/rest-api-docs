@@ -7,7 +7,7 @@ This is the repo for the Cosmic JS REST API documentation.  Sign up or create a 
 
 ### [View docs](https://cosmicjs.github.io/rest-api-docs/)
 
-## REST API Features Include:
+### REST API Features Include:
 🔐 Authentication
 
 ⚙️ Manage Buckets and Object Types
@@ -24,16 +24,16 @@ This is the repo for the Cosmic JS REST API documentation.  Sign up or create a 
 😀 PRs welcome!
 
 
-Contributing
-------------------------------
+### Contributing
 
-### Prerequisites
+
+#### Prerequisites
 
 You're going to need:
 
  - **Node.js**
 
-### Getting Set Up
+#### Getting Set Up
 
 ```shell
 git clone https://github.com/cosmicjs/rest-api-docs
