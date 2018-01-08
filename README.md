@@ -2,7 +2,7 @@
   <a href="https://cosmicjs.com"><img src="https://cosmic-s3.imgix.net/e18557d0-f3fc-11e7-b948-afa0abf2fc70-cosmicjs-logo.png?w=900" alt="Cosmic JS" width="400"></a>
 </p>
 <p align="center">
-  📖 <a href="https://cosmicjs.github.io/rest-api-docs/">View REST API docs</a>
+  📖 <a href="https://cosmicjs.github.io/rest-api-docs/">View REST API Docs</a>
 </p>
 
 ## About
