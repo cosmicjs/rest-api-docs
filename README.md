@@ -12,7 +12,7 @@ This is the repo for the Cosmic JS REST API documentation.  Sign up or create a 
 ## REST API Features Include:
 🔐 Authentication
 
-⚙️ Buckets and Object Type Management
+⚙️ Bucket and Object Type Management
 
 🛠 Object Create / Read / Update / Delete
 
