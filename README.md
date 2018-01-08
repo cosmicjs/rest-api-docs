@@ -6,7 +6,7 @@
 
 This is the repo for the Cosmic JS REST API documentation.  Sign up or create a demo account to begin testing requests: https://cosmicjs.com/signup
 
-### [View docs](https://cosmicjs.github.io/rest-api-docs/)
+### 📖 [View docs](https://cosmicjs.github.io/rest-api-docs/)
 
 ## REST API Features Include:
 🔐 Authentication
