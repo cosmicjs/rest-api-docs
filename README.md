@@ -12,15 +12,15 @@ This is the repo for the Cosmic JS REST API documentation.  Sign up or create a 
 ## REST API Features Include:
 🔐 Authentication
 
-⚙️ Manage Buckets and Object Types
+⚙️ Buckets and Object Type Management
 
-🛠 Create / Read / Update / Delete Objects
+🛠 Object Create / Read / Update / Delete
 
-🏞 Create / Read / Delete Media
+🏞 Media Create / Read / Delete
 
-🔁 Manage Webhooks
+🔁 Webhooks Management
 
-📦 Manage Extensions
+📦 Extension Management
 
 
 😀 PRs welcome!
