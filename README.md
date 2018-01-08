@@ -42,4 +42,4 @@ npm install
 npm start
 ```
 
-You can now see the docs at http://localhost:4567
+You can now see the docs at http://localhost:3000
