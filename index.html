@@ -105,7 +105,7 @@ npm install cosmicjs</code></pre>
         </blockquote> <pre class="highlight bash"><code><span class="hljs-comment"># With shell, you can just pass your email and password</span>
 curl -X POST https://api.cosmicjs.com/v1/authenticate \
 -d email=myname@myservice.com \
--d password=mypassword</code></pre><pre class="highlight javascript"><code><span class="hljs-keyword">const</span> Cosmic = <span class="hljs-built_in">require</span>(<span class="hljs-string">'cosmicjs'</span>)() <span class="hljs-comment">// double parentheses to init function without config</span>
+-d password=mypassword</code></pre><pre class="highlight javascript"><code><span class="hljs-keyword">const</span> Cosmic = <span class="hljs-built_in">require</span>(<span class="hljs-string">'cosmicjs'</span>)() <span class="hljs-comment">// double parentheses to init function without token</span>
 Cosmic.authenticate({
   <span class="hljs-attr">email</span>: <span class="hljs-string">'user@myservice.com'</span>,
   <span class="hljs-attr">password</span>: <span class="hljs-string">'mypassword'</span>
@@ -160,10 +160,11 @@ Cosmic.authenticate({
         </blockquote> <pre class="highlight bash"><code>curl -X POST https://api.cosmicjs.com/v1/buckets \
 -H <span class="hljs-string">"Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXV.eyJlbWFpbCI6InNwaXJvbnlAZ21haWwuY29tIiwicGFzc3dvcmQiOiIxNzlhZDQ1YzZjZTJjYjk3Y2YxMDI5ZTIxMjA0NmU4MSIsImlhdCI6MTUxNDQ5NzI3N30.ep4cEgH_SqItQ5McJArJtljS3GSJedyEcDRlnu9yb-U"</span> \
 -H <span class="hljs-string">"Content-Type: application/json"</span> \
--d <span class="hljs-string">'{"title": "My New Bucket"}'</span></code></pre><pre class="highlight javascript"><code><span class="hljs-keyword">const</span> Cosmic = <span class="hljs-built_in">require</span>(<span class="hljs-string">'cosmicjs'</span>)() <span class="hljs-comment">// double parentheses to init function without config</span>
+-d <span class="hljs-string">'{"title": "My New Bucket"}'</span></code></pre><pre class="highlight javascript"><code><span class="hljs-keyword">const</span> Cosmic = <span class="hljs-built_in">require</span>(<span class="hljs-string">'cosmicjs'</span>)(token) <span class="hljs-comment">// token from Cosmic.authenticate</span>
 Cosmic.addBucket({
   <span class="hljs-attr">title</span>: <span class="hljs-string">'My New Bucket'</span>,
-  <span class="hljs-attr">token</span>: <span class="hljs-string">'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXV.eyJlbWFpbCI6InNwaXJvbnlAZ21haWwuY29tIiwicGFzc3dvcmQiOiIxNzlhZDQ1YzZjZTJjYjk3Y2YxMDI5ZTIxMjA0NmU4MSIsImlhdCI6MTUxNDQ5NzI3N30.ep4cEgH_SqItQ5McJArJtljS3GSJedyEcDRlnu9yb-U'</span> }).then(<span class="hljs-function"><span class="hljs-params">data</span> =&gt;</span> {
+  <span class="hljs-attr">slug</span>: <span class="hljs-string">'my-new-bucket'</span> <span class="hljs-comment">// must be unique across all Buckets in system</span>
+}).then(<span class="hljs-function"><span class="hljs-params">data</span> =&gt;</span> {
   <span class="hljs-built_in">console</span>.log(data)
 }).catch(<span class="hljs-function"><span class="hljs-params">err</span> =&gt;</span> {
   <span class="hljs-built_in">console</span>.log(err)
@@ -266,14 +267,15 @@ Cosmic.addBucket({
         <h2 id="get-bucket">Get Bucket</h2>
         <blockquote>
           <p>Definition</p>
-        </blockquote> <pre class="highlight bash"><code>GET https://api.cosmicjs.com/:bucket_slug</code></pre><pre class="highlight javascript"><code>Cosmic.getBucket()</code></pre>
+        </blockquote> <pre class="highlight bash"><code>GET https://api.cosmicjs.com/:bucket_slug</code></pre><pre class="highlight javascript"><code>bucket.getBucket()</code></pre>
         <blockquote>
           <p>Example Request</p>
-        </blockquote> <pre class="highlight bash"><code>curl <span class="hljs-string">"https://api.cosmicjs.com/v1/wedding-site"</span></code></pre><pre class="highlight javascript"><code><span class="hljs-keyword">const</span> Cosmic = <span class="hljs-built_in">require</span>(<span class="hljs-string">'cosmicjs'</span>)({
+        </blockquote> <pre class="highlight bash"><code>curl <span class="hljs-string">"https://api.cosmicjs.com/v1/wedding-site"</span></code></pre><pre class="highlight javascript"><code><span class="hljs-keyword">const</span> Cosmic = <span class="hljs-built_in">require</span>(<span class="hljs-string">'cosmicjs'</span>)(token)
+<span class="hljs-keyword">const</span> bucket = Cosmic.bucket({
   <span class="hljs-attr">bucket</span>: <span class="hljs-string">'wedding-site'</span>,
   <span class="hljs-attr">read_key</span>: <span class="hljs-string">''</span>
 })
-Cosmic.getBucket().then(<span class="hljs-function"><span class="hljs-params">data</span> =&gt;</span> {
+bucket.getBucket().then(<span class="hljs-function"><span class="hljs-params">data</span> =&gt;</span> {
   <span class="hljs-built_in">console</span>.log(data)
 }).catch(<span class="hljs-function"><span class="hljs-params">err</span> =&gt;</span> {
   <span class="hljs-built_in">console</span>.log(err)
@@ -328,7 +330,7 @@ Cosmic.getBucket().then(<span class="hljs-function"><span class="hljs-params">da
         <h2 id="add-object-type">Add Object Type</h2>
         <blockquote>
           <p>Definition</p>
-        </blockquote> <pre class="highlight bash"><code>POST https://api.cosmicjs.com/v1/:bucket_slug/add-object-type</code></pre><pre class="highlight javascript"><code>Cosmic.addObjectType()</code></pre>
+        </blockquote> <pre class="highlight bash"><code>POST https://api.cosmicjs.com/v1/:bucket_slug/add-object-type</code></pre><pre class="highlight javascript"><code>bucket.addObjectType()</code></pre>
         <blockquote>
           <p>Example Request</p>
         </blockquote> <pre class="highlight bash"><code>{
@@ -349,7 +351,7 @@ Cosmic.getBucket().then(<span class="hljs-function"><span class="hljs-params">da
       <span class="hljs-string">"required"</span>: <span class="hljs-literal">true</span>
     }
   ]
-}</code></pre><pre class="highlight javascript"><code><span class="hljs-keyword">const</span> Cosmic = <span class="hljs-built_in">require</span>(<span class="hljs-string">'cosmicjs'</span>)({
+}</code></pre><pre class="highlight javascript"><code><span class="hljs-keyword">const</span> bucket = Cosmic.bucket({
   <span class="hljs-attr">bucket</span>: <span class="hljs-string">'bucket-slug'</span>,
   <span class="hljs-attr">write_key</span>: <span class="hljs-string">''</span>
 })
@@ -372,7 +374,7 @@ Cosmic.getBucket().then(<span class="hljs-function"><span class="hljs-params">da
     }
   ]
 }
-Cosmic.addObjectType(params).then(<span class="hljs-function"><span class="hljs-params">data</span> =&gt;</span> {
+bucket.addObjectType(params).then(<span class="hljs-function"><span class="hljs-params">data</span> =&gt;</span> {
   <span class="hljs-built_in">console</span>.log(data)
 }).catch(<span class="hljs-function"><span class="hljs-params">err</span> =&gt;</span> {
   <span class="hljs-built_in">console</span>.log(err)
@@ -454,14 +456,14 @@ Cosmic.addObjectType(params).then(<span class="hljs-function"><span class="hljs-
         <h2 id="get-object-types">Get Object Types</h2>
         <blockquote>
           <p>Definition</p>
-        </blockquote> <pre class="highlight bash"><code>GET https://api.cosmicjs.com/v1/:bucket_slug/object-types</code></pre><pre class="highlight javascript"><code>Cosmic.getObjectTypes()</code></pre>
+        </blockquote> <pre class="highlight bash"><code>GET https://api.cosmicjs.com/v1/:bucket_slug/object-types</code></pre><pre class="highlight javascript"><code>bucket.getObjectTypes()</code></pre>
         <blockquote>
           <p>Example Request</p>
-        </blockquote> <pre class="highlight bash"><code>curl <span class="hljs-string">"https://api.cosmicjs.com/v1/wedding-site/object-types"</span></code></pre><pre class="highlight javascript"><code><span class="hljs-keyword">const</span> Cosmic = <span class="hljs-built_in">require</span>(<span class="hljs-string">'cosmicjs'</span>)({
+        </blockquote> <pre class="highlight bash"><code>curl <span class="hljs-string">"https://api.cosmicjs.com/v1/wedding-site/object-types"</span></code></pre><pre class="highlight javascript"><code><span class="hljs-keyword">const</span> bucket = Cosmic.bucket({
   <span class="hljs-attr">bucket</span>: <span class="hljs-string">'wedding-site'</span>,
   <span class="hljs-attr">read_key</span>: <span class="hljs-string">''</span>
 })
-Cosmic.getObjectTypes().then(<span class="hljs-function"><span class="hljs-params">data</span> =&gt;</span> {
+bucket.getObjectTypes().then(<span class="hljs-function"><span class="hljs-params">data</span> =&gt;</span> {
   <span class="hljs-built_in">console</span>.log(data)
 }).catch(<span class="hljs-function"><span class="hljs-params">err</span> =&gt;</span> {
   <span class="hljs-built_in">console</span>.log(err)
@@ -547,7 +549,7 @@ Cosmic.getObjectTypes().then(<span class="hljs-function"><span class="hljs-param
         <h2 id="edit-object-type">Edit Object Type</h2>
         <blockquote>
           <p>Definition</p>
-        </blockquote> <pre class="highlight bash"><code>PUT https://api.cosmicjs.com/v1/:bucket_slug/edit-object-type</code></pre><pre class="highlight javascript"><code>Cosmic.editObjectType()</code></pre>
+        </blockquote> <pre class="highlight bash"><code>PUT https://api.cosmicjs.com/v1/:bucket_slug/edit-object-type</code></pre><pre class="highlight javascript"><code>bucket.editObjectType()</code></pre>
         <blockquote>
           <p>Example Request</p>
         </blockquote> <pre class="highlight bash"><code>{
@@ -572,11 +574,11 @@ Cosmic.getObjectTypes().then(<span class="hljs-function"><span class="hljs-param
       <span class="hljs-string">"required"</span>: <span class="hljs-literal">true</span>
     }
   ]
-}</code></pre><pre class="highlight javascript"><code><span class="hljs-keyword">const</span> Cosmic = <span class="hljs-built_in">require</span>(<span class="hljs-string">'cosmicjs'</span>)({
+}</code></pre><pre class="highlight javascript"><code><span class="hljs-keyword">const</span> bucket = Cosmic.bucket({
   <span class="hljs-attr">bucket</span>: <span class="hljs-string">'bucket-slug'</span>,
   <span class="hljs-attr">write_key</span>: <span class="hljs-string">''</span>
 })
-Cosmic.editObjectType({
+bucket.editObjectType({
   <span class="hljs-attr">slug</span>: <span class="hljs-string">'posts'</span>,
   <span class="hljs-attr">title</span>: <span class="hljs-string">'New Posts Title'</span>
 }).then(<span class="hljs-function"><span class="hljs-params">data</span> =&gt;</span> {
@@ -662,16 +664,16 @@ Cosmic.editObjectType({
         <h2 id="delete-object-type">Delete Object Type</h2>
         <blockquote>
           <p>Definition</p>
-        </blockquote> <pre class="highlight bash"><code>DELETE https://api.cosmicjs.com/v1/:bucket_slug/object-types/:type_slug</code></pre><pre class="highlight javascript"><code>Cosmic.deleteObjectType()</code></pre>
+        </blockquote> <pre class="highlight bash"><code>DELETE https://api.cosmicjs.com/v1/:bucket_slug/object-types/:type_slug</code></pre><pre class="highlight javascript"><code>bucket.deleteObjectType()</code></pre>
         <blockquote>
           <p>Example Request Body</p>
         </blockquote> <pre class="highlight bash"><code>{
   <span class="hljs-string">"write_key"</span>: <span class="hljs-string">"your-key-added-in-bucket-settings"</span> // optional
-}</code></pre><pre class="highlight javascript"><code><span class="hljs-keyword">const</span> Cosmic = <span class="hljs-built_in">require</span>(<span class="hljs-string">'cosmicjs'</span>)({
+}</code></pre><pre class="highlight javascript"><code><span class="hljs-keyword">const</span> bucket = Cosmic.bucket({
   <span class="hljs-attr">bucket</span>: <span class="hljs-string">'bucket-slug'</span>,
   <span class="hljs-attr">write_key</span>: <span class="hljs-string">''</span>
 })
-Cosmic.deleteObjectType({
+bucket.deleteObjectType({
   <span class="hljs-attr">slug</span>: <span class="hljs-string">'posts'</span>
 }).then(<span class="hljs-function"><span class="hljs-params">data</span> =&gt;</span> {
   <span class="hljs-built_in">console</span>.log(data)
@@ -708,7 +710,7 @@ Cosmic.deleteObjectType({
         <h2 id="add-object">Add Object</h2>
         <blockquote>
           <p>Definition</p>
-        </blockquote> <pre class="highlight bash"><code>POST https://api.cosmicjs.com/v1/:bucket_slug/add-object</code></pre><pre class="highlight javascript"><code>Cosmic.addObject()</code></pre>
+        </blockquote> <pre class="highlight bash"><code>POST https://api.cosmicjs.com/v1/:bucket_slug/add-object</code></pre><pre class="highlight javascript"><code>bucket.addObject()</code></pre>
         <blockquote>
           <p>Example Request</p>
         </blockquote> <pre class="highlight bash"><code>{
@@ -750,11 +752,11 @@ Cosmic.deleteObjectType({
     <span class="hljs-string">"slug_field"</span>: <span class="hljs-literal">false</span>
   }
 }
-<span class="hljs-keyword">const</span> Cosmic = <span class="hljs-built_in">require</span>(<span class="hljs-string">'cosmicjs'</span>)({
+<span class="hljs-keyword">const</span> bucket = Cosmic.bucket({
   <span class="hljs-attr">bucket</span>: <span class="hljs-string">'bucket-slug'</span>,
   <span class="hljs-attr">write_key</span>: <span class="hljs-string">''</span>
 })
-Cosmic.addObject(params).then(<span class="hljs-function"><span class="hljs-params">data</span> =&gt;</span> {
+bucket.addObject(params).then(<span class="hljs-function"><span class="hljs-params">data</span> =&gt;</span> {
   <span class="hljs-built_in">console</span>.log(data)
 }).catch(<span class="hljs-function"><span class="hljs-params">err</span> =&gt;</span> {
   <span class="hljs-built_in">console</span>.log(err)
@@ -859,14 +861,14 @@ Cosmic.addObject(params).then(<span class="hljs-function"><span class="hljs-para
         <h2 id="get-objects">Get Objects</h2>
         <blockquote>
           <p>Definition</p>
-        </blockquote> <pre class="highlight bash"><code>GET https://api.cosmicjs.com/:bucket_slug/objects</code></pre><pre class="highlight javascript"><code>Cosmic.getObjects()</code></pre>
+        </blockquote> <pre class="highlight bash"><code>GET https://api.cosmicjs.com/:bucket_slug/objects</code></pre><pre class="highlight javascript"><code>bucket.getObjects()</code></pre>
         <blockquote>
           <p>Example Request</p>
-        </blockquote> <pre class="highlight bash"><code>curl <span class="hljs-string">"https://api.cosmicjs.com/v1/wedding-site/objects?pretty=true&amp;hide_metafields=true&amp;limit=2"</span></code></pre><pre class="highlight javascript"><code><span class="hljs-keyword">const</span> Cosmic = <span class="hljs-built_in">require</span>(<span class="hljs-string">'cosmicjs'</span>)({
+        </blockquote> <pre class="highlight bash"><code>curl <span class="hljs-string">"https://api.cosmicjs.com/v1/wedding-site/objects?pretty=true&amp;hide_metafields=true&amp;limit=2"</span></code></pre><pre class="highlight javascript"><code><span class="hljs-keyword">const</span> bucket = Cosmic.bucket({
   <span class="hljs-attr">bucket</span>: <span class="hljs-string">'wedding-site'</span>,
   <span class="hljs-attr">read_key</span>: <span class="hljs-string">''</span>
 })
-Cosmic.getObjects({
+bucket.getObjects({
   <span class="hljs-attr">limit</span>: <span class="hljs-number">2</span>
 }).then(<span class="hljs-function"><span class="hljs-params">data</span> =&gt;</span> {
   <span class="hljs-built_in">console</span>.log(data)
@@ -904,7 +906,7 @@ Cosmic.getObjects({
         <span class="hljs-attr">"menu-title"</span>: <span class="hljs-string">"Carol &amp; Jack"</span>,
         <span class="hljs-attr">"description"</span>: <span class="hljs-string">"This is the wedding website for the Jack and Carol Wedding on November 22, 2014 in Dallas, TX."</span>,
         <span class="hljs-attr">"author"</span>: <span class="hljs-string">"Tony Spiro"</span>,
-        <span class="hljs-attr">"footer-text"</span>: <span class="hljs-string">"Cosmic JS &amp;copy; 2015"</span>
+        <span class="hljs-attr">"footer-text"</span>: <span class="hljs-string">"Cosmic JS &amp;copy; 2018"</span>
       }
     }
   ]
@@ -979,14 +981,14 @@ Cosmic.getObjects({
         <h2 id="get-objects-by-type">Get Objects by Type</h2>
         <blockquote>
           <p>Definition</p>
-        </blockquote> <pre class="highlight bash"><code>GET https://api.cosmicjs.com/v1/:bucket_slug/object-type/:type_slug</code></pre><pre class="highlight javascript"><code>Cosmic.getObjectsByType()</code></pre>
+        </blockquote> <pre class="highlight bash"><code>GET https://api.cosmicjs.com/v1/:bucket_slug/object-type/:type_slug</code></pre><pre class="highlight javascript"><code>bucket.getObjectsByType()</code></pre>
         <blockquote>
           <p>Example Request</p>
-        </blockquote> <pre class="highlight bash"><code>curl <span class="hljs-string">"https://api.cosmicjs.com/v1/wedding-site/object-type/groomsmen?limit=3"</span></code></pre><pre class="highlight javascript"><code><span class="hljs-keyword">const</span> Cosmic = <span class="hljs-built_in">require</span>(<span class="hljs-string">'cosmicjs'</span>)({
+        </blockquote> <pre class="highlight bash"><code>curl <span class="hljs-string">"https://api.cosmicjs.com/v1/wedding-site/object-type/groomsmen?limit=3"</span></code></pre><pre class="highlight javascript"><code><span class="hljs-keyword">const</span> bucket = Cosmic.bucket({
   <span class="hljs-attr">bucket</span>: <span class="hljs-string">'wedding-site'</span>,
   <span class="hljs-attr">read_key</span>: <span class="hljs-string">''</span>
 })
-Cosmic.getObjectsByType({
+bucket.getObjectsByType({
   <span class="hljs-attr">type_slug</span>: <span class="hljs-string">'groomsmen'</span>,
   <span class="hljs-attr">limit</span>: <span class="hljs-number">3</span>
 }).then(<span class="hljs-function"><span class="hljs-params">data</span> =&gt;</span> {
@@ -1123,14 +1125,14 @@ Cosmic.getObjectsByType({
         <h2 id="search-objects">Search Objects</h2>
         <blockquote>
           <p>Definition</p>
-        </blockquote> <pre class="highlight bash"><code>GET https://api.cosmicjs.com/v1/:bucket_slug/object-type/:type_slug/search</code></pre><pre class="highlight javascript"><code>Cosmic.searchObjectType()</code></pre>
+        </blockquote> <pre class="highlight bash"><code>GET https://api.cosmicjs.com/v1/:bucket_slug/object-type/:type_slug/search</code></pre><pre class="highlight javascript"><code>bucket.searchObjectType()</code></pre>
         <blockquote>
           <p>Example Request</p>
-        </blockquote> <pre class="highlight bash"><code>curl <span class="hljs-string">"https://api.cosmicjs.com/v1/wedding-site/object-type/groomsmen/search?metafield_key=official-title&amp;metafield_value=Best%20Man"</span></code></pre><pre class="highlight javascript"><code><span class="hljs-keyword">const</span> Cosmic = <span class="hljs-built_in">require</span>(<span class="hljs-string">'cosmicjs'</span>)({
+        </blockquote> <pre class="highlight bash"><code>curl <span class="hljs-string">"https://api.cosmicjs.com/v1/wedding-site/object-type/groomsmen/search?metafield_key=official-title&amp;metafield_value=Best%20Man"</span></code></pre><pre class="highlight javascript"><code><span class="hljs-keyword">const</span> bucket = Cosmic.bucket({
   <span class="hljs-attr">bucket</span>: <span class="hljs-string">'wedding-site'</span>,
   <span class="hljs-attr">read_key</span>: <span class="hljs-string">''</span>
 })
-Cosmic.searchObjectType({
+bucket.searchObjectType({
   <span class="hljs-attr">type_slug</span>: <span class="hljs-string">'groomsmen'</span>,
   <span class="hljs-attr">metafield_key</span>: <span class="hljs-string">'official-title'</span>,
   <span class="hljs-attr">metafield_value</span>: <span class="hljs-string">'Best Man'</span>
@@ -1254,7 +1256,7 @@ Cosmic.searchObjectType({
         <h2 id="edit-object">Edit Object</h2>
         <blockquote>
           <p>Definition</p>
-        </blockquote> <pre class="highlight bash"><code>PUT https://api.cosmicjs.com/v1/:bucket_slug/edit-object</code></pre><pre class="highlight javascript"><code>Cosmic.editObject()</code></pre>
+        </blockquote> <pre class="highlight bash"><code>PUT https://api.cosmicjs.com/v1/:bucket_slug/edit-object</code></pre><pre class="highlight javascript"><code>bucket.editObject()</code></pre>
         <blockquote>
           <p>Example Request</p>
         </blockquote> <pre class="highlight bash"><code>{
@@ -1275,11 +1277,11 @@ Cosmic.searchObjectType({
       <span class="hljs-string">"type"</span>: <span class="hljs-string">"text"</span>
     }
   ]
-}</code></pre><pre class="highlight javascript"><code><span class="hljs-keyword">const</span> Cosmic = <span class="hljs-built_in">require</span>(<span class="hljs-string">'cosmicjs'</span>)({
+}</code></pre><pre class="highlight javascript"><code><span class="hljs-keyword">const</span> bucket = Cosmic.bucket({
   <span class="hljs-attr">bucket</span>: <span class="hljs-string">'bucket-slug'</span>,
   <span class="hljs-attr">write_key</span>: <span class="hljs-string">''</span>
 })
-Cosmic.editObject({
+bucket.editObject({
   <span class="hljs-attr">slug</span>: <span class="hljs-string">'cosmic-js-example'</span>,
   <span class="hljs-attr">title</span>: <span class="hljs-string">'New Title Edit'</span>
 }).then(<span class="hljs-function"><span class="hljs-params">data</span> =&gt;</span> {
@@ -1384,16 +1386,16 @@ Cosmic.editObject({
         <h2 id="delete-object">Delete Object</h2>
         <blockquote>
           <p>Definition</p>
-        </blockquote> <pre class="highlight bash"><code>DELETE https://api.cosmicjs.com/v1/:bucket_slug/objects/:object_slug</code></pre><pre class="highlight javascript"><code>Cosmic.deleteObject()</code></pre>
+        </blockquote> <pre class="highlight bash"><code>DELETE https://api.cosmicjs.com/v1/:bucket_slug/objects/:object_slug</code></pre><pre class="highlight javascript"><code>bucket.deleteObject()</code></pre>
         <blockquote>
           <p>Example Request</p>
         </blockquote> <pre class="highlight bash"><code>{
   <span class="hljs-string">"write_key"</span>: <span class="hljs-string">"your-key-added-in-bucket-settings"</span>
-}</code></pre><pre class="highlight javascript"><code><span class="hljs-keyword">const</span> Cosmic = <span class="hljs-built_in">require</span>(<span class="hljs-string">'cosmicjs'</span>)({
+}</code></pre><pre class="highlight javascript"><code><span class="hljs-keyword">const</span> bucket = Cosmic.bucket({
   <span class="hljs-attr">bucket</span>: <span class="hljs-string">'bucket-slug'</span>,
   <span class="hljs-attr">write_key</span>: <span class="hljs-string">''</span>
 })
-Cosmic.deleteObject({
+bucket.deleteObject({
   <span class="hljs-attr">slug</span>: <span class="hljs-string">'cosmic-js-example'</span>
 }).then(<span class="hljs-function"><span class="hljs-params">data</span> =&gt;</span> {
   <span class="hljs-built_in">console</span>.log(data)
@@ -1749,7 +1751,7 @@ Cosmic.deleteObject({
         <h2 id="connect-objects">Connect Objects</h2>
         <blockquote>
           <p>Definition</p>
-        </blockquote> <pre class="highlight bash"><code>POST https://api.cosmicjs.com/v1/:bucket_slug/add-object</code></pre><pre class="highlight javascript"><code>Cosmic.addObject()</code></pre>
+        </blockquote> <pre class="highlight bash"><code>POST https://api.cosmicjs.com/v1/:bucket_slug/add-object</code></pre><pre class="highlight javascript"><code>bucket.addObject()</code></pre>
         <blockquote>
           <p>Example Request</p>
         </blockquote> <pre class="highlight bash"><code>{
@@ -1805,11 +1807,11 @@ Cosmic.deleteObject({
     }
   ]
 }
-<span class="hljs-keyword">const</span> Cosmic = <span class="hljs-built_in">require</span>(<span class="hljs-string">'cosmicjs'</span>)({
+<span class="hljs-keyword">const</span> bucket = Cosmic.bucket({
   <span class="hljs-attr">bucket</span>: <span class="hljs-string">'bucket-slug'</span>,
   <span class="hljs-attr">write_key</span>: <span class="hljs-string">''</span>
 })
-Cosmic.addObject(params).then(<span class="hljs-function"><span class="hljs-params">data</span> =&gt;</span> {
+bucket.addObject(params).then(<span class="hljs-function"><span class="hljs-params">data</span> =&gt;</span> {
   <span class="hljs-built_in">console</span>.log(data)
 }).catch(<span class="hljs-function"><span class="hljs-params">err</span> =&gt;</span> {
   <span class="hljs-built_in">console</span>.log(err)
@@ -1823,7 +1825,7 @@ Cosmic.addObject(params).then(<span class="hljs-function"><span class="hljs-para
         <h2 id="add-media">Add Media</h2>
         <blockquote>
           <p>Definition</p>
-        </blockquote> <pre class="highlight bash"><code>POST https://api.cosmicjs.com/v1/:bucket_slug/media</code></pre><pre class="highlight javascript"><code>Cosmic.addMedia()</code></pre>
+        </blockquote> <pre class="highlight bash"><code>POST https://api.cosmicjs.com/v1/:bucket_slug/media</code></pre><pre class="highlight javascript"><code>bucket.addMedia()</code></pre>
         <blockquote>
           <p>Example Request</p>
         </blockquote> <pre class="highlight bash"><code>{
@@ -1833,11 +1835,11 @@ Cosmic.addObject(params).then(<span class="hljs-function"><span class="hljs-para
     <span class="hljs-string">"caption"</span>: <span class="hljs-string">"Beautiful picture of the beach"</span>,
     <span class="hljs-string">"credit"</span>: <span class="hljs-string">"Tyler Jackson"</span>
   }
-}</code></pre><pre class="highlight javascript"><code><span class="hljs-keyword">const</span> Cosmic = <span class="hljs-built_in">require</span>(<span class="hljs-string">'cosmicjs'</span>)({
+}</code></pre><pre class="highlight javascript"><code><span class="hljs-keyword">const</span> bucket = Cosmic.bucket({
   <span class="hljs-attr">bucket</span>: <span class="hljs-string">'bucket-slug'</span>,
   <span class="hljs-attr">write_key</span>: <span class="hljs-string">''</span>
 })
-Cosmic.addMedia({
+bucket.addMedia({
   <span class="hljs-attr">media</span>: <span class="hljs-string">'&lt;FILE_DATA&gt;'</span>,
   <span class="hljs-attr">folder</span>: <span class="hljs-string">'your-folder-slug'</span>,
   <span class="hljs-attr">metadata</span>: {
@@ -1918,11 +1920,11 @@ Cosmic.addMedia({
         </blockquote> <pre class="highlight bash"><code>GET https://api.cosmicjs.com/v1/:bucket_slug/media</code></pre><pre class="highlight javascript"><code>Cosmic.getMedia()</code></pre>
         <blockquote>
           <p>Example Request</p>
-        </blockquote> <pre class="highlight bash"><code>curl <span class="hljs-string">"https://api.cosmicjs.com/v1/wedding-site/media?pretty=true&amp;folder=groomsmen&amp;limit=3"</span></code></pre><pre class="highlight javascript"><code><span class="hljs-keyword">const</span> Cosmic = <span class="hljs-built_in">require</span>(<span class="hljs-string">'cosmicjs'</span>)({
+        </blockquote> <pre class="highlight bash"><code>curl <span class="hljs-string">"https://api.cosmicjs.com/v1/wedding-site/media?pretty=true&amp;folder=groomsmen&amp;limit=3"</span></code></pre><pre class="highlight javascript"><code><span class="hljs-keyword">const</span> bucket = Cosmic.bucket({
   <span class="hljs-attr">bucket</span>: <span class="hljs-string">'wedding-site'</span>,
   <span class="hljs-attr">write_key</span>: <span class="hljs-string">''</span>
 })
-Cosmic.getMedia({
+bucket.getMedia({
   <span class="hljs-attr">folder</span>: <span class="hljs-string">'groomsmen'</span>,
   <span class="hljs-attr">limit</span>: <span class="hljs-number">3</span>
 }).then(<span class="hljs-function"><span class="hljs-params">data</span> =&gt;</span> {
@@ -2015,11 +2017,11 @@ Cosmic.getMedia({
           <p>Example Request</p>
         </blockquote> <pre class="highlight bash"><code>{
   <span class="hljs-string">"write_key"</span>: <span class="hljs-string">"your-key-added-in-bucket-settings"</span>
-}</code></pre><pre class="highlight javascript"><code><span class="hljs-keyword">const</span> Cosmic = <span class="hljs-built_in">require</span>(<span class="hljs-string">'cosmicjs'</span>)({
+}</code></pre><pre class="highlight javascript"><code><span class="hljs-keyword">const</span> bucket = Cosmic.bucket({
   <span class="hljs-attr">bucket</span>: <span class="hljs-string">'bucket-slug'</span>,
   <span class="hljs-attr">write_key</span>: <span class="hljs-string">''</span>
 })
-Cosmic.deleteMedia({
+bucket.deleteMedia({
  <span class="hljs-attr">id</span>: <span class="hljs-string">'5a4b18e12fff7ec0e3c13c65'</span>
 }).then(<span class="hljs-function"><span class="hljs-params">data</span> =&gt;</span> {
   <span class="hljs-built_in">console</span>.log(data)
@@ -2056,20 +2058,20 @@ Cosmic.deleteMedia({
         <h2 id="add-webhook">Add Webhook</h2>
         <blockquote>
           <p>Definition</p>
-        </blockquote> <pre class="highlight bash"><code>POST https://api.cosmicjs.com/v1/:bucket_slug/webhooks</code></pre><pre class="highlight javascript"><code>Cosmic.addWebhooks()</code></pre>
+        </blockquote> <pre class="highlight bash"><code>POST https://api.cosmicjs.com/v1/:bucket_slug/webhooks</code></pre><pre class="highlight javascript"><code>bucket.addWebhooks()</code></pre>
         <blockquote>
           <p>Example Request</p>
         </blockquote> <pre class="highlight bash"><code>{
   <span class="hljs-string">"event"</span>: <span class="hljs-string">"object.created.published"</span>,
   <span class="hljs-string">"endpoint"</span>: <span class="hljs-string">"http://my-listener.com"</span>,
   <span class="hljs-string">"write_key"</span>: <span class="hljs-string">"your-key-added-in-bucket-settings"</span>
-}</code></pre><pre class="highlight javascript"><code><span class="hljs-keyword">const</span> Cosmic = <span class="hljs-built_in">require</span>(<span class="hljs-string">'cosmicjs'</span>)({
+}</code></pre><pre class="highlight javascript"><code><span class="hljs-keyword">const</span> bucket = Cosmic.bucket({
   <span class="hljs-attr">bucket</span>: <span class="hljs-string">'bucket-slug'</span>,
   <span class="hljs-attr">write_key</span>: <span class="hljs-string">''</span>
 })
-Cosmic.addWebhook({
-    <span class="hljs-attr">event</span>: <span class="hljs-string">'object.created.published'</span>,
-    <span class="hljs-attr">endpoint</span>: <span class="hljs-string">'http://my-listener.com'</span>
+bucket.addWebhook({
+  <span class="hljs-attr">event</span>: <span class="hljs-string">'object.created.published'</span>,
+  <span class="hljs-attr">endpoint</span>: <span class="hljs-string">'http://my-listener.com'</span>
 }).then(<span class="hljs-function"><span class="hljs-params">data</span> =&gt;</span> {
   <span class="hljs-built_in">console</span>.log(data)
 }).catch(<span class="hljs-function"><span class="hljs-params">err</span> =&gt;</span> {
@@ -2131,11 +2133,11 @@ Cosmic.addWebhook({
           <p>Example Request</p>
         </blockquote> <pre class="highlight bash"><code>{
   <span class="hljs-string">"write_key"</span>: <span class="hljs-string">"your-key-added-in-bucket-settings"</span>
-}</code></pre><pre class="highlight javascript"><code><span class="hljs-keyword">const</span> Cosmic = <span class="hljs-built_in">require</span>(<span class="hljs-string">'cosmicjs'</span>)({
+}</code></pre><pre class="highlight javascript"><code><span class="hljs-keyword">const</span> bucket = Cosmic.bucket({
   <span class="hljs-attr">bucket</span>: <span class="hljs-string">'bucket-slug'</span>,
   <span class="hljs-attr">write_key</span>: <span class="hljs-string">''</span>
 })
-Cosmic.deleteWebhook({
+bucket.deleteWebhook({
   <span class="hljs-attr">id</span>: <span class="hljs-string">'c62defe0-5f93-11e7-8054-873245f0e98d'</span>
 }).then(<span class="hljs-function"><span class="hljs-params">data</span> =&gt;</span> {
   <span class="hljs-built_in">console</span>.log(data)
@@ -2171,17 +2173,17 @@ Cosmic.deleteWebhook({
         <h2 id="add-extension">Add Extension</h2>
         <blockquote>
           <p>Definition</p>
-        </blockquote> <pre class="highlight bash"><code>POST https://api.cosmicjs.com/v1/:bucket_slug/extensions</code></pre><pre class="highlight javascript"><code>Cosmic.addExtension()</code></pre>
+        </blockquote> <pre class="highlight bash"><code>POST https://api.cosmicjs.com/v1/:bucket_slug/extensions</code></pre><pre class="highlight javascript"><code>bucket.addExtension()</code></pre>
         <blockquote>
           <p>Example Request</p>
         </blockquote> <pre class="highlight bash"><code>{
   <span class="hljs-string">"zip"</span>: <span class="hljs-string">"your-media-multipart-form-data"</span>,
   <span class="hljs-string">"write_key"</span>: <span class="hljs-string">"your-key-added-in-bucket-settings"</span>
-}</code></pre><pre class="highlight javascript"><code><span class="hljs-keyword">const</span> Cosmic = <span class="hljs-built_in">require</span>(<span class="hljs-string">'cosmicjs'</span>)({
+}</code></pre><pre class="highlight javascript"><code><span class="hljs-keyword">const</span> bucket = Cosmic.bucket({
   <span class="hljs-attr">bucket</span>: <span class="hljs-string">'bucket-slug'</span>,
   <span class="hljs-attr">write_key</span>: <span class="hljs-string">''</span>
 })
-Cosmic.addExtension({
+bucket.addExtension({
   <span class="hljs-attr">zip</span>: <span class="hljs-string">'&lt;ZIP_FILE_DATA&gt;'</span>
 }).then(<span class="hljs-function"><span class="hljs-params">data</span> =&gt;</span> {
   <span class="hljs-built_in">console</span>.log(data)
@@ -2235,11 +2237,11 @@ Cosmic.addExtension({
           <p>Example Request</p>
         </blockquote> <pre class="highlight bash"><code>{
   <span class="hljs-string">"write_key"</span>: <span class="hljs-string">"your-key-added-in-bucket-settings"</span>
-}</code></pre><pre class="highlight javascript"><code><span class="hljs-keyword">const</span> Cosmic = <span class="hljs-built_in">require</span>(<span class="hljs-string">'cosmicjs'</span>)({
+}</code></pre><pre class="highlight javascript"><code><span class="hljs-keyword">const</span> bucket = Cosmic.bucket({
   <span class="hljs-attr">bucket</span>: <span class="hljs-string">'bucket-slug'</span>,
   <span class="hljs-attr">write_key</span>: <span class="hljs-string">''</span>
 })
-Cosmic.deleteExtension({
+bucket.deleteExtension({
   <span class="hljs-attr">id</span>: <span class="hljs-string">'c62defe0-5f93-11e7-8054-873245f0e98d'</span>
 }).then(<span class="hljs-function"><span class="hljs-params">data</span> =&gt;</span> {
   <span class="hljs-built_in">console</span>.log(data)
