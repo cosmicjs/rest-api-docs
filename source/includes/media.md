@@ -83,6 +83,98 @@ folder | | String | Media folder slug
 metadata | | Object | Key / value data store
 write_key | | String | Your Bucket write key
 
+
+## Get Media
+
+> Definition
+
+```bash
+GET https://api.cosmicjs.com/v1/:bucket_slug/media
+```
+
+```javascript
+Cosmic.getMedia()
+```
+
+> Example Request
+
+```bash
+curl "https://api.cosmicjs.com/v1/wedding-site/media?pretty=true&folder=groomsmen&limit=3"
+```
+
+```javascript
+const Cosmic = require('cosmicjs')({
+  bucket: 'wedding-site',
+  write_key: ''
+})
+Cosmic.getMedia({
+  folder: 'groomsmen',
+  limit: 3
+}).then(data => {
+  console.log(data)
+}).catch(err => {
+  console.log(err)
+})
+```
+
+
+> Example Response
+
+```json
+{
+  "media": [
+    {
+      "_id": "55b3da7940d7a3791b00001f",
+      "name": "069b9650-32fe-11e5-9f75-cb9b4016a019.jpg",
+      "original_name": "mke.jpg",
+      "size": 30353,
+      "type": "image/jpeg",
+      "bucket": "55b3d557df0fb1df7600004b",
+      "created": "2015-01-02T01:40:40.903Z",
+      "folder": "groomsmen",
+      "location": "https://s3-us-west-2.amazonaws.com/cosmicjs",
+      "url": "https://s3-us-west-2.amazonaws.com/cosmicjs/069b9650-32fe-11e5-9f75-cb9b4016a019.jpg",
+      "imgix_url": "https://cosmic-s3.imgix.net/069b9650-32fe-11e5-9f75-cb9b4016a019.jpg"
+    },
+    {
+      "_id": "55b3da7940d7a3791b00001e",
+      "name": "069b6f44-32fe-11e5-9f75-cb9b4016a019.jpg",
+      "original_name": "dave.jpg",
+      "size": 21110,
+      "type": "image/jpeg",
+      "bucket": "55b3d557df0fb1df7600004b",
+      "created": "2015-01-02T01:40:40.814Z",
+      "folder": "groomsmen",
+      "location": "https://s3-us-west-2.amazonaws.com/cosmicjs",
+      "url": "https://s3-us-west-2.amazonaws.com/cosmicjs/069b6f44-32fe-11e5-9f75-cb9b4016a019.jpg",
+      "imgix_url": "https://cosmic-s3.imgix.net/069b6f44-32fe-11e5-9f75-cb9b4016a019.jpg"
+    },
+    {
+      "_id": "55b3da7840d7a3791b00001d",
+      "name": "069b6f43-32fe-11e5-9f75-cb9b4016a019.jpg",
+      "original_name": "selden.jpg",
+      "size": 26217,
+      "type": "image/jpeg",
+      "bucket": "55b3d557df0fb1df7600004b",
+      "created": "2015-01-02T01:40:40.655Z",
+      "folder": "groomsmen",
+      "location": "https://s3-us-west-2.amazonaws.com/cosmicjs",
+      "url": "https://s3-us-west-2.amazonaws.com/cosmicjs/069b6f43-32fe-11e5-9f75-cb9b4016a019.jpg",
+      "imgix_url": "https://cosmic-s3.imgix.net/069b6f43-32fe-11e5-9f75-cb9b4016a019.jpg"
+    }
+  ]
+}
+```
+
+
+You can add `folder` to get Media from a certain folder.  You can use the full Imgix suite of image processing tools on the `imgix_url` property value.  Check out the <a href="https://docs.imgix.com/" target="_blank">Imgix documentation</a> for more info.
+
+Parameter | Required | Type | Description
+--------- | ------- | ----------- | -----------
+pretty | | File | Media object
+folder | | String | Media folder slug
+read_key | | String | Your Bucket read key
+
 ## Delete Media
 
 > Definition

@@ -138,12 +138,12 @@ gulp.task('serve', ['NO_COMPRESS', 'default'], function() {
   gulp.watch('./source/stylesheets/**/*', ['sass']);
   gulp.watch('./source/index.yml', ['highlightjs', 'js', 'html']);
 
-  var server = gls.static('build', 4567);
+  var server = gls.static('build', process.env.PORT || 3000);
   server.start();
 
   gulp.watch(['build/**/*'], function (file) {
     server.notify.apply(server, [file]);
   });
 
-  gulp.src(__filename).pipe(open({uri: 'http://localhost:4567'}));
+  gulp.src(__filename).pipe(open({uri: 'http://localhost:' + (process.env.PORT || 3000) }));
 });
