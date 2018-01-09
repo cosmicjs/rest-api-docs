@@ -118,6 +118,7 @@ options.content_editor | | Bool | Set to false to hide the content editor
 metafields | | Array | Add Metafields to your Object
 locale | | String | Add localization to the Object
 write_key | | String | Your Bucket write key
+revision | | String | A revision id.  Can be found in revision URL in Dashboard
 
 
 ## Get Objects
