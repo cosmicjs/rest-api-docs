@@ -9,7 +9,7 @@ POST https://api.cosmicjs.com/v1/:bucket_slug/extensions
 ```
 
 ```javascript
-Cosmic.addExtension()
+bucket.addExtension()
 ```
 
 > Example Request
@@ -22,11 +22,11 @@ Cosmic.addExtension()
 ```
 
 ```javascript
-const Cosmic = require('cosmicjs')({
+const bucket = Cosmic.bucket({
   bucket: 'bucket-slug',
   write_key: ''
 })
-Cosmic.addExtension({
+bucket.addExtension({
   zip: '<ZIP_FILE_DATA>'
 }).then(data => {
   console.log(data)
@@ -82,11 +82,11 @@ Cosmic.deleteExtension()
 ```
 
 ```javascript
-const Cosmic = require('cosmicjs')({
+const bucket = Cosmic.bucket({
   bucket: 'bucket-slug',
   write_key: ''
 })
-Cosmic.deleteExtension({
+bucket.deleteExtension({
   id: 'c62defe0-5f93-11e7-8054-873245f0e98d'
 }).then(data => {
   console.log(data)

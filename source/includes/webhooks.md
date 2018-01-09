@@ -9,7 +9,7 @@ POST https://api.cosmicjs.com/v1/:bucket_slug/webhooks
 ```
 
 ```javascript
-Cosmic.addWebhooks()
+bucket.addWebhooks()
 ```
 
 > Example Request
@@ -23,13 +23,13 @@ Cosmic.addWebhooks()
 ```
 
 ```javascript
-const Cosmic = require('cosmicjs')({
+const bucket = Cosmic.bucket({
   bucket: 'bucket-slug',
   write_key: ''
 })
-Cosmic.addWebhook({
-	event: 'object.created.published',
-	endpoint: 'http://my-listener.com'
+bucket.addWebhook({
+  event: 'object.created.published',
+  endpoint: 'http://my-listener.com'
 }).then(data => {
   console.log(data)
 }).catch(err => {
@@ -81,11 +81,11 @@ Cosmic.deleteWebhook()
 ```
 
 ```javascript
-const Cosmic = require('cosmicjs')({
+const bucket = Cosmic.bucket({
   bucket: 'bucket-slug',
   write_key: ''
 })
-Cosmic.deleteWebhook({
+bucket.deleteWebhook({
   id: 'c62defe0-5f93-11e7-8054-873245f0e98d'
 }).then(data => {
   console.log(data)

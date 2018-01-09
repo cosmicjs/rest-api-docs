@@ -11,7 +11,7 @@ POST https://api.cosmicjs.com/v1/:bucket_slug/add-object
 ```
 
 ```javascript
-Cosmic.addObject()
+bucket.addObject()
 ```
 
 > Example Request
@@ -60,11 +60,11 @@ const params = {
     "slug_field": false
   }
 }
-const Cosmic = require('cosmicjs')({
+const bucket = Cosmic.bucket({
   bucket: 'bucket-slug',
   write_key: ''
 })
-Cosmic.addObject(params).then(data => {
+bucket.addObject(params).then(data => {
   console.log(data)
 }).catch(err => {
   console.log(err)
@@ -118,7 +118,6 @@ options.content_editor | | Bool | Set to false to hide the content editor
 metafields | | Array | Add Metafields to your Object
 locale | | String | Add localization to the Object
 write_key | | String | Your Bucket write key
-revision | | String | A revision id.  Can be found in revision URL in Dashboard
 
 
 ## Get Objects
@@ -130,7 +129,7 @@ GET https://api.cosmicjs.com/:bucket_slug/objects
 ```
 
 ```javascript
-Cosmic.getObjects()
+bucket.getObjects()
 ```
 
 > Example Request
@@ -140,11 +139,11 @@ curl "https://api.cosmicjs.com/v1/wedding-site/objects?pretty=true&hide_metafiel
 ```
 
 ```javascript
-const Cosmic = require('cosmicjs')({
+const bucket = Cosmic.bucket({
   bucket: 'wedding-site',
   read_key: ''
 })
-Cosmic.getObjects({
+bucket.getObjects({
   limit: 2
 }).then(data => {
   console.log(data)
@@ -185,7 +184,7 @@ Cosmic.getObjects({
         "menu-title": "Carol & Jack",
         "description": "This is the wedding website for the Jack and Carol Wedding on November 22, 2014 in Dallas, TX.",
         "author": "Tony Spiro",
-        "footer-text": "Cosmic JS &copy; 2015"
+        "footer-text": "Cosmic JS &copy; 2018"
       }
     }
   ]
@@ -216,7 +215,7 @@ GET https://api.cosmicjs.com/v1/:bucket_slug/object-type/:type_slug
 ```
 
 ```javascript
-Cosmic.getObjectsByType()
+bucket.getObjectsByType()
 ```
 
 > Example Request
@@ -225,11 +224,11 @@ Cosmic.getObjectsByType()
 curl "https://api.cosmicjs.com/v1/wedding-site/object-type/groomsmen?limit=3"
 ```
 ```javascript
-const Cosmic = require('cosmicjs')({
+const bucket = Cosmic.bucket({
   bucket: 'wedding-site',
   read_key: ''
 })
-Cosmic.getObjectsByType({
+bucket.getObjectsByType({
   type_slug: 'groomsmen',
   limit: 3
 }).then(data => {
@@ -325,7 +324,7 @@ GET https://api.cosmicjs.com/v1/:bucket_slug/object-type/:type_slug/search
 ```
 
 ```javascript
-Cosmic.searchObjectType()
+bucket.searchObjectType()
 ```
 
 > Example Request
@@ -335,11 +334,11 @@ curl "https://api.cosmicjs.com/v1/wedding-site/object-type/groomsmen/search?meta
 ```
 
 ```javascript
-const Cosmic = require('cosmicjs')({
+const bucket = Cosmic.bucket({
   bucket: 'wedding-site',
   read_key: ''
 })
-Cosmic.searchObjectType({
+bucket.searchObjectType({
   type_slug: 'groomsmen',
   metafield_key: 'official-title',
   metafield_value: 'Best Man'
@@ -406,7 +405,7 @@ PUT https://api.cosmicjs.com/v1/:bucket_slug/edit-object
 ```
 
 ```javascript
-Cosmic.editObject()
+bucket.editObject()
 ```
 
 > Example Request
@@ -434,11 +433,11 @@ Cosmic.editObject()
 ```
 
 ```javascript
-const Cosmic = require('cosmicjs')({
+const bucket = Cosmic.bucket({
   bucket: 'bucket-slug',
   write_key: ''
 })
-Cosmic.editObject({
+bucket.editObject({
   slug: 'cosmic-js-example',
   title: 'New Title Edit'
 }).then(data => {
@@ -502,7 +501,7 @@ DELETE https://api.cosmicjs.com/v1/:bucket_slug/objects/:object_slug
 ```
 
 ```javascript
-Cosmic.deleteObject()
+bucket.deleteObject()
 ```
 
 > Example Request
@@ -514,11 +513,11 @@ Cosmic.deleteObject()
 ```
 
 ```javascript
-const Cosmic = require('cosmicjs')({
+const bucket = Cosmic.bucket({
   bucket: 'bucket-slug',
   write_key: ''
 })
-Cosmic.deleteObject({
+bucket.deleteObject({
   slug: 'cosmic-js-example'
 }).then(data => {
   console.log(data)

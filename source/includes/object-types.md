@@ -9,7 +9,7 @@ POST https://api.cosmicjs.com/v1/:bucket_slug/add-object-type
 ```
 
 ```javascript
-Cosmic.addObjectType()
+bucket.addObjectType()
 ```
 
 > Example Request
@@ -37,7 +37,7 @@ Cosmic.addObjectType()
 ```
 
 ```javascript
-const Cosmic = require('cosmicjs')({
+const bucket = Cosmic.bucket({
   bucket: 'bucket-slug',
   write_key: ''
 })
@@ -60,7 +60,7 @@ const params = {
     }
   ]
 }
-Cosmic.addObjectType(params).then(data => {
+bucket.addObjectType(params).then(data => {
   console.log(data)
 }).catch(err => {
   console.log(err)
@@ -115,7 +115,7 @@ GET https://api.cosmicjs.com/v1/:bucket_slug/object-types
 ```
 
 ```javascript
-Cosmic.getObjectTypes()
+bucket.getObjectTypes()
 ```
 
 > Example Request
@@ -125,11 +125,11 @@ curl "https://api.cosmicjs.com/v1/wedding-site/object-types"
 ```
 
 ```javascript
-const Cosmic = require('cosmicjs')({
+const bucket = Cosmic.bucket({
   bucket: 'wedding-site',
   read_key: ''
 })
-Cosmic.getObjectTypes().then(data => {
+bucket.getObjectTypes().then(data => {
   console.log(data)
 }).catch(err => {
   console.log(err)
@@ -209,7 +209,7 @@ PUT https://api.cosmicjs.com/v1/:bucket_slug/edit-object-type
 ```
 
 ```javascript
-Cosmic.editObjectType()
+bucket.editObjectType()
   ```
 
 > Example Request
@@ -242,11 +242,11 @@ Cosmic.editObjectType()
 
 
 ```javascript
-const Cosmic = require('cosmicjs')({
+const bucket = Cosmic.bucket({
   bucket: 'bucket-slug',
   write_key: ''
 })
-Cosmic.editObjectType({
+bucket.editObjectType({
   slug: 'posts',
   title: 'New Posts Title'
 }).then(data => {
@@ -311,7 +311,7 @@ DELETE https://api.cosmicjs.com/v1/:bucket_slug/object-types/:type_slug
 ```
 
 ```javascript
-Cosmic.deleteObjectType()
+bucket.deleteObjectType()
 ```
 
 
@@ -324,11 +324,11 @@ Cosmic.deleteObjectType()
 ```
 
 ```javascript
-const Cosmic = require('cosmicjs')({
+const bucket = Cosmic.bucket({
   bucket: 'bucket-slug',
   write_key: ''
 })
-Cosmic.deleteObjectType({
+bucket.deleteObjectType({
   slug: 'posts'
 }).then(data => {
   console.log(data)

@@ -9,7 +9,7 @@ POST https://api.cosmicjs.com/v1/:bucket_slug/media
 ```
 
 ```javascript
-Cosmic.addMedia()
+bucket.addMedia()
 ```
 
 > Example Request
@@ -26,11 +26,11 @@ Cosmic.addMedia()
 ```
 
 ```javascript
-const Cosmic = require('cosmicjs')({
+const bucket = Cosmic.bucket({
   bucket: 'bucket-slug',
   write_key: ''
 })
-Cosmic.addMedia({
+bucket.addMedia({
   media: '<FILE_DATA>',
   folder: 'your-folder-slug',
   metadata: {
@@ -103,11 +103,11 @@ curl "https://api.cosmicjs.com/v1/wedding-site/media?pretty=true&folder=groomsme
 ```
 
 ```javascript
-const Cosmic = require('cosmicjs')({
+const bucket = Cosmic.bucket({
   bucket: 'wedding-site',
   write_key: ''
 })
-Cosmic.getMedia({
+bucket.getMedia({
   folder: 'groomsmen',
   limit: 3
 }).then(data => {
@@ -196,11 +196,11 @@ Cosmic.deleteMedia()
 ```
 
 ```javascript
-const Cosmic = require('cosmicjs')({
+const bucket = Cosmic.bucket({
   bucket: 'bucket-slug',
   write_key: ''
 })
-Cosmic.deleteMedia({
+bucket.deleteMedia({
  id: '5a4b18e12fff7ec0e3c13c65'
 }).then(data => {
   console.log(data)

@@ -25,10 +25,11 @@ curl -X POST https://api.cosmicjs.com/v1/buckets \
 ```
 
 ```javascript
-const Cosmic = require('cosmicjs')() // double parentheses to init function without config
+const Cosmic = require('cosmicjs')(token) // token from Cosmic.authenticate
 Cosmic.addBucket({
   title: 'My New Bucket',
-  token: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXV.eyJlbWFpbCI6InNwaXJvbnlAZ21haWwuY29tIiwicGFzc3dvcmQiOiIxNzlhZDQ1YzZjZTJjYjk3Y2YxMDI5ZTIxMjA0NmU4MSIsImlhdCI6MTUxNDQ5NzI3N30.ep4cEgH_SqItQ5McJArJtljS3GSJedyEcDRlnu9yb-U' }).then(data => {
+  slug: 'my-new-bucket' // must be unique across all Buckets in system
+}).then(data => {
   console.log(data)
 }).catch(err => {
   console.log(err)
@@ -71,7 +72,7 @@ GET https://api.cosmicjs.com/:bucket_slug
 ```
 
 ```javascript
-Cosmic.getBucket()
+bucket.getBucket()
 ```
 
 > Example Request
@@ -81,11 +82,12 @@ curl "https://api.cosmicjs.com/v1/wedding-site"
 ```
 
 ```javascript
-const Cosmic = require('cosmicjs')({
+const Cosmic = require('cosmicjs')(token)
+const bucket = Cosmic.bucket({
   bucket: 'wedding-site',
   read_key: ''
 })
-Cosmic.getBucket().then(data => {
+bucket.getBucket().then(data => {
   console.log(data)
 }).catch(err => {
   console.log(err)
