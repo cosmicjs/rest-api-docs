@@ -160,7 +160,9 @@ Cosmic.authenticate({
         </blockquote> <pre class="highlight bash"><code>curl -X POST https://api.cosmicjs.com/v1/buckets \
 -H <span class="hljs-string">"Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXV.eyJlbWFpbCI6InNwaXJvbnlAZ21haWwuY29tIiwicGFzc3dvcmQiOiIxNzlhZDQ1YzZjZTJjYjk3Y2YxMDI5ZTIxMjA0NmU4MSIsImlhdCI6MTUxNDQ5NzI3N30.ep4cEgH_SqItQ5McJArJtljS3GSJedyEcDRlnu9yb-U"</span> \
 -H <span class="hljs-string">"Content-Type: application/json"</span> \
--d <span class="hljs-string">'{"title": "My New Bucket"}'</span></code></pre><pre class="highlight javascript"><code><span class="hljs-keyword">const</span> Cosmic = <span class="hljs-built_in">require</span>(<span class="hljs-string">'cosmicjs'</span>)(token) <span class="hljs-comment">// token from Cosmic.authenticate</span>
+-d <span class="hljs-string">'{"title": "My New Bucket"}'</span></code></pre><pre class="highlight javascript"><code><span class="hljs-keyword">const</span> Cosmic = <span class="hljs-built_in">require</span>(<span class="hljs-string">'cosmicjs'</span>)({
+  <span class="hljs-attr">token</span>: <span class="hljs-string">'your-token-from-auth-request'</span> <span class="hljs-comment">// from Cosmic.authenticate</span>
+})
 Cosmic.addBucket({
   <span class="hljs-attr">title</span>: <span class="hljs-string">'My New Bucket'</span>,
   <span class="hljs-attr">slug</span>: <span class="hljs-string">'my-new-bucket'</span> <span class="hljs-comment">// must be unique across all Buckets in system</span>
@@ -270,7 +272,9 @@ Cosmic.addBucket({
         </blockquote> <pre class="highlight bash"><code>GET https://api.cosmicjs.com/:bucket_slug</code></pre><pre class="highlight javascript"><code>bucket.getBucket()</code></pre>
         <blockquote>
           <p>Example Request</p>
-        </blockquote> <pre class="highlight bash"><code>curl <span class="hljs-string">"https://api.cosmicjs.com/v1/wedding-site"</span></code></pre><pre class="highlight javascript"><code><span class="hljs-keyword">const</span> Cosmic = <span class="hljs-built_in">require</span>(<span class="hljs-string">'cosmicjs'</span>)(token)
+        </blockquote> <pre class="highlight bash"><code>curl <span class="hljs-string">"https://api.cosmicjs.com/v1/wedding-site"</span></code></pre><pre class="highlight javascript"><code><span class="hljs-keyword">const</span> Cosmic = <span class="hljs-built_in">require</span>(<span class="hljs-string">'cosmicjs'</span>)({
+  <span class="hljs-attr">token</span>: <span class="hljs-string">'your-token-from-auth-request'</span> <span class="hljs-comment">// from Cosmic.authenticate</span>
+})
 <span class="hljs-keyword">const</span> bucket = Cosmic.bucket({
   <span class="hljs-attr">bucket</span>: <span class="hljs-string">'wedding-site'</span>,
   <span class="hljs-attr">read_key</span>: <span class="hljs-string">''</span>
