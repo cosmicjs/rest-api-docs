@@ -25,7 +25,9 @@ curl -X POST https://api.cosmicjs.com/v1/buckets \
 ```
 
 ```javascript
-const Cosmic = require('cosmicjs')(token) // token from Cosmic.authenticate
+const Cosmic = require('cosmicjs')({
+  token: 'your-token-from-auth-request' // from Cosmic.authenticate
+})
 Cosmic.addBucket({
   title: 'My New Bucket',
   slug: 'my-new-bucket' // must be unique across all Buckets in system
@@ -82,7 +84,9 @@ curl "https://api.cosmicjs.com/v1/wedding-site"
 ```
 
 ```javascript
-const Cosmic = require('cosmicjs')(token)
+const Cosmic = require('cosmicjs')({
+  token: 'your-token-from-auth-request' // from Cosmic.authenticate
+})
 const bucket = Cosmic.bucket({
   bucket: 'wedding-site',
   read_key: ''
