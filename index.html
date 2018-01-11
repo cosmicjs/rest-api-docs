@@ -104,11 +104,11 @@ npm install cosmicjs</code></pre>
           <p>Example Request</p>
         </blockquote> <pre class="highlight bash"><code><span class="hljs-comment"># With shell, you can just pass your email and password</span>
 curl -X POST https://api.cosmicjs.com/v1/authenticate \
--d email=myname@myservice.com \
--d password=mypassword</code></pre><pre class="highlight javascript"><code><span class="hljs-keyword">const</span> Cosmic = <span class="hljs-built_in">require</span>(<span class="hljs-string">'cosmicjs'</span>)() <span class="hljs-comment">// double parentheses to init function without token</span>
+-d email=you@youremail.com \
+-d password=yourpassword</code></pre><pre class="highlight javascript"><code><span class="hljs-keyword">const</span> Cosmic = <span class="hljs-built_in">require</span>(<span class="hljs-string">'cosmicjs'</span>)() <span class="hljs-comment">// double parentheses to init function without token</span>
 Cosmic.authenticate({
-  <span class="hljs-attr">email</span>: <span class="hljs-string">'user@myservice.com'</span>,
-  <span class="hljs-attr">password</span>: <span class="hljs-string">'mypassword'</span>
+  <span class="hljs-attr">email</span>: <span class="hljs-string">'you@youremail.com'</span>,
+  <span class="hljs-attr">password</span>: <span class="hljs-string">'yourpassword'</span>
 }).then(<span class="hljs-function"><span class="hljs-params">data</span> =&gt;</span> {
     <span class="hljs-built_in">console</span>.log(data)
 }).catch(<span class="hljs-function"><span class="hljs-params">err</span> =&gt;</span> {
@@ -266,6 +266,54 @@ Cosmic.addBucket({
             </tr>
           </tbody>
         </table>
+        <h2 id="connect-to-bucket">Connect to Bucket</h2>
+        <blockquote>
+          <p>Example Request</p>
+        </blockquote> <pre class="highlight bash"><code>GET https://api.cosmicjs.com/:bucket_slug</code></pre><pre class="highlight javascript"><code><span class="hljs-comment">// Use the Cosmic.bucket method to connect to different Buckets in your account.</span>
+<span class="hljs-keyword">const</span> Cosmic = <span class="hljs-built_in">require</span>(<span class="hljs-string">'cosmicjs'</span>)({
+  <span class="hljs-attr">token</span>: <span class="hljs-string">'your-token-from-auth-request'</span> <span class="hljs-comment">// from Cosmic.authenticate</span>
+})
+<span class="hljs-keyword">const</span> bucket1 = Cosmic.bucket({
+  <span class="hljs-attr">bucket</span>: <span class="hljs-string">'my-first-bucket'</span>,
+  <span class="hljs-attr">read_key</span>: <span class="hljs-string">''</span>,
+  <span class="hljs-attr">write_key</span>: <span class="hljs-string">''</span>
+})
+<span class="hljs-keyword">const</span> bucket2 = Cosmic.bucket({
+  <span class="hljs-attr">bucket</span>: <span class="hljs-string">'my-other-bucket'</span>,
+  <span class="hljs-attr">read_key</span>: <span class="hljs-string">''</span>,
+  <span class="hljs-attr">write_key</span>: <span class="hljs-string">''</span>
+})</code></pre>
+        <p>For the NPM module:</p>
+        <table>
+          <thead>
+            <tr>
+              <th>Parameter</th>
+              <th>Required</th>
+              <th>Type</th>
+              <th>Description</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>bucket</td>
+              <td></td>
+              <td>String</td>
+              <td>The Bucket slug</td>
+            </tr>
+            <tr>
+              <td>read_key</td>
+              <td></td>
+              <td>String</td>
+              <td>Restrict read access</td>
+            </tr>
+            <tr>
+              <td>write_key</td>
+              <td></td>
+              <td>String</td>
+              <td>Restrict write access</td>
+            </tr>
+          </tbody>
+        </table>
         <h2 id="get-bucket">Get Bucket</h2>
         <blockquote>
           <p>Definition</p>
@@ -305,7 +353,7 @@ bucket.getBucket().then(<span class="hljs-function"><span class="hljs-params">da
     ]
   }
 }</code></pre>
-        <p>Returns the entire Bucket. If you would like to restrict read access to your Bucket, you can do so in Your Bucket &gt; Basic Settings.</p>
+        <p>Returns the entire Bucket including Object Types, Objects, Media and more. If you would like to restrict read access to your Bucket, you can do so in Your Bucket &gt; Basic Settings.</p>
         <table>
           <thead>
             <tr>
@@ -1412,7 +1460,7 @@ bucket.deleteObject({
   <span class="hljs-attr">"status"</span>: <span class="hljs-string">"200"</span>,
   <span class="hljs-attr">"message"</span>: <span class="hljs-string">"Object deleted"</span>
 }</code></pre>
-        <p>Edit an existing Object in your Bucket.</p>
+        <p>Delete an existing Object in your Bucket.</p>
         <table>
           <thead>
             <tr>
@@ -1880,8 +1928,7 @@ bucket.addMedia({
     ]
   }
 }</code></pre>
-        <p>The only required post value is <code>media</code> which is the name of your media sent. If a write key is enabled on the requested bucket, the parameter <code>write_key</code> will need to be present in the Body. You can also add an optional
-          <code>folder</code> and <code>metadata</code> params.</p>
+        <p>The only required post value is <code>media</code> which is the name of your media sent. You can also add an optional <code>folder</code> and <code>metadata</code> params.</p>
         <table>
           <thead>
             <tr>
@@ -1981,7 +2028,7 @@ bucket.getMedia({
     }
   ]
 }</code></pre>
-        <p>You can add <code>folder</code> to get Media from a certain folder. You can use the full Imgix suite of image processing tools on the <code>imgix_url</code> property value. Check out the
+        <p>You can add <code>folder</code> to get Media from a certain folder. You can use the full Imgix suite of image processing tools on the URL provided by the <code>imgix_url</code> property value. Check out the
           <a href="https://docs.imgix.com/" target="_blank">Imgix documentation</a> for more info.</p>
         <table>
           <thead>
@@ -2038,8 +2085,7 @@ bucket.deleteMedia({
   <span class="hljs-attr">"status"</span>: <span class="hljs-string">"200"</span>,
   <span class="hljs-attr">"message"</span>: <span class="hljs-string">"Object Type deleted."</span>
 }</code></pre>
-        <p>Required post values include media which is the name of your media sent. If a write key is enabled on the requested bucket, the variable <code>write_key</code> will need to be present in the Body. You can also add an optional folder param to add
-          the Media to a specific folder.</p>
+        <p>If a write key is enabled on the requested bucket, the variable <code>write_key</code> will need to be present in the Body.</p>
         <table>
           <thead>
             <tr>
