@@ -536,7 +536,7 @@ bucket.deleteObject({
 ```
 
 
-Edit an existing Object in your Bucket.
+Delete an existing Object in your Bucket.
 
 Parameter | Required | Type | Description
 --------- | ------- | ----------- | -----------

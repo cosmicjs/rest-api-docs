@@ -15,15 +15,15 @@ Cosmic.authenticate()
 ```bash
 # With shell, you can just pass your email and password
 curl -X POST https://api.cosmicjs.com/v1/authenticate \
--d email=myname@myservice.com \
--d password=mypassword
+-d email=you@youremail.com \
+-d password=yourpassword
 ```
 
 ```javascript
 const Cosmic = require('cosmicjs')() // double parentheses to init function without token
 Cosmic.authenticate({
-  email: 'user@myservice.com',
-  password: 'mypassword'
+  email: 'you@youremail.com',
+  password: 'yourpassword'
 }).then(data => {
 	console.log(data)
 }).catch(err => {

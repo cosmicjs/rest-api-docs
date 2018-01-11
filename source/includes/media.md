@@ -74,7 +74,7 @@ bucket.addMedia({
 ```
 
 
-The only required post value is `media` which is the name of your media sent. If a write key is enabled on the requested bucket, the parameter `write_key` will need to be present in the Body. You can also add an optional `folder` and `metadata` params.
+The only required post value is `media` which is the name of your media sent. You can also add an optional `folder` and `metadata` params.
 
 Parameter | Required | Type | Description
 --------- | ------- | ----------- | -----------
@@ -167,7 +167,7 @@ bucket.getMedia({
 ```
 
 
-You can add `folder` to get Media from a certain folder.  You can use the full Imgix suite of image processing tools on the `imgix_url` property value.  Check out the <a href="https://docs.imgix.com/" target="_blank">Imgix documentation</a> for more info.
+You can add `folder` to get Media from a certain folder.  You can use the full Imgix suite of image processing tools on the URL provided by the `imgix_url` property value.  Check out the <a href="https://docs.imgix.com/" target="_blank">Imgix documentation</a> for more info.
 
 Parameter | Required | Type | Description
 --------- | ------- | ----------- | -----------
@@ -220,7 +220,7 @@ bucket.deleteMedia({
 ```
 
 
-Required post values include media which is the name of your media sent. If a write key is enabled on the requested bucket, the variable `write_key` will need to be present in the Body. You can also add an optional folder param to add the Media to a specific folder.
+If a write key is enabled on the requested bucket, the variable `write_key` will need to be present in the Body.
 
 Parameter | Required | Type | Description
 --------- | ------- | ----------- | -----------

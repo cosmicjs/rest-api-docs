@@ -64,6 +64,38 @@ media_folders |  | Array | Populate your Bucket with Media Folders. See <a href=
 webhooks |  | Array | Populate your Bucket with <a href="https://cosmicjs.com/docs/webhooks" target="_blank">Webhooks</a>. See <a href="#webhooks">Webhooks</a> for model.
 extensions |  | Array | Populate your Bucket with <a href="https://cosmicjs.com/docs/extensions" target="_blank">Extensions</a>. See <a href="#extensions">Extensions</a> for model.
 
+## Connect to Bucket
+
+> Example Request
+
+```bash
+GET https://api.cosmicjs.com/:bucket_slug
+```
+
+```javascript
+// Use the Cosmic.bucket method to connect to different Buckets in your account.
+const Cosmic = require('cosmicjs')({
+  token: 'your-token-from-auth-request' // from Cosmic.authenticate
+})
+const bucket1 = Cosmic.bucket({
+  bucket: 'my-first-bucket',
+  read_key: '',
+  write_key: ''
+})
+const bucket2 = Cosmic.bucket({
+  bucket: 'my-other-bucket',
+  read_key: '',
+  write_key: ''
+})
+```
+
+For the NPM module:
+
+Parameter | Required | Type | Description
+--------- | ------- | ----------- | -----------
+bucket |  | String | The Bucket slug
+read_key |  | String | Restrict read access
+write_key |  | String | Restrict write access
 
 ## Get Bucket
 
@@ -123,7 +155,7 @@ bucket.getBucket().then(data => {
 ```
 
 
-Returns the entire Bucket.  If you would like to restrict read access to your Bucket, you can do so in Your Bucket > Basic Settings.
+Returns the entire Bucket including Object Types, Objects, Media and more.  If you would like to restrict read access to your Bucket, you can do so in Your Bucket > Basic Settings.
 
 Parameter | Required | Type | Description
 --------- | ------- | ----------- | -----------
