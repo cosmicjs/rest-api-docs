@@ -106,7 +106,7 @@ bucket.deleteExtension({
 ```
 
 
-If a write key is enabled on the requested bucket, the variable `write_key` will need to be present in the Body.
+If a write key is enabled on the requested bucket, the variable `write_key` will need to be present.
 
 Parameter | Required | Type | Description
 --------- | ------- | ----------- | -----------
