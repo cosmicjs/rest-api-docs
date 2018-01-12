@@ -50,8 +50,11 @@
         </blockquote> <pre class="highlight bash"><code><span class="hljs-comment"># API Endpoint</span>
 https://api.cosmicjs.com</code></pre><pre class="highlight javascript"><code><span class="hljs-comment">// Install the NPM package</span>
 npm install cosmicjs</code></pre>
-        <p>The Cosmic JS REST API helps you easily manage data and files for your applications. We support cross-origin resource sharing, allowing you to interact securely with our API from a client-side web application (though you should never expose your
-          private keys or credentials in any public website&#39;s client-side code). JSON is returned by all API responses, including errors.</p>
+        <p>The Cosmic JS REST API helps you easily manage data and files for websites and applications. We support cross-origin resource sharing, allowing you to interact securely with our API from a client-side web application (though you should never expose
+          your private keys or credentials in any public website&#39;s client-side code). JSON is returned by all API responses, including errors.</p>
+        <h2 id="getting-started">Getting Started</h2>
+        <p>Go to
+          <a href="https://cosmicjs.com/signup">https://cosmicjs.com/signup</a> to create an account and get familiar with the Cosmic JS Dashboard.</p>
         <h1 id="errors">Errors</h1>
         <p>The Cosmic JS API uses the following error codes:</p>
         <table>
@@ -123,8 +126,6 @@ Cosmic.authenticate({
 }</code></pre>
         <p>Send your <code>email</code> and <code>password</code> to receive your access token. Your access token will be used to add Buckets to your account as well as other account-related access.
           <b>You do not need to use the token to edit your Bucket. Your Bucket has its own read and write keys for restricted access</b>.</p>
-        <p>Go to
-          <a href="https://cosmicjs.com/signup">https://cosmicjs.com/signup</a> to create an account.</p>
         <table>
           <thead>
             <tr>
@@ -151,7 +152,6 @@ Cosmic.authenticate({
         </table>
         <h1 id="buckets">Buckets</h1>
         <h2 id="add-bucket">Add Bucket</h2>
-        <p><code>title</code> is the only required property. See the table below for the other optional properties. The Bucket request matches the <code>bucket.json</code> file located in Your Bucket Dashboard &gt; Import Export.</p>
         <blockquote>
           <p>Definition</p>
         </blockquote> <pre class="highlight bash"><code>POST https://api.cosmicjs.com/v1/buckets</code></pre><pre class="highlight javascript"><code>Cosmic.addBucket()</code></pre>
@@ -180,6 +180,8 @@ Cosmic.addBucket({
     <span class="hljs-attr">"title"</span>: <span class="hljs-string">"My New Bucket"</span>
   }
 }</code></pre>
+        <p><code>title</code> is the only required property. If no <code>slug</code> is present, the title will be
+          <a href="https://www.npmjs.com/package/url-slug" target="_blank">converted to a slug</a>. See the table below for the other optional properties. The Bucket request matches the <code>bucket.json</code> file located in Your Bucket Dashboard &gt; Import Export.</p>
         <table>
           <thead>
             <tr>
@@ -200,7 +202,8 @@ Cosmic.addBucket({
               <td>slug</td>
               <td></td>
               <td>String</td>
-              <td>URL-friendly unique identifier</td>
+              <td>
+                <a href="https://www.npmjs.com/package/url-slug" target="_blank">URL-friendly</a> unique identifier</td>
             </tr>
             <tr>
               <td>read_key</td>
