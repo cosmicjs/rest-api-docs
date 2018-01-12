@@ -78,12 +78,12 @@ const Cosmic = require('cosmicjs')({
   token: 'your-token-from-auth-request' // from Cosmic.authenticate
 })
 const bucket1 = Cosmic.bucket({
-  bucket: 'my-first-bucket',
+  slug: 'my-first-bucket',
   read_key: '',
   write_key: ''
 })
 const bucket2 = Cosmic.bucket({
-  bucket: 'my-other-bucket',
+  slug: 'my-other-bucket',
   read_key: '',
   write_key: ''
 })
@@ -120,7 +120,7 @@ const Cosmic = require('cosmicjs')({
   token: 'your-token-from-auth-request' // from Cosmic.authenticate
 })
 const bucket = Cosmic.bucket({
-  bucket: 'wedding-site',
+  slug: 'wedding-site',
   read_key: ''
 })
 bucket.getBucket().then(data => {

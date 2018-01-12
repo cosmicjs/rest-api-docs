@@ -61,7 +61,7 @@ const params = {
   }
 }
 const bucket = Cosmic.bucket({
-  bucket: 'bucket-slug',
+  slug: 'bucket-slug',
   write_key: ''
 })
 bucket.addObject(params).then(data => {
@@ -140,7 +140,7 @@ curl "https://api.cosmicjs.com/v1/wedding-site/objects?pretty=true&hide_metafiel
 
 ```javascript
 const bucket = Cosmic.bucket({
-  bucket: 'wedding-site',
+  slug: 'wedding-site',
   read_key: ''
 })
 bucket.getObjects({
@@ -225,7 +225,7 @@ curl "https://api.cosmicjs.com/v1/wedding-site/object-type/groomsmen?limit=3"
 ```
 ```javascript
 const bucket = Cosmic.bucket({
-  bucket: 'wedding-site',
+  slug: 'wedding-site',
   read_key: ''
 })
 bucket.getObjectsByType({
@@ -335,7 +335,7 @@ curl "https://api.cosmicjs.com/v1/wedding-site/object-type/groomsmen/search?meta
 
 ```javascript
 const bucket = Cosmic.bucket({
-  bucket: 'wedding-site',
+  slug: 'wedding-site',
   read_key: ''
 })
 bucket.searchObjectType({
@@ -434,7 +434,7 @@ bucket.editObject()
 
 ```javascript
 const bucket = Cosmic.bucket({
-  bucket: 'bucket-slug',
+  slug: 'bucket-slug',
   write_key: ''
 })
 bucket.editObject({
@@ -514,7 +514,7 @@ bucket.deleteObject()
 
 ```javascript
 const bucket = Cosmic.bucket({
-  bucket: 'bucket-slug',
+  slug: 'bucket-slug',
   write_key: ''
 })
 bucket.deleteObject({

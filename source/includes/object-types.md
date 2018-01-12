@@ -38,7 +38,7 @@ bucket.addObjectType()
 
 ```javascript
 const bucket = Cosmic.bucket({
-  bucket: 'bucket-slug',
+  slug: 'bucket-slug',
   write_key: ''
 })
 const params = {
@@ -126,7 +126,7 @@ curl "https://api.cosmicjs.com/v1/wedding-site/object-types"
 
 ```javascript
 const bucket = Cosmic.bucket({
-  bucket: 'wedding-site',
+  slug: 'wedding-site',
   read_key: ''
 })
 bucket.getObjectTypes().then(data => {
@@ -243,7 +243,7 @@ bucket.editObjectType()
 
 ```javascript
 const bucket = Cosmic.bucket({
-  bucket: 'bucket-slug',
+  slug: 'bucket-slug',
   write_key: ''
 })
 bucket.editObjectType({
@@ -325,7 +325,7 @@ bucket.deleteObjectType()
 
 ```javascript
 const bucket = Cosmic.bucket({
-  bucket: 'bucket-slug',
+  slug: 'bucket-slug',
   write_key: ''
 })
 bucket.deleteObjectType({

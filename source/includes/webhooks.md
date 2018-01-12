@@ -24,7 +24,7 @@ bucket.addWebhooks()
 
 ```javascript
 const bucket = Cosmic.bucket({
-  bucket: 'bucket-slug',
+  slug: 'bucket-slug',
   write_key: ''
 })
 bucket.addWebhook({
@@ -82,7 +82,7 @@ Cosmic.deleteWebhook()
 
 ```javascript
 const bucket = Cosmic.bucket({
-  bucket: 'bucket-slug',
+  slug: 'bucket-slug',
   write_key: ''
 })
 bucket.deleteWebhook({

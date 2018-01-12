@@ -23,7 +23,7 @@ bucket.addExtension()
 
 ```javascript
 const bucket = Cosmic.bucket({
-  bucket: 'bucket-slug',
+  slug: 'bucket-slug',
   write_key: ''
 })
 bucket.addExtension({
@@ -83,7 +83,7 @@ Cosmic.deleteExtension()
 
 ```javascript
 const bucket = Cosmic.bucket({
-  bucket: 'bucket-slug',
+  slug: 'bucket-slug',
   write_key: ''
 })
 bucket.deleteExtension({

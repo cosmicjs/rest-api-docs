@@ -308,7 +308,7 @@ const params = {
   ]
 }
 const bucket = Cosmic.bucket({
-  bucket: 'bucket-slug',
+  slug: 'bucket-slug',
   write_key: ''
 })
 bucket.addObject(params).then(data => {

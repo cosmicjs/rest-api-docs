@@ -27,7 +27,7 @@ bucket.addMedia()
 
 ```javascript
 const bucket = Cosmic.bucket({
-  bucket: 'bucket-slug',
+  slug: 'bucket-slug',
   write_key: ''
 })
 bucket.addMedia({
@@ -104,7 +104,7 @@ curl "https://api.cosmicjs.com/v1/wedding-site/media?pretty=true&folder=groomsme
 
 ```javascript
 const bucket = Cosmic.bucket({
-  bucket: 'wedding-site',
+  slug: 'wedding-site',
   write_key: ''
 })
 bucket.getMedia({
@@ -197,7 +197,7 @@ Cosmic.deleteMedia()
 
 ```javascript
 const bucket = Cosmic.bucket({
-  bucket: 'bucket-slug',
+  slug: 'bucket-slug',
   write_key: ''
 })
 bucket.deleteMedia({
