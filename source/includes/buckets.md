@@ -2,7 +2,6 @@
 
 
 ## Add Bucket
-`title` is the only required property.  See the table below for the other optional properties.  The Bucket request matches the `bucket.json` file located in Your Bucket Dashboard > Import Export.
 
 
 > Definition
@@ -50,10 +49,12 @@ Cosmic.addBucket({
 }
 ```
 
+`title` is the only required property.  If no `slug` is present, the title will be <a href="https://www.npmjs.com/package/url-slug" target="_blank">converted to a slug</a>.  See the table below for the other optional properties.  The Bucket request matches the `bucket.json` file located in Your Bucket Dashboard > Import Export.
+
 Parameter | Required | Type | Description
 --------- | ------- | ----------- | -----------
 title | required | String | Your Bucket title
-slug |  | String | URL-friendly unique identifier
+slug |  | String | <a href="https://www.npmjs.com/package/url-slug" target="_blank">URL-friendly</a> unique identifier
 read_key |  | String | Restrict read access
 write_key |  | String | Restrict write access
 cluster |  | String | Add this Bucket to a Cluster.  ID of existing Cluster
