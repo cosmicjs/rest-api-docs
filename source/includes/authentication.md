@@ -14,9 +14,9 @@ Cosmic.authenticate()
 
 ```bash
 # With shell, you can just pass your email and password
-curl -X POST https://api.cosmicjs.com/v1/authenticate \
--d email=you@youremail.com \
--d password=yourpassword
+curl -X POST "https://api.cosmicjs.com/v1/authenticate" \
+-d "email=you@youremail.com" \
+-d "password=yourpassword"
 ```
 
 ```javascript
@@ -37,7 +37,7 @@ Cosmic.authenticate({
 {
   "success": true,
   "message": "Token created successfully.",
-  "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXV.eyJlbWFpbCI6InNwaXJvbnlAZ21haWwuY29tIiwicGFzc3dvcmQiOiIxNzlhZDQ1YzZjZTJjYjk3Y2YxMDI5ZTIxMjA0NmU4MSIsImlhdCI6MTUxNDQ5NzI3N30.ep4cEgH_SqItQ5McJArJtljS3GSJedyEcDRlnu9yb-U"
+  "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXV.eyJlbWFpbCI6InNwaXJvbnl..."
 }
 ```
 

@@ -17,8 +17,8 @@ Cosmic.addBucket()
 > Example Request
 
 ```bash
-curl -X POST https://api.cosmicjs.com/v1/buckets \
--H "Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXV.eyJlbWFpbCI6InNwaXJvbnlAZ21haWwuY29tIiwicGFzc3dvcmQiOiIxNzlhZDQ1YzZjZTJjYjk3Y2YxMDI5ZTIxMjA0NmU4MSIsImlhdCI6MTUxNDQ5NzI3N30.ep4cEgH_SqItQ5McJArJtljS3GSJedyEcDRlnu9yb-U" \
+curl -X POST "https://api.cosmicjs.com/v1/buckets" \
+-H "Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXV..." \
 -H "Content-Type: application/json" \
 -d '{"title": "My New Bucket"}'
 ```
@@ -70,7 +70,7 @@ extensions |  | Array | Populate your Bucket with <a href="https://cosmicjs.com/
 > Example Request
 
 ```bash
-GET https://api.cosmicjs.com/:bucket_slug
+curl "https://api.cosmicjs.com/v1/wedding-site"
 ```
 
 ```javascript
@@ -103,7 +103,7 @@ write_key |  | String | Restrict write access
 > Definition
 
 ```bash
-GET https://api.cosmicjs.com/:bucket_slug
+GET https://api.cosmicjs.com/v1/:bucket_slug
 ```
 
 ```javascript
