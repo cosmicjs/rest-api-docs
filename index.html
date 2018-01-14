@@ -276,7 +276,7 @@ Cosmic.addBucket({
 <span class="hljs-keyword">const</span> Cosmic = <span class="hljs-built_in">require</span>(<span class="hljs-string">'cosmicjs'</span>)({
   <span class="hljs-attr">token</span>: <span class="hljs-string">'your-token-from-auth-request'</span> <span class="hljs-comment">// optional</span>
 })
-<span class="hljs-keyword">const</span> bucket1 = Cosmic.bucket({
+<span class="hljs-keyword">const</span> bucket = Cosmic.bucket({
   <span class="hljs-attr">slug</span>: <span class="hljs-string">'my-first-bucket'</span>,
   <span class="hljs-attr">read_key</span>: <span class="hljs-string">''</span>,
   <span class="hljs-attr">write_key</span>: <span class="hljs-string">''</span>
@@ -298,8 +298,8 @@ Cosmic.addBucket({
           </thead>
           <tbody>
             <tr>
-              <td>bucket</td>
-              <td></td>
+              <td>slug</td>
+              <td>required</td>
               <td>String</td>
               <td>The Bucket slug</td>
             </tr>
