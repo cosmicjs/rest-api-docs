@@ -78,7 +78,7 @@ curl "https://api.cosmicjs.com/v1/wedding-site"
 const Cosmic = require('cosmicjs')({
   token: 'your-token-from-auth-request' // optional
 })
-const bucket1 = Cosmic.bucket({
+const bucket = Cosmic.bucket({
   slug: 'my-first-bucket',
   read_key: '',
   write_key: ''
@@ -94,7 +94,7 @@ For the NPM module:
 
 Parameter | Required | Type | Description
 --------- | ------- | ----------- | -----------
-bucket |  | String | The Bucket slug
+slug | required | String | The Bucket slug
 read_key |  | String | Restrict read access
 write_key |  | String | Restrict write access
 
