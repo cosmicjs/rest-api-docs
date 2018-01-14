@@ -201,7 +201,7 @@ skip | | Number | The number of Objects to skip
 status | | Enum | all, Return published and draft status Objects
 revision | | String | The revision_id of the Object Revision
 hide_metafields | | Enum | true, Hides metafields
-sort | | Enum | created_at,-created_at,modified_at,-modified_at,random
+sort | | Enum | created_at, -created_at,<br />modified_at, -modified_at,<br />random
 locale | | String | Filter by locale
 pretty | | Enum | true, Makes the response more reader-friendly
 read_key | | String | Your Bucket read key
@@ -310,7 +310,7 @@ skip | | Number | The number of Objects to skip
 status | | Enum | all, Return published and draft status Objects
 revision | | String | The revision_id of the Object Revision
 hide_metafields | | Enum | true, Hides metafields
-sort | | Enum | created_at,-created_at,modified_at,-modified_at,random
+sort | | Enum | created_at, -created_at,<br />modified_at, -modified_at,<br />random
 locale | | String | Filter by locale
 pretty | | Enum | true, Makes the response more reader-friendly
 read_key | | String | Your Bucket read key
@@ -387,7 +387,7 @@ limit | | Number | The number of Objects to return
 skip | | Number | The number of Objects to skip
 status | | Enum | all, Return published and draft status Objects
 hide_metafields | | Enum | true, Hides metafields
-sort | | Enum | created_at,-created_at,modified_at,<br />-modified_at,random
+sort | | Enum | created_at, -created_at,<br />modified_at, -modified_at,<br />random
 metafield_key | | String | Metafield key to search for
 metafield_value | | String | Exact Metafield value to match
 metafield_value_has | | String | Metafield value contains this string
