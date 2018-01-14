@@ -324,5 +324,5 @@ You can connect Objects to create "one to many" and "many to many" relationships
 For a Single Object Metafield, add the Object ID (`_id`) as the value to connect the Object.  The full Object will be returned on the Metadata response in the `object` property.
 
 ### Multiple Objects
-For Multiple Object type Metafields, you can add the Object IDs as comma-separated values which will return the full Objects as an Array on the response.  The full Objects will be returned on the Metadata response in the `objects` property.
+For Multiple Object type Metafields, you can add the Object IDs as comma-separated values.  The full Objects will be returned on the Metadata response in the `objects` property.
 
