@@ -5,8 +5,6 @@
   📖 <a href="https://cosmicjs.github.io/rest-api-docs/">View REST API Docs</a>
 </p>
 
-## About
-
 This is the repo for the Cosmic JS REST API documentation.  Sign up to begin testing requests: https://cosmicjs.com/signup
 
 ## REST API Features Include:
