@@ -291,7 +291,7 @@ bucket.editObjectType({
 }
 ```
 
-Edit an exiting Object Type in your Bucket.
+Edit an existing Object Type in your Bucket.
 
 Parameter | Required | Type | Description
 --------- | ------- | ----------- | -----------
@@ -346,7 +346,7 @@ bucket.deleteObjectType({
 }
 ```
 
-Delete an exiting Object Type from your Bucket.  * This does not delete Objects in this Object Type.
+Delete an existing Object Type from your Bucket.  * This does not delete Objects in this Object Type.
 
 Parameter | Required | Type | Description
 --------- | ------- | ----------- | -----------
