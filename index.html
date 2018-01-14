@@ -1011,7 +1011,9 @@ bucket.getObjects({
               <td>sort</td>
               <td></td>
               <td>Enum</td>
-              <td>created_at,-created_at,modified_at,-modified_at,random</td>
+              <td>created_at, -created_at,
+                <br />modified_at, -modified_at,
+                <br />random</td>
             </tr>
             <tr>
               <td>locale</td>
@@ -1155,7 +1157,9 @@ bucket.getObjectsByType({
               <td>sort</td>
               <td></td>
               <td>Enum</td>
-              <td>created_at,-created_at,modified_at,-modified_at,random</td>
+              <td>created_at, -created_at,
+                <br />modified_at, -modified_at,
+                <br />random</td>
             </tr>
             <tr>
               <td>locale</td>
@@ -1261,8 +1265,9 @@ bucket.searchObjectType({
               <td>sort</td>
               <td></td>
               <td>Enum</td>
-              <td>created_at,-created_at,modified_at,
-                <br />-modified_at,random</td>
+              <td>created_at, -created_at,
+                <br />modified_at, -modified_at,
+                <br />random</td>
             </tr>
             <tr>
               <td>metafield_key</td>
@@ -1875,7 +1880,7 @@ bucket.addObject(params).then(<span class="hljs-function"><span class="hljs-para
         <h3 id="single-objects">Single Objects</h3>
         <p>For a Single Object Metafield, add the Object ID (<code>_id</code>) as the value to connect the Object. The full Object will be returned on the Metadata response in the <code>object</code> property.</p>
         <h3 id="multiple-objects">Multiple Objects</h3>
-        <p>For Multiple Object type Metafields, you can add the Object IDs as comma-separated values which will return the full Objects as an Array on the response. The full Objects will be returned on the Metadata response in the <code>objects</code> property.</p>
+        <p>For Multiple Object type Metafields, you can add the Object IDs as comma-separated values. The full Objects will be returned on the Metadata response in the <code>objects</code> property.</p>
         <h1 id="media">Media</h1>
         <h2 id="add-media">Add Media</h2>
         <blockquote>
