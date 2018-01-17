@@ -160,8 +160,8 @@ Metafields are powerful components that can be added to Objects and Object Types
 Parameter | Required | Type | Description
 --------- | ------- | ----------- | -----------
 type | required | Enum | text, textarea, html-textarea, <br />select-dropdown, object, objects, <br />file, date, radio-buttons, check-boxes, <br />repeater, parent, markdown
-title | required | String | Your Bucket title
-key | required | String | Unique identifier for your Bucket
+title | required | String | Your Metafield title
+key | required | String | Unique identifier for your Metafield
 value | | String | Metafield value
 required | | Bool | A value is required
 regex | | String | Restrict the value to match a regular expresssion
@@ -326,3 +326,10 @@ For a Single Object Metafield, add the Object ID (`_id`) as the value to connect
 ### Multiple Objects
 For Multiple Object type Metafields, you can add the Object IDs as comma-separated values.  The full Objects will be returned on the Metadata response in the `objects` property.
 
+Parameter | Required | Type | Description
+--------- | ------- | ----------- | -----------
+type | required | Enum | object, objects
+title | required | String | Your Metafield title
+key | required | String | Unique identifier for your Bucket
+object_type | required | String | Object Type slug
+value | | String | For single Object this is the `_id` property.  For multiple Objects it is comma-separated `_id`s.

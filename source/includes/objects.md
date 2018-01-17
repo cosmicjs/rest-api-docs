@@ -305,6 +305,7 @@ Get Objects from an Object Type.
 
 Parameter | Required | Type | Description
 --------- | ------- | ----------- | -----------
+type_slug | | String | The Object Type slug
 limit | | Number | The number of Objects to return
 skip | | Number | The number of Objects to skip
 status | | Enum | all, Return published and draft status Objects
@@ -383,6 +384,7 @@ Search Objects in an Object Type.
 
 Parameter | Required | Type | Description
 --------- | ------- | ----------- | -----------
+type_slug | | String | The Object Type slug
 limit | | Number | The number of Objects to return
 skip | | Number | The number of Objects to skip
 status | | Enum | all, Return published and draft status Objects
@@ -481,9 +483,9 @@ Edit an existing Object in your Bucket.
 
 Parameter | Required | Type | Description
 --------- | ------- | ----------- | -----------
-type_slug | required | String | Add Object to Object Type
-title | required | String | Your Bucket title
-slug | | String | Unique identifier for your Object
+slug | required | String | Unique identifier for your Object
+type_slug | | String | Object Type
+title | | String | Your Bucket title
 content | | String | Add Content to your Object
 options.slug_field | | Bool | Set to false to hide the slug field
 options.content_editor | | Bool | Set to false to hide the content editor
@@ -540,4 +542,5 @@ Delete an existing Object in your Bucket.
 
 Parameter | Required | Type | Description
 --------- | ------- | ----------- | -----------
+slug | required | String | Unique identifier for your Object
 write_key | | String | Your Bucket write key
