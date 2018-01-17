@@ -53,7 +53,7 @@ bucket.addExtension({
 ```
 
 
-Adds an Extension to your Bucket.  Required post values include zip which is the name of your file sent.   Read more about Extensions on the <a href="https://cosmicjs.com/docs/extensions" target="_blank">Extensions documentation page</a>.
+Adds an Extension to your Bucket.  The only required post value is `zip` which is the name of your file sent.   Read more about Extensions on the <a href="https://cosmicjs.com/docs/extensions" target="_blank">Extensions documentation page</a>.
 
 Parameter | Required | Type | Description
 --------- | ------- | ----------- | -----------
@@ -106,7 +106,7 @@ bucket.deleteExtension({
 ```
 
 
-If a write key is enabled on the requested bucket, the variable `write_key` will need to be present.
+If a write key is enabled on the requested bucket, the parameter `write_key` will need to be present.
 
 Parameter | Required | Type | Description
 --------- | ------- | ----------- | -----------

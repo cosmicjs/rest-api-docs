@@ -1,6 +1,6 @@
 # Metafields
 
-Metafields are powerful components that can be added to Objects and Object Types.  Metafields added to Object Types, will be default for all new Objects in the type.
+Metafields are powerful components that can be added to Objects and Object Types.  Metafields added to Object Types will be default for all new Objects in the type.
 
 ## Model
 
@@ -172,7 +172,7 @@ children | | Array | Add nested Metafields
 
 ## Validation
 
-You can use optional validation parameters to make sure editors on the Web Dashboard enter the correct values.
+You can use optional validation parameters to make sure editors using the Web Dashboard enter the correct values.
 
 > Example Metafields with Validations
 
@@ -318,10 +318,10 @@ bucket.addObject(params).then(data => {
 })
 ```
 
-You can connect Objects to create "one to many" and "many to many" relationships using Single and Mulpile Object Metafields.  
+You can connect Objects to create "one to many" and "many to many" relationships between Objects using Single and Multiple Object Metafields.  
 
 ### Single Objects
-For a Single Object Metafield, add the Object ID (`_id`) as the value to connect the Object.  The full Object will be returned on the Metadata response in the `object` property.
+For a Single Object Metafield, add the Object ID (`_id`) to the value to connect the Object.  The full Object will be returned on the Metadata response in the `object` property.
 
 ### Multiple Objects
 For Multiple Object type Metafields, you can add the Object IDs as comma-separated values.  The full Objects will be returned on the Metadata response in the `objects` property.

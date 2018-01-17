@@ -104,7 +104,7 @@ bucket.deleteWebhook({
 }
 ```
 
-If a write key is enabled on the requested bucket, the variable `write_key` will need to be present.
+If a write key is enabled on the requested bucket, the parameter `write_key` will need to be present.
 
 Parameter | Required | Type | Description
 --------- | ------- | ----------- | -----------

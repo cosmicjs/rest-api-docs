@@ -115,7 +115,7 @@ slug | | String | Unique identifier for your Object
 content | | String | Add Content to your Object
 options.slug_field | | Bool | Set to false to hide the slug field
 options.content_editor | | Bool | Set to false to hide the content editor
-metafields | | Array | Add Metafields to your Object
+metafields | | Array | Add Metafields to your Object. See <a href="#model">Metafields Model</a>.
 locale | | String | Add localization to the Object
 write_key | | String | Your Bucket write key
 
@@ -489,7 +489,7 @@ title | | String | Your Bucket title
 content | | String | Add Content to your Object
 options.slug_field | | Bool | Set to false to hide the slug field
 options.content_editor | | Bool | Set to false to hide the content editor
-metafields | | Array | Add Metafields to your Object
+metafields | | Array | Add Metafields to your Object. See <a href="#model">Metafields Model</a>.
 locale | | String | Edit Object locale
 write_key | | String | Your Bucket write key
 

@@ -167,7 +167,10 @@ bucket.getMedia({
 ```
 
 
-You can add `folder` to get Media from a certain folder.  You can use the full Imgix suite of image processing tools on the URL provided by the `imgix_url` property value.  Check out the <a href="https://docs.imgix.com/" target="_blank">Imgix documentation</a> for more info.
+You can add the `folder` parameter to get Media from a certain folder.
+
+### Imgix
+<a href="https://imgix.com/" target="_blank">Imgix</a> is included with every account.  You can use the Imgix suite of image processing tools on the URL provided by the `imgix_url` property value.  Check out the <a href="https://docs.imgix.com/" target="_blank">Imgix documentation</a> for more info.
 
 Parameter | Required | Type | Description
 --------- | ------- | ----------- | -----------
@@ -220,7 +223,7 @@ bucket.deleteMedia({
 ```
 
 
-If a write key is enabled on the requested bucket, the variable `write_key` will need to be present.
+If a write key is enabled on the requested bucket, the parameter `write_key` will need to be present.
 
 Parameter | Required | Type | Description
 --------- | ------- | ----------- | -----------
