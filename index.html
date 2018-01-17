@@ -1124,6 +1124,12 @@ bucket.getObjectsByType({
           </thead>
           <tbody>
             <tr>
+              <td>type_slug</td>
+              <td></td>
+              <td>String</td>
+              <td>The Object Type slug</td>
+            </tr>
+            <tr>
               <td>limit</td>
               <td></td>
               <td>Number</td>
@@ -1237,6 +1243,12 @@ bucket.searchObjectType({
             </tr>
           </thead>
           <tbody>
+            <tr>
+              <td>type_slug</td>
+              <td></td>
+              <td>String</td>
+              <td>The Object Type slug</td>
+            </tr>
             <tr>
               <td>limit</td>
               <td></td>
@@ -1388,22 +1400,22 @@ bucket.editObject({
           </thead>
           <tbody>
             <tr>
-              <td>type_slug</td>
+              <td>slug</td>
               <td>required</td>
               <td>String</td>
-              <td>Add Object to Object Type</td>
+              <td>Unique identifier for your Object</td>
+            </tr>
+            <tr>
+              <td>type_slug</td>
+              <td></td>
+              <td>String</td>
+              <td>Object Type</td>
             </tr>
             <tr>
               <td>title</td>
-              <td>required</td>
-              <td>String</td>
-              <td>Your Bucket title</td>
-            </tr>
-            <tr>
-              <td>slug</td>
               <td></td>
               <td>String</td>
-              <td>Unique identifier for your Object</td>
+              <td>Your Bucket title</td>
             </tr>
             <tr>
               <td>content</td>
@@ -1479,6 +1491,12 @@ bucket.deleteObject({
             </tr>
           </thead>
           <tbody>
+            <tr>
+              <td>slug</td>
+              <td>required</td>
+              <td>String</td>
+              <td>Unique identifier for your Object</td>
+            </tr>
             <tr>
               <td>write_key</td>
               <td></td>
@@ -1663,13 +1681,13 @@ bucket.deleteObject({
               <td>title</td>
               <td>required</td>
               <td>String</td>
-              <td>Your Bucket title</td>
+              <td>Your Metafield title</td>
             </tr>
             <tr>
               <td>key</td>
               <td>required</td>
               <td>String</td>
-              <td>Unique identifier for your Bucket</td>
+              <td>Unique identifier for your Metafield</td>
             </tr>
             <tr>
               <td>value</td>
@@ -1881,6 +1899,48 @@ bucket.addObject(params).then(<span class="hljs-function"><span class="hljs-para
         <p>For a Single Object Metafield, add the Object ID (<code>_id</code>) as the value to connect the Object. The full Object will be returned on the Metadata response in the <code>object</code> property.</p>
         <h3 id="multiple-objects">Multiple Objects</h3>
         <p>For Multiple Object type Metafields, you can add the Object IDs as comma-separated values. The full Objects will be returned on the Metadata response in the <code>objects</code> property.</p>
+        <table>
+          <thead>
+            <tr>
+              <th>Parameter</th>
+              <th>Required</th>
+              <th>Type</th>
+              <th>Description</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>type</td>
+              <td>required</td>
+              <td>Enum</td>
+              <td>object, objects</td>
+            </tr>
+            <tr>
+              <td>title</td>
+              <td>required</td>
+              <td>String</td>
+              <td>Your Metafield title</td>
+            </tr>
+            <tr>
+              <td>key</td>
+              <td>required</td>
+              <td>String</td>
+              <td>Unique identifier for your Bucket</td>
+            </tr>
+            <tr>
+              <td>object_type</td>
+              <td>required</td>
+              <td>String</td>
+              <td>Object Type slug</td>
+            </tr>
+            <tr>
+              <td>value</td>
+              <td></td>
+              <td>String</td>
+              <td>For single Object this is the <code>_id</code> property. For multiple Objects it is comma-separated <code>_id</code>s.</td>
+            </tr>
+          </tbody>
+        </table>
         <h1 id="media">Media</h1>
         <h2 id="add-media">Add Media</h2>
         <blockquote>
