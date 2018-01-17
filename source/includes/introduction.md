@@ -17,3 +17,6 @@ The Cosmic JS REST API helps you easily manage data and files for websites and a
 ## Getting Started
 
 Go to https://cosmicjs.com/signup to create an account and get familiar with the Cosmic JS Dashboard.
+
+### Terms
+These docs assume you understand the core concepts of Cosmic JS including Buckets, Object Types and Objects.  For a brief overview of these terms, see the <a href="https://cosmicjs.com/getting-started" target="_blank">Getting Started guide</a>.
