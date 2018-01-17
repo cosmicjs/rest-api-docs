@@ -125,7 +125,7 @@ Cosmic.authenticate({
   <span class="hljs-attr">"token"</span>: <span class="hljs-string">"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXV.eyJlbWFpbCI6InNwaXJvbnl..."</span>
 }</code></pre>
         <p>Send your <code>email</code> and <code>password</code> to receive your access token. Your access token will be used to add Buckets to your account as well as other account-related access.
-          <b>You do not need to use the token to edit your Bucket. Your Bucket has its own read and write keys for restricted access</b>.</p>
+          <b>You do not need to use the token to access your Bucket. Your Bucket has its own read and write keys for restricted access</b>.</p>
         <table>
           <thead>
             <tr>
@@ -897,7 +897,8 @@ bucket.addObject(params).then(<span class="hljs-function"><span class="hljs-para
               <td>metafields</td>
               <td></td>
               <td>Array</td>
-              <td>Add Metafields to your Object</td>
+              <td>Add Metafields to your Object. See
+                <a href="#model">Metafields Model</a>.</td>
             </tr>
             <tr>
               <td>locale</td>
@@ -1439,7 +1440,8 @@ bucket.editObject({
               <td>metafields</td>
               <td></td>
               <td>Array</td>
-              <td>Add Metafields to your Object</td>
+              <td>Add Metafields to your Object. See
+                <a href="#model">Metafields Model</a>.</td>
             </tr>
             <tr>
               <td>locale</td>
@@ -1506,7 +1508,7 @@ bucket.deleteObject({
           </tbody>
         </table>
         <h1 id="metafields">Metafields</h1>
-        <p>Metafields are powerful components that can be added to Objects and Object Types. Metafields added to Object Types, will be default for all new Objects in the type.</p>
+        <p>Metafields are powerful components that can be added to Objects and Object Types. Metafields added to Object Types will be default for all new Objects in the type.</p>
         <h2 id="model">Model</h2>
         <blockquote>
           <p>Example Metafields</p>
@@ -1734,7 +1736,7 @@ bucket.deleteObject({
           </tbody>
         </table>
         <h2 id="validation">Validation</h2>
-        <p>You can use optional validation parameters to make sure editors on the Web Dashboard enter the correct values.</p>
+        <p>You can use optional validation parameters to make sure editors using the Web Dashboard enter the correct values.</p>
         <blockquote>
           <p>Example Metafields with Validations</p>
         </blockquote> <pre class="highlight json"><code>{
@@ -1894,9 +1896,9 @@ bucket.addObject(params).then(<span class="hljs-function"><span class="hljs-para
 }).catch(<span class="hljs-function"><span class="hljs-params">err</span> =&gt;</span> {
   <span class="hljs-built_in">console</span>.log(err)
 })</code></pre>
-        <p>You can connect Objects to create &quot;one to many&quot; and &quot;many to many&quot; relationships using Single and Mulpile Object Metafields. </p>
+        <p>You can connect Objects to create &quot;one to many&quot; and &quot;many to many&quot; relationships between Objects using Single and Multiple Object Metafields. </p>
         <h3 id="single-objects">Single Objects</h3>
-        <p>For a Single Object Metafield, add the Object ID (<code>_id</code>) as the value to connect the Object. The full Object will be returned on the Metadata response in the <code>object</code> property.</p>
+        <p>For a Single Object Metafield, add the Object ID (<code>_id</code>) to the value to connect the Object. The full Object will be returned on the Metadata response in the <code>object</code> property.</p>
         <h3 id="multiple-objects">Multiple Objects</h3>
         <p>For Multiple Object type Metafields, you can add the Object IDs as comma-separated values. The full Objects will be returned on the Metadata response in the <code>objects</code> property.</p>
         <table>
@@ -2096,7 +2098,10 @@ bucket.getMedia({
     }
   ]
 }</code></pre>
-        <p>You can add <code>folder</code> to get Media from a certain folder. You can use the full Imgix suite of image processing tools on the URL provided by the <code>imgix_url</code> property value. Check out the
+        <p>You can add the <code>folder</code> parameter to get Media from a certain folder.</p>
+        <h3 id="imgix">Imgix</h3>
+        <p>
+          <a href="https://imgix.com/" target="_blank">Imgix</a> is included with every account. You can use the Imgix suite of image processing tools on the URL provided by the <code>imgix_url</code> property value. Check out the
           <a href="https://docs.imgix.com/" target="_blank">Imgix documentation</a> for more info.</p>
         <table>
           <thead>
@@ -2153,7 +2158,7 @@ bucket.deleteMedia({
   <span class="hljs-attr">"status"</span>: <span class="hljs-string">"200"</span>,
   <span class="hljs-attr">"message"</span>: <span class="hljs-string">"Object Type deleted."</span>
 }</code></pre>
-        <p>If a write key is enabled on the requested bucket, the variable <code>write_key</code> will need to be present.</p>
+        <p>If a write key is enabled on the requested bucket, the parameter <code>write_key</code> will need to be present.</p>
         <table>
           <thead>
             <tr>
@@ -2268,7 +2273,7 @@ bucket.deleteWebhook({
   <span class="hljs-attr">"status"</span>: <span class="hljs-string">"200"</span>,
   <span class="hljs-attr">"message"</span>: <span class="hljs-string">"Webhook deleted."</span>
 }</code></pre>
-        <p>If a write key is enabled on the requested bucket, the variable <code>write_key</code> will need to be present.</p>
+        <p>If a write key is enabled on the requested bucket, the parameter <code>write_key</code> will need to be present.</p>
         <table>
           <thead>
             <tr>
@@ -2321,7 +2326,7 @@ bucket.addExtension({
     <span class="hljs-attr">"font_awesome_class"</span>: <span class="hljs-string">"fa-shopping-basket"</span>
   }
 }</code></pre>
-        <p>Adds an Extension to your Bucket. Required post values include zip which is the name of your file sent. Read more about Extensions on the
+        <p>Adds an Extension to your Bucket. The only required post value is <code>zip</code> which is the name of your file sent. Read more about Extensions on the
           <a href="https://cosmicjs.com/docs/extensions" target="_blank">Extensions documentation page</a>.</p>
         <table>
           <thead>
@@ -2372,7 +2377,7 @@ bucket.deleteExtension({
   <span class="hljs-attr">"status"</span>: <span class="hljs-string">"200"</span>,
   <span class="hljs-attr">"message"</span>: <span class="hljs-string">"Extension deleted."</span>
 }</code></pre>
-        <p>If a write key is enabled on the requested bucket, the variable <code>write_key</code> will need to be present.</p>
+        <p>If a write key is enabled on the requested bucket, the parameter <code>write_key</code> will need to be present.</p>
         <table>
           <thead>
             <tr>
