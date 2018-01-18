@@ -199,7 +199,6 @@ Parameter | Required | Type | Description
 limit | | Number | The number of Objects to return
 skip | | Number | The number of Objects to skip
 status | | Enum | all, Return published and draft status Objects
-revision | | String | The revision_id of the Object Revision
 hide_metafields | | Enum | true, Hides metafields
 sort | | Enum | created_at, -created_at,<br />modified_at, -modified_at,<br />random
 locale | | String | Filter by locale
