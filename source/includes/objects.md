@@ -206,6 +206,72 @@ locale | | String | Filter by locale
 pretty | | Enum | true, Makes the response more reader-friendly
 read_key | | String | Your Bucket read key
 
+
+## Get Object
+
+> Definition
+
+```bash
+GET https://api.cosmicjs.com/:bucket_slug/object/:slug
+```
+
+```javascript
+bucket.getObject()
+```
+
+> Example Request
+
+```bash
+curl "https://api.cosmicjs.com/v1/wedding-site/object/registry"
+```
+
+```javascript
+const bucket = Cosmic.bucket({
+  slug: 'wedding-site',
+  read_key: ''
+})
+bucket.getObject({
+  slug: 'registry'
+}).then(data => {
+  console.log(data)
+}).catch(err => {
+  console.log(err)
+})
+```
+
+> Example Response
+
+```json
+{
+  "object": {
+    "_id": "55b3da7740d7a3791b000011",
+    "bucket": "55b3d557df0fb1df7600004b",
+    "slug": "registry",
+    "title": "Registry",
+    "content": "<p>Carol and Jack are registered at Pottery Barn, Macy's and Crate and Barrel.</p>",
+    "type_slug": "sections",
+    "created": "2015-07-25T18:50:31.851Z",
+    "metadata": {
+      "pottery-barn": "http://www.potterybarn.com",
+      "macys": "http://www.macys.com",
+      "crate-and-barrel": "http://www.crateandbarrel.com/"
+    }
+  }
+}
+```
+
+Returns a single Object from your Bucket.
+
+
+Parameter | Required | Type | Description
+--------- | ------- | ----------- | -----------
+status | | Enum | all, Return published and draft status Objects
+revision | | String | The revision_id of the Object Revision
+hide_metafields | | Enum | true, Hides metafields
+locale | | String | Filter by locale
+pretty | | Enum | true, Makes the response more reader-friendly
+read_key | | String | Your Bucket read key
+
 ## Get Objects by Type
 
 > Definition
