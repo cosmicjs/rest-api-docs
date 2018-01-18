@@ -264,6 +264,7 @@ Returns a single Object from your Bucket.
 
 Parameter | Required | Type | Description
 --------- | ------- | ----------- | -----------
+slug | required | String | Unique identifier for your Object
 status | | Enum | all, Return published and draft status Objects
 revision | | String | The revision_id of the Object Revision
 hide_metafields | | Enum | true, Hides metafields
