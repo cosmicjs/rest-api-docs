@@ -113,6 +113,7 @@ type_slug | required | String | Add Object to Object Type
 title | required | String | Your Object title
 slug | | String | Unique identifier for your Object
 content | | String | Add Content to your Object
+status | | Enum | draft, published, defaults to published
 options.slug_field | | Bool | Set to false to hide the slug field
 options.content_editor | | Bool | Set to false to hide the content editor
 metafields | | Array | Add Metafields to your Object. See <a href="#model">Metafields Model</a>.
