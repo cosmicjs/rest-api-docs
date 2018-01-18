@@ -1039,6 +1039,90 @@ bucket.getObjects({
             </tr>
           </tbody>
         </table>
+        <h2 id="get-object">Get Object</h2>
+        <blockquote>
+          <p>Definition</p>
+        </blockquote> <pre class="highlight bash"><code>GET https://api.cosmicjs.com/:bucket_slug/object/:slug</code></pre><pre class="highlight javascript"><code>bucket.getObject()</code></pre>
+        <blockquote>
+          <p>Example Request</p>
+        </blockquote> <pre class="highlight bash"><code>curl <span class="hljs-string">"https://api.cosmicjs.com/v1/wedding-site/object/registry"</span></code></pre><pre class="highlight javascript"><code><span class="hljs-keyword">const</span> bucket = Cosmic.bucket({
+  <span class="hljs-attr">slug</span>: <span class="hljs-string">'wedding-site'</span>,
+  <span class="hljs-attr">read_key</span>: <span class="hljs-string">''</span>
+})
+bucket.getObject({
+  <span class="hljs-attr">slug</span>: <span class="hljs-string">'registry'</span>
+}).then(<span class="hljs-function"><span class="hljs-params">data</span> =&gt;</span> {
+  <span class="hljs-built_in">console</span>.log(data)
+}).catch(<span class="hljs-function"><span class="hljs-params">err</span> =&gt;</span> {
+  <span class="hljs-built_in">console</span>.log(err)
+})</code></pre>
+        <blockquote>
+          <p>Example Response</p>
+        </blockquote> <pre class="highlight json"><code>{
+  <span class="hljs-attr">"object"</span>: {
+    <span class="hljs-attr">"_id"</span>: <span class="hljs-string">"55b3da7740d7a3791b000011"</span>,
+    <span class="hljs-attr">"bucket"</span>: <span class="hljs-string">"55b3d557df0fb1df7600004b"</span>,
+    <span class="hljs-attr">"slug"</span>: <span class="hljs-string">"registry"</span>,
+    <span class="hljs-attr">"title"</span>: <span class="hljs-string">"Registry"</span>,
+    <span class="hljs-attr">"content"</span>: <span class="hljs-string">"&lt;p&gt;Carol and Jack are registered at Pottery Barn, Macy's and Crate and Barrel.&lt;/p&gt;"</span>,
+    <span class="hljs-attr">"type_slug"</span>: <span class="hljs-string">"sections"</span>,
+    <span class="hljs-attr">"created"</span>: <span class="hljs-string">"2015-07-25T18:50:31.851Z"</span>,
+    <span class="hljs-attr">"metadata"</span>: {
+      <span class="hljs-attr">"pottery-barn"</span>: <span class="hljs-string">"http://www.potterybarn.com"</span>,
+      <span class="hljs-attr">"macys"</span>: <span class="hljs-string">"http://www.macys.com"</span>,
+      <span class="hljs-attr">"crate-and-barrel"</span>: <span class="hljs-string">"http://www.crateandbarrel.com/"</span>
+    }
+  }
+}</code></pre>
+        <p>Returns a single Object from your Bucket.</p>
+        <table>
+          <thead>
+            <tr>
+              <th>Parameter</th>
+              <th>Required</th>
+              <th>Type</th>
+              <th>Description</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>status</td>
+              <td></td>
+              <td>Enum</td>
+              <td>all, Return published and draft status Objects</td>
+            </tr>
+            <tr>
+              <td>revision</td>
+              <td></td>
+              <td>String</td>
+              <td>The revision_id of the Object Revision</td>
+            </tr>
+            <tr>
+              <td>hide_metafields</td>
+              <td></td>
+              <td>Enum</td>
+              <td>true, Hides metafields</td>
+            </tr>
+            <tr>
+              <td>locale</td>
+              <td></td>
+              <td>String</td>
+              <td>Filter by locale</td>
+            </tr>
+            <tr>
+              <td>pretty</td>
+              <td></td>
+              <td>Enum</td>
+              <td>true, Makes the response more reader-friendly</td>
+            </tr>
+            <tr>
+              <td>read_key</td>
+              <td></td>
+              <td>String</td>
+              <td>Your Bucket read key</td>
+            </tr>
+          </tbody>
+        </table>
         <h2 id="get-objects-by-type">Get Objects by Type</h2>
         <blockquote>
           <p>Definition</p>
