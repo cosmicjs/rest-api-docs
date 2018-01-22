@@ -372,7 +372,7 @@ Get Objects from an Object Type.
 
 Parameter | Required | Type | Description
 --------- | ------- | ----------- | -----------
-type_slug | | String | The Object Type slug
+type_slug | required | String | The Object Type slug
 limit | | Number | The number of Objects to return
 skip | | Number | The number of Objects to skip
 status | | Enum | all, Return published and draft status Objects
