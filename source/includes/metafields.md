@@ -330,6 +330,6 @@ Parameter | Required | Type | Description
 --------- | ------- | ----------- | -----------
 type | required | Enum | object, objects
 title | required | String | Your Metafield title
-key | required | String | Unique identifier for your Bucket
+key | required | String | Unique identifier for your Metafield
 object_type | required | String | Object Type slug
 value | | String | For single Object this is the `_id` property.  For multiple Objects it is comma-separated `_id`s.
