@@ -121,7 +121,7 @@ curl "https://api.cosmicjs.com/v1/wedding-site"
 const Cosmic = require('cosmicjs')
 const api = Cosmic()
 const bucket = api.bucket({
-  slug: 'creative-agency'
+  slug: 'wedding-site'
 })
 bucket.getBucket().then(data => {
   console.log(data)
