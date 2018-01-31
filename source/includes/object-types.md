@@ -124,8 +124,11 @@ bucket.getObjectTypes()
 curl "https://api.cosmicjs.com/v1/wedding-site/object-types"
 ```
 
-```javascript
-const bucket = Cosmic.bucket({
+<script src="https://embed.runkit.com" data-element-id="runkit-get-object-types"></script>
+<pre class="runkit" id="runkit-get-object-types">
+const Cosmic = require('cosmicjs')
+const api = Cosmic()
+const bucket = api.bucket({
   slug: 'wedding-site',
   read_key: ''
 })
@@ -134,63 +137,7 @@ bucket.getObjectTypes().then(data => {
 }).catch(err => {
   console.log(err)
 })
-```
-
-> Example Response
-
-```json
-{ 
-  "object_types": [
-    {
-      "title": "Groomsmen",
-      "slug": "groomsmen",
-      "singular": "Groomsman",
-      "metafields": [
-        {
-          "type": "file",
-          "title": "Image",
-          "key": "image",
-          "value": ""
-        },
-        {
-          "key": "official-title",
-          "title": "Official Title",
-          "type": "text",
-          "value": ""
-        }
-      ],
-      "order": 2
-    },
-    {
-      "title": "Bridesmaids",
-      "slug": "bridesmaids",
-      "singular": "Bridesmaid",
-      "metafields": [
-        {
-          "type": "file",
-          "title": "Image",
-          "key": "image",
-          "value": ""
-        },
-        {
-          "type": "text",
-          "title": "Official Title",
-          "key": "",
-          "value": ""
-        }
-      ],
-      "order": 3
-    },
-    {
-      "title": "Sections",
-      "slug": "sections",
-      "singular": "Section",
-      "metafields": [],
-      "order": 1
-    }
-  ]
-}
-```
+</pre>
 
 Get all Object Types in your Bucket.
 

@@ -98,6 +98,9 @@ under the License.
   function getLanguageFromQueryString() {
     if (location.search.length >= 1) {
       var language = parseURL(location.search).language
+      $('.runkit').hide();
+      if (location.search === '?javascript')
+        $('.runkit').show();
       if (language) {
         return language;
       } else if (jQuery.inArray(location.search.substr(1), languages) != -1) {
@@ -155,6 +158,9 @@ under the License.
   $(function() {
     $(".lang-selector a").on("click", function() {
       var language = $(this).data("language-name");
+      $('.runkit').hide();
+      if (language === 'javascript')
+        $('.runkit').show();
       pushURL(language);
       activateLanguage(language);
       return false;

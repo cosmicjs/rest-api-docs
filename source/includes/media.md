@@ -102,10 +102,13 @@ Cosmic.getMedia()
 curl "https://api.cosmicjs.com/v1/wedding-site/media?pretty=true&folder=groomsmen&limit=3"
 ```
 
-```javascript
-const bucket = Cosmic.bucket({
+<script src="https://embed.runkit.com" data-element-id="runkit-get-media"></script>
+<pre class="runkit" id="runkit-get-media">
+const Cosmic = require('cosmicjs')
+const api = Cosmic()
+const bucket = api.bucket({
   slug: 'wedding-site',
-  write_key: ''
+  read_key: ''
 })
 bucket.getMedia({
   folder: 'groomsmen',
@@ -115,57 +118,7 @@ bucket.getMedia({
 }).catch(err => {
   console.log(err)
 })
-```
-
-
-> Example Response
-
-```json
-{
-  "media": [
-    {
-      "_id": "55b3da7940d7a3791b00001f",
-      "name": "069b9650-32fe-11e5-9f75-cb9b4016a019.jpg",
-      "original_name": "mke.jpg",
-      "size": 30353,
-      "type": "image/jpeg",
-      "bucket": "55b3d557df0fb1df7600004b",
-      "created": "2015-01-02T01:40:40.903Z",
-      "folder": "groomsmen",
-      "location": "https://s3-us-west-2.amazonaws.com/cosmicjs",
-      "url": "https://s3-us-west-2.amazonaws.com/cosmicjs/069b9650-32fe-11e5-9f75-cb9b4016a019.jpg",
-      "imgix_url": "https://cosmic-s3.imgix.net/069b9650-32fe-11e5-9f75-cb9b4016a019.jpg"
-    },
-    {
-      "_id": "55b3da7940d7a3791b00001e",
-      "name": "069b6f44-32fe-11e5-9f75-cb9b4016a019.jpg",
-      "original_name": "dave.jpg",
-      "size": 21110,
-      "type": "image/jpeg",
-      "bucket": "55b3d557df0fb1df7600004b",
-      "created": "2015-01-02T01:40:40.814Z",
-      "folder": "groomsmen",
-      "location": "https://s3-us-west-2.amazonaws.com/cosmicjs",
-      "url": "https://s3-us-west-2.amazonaws.com/cosmicjs/069b6f44-32fe-11e5-9f75-cb9b4016a019.jpg",
-      "imgix_url": "https://cosmic-s3.imgix.net/069b6f44-32fe-11e5-9f75-cb9b4016a019.jpg"
-    },
-    {
-      "_id": "55b3da7840d7a3791b00001d",
-      "name": "069b6f43-32fe-11e5-9f75-cb9b4016a019.jpg",
-      "original_name": "selden.jpg",
-      "size": 26217,
-      "type": "image/jpeg",
-      "bucket": "55b3d557df0fb1df7600004b",
-      "created": "2015-01-02T01:40:40.655Z",
-      "folder": "groomsmen",
-      "location": "https://s3-us-west-2.amazonaws.com/cosmicjs",
-      "url": "https://s3-us-west-2.amazonaws.com/cosmicjs/069b6f43-32fe-11e5-9f75-cb9b4016a019.jpg",
-      "imgix_url": "https://cosmic-s3.imgix.net/069b6f43-32fe-11e5-9f75-cb9b4016a019.jpg"
-    }
-  ]
-}
-```
-
+</pre>
 
 You can add the `folder` parameter to get Media from a certain folder.
 

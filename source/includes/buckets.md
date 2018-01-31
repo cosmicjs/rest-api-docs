@@ -116,44 +116,19 @@ bucket.getBucket()
 curl "https://api.cosmicjs.com/v1/wedding-site"
 ```
 
-```javascript
-const Cosmic = require('cosmicjs')({
-  token: 'your-token-from-auth-request' // optional
-})
-const bucket = Cosmic.bucket({
-  slug: 'wedding-site',
-  read_key: ''
+<script src="https://embed.runkit.com" data-element-id="runkit-get-bucket"></script>
+<pre class="runkit" id="runkit-get-bucket">
+const Cosmic = require('cosmicjs')
+const api = Cosmic()
+const bucket = api.bucket({
+  slug: 'creative-agency'
 })
 bucket.getBucket().then(data => {
   console.log(data)
 }).catch(err => {
   console.log(err)
 })
-```
-
-> Example Response
-
-```json
-{
-  "bucket": {
-    "_id": "55b3d557df0fb1df7600004b",
-    "slug": "wedding-site",
-    "title": "Wedding Site",
-    "object_types": [
-      ...
-    ],
-    "objects": [
-      ...
-    ],
-    "media": [
-      ...
-    ],
-    "media_folders": [
-      ...
-    ]
-  }
-}
-```
+</pre>
 
 
 Returns the entire Bucket including Object Types, Objects, Media and more.  If you would like to restrict read access to your Bucket, you can do so in Your Bucket > Basic Settings.
