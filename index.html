@@ -9,7 +9,27 @@
     <link href="stylesheets/print.css" rel="stylesheet" type="text/css" media="print" />
     <link href="stylesheets/highlight-monokai.css" rel="stylesheet" type="text/css" media="screen, print" />
     <script src="javascripts/all.js" type="text/javascript"></script>
-  </head>
+    <link rel="apple-touch-icon-precomposed" sizes="57x57" href="https://cosmicjs.com/images/favicons/apple-touch-icon-57x57.png" />
+    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="https://cosmicjs.com/images/favicons/apple-touch-icon-114x114.png" />
+    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="https://cosmicjs.com/images/favicons/apple-touch-icon-72x72.png" />
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="https://cosmicjs.com/images/favicons/apple-touch-icon-144x144.png" />
+    <link rel="apple-touch-icon-precomposed" sizes="60x60" href="https://cosmicjs.com/images/favicons/apple-touch-icon-60x60.png" />
+    <link rel="apple-touch-icon-precomposed" sizes="120x120" href="https://cosmicjs.com/images/favicons/apple-touch-icon-120x120.png" />
+    <link rel="apple-touch-icon-precomposed" sizes="76x76" href="https://cosmicjs.com/images/favicons/apple-touch-icon-76x76.png" />
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="https://cosmicjs.com/images/favicons/apple-touch-icon-152x152.png" />
+    <link rel="icon" type="image/png" href="https://cosmicjs.com/images/favicons/favicon-196x196.png" sizes="196x196" />
+    <link rel="icon" type="image/png" href="https://cosmicjs.com/images/favicons/favicon-96x96.png" sizes="96x96" />
+    <link rel="icon" type="image/png" href="https://cosmicjs.com/images/favicons/favicon-32x32.png" sizes="32x32" />
+    <link rel="icon" type="image/png" href="https://cosmicjs.com/images/favicons/favicon-16x16.png" sizes="16x16" />
+    <link rel="icon" type="image/png" href="https://cosmicjs.com/images/favicons/favicon-128.png" sizes="128x128" />
+    <meta name="application-name" content="&nbsp;" />
+    <meta name="msapplication-TileColor" content="#FFFFFF" />
+    <meta name="msapplication-TileImage" content="https://cosmicjs.com/images/favicons/mstile-144x144.png" />
+    <meta name="msapplication-square70x70logo" content="https://cosmicjs.com/images/favicons/mstile-70x70.png" />
+    <meta name="msapplication-square150x150logo" content="https://cosmicjs.com/images/favicons/mstile-150x150.png" />
+    <meta name="msapplication-wide310x150logo" content="https://cosmicjs.com/images/favicons/mstile-310x150.png" />
+    <meta name="msapplication-square310x310logo" content="https://cosmicjs.com/images/favicons/mstile-310x310.png" />
+    <meta property="og:image" content="https://cosmicjs.com/images/marketing/logo.png" /> </head>
   <body class="" data-languages="[&#34;bash&#34;,&#34;javascript&#34;]">
     <a href="#" id="nav-button">
       <span> NAV
@@ -52,6 +72,8 @@ https://api.cosmicjs.com</code></pre><pre class="highlight javascript"><code><sp
 npm install cosmicjs</code></pre>
         <p>The Cosmic JS REST API helps you easily manage data and files for websites and applications. We support cross-origin resource sharing, allowing you to interact securely with our API from a client-side web application (though you should never expose
           your private keys or credentials in any public website&#39;s client-side code). JSON is returned by all API responses, including errors.</p>
+        <p>Some code samples are runnable using
+          <a href="https://runkit.com/home" target="_blank">Runkit</a>.</p>
         <h2 id="getting-started">Getting Started</h2>
         <p>Go to
           <a href="https://cosmicjs.com/signup">https://cosmicjs.com/signup</a> to create an account and get familiar with the Cosmic JS Dashboard.</p>
@@ -326,39 +348,21 @@ Cosmic.addBucket({
         </blockquote> <pre class="highlight bash"><code>GET https://api.cosmicjs.com/v1/:bucket_slug</code></pre><pre class="highlight javascript"><code>bucket.getBucket()</code></pre>
         <blockquote>
           <p>Example Request</p>
-        </blockquote> <pre class="highlight bash"><code>curl <span class="hljs-string">"https://api.cosmicjs.com/v1/wedding-site"</span></code></pre><pre class="highlight javascript"><code><span class="hljs-keyword">const</span> Cosmic = <span class="hljs-built_in">require</span>(<span class="hljs-string">'cosmicjs'</span>)({
-  <span class="hljs-attr">token</span>: <span class="hljs-string">'your-token-from-auth-request'</span> <span class="hljs-comment">// optional</span>
+        </blockquote> <pre class="highlight bash"><code>curl <span class="hljs-string">"https://api.cosmicjs.com/v1/wedding-site"</span></code></pre>
+        <p>
+          <script src="https://embed.runkit.com" data-element-id="runkit-get-bucket"></script>
+        </p> <pre class="runkit" id="runkit-get-bucket">
+const Cosmic = require('cosmicjs')
+const api = Cosmic()
+const bucket = api.bucket({
+  slug: 'creative-agency'
 })
-<span class="hljs-keyword">const</span> bucket = Cosmic.bucket({
-  <span class="hljs-attr">slug</span>: <span class="hljs-string">'wedding-site'</span>,
-  <span class="hljs-attr">read_key</span>: <span class="hljs-string">''</span>
+bucket.getBucket().then(data => {
+  console.log(data)
+}).catch(err => {
+  console.log(err)
 })
-bucket.getBucket().then(<span class="hljs-function"><span class="hljs-params">data</span> =&gt;</span> {
-  <span class="hljs-built_in">console</span>.log(data)
-}).catch(<span class="hljs-function"><span class="hljs-params">err</span> =&gt;</span> {
-  <span class="hljs-built_in">console</span>.log(err)
-})</code></pre>
-        <blockquote>
-          <p>Example Response</p>
-        </blockquote> <pre class="highlight json"><code>{
-  <span class="hljs-attr">"bucket"</span>: {
-    <span class="hljs-attr">"_id"</span>: <span class="hljs-string">"55b3d557df0fb1df7600004b"</span>,
-    <span class="hljs-attr">"slug"</span>: <span class="hljs-string">"wedding-site"</span>,
-    <span class="hljs-attr">"title"</span>: <span class="hljs-string">"Wedding Site"</span>,
-    <span class="hljs-attr">"object_types"</span>: [
-      ...
-    ],
-    <span class="hljs-attr">"objects"</span>: [
-      ...
-    ],
-    <span class="hljs-attr">"media"</span>: [
-      ...
-    ],
-    <span class="hljs-attr">"media_folders"</span>: [
-      ...
-    ]
-  }
-}</code></pre>
+</pre>
         <p>Returns the entire Bucket including Object Types, Objects, Media and more. If you would like to restrict read access to your Bucket, you can do so in Your Bucket &gt; Basic Settings.</p>
         <table>
           <thead>
@@ -517,68 +521,22 @@ bucket.addObjectType(params).then(<span class="hljs-function"><span class="hljs-
         </blockquote> <pre class="highlight bash"><code>GET https://api.cosmicjs.com/v1/:bucket_slug/object-types</code></pre><pre class="highlight javascript"><code>bucket.getObjectTypes()</code></pre>
         <blockquote>
           <p>Example Request</p>
-        </blockquote> <pre class="highlight bash"><code>curl <span class="hljs-string">"https://api.cosmicjs.com/v1/wedding-site/object-types"</span></code></pre><pre class="highlight javascript"><code><span class="hljs-keyword">const</span> bucket = Cosmic.bucket({
-  <span class="hljs-attr">slug</span>: <span class="hljs-string">'wedding-site'</span>,
-  <span class="hljs-attr">read_key</span>: <span class="hljs-string">''</span>
+        </blockquote> <pre class="highlight bash"><code>curl <span class="hljs-string">"https://api.cosmicjs.com/v1/wedding-site/object-types"</span></code></pre>
+        <p>
+          <script src="https://embed.runkit.com" data-element-id="runkit-get-object-types"></script>
+        </p> <pre class="runkit" id="runkit-get-object-types">
+const Cosmic = require('cosmicjs')
+const api = Cosmic()
+const bucket = api.bucket({
+  slug: 'wedding-site',
+  read_key: ''
 })
-bucket.getObjectTypes().then(<span class="hljs-function"><span class="hljs-params">data</span> =&gt;</span> {
-  <span class="hljs-built_in">console</span>.log(data)
-}).catch(<span class="hljs-function"><span class="hljs-params">err</span> =&gt;</span> {
-  <span class="hljs-built_in">console</span>.log(err)
-})</code></pre>
-        <blockquote>
-          <p>Example Response</p>
-        </blockquote> <pre class="highlight json"><code>{ 
-  <span class="hljs-attr">"object_types"</span>: [
-    {
-      <span class="hljs-attr">"title"</span>: <span class="hljs-string">"Groomsmen"</span>,
-      <span class="hljs-attr">"slug"</span>: <span class="hljs-string">"groomsmen"</span>,
-      <span class="hljs-attr">"singular"</span>: <span class="hljs-string">"Groomsman"</span>,
-      <span class="hljs-attr">"metafields"</span>: [
-        {
-          <span class="hljs-attr">"type"</span>: <span class="hljs-string">"file"</span>,
-          <span class="hljs-attr">"title"</span>: <span class="hljs-string">"Image"</span>,
-          <span class="hljs-attr">"key"</span>: <span class="hljs-string">"image"</span>,
-          <span class="hljs-attr">"value"</span>: <span class="hljs-string">""</span>
-        },
-        {
-          <span class="hljs-attr">"key"</span>: <span class="hljs-string">"official-title"</span>,
-          <span class="hljs-attr">"title"</span>: <span class="hljs-string">"Official Title"</span>,
-          <span class="hljs-attr">"type"</span>: <span class="hljs-string">"text"</span>,
-          <span class="hljs-attr">"value"</span>: <span class="hljs-string">""</span>
-        }
-      ],
-      <span class="hljs-attr">"order"</span>: <span class="hljs-number">2</span>
-    },
-    {
-      <span class="hljs-attr">"title"</span>: <span class="hljs-string">"Bridesmaids"</span>,
-      <span class="hljs-attr">"slug"</span>: <span class="hljs-string">"bridesmaids"</span>,
-      <span class="hljs-attr">"singular"</span>: <span class="hljs-string">"Bridesmaid"</span>,
-      <span class="hljs-attr">"metafields"</span>: [
-        {
-          <span class="hljs-attr">"type"</span>: <span class="hljs-string">"file"</span>,
-          <span class="hljs-attr">"title"</span>: <span class="hljs-string">"Image"</span>,
-          <span class="hljs-attr">"key"</span>: <span class="hljs-string">"image"</span>,
-          <span class="hljs-attr">"value"</span>: <span class="hljs-string">""</span>
-        },
-        {
-          <span class="hljs-attr">"type"</span>: <span class="hljs-string">"text"</span>,
-          <span class="hljs-attr">"title"</span>: <span class="hljs-string">"Official Title"</span>,
-          <span class="hljs-attr">"key"</span>: <span class="hljs-string">""</span>,
-          <span class="hljs-attr">"value"</span>: <span class="hljs-string">""</span>
-        }
-      ],
-      <span class="hljs-attr">"order"</span>: <span class="hljs-number">3</span>
-    },
-    {
-      <span class="hljs-attr">"title"</span>: <span class="hljs-string">"Sections"</span>,
-      <span class="hljs-attr">"slug"</span>: <span class="hljs-string">"sections"</span>,
-      <span class="hljs-attr">"singular"</span>: <span class="hljs-string">"Section"</span>,
-      <span class="hljs-attr">"metafields"</span>: [],
-      <span class="hljs-attr">"order"</span>: <span class="hljs-number">1</span>
-    }
-  ]
-}</code></pre>
+bucket.getObjectTypes().then(data => {
+  console.log(data)
+}).catch(err => {
+  console.log(err)
+})
+</pre>
         <p>Get all Object Types in your Bucket.</p>
         <table>
           <thead>
@@ -929,53 +887,24 @@ bucket.addObject(params).then(<span class="hljs-function"><span class="hljs-para
         </blockquote> <pre class="highlight bash"><code>GET https://api.cosmicjs.com/:bucket_slug/objects</code></pre><pre class="highlight javascript"><code>bucket.getObjects()</code></pre>
         <blockquote>
           <p>Example Request</p>
-        </blockquote> <pre class="highlight bash"><code>curl <span class="hljs-string">"https://api.cosmicjs.com/v1/wedding-site/objects?pretty=true&amp;hide_metafields=true&amp;limit=2"</span></code></pre><pre class="highlight javascript"><code><span class="hljs-keyword">const</span> bucket = Cosmic.bucket({
-  <span class="hljs-attr">slug</span>: <span class="hljs-string">'wedding-site'</span>,
-  <span class="hljs-attr">read_key</span>: <span class="hljs-string">''</span>
+        </blockquote> <pre class="highlight bash"><code>curl <span class="hljs-string">"https://api.cosmicjs.com/v1/wedding-site/objects?pretty=true&amp;hide_metafields=true&amp;limit=2"</span></code></pre>
+        <p>
+          <script src="https://embed.runkit.com" data-element-id="runkit-get-objects"></script>
+        </p> <pre class="runkit" id="runkit-get-objects">
+const Cosmic = require('cosmicjs')
+const api = Cosmic()
+const bucket = api.bucket({
+  slug: 'wedding-site',
+  read_key: ''
 })
 bucket.getObjects({
-  <span class="hljs-attr">limit</span>: <span class="hljs-number">2</span>
-}).then(<span class="hljs-function"><span class="hljs-params">data</span> =&gt;</span> {
-  <span class="hljs-built_in">console</span>.log(data)
-}).catch(<span class="hljs-function"><span class="hljs-params">err</span> =&gt;</span> {
-  <span class="hljs-built_in">console</span>.log(err)
-})</code></pre>
-        <blockquote>
-          <p>Example Response</p>
-        </blockquote> <pre class="highlight json"><code>{
-  <span class="hljs-attr">"objects"</span>: [
-    {
-      <span class="hljs-attr">"_id"</span>: <span class="hljs-string">"55b3da7740d7a3791b000002"</span>,
-      <span class="hljs-attr">"bucket"</span>: <span class="hljs-string">"55b3d557df0fb1df7600004b"</span>,
-      <span class="hljs-attr">"slug"</span>: <span class="hljs-string">"main-menu"</span>,
-      <span class="hljs-attr">"title"</span>: <span class="hljs-string">"Main Menu"</span>,
-      <span class="hljs-attr">"content"</span>: <span class="hljs-string">""</span>,
-      <span class="hljs-attr">"type_slug"</span>: <span class="hljs-string">"sections"</span>,
-      <span class="hljs-attr">"created"</span>: <span class="hljs-string">"2015-07-25T18:50:31.809Z"</span>,
-      <span class="hljs-attr">"metadata"</span>: {
-        <span class="hljs-attr">"our-story"</span>: <span class="hljs-string">"Our Story"</span>,
-        <span class="hljs-attr">"accomodations"</span>: <span class="hljs-string">"Accomodations"</span>,
-        <span class="hljs-attr">"registry"</span>: <span class="hljs-string">"Registry"</span>
-      }
-    },
-    {
-      <span class="hljs-attr">"_id"</span>: <span class="hljs-string">"55b3da7740d7a3791b000003"</span>,
-      <span class="hljs-attr">"bucket"</span>: <span class="hljs-string">"55b3d557df0fb1df7600004b"</span>,
-      <span class="hljs-attr">"slug"</span>: <span class="hljs-string">"global"</span>,
-      <span class="hljs-attr">"title"</span>: <span class="hljs-string">"Global"</span>,
-      <span class="hljs-attr">"content"</span>: <span class="hljs-string">""</span>,
-      <span class="hljs-attr">"type_slug"</span>: <span class="hljs-string">"sections"</span>,
-      <span class="hljs-attr">"created"</span>: <span class="hljs-string">"2015-07-25T18:50:31.812Z"</span>,
-      <span class="hljs-attr">"metadata"</span>: {
-        <span class="hljs-attr">"site-title"</span>: <span class="hljs-string">"Carol and Jack Wedding Website"</span>,
-        <span class="hljs-attr">"menu-title"</span>: <span class="hljs-string">"Carol &amp; Jack"</span>,
-        <span class="hljs-attr">"description"</span>: <span class="hljs-string">"This is the wedding website for the Jack and Carol Wedding on November 22, 2014 in Dallas, TX."</span>,
-        <span class="hljs-attr">"author"</span>: <span class="hljs-string">"Tony Spiro"</span>,
-        <span class="hljs-attr">"footer-text"</span>: <span class="hljs-string">"Cosmic JS &amp;copy; 2018"</span>
-      }
-    }
-  ]
-}</code></pre>
+  limit: 2
+}).then(data => {
+  console.log(data)
+}).catch(err => {
+  console.log(err)
+})
+</pre>
         <p>Returns all Objects from your Bucket.</p>
         <table>
           <thead>
@@ -1045,35 +974,24 @@ bucket.getObjects({
         </blockquote> <pre class="highlight bash"><code>GET https://api.cosmicjs.com/:bucket_slug/object/:slug</code></pre><pre class="highlight javascript"><code>bucket.getObject()</code></pre>
         <blockquote>
           <p>Example Request</p>
-        </blockquote> <pre class="highlight bash"><code>curl <span class="hljs-string">"https://api.cosmicjs.com/v1/wedding-site/object/registry"</span></code></pre><pre class="highlight javascript"><code><span class="hljs-keyword">const</span> bucket = Cosmic.bucket({
-  <span class="hljs-attr">slug</span>: <span class="hljs-string">'wedding-site'</span>,
-  <span class="hljs-attr">read_key</span>: <span class="hljs-string">''</span>
+        </blockquote> <pre class="highlight bash"><code>curl <span class="hljs-string">"https://api.cosmicjs.com/v1/wedding-site/object/registry"</span></code></pre>
+        <p>
+          <script src="https://embed.runkit.com" data-element-id="runkit-get-object"></script>
+        </p> <pre class="runkit" id="runkit-get-object">
+const Cosmic = require('cosmicjs')
+const api = Cosmic()
+const bucket = api.bucket({
+  slug: 'wedding-site',
+  read_key: ''
 })
 bucket.getObject({
-  <span class="hljs-attr">slug</span>: <span class="hljs-string">'registry'</span>
-}).then(<span class="hljs-function"><span class="hljs-params">data</span> =&gt;</span> {
-  <span class="hljs-built_in">console</span>.log(data)
-}).catch(<span class="hljs-function"><span class="hljs-params">err</span> =&gt;</span> {
-  <span class="hljs-built_in">console</span>.log(err)
-})</code></pre>
-        <blockquote>
-          <p>Example Response</p>
-        </blockquote> <pre class="highlight json"><code>{
-  <span class="hljs-attr">"object"</span>: {
-    <span class="hljs-attr">"_id"</span>: <span class="hljs-string">"55b3da7740d7a3791b000011"</span>,
-    <span class="hljs-attr">"bucket"</span>: <span class="hljs-string">"55b3d557df0fb1df7600004b"</span>,
-    <span class="hljs-attr">"slug"</span>: <span class="hljs-string">"registry"</span>,
-    <span class="hljs-attr">"title"</span>: <span class="hljs-string">"Registry"</span>,
-    <span class="hljs-attr">"content"</span>: <span class="hljs-string">"&lt;p&gt;Carol and Jack are registered at Pottery Barn, Macy's and Crate and Barrel.&lt;/p&gt;"</span>,
-    <span class="hljs-attr">"type_slug"</span>: <span class="hljs-string">"sections"</span>,
-    <span class="hljs-attr">"created"</span>: <span class="hljs-string">"2015-07-25T18:50:31.851Z"</span>,
-    <span class="hljs-attr">"metadata"</span>: {
-      <span class="hljs-attr">"pottery-barn"</span>: <span class="hljs-string">"http://www.potterybarn.com"</span>,
-      <span class="hljs-attr">"macys"</span>: <span class="hljs-string">"http://www.macys.com"</span>,
-      <span class="hljs-attr">"crate-and-barrel"</span>: <span class="hljs-string">"http://www.crateandbarrel.com/"</span>
-    }
-  }
-}</code></pre>
+  slug: 'registry'
+}).then(data => {
+  console.log(data)
+}).catch(err => {
+  console.log(err)
+})
+</pre>
         <p>Returns a single Object from your Bucket.</p>
         <table>
           <thead>
@@ -1135,77 +1053,25 @@ bucket.getObject({
         </blockquote> <pre class="highlight bash"><code>GET https://api.cosmicjs.com/v1/:bucket_slug/object-type/:type_slug</code></pre><pre class="highlight javascript"><code>bucket.getObjectsByType()</code></pre>
         <blockquote>
           <p>Example Request</p>
-        </blockquote> <pre class="highlight bash"><code>curl <span class="hljs-string">"https://api.cosmicjs.com/v1/wedding-site/object-type/groomsmen?limit=3"</span></code></pre><pre class="highlight javascript"><code><span class="hljs-keyword">const</span> bucket = Cosmic.bucket({
-  <span class="hljs-attr">slug</span>: <span class="hljs-string">'wedding-site'</span>,
-  <span class="hljs-attr">read_key</span>: <span class="hljs-string">''</span>
+        </blockquote> <pre class="highlight bash"><code>curl <span class="hljs-string">"https://api.cosmicjs.com/v1/wedding-site/object-type/groomsmen?limit=3"</span></code></pre>
+        <p>
+          <script src="https://embed.runkit.com" data-element-id="runkit-get-objects-by-type"></script>
+        </p> <pre class="runkit" id="runkit-get-objects-by-type">
+const Cosmic = require('cosmicjs')
+const api = Cosmic()
+const bucket = api.bucket({
+  slug: 'wedding-site',
+  read_key: ''
 })
 bucket.getObjectsByType({
-  <span class="hljs-attr">type_slug</span>: <span class="hljs-string">'groomsmen'</span>,
-  <span class="hljs-attr">limit</span>: <span class="hljs-number">3</span>
-}).then(<span class="hljs-function"><span class="hljs-params">data</span> =&gt;</span> {
-  <span class="hljs-built_in">console</span>.log(data)
-}).catch(<span class="hljs-function"><span class="hljs-params">err</span> =&gt;</span> {
-  <span class="hljs-built_in">console</span>.log(err)
-})</code></pre>
-        <blockquote>
-          <p>Example Response</p>
-        </blockquote> <pre class="highlight json"><code>{
-  <span class="hljs-attr">"objects"</span>: [
-    {
-      <span class="hljs-attr">"_id"</span>: <span class="hljs-string">"55b3da7740d7a3791b000009"</span>,
-      <span class="hljs-attr">"bucket"</span>: <span class="hljs-string">"55b3d557df0fb1df7600004b"</span>,
-      <span class="hljs-attr">"slug"</span>: <span class="hljs-string">"chad-henly"</span>,
-      <span class="hljs-attr">"title"</span>: <span class="hljs-string">"Chad Henly"</span>,
-      <span class="hljs-attr">"content"</span>: <span class="hljs-string">"&lt;p&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;br&gt;&lt;/p&gt;"</span>,
-      <span class="hljs-attr">"type_slug"</span>: <span class="hljs-string">"groomsmen"</span>,
-      <span class="hljs-attr">"created"</span>: <span class="hljs-string">"2015-07-25T18:50:31.820Z"</span>,
-      <span class="hljs-attr">"modified"</span>: <span class="hljs-string">"2015-07-25T18:51:44.249Z"</span>,
-      <span class="hljs-attr">"metadata"</span>: {
-        <span class="hljs-attr">"image"</span>: {
-          <span class="hljs-attr">"url"</span>: <span class="hljs-string">"https://s3-us-west-2.amazonaws.com/cosmicjs/3181a814-93d9-ad8f-74ce-1eeb64023b61-1420162840289-mke.jpg"</span>,
-          <span class="hljs-attr">"imgix_url"</span>: <span class="hljs-string">"https://cosmic-s3.imgix.net/3181a814-93d9-ad8f-74ce-1eeb64023b61-1420162840289-mke.jpg"</span>
-        },
-        <span class="hljs-attr">"official-title"</span>: <span class="hljs-string">"Best Man"</span>
-      }
-    },
-    {
-      <span class="hljs-attr">"_id"</span>: <span class="hljs-string">"55b3da7740d7a3791b00000a"</span>,
-      <span class="hljs-attr">"bucket"</span>: <span class="hljs-string">"55b3d557df0fb1df7600004b"</span>,
-      <span class="hljs-attr">"slug"</span>: <span class="hljs-string">"eric-harland"</span>,
-      <span class="hljs-attr">"title"</span>: <span class="hljs-string">"Eric Harland"</span>,
-      <span class="hljs-attr">"content"</span>: <span class="hljs-string">"&lt;p&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;br&gt;&lt;/p&gt;"</span>,
-      <span class="hljs-attr">"type_slug"</span>: <span class="hljs-string">"groomsmen"</span>,
-      <span class="hljs-attr">"created"</span>: <span class="hljs-string">"2015-07-25T18:50:31.821Z"</span>,
-      <span class="hljs-attr">"modified"</span>: <span class="hljs-string">"2015-07-25T18:52:35.032Z"</span>,
-      <span class="hljs-attr">"metadata"</span>: {
-        <span class="hljs-attr">"image"</span>: {
-          <span class="hljs-attr">"url"</span>: <span class="hljs-string">"https://s3-us-west-2.amazonaws.com/cosmicjs/a499fdab-10b5-5168-9ef1-8981c8e93da4-1420162840650-dave.jpg"</span>,
-          <span class="hljs-attr">"imgix_url"</span>: <span class="hljs-string">"https://cosmic-s3.imgix.net/a499fdab-10b5-5168-9ef1-8981c8e93da4-1420162840650-dave.jpg"</span>
-        },
-        <span class="hljs-attr">"official-title"</span>: <span class="hljs-string">"Groomsman"</span>
-      }
-    },
-    {
-      <span class="hljs-attr">"_id"</span>: <span class="hljs-string">"55b3da7740d7a3791b00000c"</span>,
-      <span class="hljs-attr">"bucket"</span>: <span class="hljs-string">"55b3d557df0fb1df7600004b"</span>,
-      <span class="hljs-attr">"slug"</span>: <span class="hljs-string">"lance-bergstrom"</span>,
-      <span class="hljs-attr">"title"</span>: <span class="hljs-string">"Lance Bergstrom"</span>,
-      <span class="hljs-attr">"content"</span>: <span class="hljs-string">"&lt;p&gt;&lt;br&gt;&lt;/p&gt;"</span>,
-      <span class="hljs-attr">"type_slug"</span>: <span class="hljs-string">"groomsmen"</span>,
-      <span class="hljs-attr">"created"</span>: <span class="hljs-string">"2015-07-25T18:50:31.823Z"</span>,
-      <span class="hljs-attr">"modified"</span>: <span class="hljs-string">"2015-07-25T18:53:26.148Z"</span>,
-      <span class="hljs-attr">"metadata"</span>: {
-        <span class="hljs-attr">"image"</span>: {
-          <span class="hljs-attr">"url"</span>: <span class="hljs-string">"https://s3-us-west-2.amazonaws.com/cosmicjs/4c6a5b21-e335-237f-2731-a455d361ddd1-1420162839613-colin.jpg"</span>,
-          <span class="hljs-attr">"imgix_url"</span>: <span class="hljs-string">"https://cosmic-s3.imgix.net/4c6a5b21-e335-237f-2731-a455d361ddd1-1420162839613-colin.jpg"</span>
-        },
-        <span class="hljs-attr">"official-title"</span>: <span class="hljs-string">"Groomsman"</span>
-      }
-    }
-  ],
-  <span class="hljs-attr">"total"</span>: <span class="hljs-number">5</span>,
-  <span class="hljs-attr">"limit"</span>: <span class="hljs-number">3</span>
-}</code></pre>
+  type_slug: 'groomsmen',
+  limit: 3
+}).then(data => {
+  console.log(data)
+}).catch(err => {
+  console.log(err)
+})
+</pre>
         <p>Get Objects from an Object Type.</p>
         <table>
           <thead>
@@ -1287,45 +1153,26 @@ bucket.getObjectsByType({
         </blockquote> <pre class="highlight bash"><code>GET https://api.cosmicjs.com/v1/:bucket_slug/object-type/:type_slug/search</code></pre><pre class="highlight javascript"><code>bucket.searchObjectType()</code></pre>
         <blockquote>
           <p>Example Request</p>
-        </blockquote> <pre class="highlight bash"><code>curl <span class="hljs-string">"https://api.cosmicjs.com/v1/wedding-site/object-type/groomsmen/search?metafield_key=official-title&amp;metafield_value=Best%20Man"</span></code></pre><pre class="highlight javascript"><code><span class="hljs-keyword">const</span> bucket = Cosmic.bucket({
-  <span class="hljs-attr">slug</span>: <span class="hljs-string">'wedding-site'</span>,
-  <span class="hljs-attr">read_key</span>: <span class="hljs-string">''</span>
+        </blockquote> <pre class="highlight bash"><code>curl <span class="hljs-string">"https://api.cosmicjs.com/v1/wedding-site/object-type/groomsmen/search?metafield_key=official-title&amp;metafield_value=Best%20Man"</span></code></pre>
+        <p>
+          <script src="https://embed.runkit.com" data-element-id="runkit-search-object-type"></script>
+        </p> <pre class="runkit" id="runkit-search-object-type">
+const Cosmic = require('cosmicjs')
+const api = Cosmic()
+const bucket = api.bucket({
+  slug: 'wedding-site',
+  read_key: ''
 })
 bucket.searchObjectType({
-  <span class="hljs-attr">type_slug</span>: <span class="hljs-string">'groomsmen'</span>,
-  <span class="hljs-attr">metafield_key</span>: <span class="hljs-string">'official-title'</span>,
-  <span class="hljs-attr">metafield_value</span>: <span class="hljs-string">'Best Man'</span>
-}).then(<span class="hljs-function"><span class="hljs-params">data</span> =&gt;</span> {
-  <span class="hljs-built_in">console</span>.log(data)
-}).catch(<span class="hljs-function"><span class="hljs-params">err</span> =&gt;</span> {
-  <span class="hljs-built_in">console</span>.log(err)
-})</code></pre>
-        <blockquote>
-          <p>Example Response</p>
-        </blockquote> <pre class="highlight json"><code>{
-  <span class="hljs-attr">"objects"</span>: [
-    {
-      <span class="hljs-attr">"_id"</span>: <span class="hljs-string">"55b3da7740d7a3791b000009"</span>,
-      <span class="hljs-attr">"bucket"</span>: <span class="hljs-string">"55b3d557df0fb1df7600004b"</span>,
-      <span class="hljs-attr">"slug"</span>: <span class="hljs-string">"chad-henly"</span>,
-      <span class="hljs-attr">"title"</span>: <span class="hljs-string">"Chad Henly"</span>,
-      <span class="hljs-attr">"content"</span>: <span class="hljs-string">"&lt;p&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;br&gt;&lt;/p&gt;"</span>,
-      <span class="hljs-attr">"type_slug"</span>: <span class="hljs-string">"groomsmen"</span>,
-      <span class="hljs-attr">"created"</span>: <span class="hljs-string">"2015-07-25T18:50:31.820Z"</span>,
-      <span class="hljs-attr">"user_id"</span>: <span class="hljs-string">"55767c3ffbcf5cbb13000001"</span>,
-      <span class="hljs-attr">"order"</span>: <span class="hljs-number">7</span>,
-      <span class="hljs-attr">"modified"</span>: <span class="hljs-string">"2015-07-25T18:51:44.249Z"</span>,
-      <span class="hljs-attr">"metadata"</span>: {
-        <span class="hljs-attr">"image"</span>: {
-          <span class="hljs-attr">"url"</span>: <span class="hljs-string">"https://s3-us-west-2.amazonaws.com/cosmicjs/3181a814-93d9-ad8f-74ce-1eeb64023b61-1420162840289-mke.jpg"</span>,
-          <span class="hljs-attr">"imgix_url"</span>: <span class="hljs-string">"https://cosmic-s3.imgix.net/3181a814-93d9-ad8f-74ce-1eeb64023b61-1420162840289-mke.jpg"</span>
-        },
-        <span class="hljs-attr">"official-title"</span>: <span class="hljs-string">"Best Man"</span>
-      }
-    }
-  ],
-  <span class="hljs-attr">"total"</span>: <span class="hljs-number">1</span>
-}</code></pre>
+  type_slug: 'groomsmen',
+  metafield_key: 'official-title',
+  metafield_value: 'Best Man'
+}).then(data => {
+  console.log(data)
+}).catch(err => {
+  console.log(err)
+})
+</pre>
         <p>Search Objects in an Object Type.</p>
         <table>
           <thead>
@@ -2134,63 +1981,25 @@ bucket.addMedia({
         </blockquote> <pre class="highlight bash"><code>GET https://api.cosmicjs.com/v1/:bucket_slug/media</code></pre><pre class="highlight javascript"><code>Cosmic.getMedia()</code></pre>
         <blockquote>
           <p>Example Request</p>
-        </blockquote> <pre class="highlight bash"><code>curl <span class="hljs-string">"https://api.cosmicjs.com/v1/wedding-site/media?pretty=true&amp;folder=groomsmen&amp;limit=3"</span></code></pre><pre class="highlight javascript"><code><span class="hljs-keyword">const</span> bucket = Cosmic.bucket({
-  <span class="hljs-attr">slug</span>: <span class="hljs-string">'wedding-site'</span>,
-  <span class="hljs-attr">write_key</span>: <span class="hljs-string">''</span>
+        </blockquote> <pre class="highlight bash"><code>curl <span class="hljs-string">"https://api.cosmicjs.com/v1/wedding-site/media?pretty=true&amp;folder=groomsmen&amp;limit=3"</span></code></pre>
+        <p>
+          <script src="https://embed.runkit.com" data-element-id="runkit-get-media"></script>
+        </p> <pre class="runkit" id="runkit-get-media">
+const Cosmic = require('cosmicjs')
+const api = Cosmic()
+const bucket = api.bucket({
+  slug: 'wedding-site',
+  read_key: ''
 })
 bucket.getMedia({
-  <span class="hljs-attr">folder</span>: <span class="hljs-string">'groomsmen'</span>,
-  <span class="hljs-attr">limit</span>: <span class="hljs-number">3</span>
-}).then(<span class="hljs-function"><span class="hljs-params">data</span> =&gt;</span> {
-  <span class="hljs-built_in">console</span>.log(data)
-}).catch(<span class="hljs-function"><span class="hljs-params">err</span> =&gt;</span> {
-  <span class="hljs-built_in">console</span>.log(err)
-})</code></pre>
-        <blockquote>
-          <p>Example Response</p>
-        </blockquote> <pre class="highlight json"><code>{
-  <span class="hljs-attr">"media"</span>: [
-    {
-      <span class="hljs-attr">"_id"</span>: <span class="hljs-string">"55b3da7940d7a3791b00001f"</span>,
-      <span class="hljs-attr">"name"</span>: <span class="hljs-string">"069b9650-32fe-11e5-9f75-cb9b4016a019.jpg"</span>,
-      <span class="hljs-attr">"original_name"</span>: <span class="hljs-string">"mke.jpg"</span>,
-      <span class="hljs-attr">"size"</span>: <span class="hljs-number">30353</span>,
-      <span class="hljs-attr">"type"</span>: <span class="hljs-string">"image/jpeg"</span>,
-      <span class="hljs-attr">"bucket"</span>: <span class="hljs-string">"55b3d557df0fb1df7600004b"</span>,
-      <span class="hljs-attr">"created"</span>: <span class="hljs-string">"2015-01-02T01:40:40.903Z"</span>,
-      <span class="hljs-attr">"folder"</span>: <span class="hljs-string">"groomsmen"</span>,
-      <span class="hljs-attr">"location"</span>: <span class="hljs-string">"https://s3-us-west-2.amazonaws.com/cosmicjs"</span>,
-      <span class="hljs-attr">"url"</span>: <span class="hljs-string">"https://s3-us-west-2.amazonaws.com/cosmicjs/069b9650-32fe-11e5-9f75-cb9b4016a019.jpg"</span>,
-      <span class="hljs-attr">"imgix_url"</span>: <span class="hljs-string">"https://cosmic-s3.imgix.net/069b9650-32fe-11e5-9f75-cb9b4016a019.jpg"</span>
-    },
-    {
-      <span class="hljs-attr">"_id"</span>: <span class="hljs-string">"55b3da7940d7a3791b00001e"</span>,
-      <span class="hljs-attr">"name"</span>: <span class="hljs-string">"069b6f44-32fe-11e5-9f75-cb9b4016a019.jpg"</span>,
-      <span class="hljs-attr">"original_name"</span>: <span class="hljs-string">"dave.jpg"</span>,
-      <span class="hljs-attr">"size"</span>: <span class="hljs-number">21110</span>,
-      <span class="hljs-attr">"type"</span>: <span class="hljs-string">"image/jpeg"</span>,
-      <span class="hljs-attr">"bucket"</span>: <span class="hljs-string">"55b3d557df0fb1df7600004b"</span>,
-      <span class="hljs-attr">"created"</span>: <span class="hljs-string">"2015-01-02T01:40:40.814Z"</span>,
-      <span class="hljs-attr">"folder"</span>: <span class="hljs-string">"groomsmen"</span>,
-      <span class="hljs-attr">"location"</span>: <span class="hljs-string">"https://s3-us-west-2.amazonaws.com/cosmicjs"</span>,
-      <span class="hljs-attr">"url"</span>: <span class="hljs-string">"https://s3-us-west-2.amazonaws.com/cosmicjs/069b6f44-32fe-11e5-9f75-cb9b4016a019.jpg"</span>,
-      <span class="hljs-attr">"imgix_url"</span>: <span class="hljs-string">"https://cosmic-s3.imgix.net/069b6f44-32fe-11e5-9f75-cb9b4016a019.jpg"</span>
-    },
-    {
-      <span class="hljs-attr">"_id"</span>: <span class="hljs-string">"55b3da7840d7a3791b00001d"</span>,
-      <span class="hljs-attr">"name"</span>: <span class="hljs-string">"069b6f43-32fe-11e5-9f75-cb9b4016a019.jpg"</span>,
-      <span class="hljs-attr">"original_name"</span>: <span class="hljs-string">"selden.jpg"</span>,
-      <span class="hljs-attr">"size"</span>: <span class="hljs-number">26217</span>,
-      <span class="hljs-attr">"type"</span>: <span class="hljs-string">"image/jpeg"</span>,
-      <span class="hljs-attr">"bucket"</span>: <span class="hljs-string">"55b3d557df0fb1df7600004b"</span>,
-      <span class="hljs-attr">"created"</span>: <span class="hljs-string">"2015-01-02T01:40:40.655Z"</span>,
-      <span class="hljs-attr">"folder"</span>: <span class="hljs-string">"groomsmen"</span>,
-      <span class="hljs-attr">"location"</span>: <span class="hljs-string">"https://s3-us-west-2.amazonaws.com/cosmicjs"</span>,
-      <span class="hljs-attr">"url"</span>: <span class="hljs-string">"https://s3-us-west-2.amazonaws.com/cosmicjs/069b6f43-32fe-11e5-9f75-cb9b4016a019.jpg"</span>,
-      <span class="hljs-attr">"imgix_url"</span>: <span class="hljs-string">"https://cosmic-s3.imgix.net/069b6f43-32fe-11e5-9f75-cb9b4016a019.jpg"</span>
-    }
-  ]
-}</code></pre>
+  folder: 'groomsmen',
+  limit: 3
+}).then(data => {
+  console.log(data)
+}).catch(err => {
+  console.log(err)
+})
+</pre>
         <p>You can add the <code>folder</code> parameter to get Media from a certain folder.</p>
         <h3 id="imgix">Imgix</h3>
         <p>
