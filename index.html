@@ -879,6 +879,12 @@ bucket.addObject(params).then(<span class="hljs-function"><span class="hljs-para
               <td>String</td>
               <td>Your Bucket write key</td>
             </tr>
+            <tr>
+              <td>publish_at</td>
+              <td></td>
+              <td>Number</td>
+              <td>UNIX milisecond timestamp. Publish automatically at a later time.</td>
+            </tr>
           </tbody>
         </table>
         <h2 id="get-objects">Get Objects</h2>
@@ -1365,6 +1371,12 @@ bucket.editObject({
               <td>Add Content to your Object</td>
             </tr>
             <tr>
+              <td>status</td>
+              <td></td>
+              <td>Enum</td>
+              <td>draft, published, defaults to published</td>
+            </tr>
+            <tr>
               <td>options.slug_field</td>
               <td></td>
               <td>Bool</td>
@@ -1394,6 +1406,12 @@ bucket.editObject({
               <td></td>
               <td>String</td>
               <td>Your Bucket write key</td>
+            </tr>
+            <tr>
+              <td>publish_at</td>
+              <td></td>
+              <td>Number</td>
+              <td>UNIX milisecond timestamp. Publish automatically at a later time.</td>
             </tr>
           </tbody>
         </table>
