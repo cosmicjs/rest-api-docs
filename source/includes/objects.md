@@ -119,6 +119,8 @@ options.content_editor | | Bool | Set to false to hide the content editor
 metafields | | Array | Add Metafields to your Object. See <a href="#model">Metafields Model</a>.
 locale | | String | Add localization to the Object
 write_key | | String | Your Bucket write key
+status | | Enum | published, draft. Defaults to published
+publish_at | | Number | UNIX milisecond timestamp.  Publish automatically at a later time.
 
 
 ## Get Objects
@@ -421,6 +423,8 @@ options.content_editor | | Bool | Set to false to hide the content editor
 metafields | | Array | Add Metafields to your Object. See <a href="#model">Metafields Model</a>.
 locale | | String | Edit Object locale
 write_key | | String | Your Bucket write key
+status | | Enum | published, draft. Defaults to published
+publish_at | | Number | UNIX milisecond timestamp. Publish automatically at a later time.
 
 
 ## Delete Object
