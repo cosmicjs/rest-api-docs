@@ -137,3 +137,53 @@ Parameter | Required | Type | Description
 --------- | ------- | ----------- | -----------
 hide_metafields |  | Enum | true, Hides metafields
 read_key |  | String | Restrict read access to your Bucket
+
+
+
+## Delete Bucket
+
+> Definition
+
+```bash
+DELETE https://api.cosmicjs.com/v1/buckets/:bucket_id
+```
+
+```javascript
+Cosmic.deleteBucket()
+```
+
+> Example Request
+
+```bash
+DELETE https://api.cosmicjs.com/v1/buckets/:bucket_id
+```
+
+```javascript
+const Cosmic = require('cosmicjs')){
+  token: 'your-token-from-auth-request' // required
+})
+Cosmic.deleteBucket({
+  id: 'bucket_id'
+}).then(data => {
+  console.log(data)
+}).catch(err => {
+  console.log(err)
+})
+```
+
+> Example Response
+
+```json
+{
+  "status": "200",
+  "message": "Bucket deleted"
+}
+```
+
+
+Delete an existing Object in your Bucket.
+
+Parameter | Required | Type | Description
+--------- | ------- | ----------- | -----------
+id | required | String | The Bucket id found as "_id"
+token | required | String | You can only delete Buckets that you have created / own.
