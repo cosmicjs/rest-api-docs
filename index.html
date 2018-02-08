@@ -388,6 +388,53 @@ bucket.getBucket().then(data => {
             </tr>
           </tbody>
         </table>
+        <h2 id="delete-bucket">Delete Bucket</h2>
+        <blockquote>
+          <p>Definition</p>
+        </blockquote> <pre class="highlight bash"><code>DELETE https://api.cosmicjs.com/v1/buckets/:bucket_id</code></pre><pre class="highlight javascript"><code>Cosmic.deleteBucket()</code></pre>
+        <blockquote>
+          <p>Example Request</p>
+        </blockquote> <pre class="highlight bash"><code>DELETE https://api.cosmicjs.com/v1/buckets/:bucket_id</code></pre><pre class="highlight javascript"><code><span class="hljs-keyword">const</span> Cosmic = <span class="hljs-built_in">require</span>(<span class="hljs-string">'cosmicjs'</span>)){
+  <span class="hljs-attr">token</span>: <span class="hljs-string">'your-token-from-auth-request'</span> <span class="hljs-comment">// required</span>
+})
+Cosmic.deleteBucket({
+  <span class="hljs-attr">id</span>: <span class="hljs-string">'bucket_id'</span>
+}).then(<span class="hljs-function"><span class="hljs-params">data</span> =&gt;</span> {
+  <span class="hljs-built_in">console</span>.log(data)
+}).catch(<span class="hljs-function"><span class="hljs-params">err</span> =&gt;</span> {
+  <span class="hljs-built_in">console</span>.log(err)
+})</code></pre>
+        <blockquote>
+          <p>Example Response</p>
+        </blockquote> <pre class="highlight json"><code>{
+  <span class="hljs-attr">"status"</span>: <span class="hljs-string">"200"</span>,
+  <span class="hljs-attr">"message"</span>: <span class="hljs-string">"Bucket deleted"</span>
+}</code></pre>
+        <p>Delete an existing Object in your Bucket.</p>
+        <table>
+          <thead>
+            <tr>
+              <th>Parameter</th>
+              <th>Required</th>
+              <th>Type</th>
+              <th>Description</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>id</td>
+              <td>required</td>
+              <td>String</td>
+              <td>The Bucket id found as &quot;_id&quot;</td>
+            </tr>
+            <tr>
+              <td>token</td>
+              <td>required</td>
+              <td>String</td>
+              <td>You can only delete Buckets that you have created / own.</td>
+            </tr>
+          </tbody>
+        </table>
         <h1 id="object-types">Object Types</h1>
         <h2 id="add-object-type">Add Object Type</h2>
         <blockquote>
