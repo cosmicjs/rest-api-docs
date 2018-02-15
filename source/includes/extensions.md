@@ -26,8 +26,13 @@ const bucket = Cosmic.bucket({
   slug: 'bucket-slug',
   write_key: ''
 })
+
+const zipObject = req.files[0] // Using Multer
+// OR:
+// const zipObject = { originalname: filename, buffer: filedata, size: filesize } // Not using Multer
+
 bucket.addExtension({
-  zip: '<ZIP_FILE_DATA>'
+  zip: zipObject
 }).then(data => {
   console.log(data)
 }).catch(err => {
@@ -57,9 +62,48 @@ Adds an Extension to your Bucket.  The only required post value is `zip` which i
 
 Parameter | Required | Type | Description
 --------- | ------- | ----------- | -----------
-zip | required| File | Media object
+zip | required| MediaObj (see below) | Media object
 write_key | | String | Your Bucket write key
 
+
+The MediaObj must be an object with the following keys. If using the [multer](https://www.npmjs.com/package/multer) library
+the file objects have these by default. Otherwise you should create an object to pass in. See the example below.
+
+Key | Description
+--------- | -------
+originalname | name of file
+buffer | file buffer
+size | file size
+
+As an example, another popular upload library for express is [express-fileupload](https://www.npmjs.com/package/express-fileupload). File objects obtained through this have the following properties:
+
+  `req.files.foo.name: "car.jpg"`
+
+  `req.files.foo.mimetype: The mimetype of your file`
+
+  `
+  req.files.foo.data: A buffer representation of your file
+  `
+
+In order to pass the file `req.files.foo` to Cosmic you would do:
+
+  `const mediaObj = {`
+
+  &nbsp;&nbsp;&nbsp;&nbsp;`
+  originalname: req.files.foo.name,
+  `
+
+  &nbsp;&nbsp;&nbsp;&nbsp;`
+  buffer: req.files.foo.data,
+  `
+
+  &nbsp;&nbsp;&nbsp;&nbsp;`
+  size: req.files.foo.size
+  `
+
+`
+}
+`
 
 ## Delete an Extension
 

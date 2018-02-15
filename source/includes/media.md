@@ -30,8 +30,13 @@ const bucket = Cosmic.bucket({
   slug: 'bucket-slug',
   write_key: ''
 })
+
+const mediaObj = req.files[0] // Using Multer
+// OR:
+// const mediaObj = { originalname: filename, buffer: filedata, size: filesize } // Not using Multer
+
 bucket.addMedia({
-  media: '<FILE_DATA>',
+  media: mediaObj,
   folder: 'your-folder-slug',
   metadata: {
     caption: 'Beautiful picture of the beach',
@@ -78,10 +83,49 @@ The only required post value is `media` which is the name of your media sent. Yo
 
 Parameter | Required | Type | Description
 --------- | ------- | ----------- | -----------
-media | required | File | Media object
+media | required | MediaObj (see below) | Media object
 folder | | String | Media folder slug
 metadata | | Object | Key / value data store
 write_key | | String | Your Bucket write key
+
+The MediaObj must be an object with the following keys. If using the [multer](https://www.npmjs.com/package/multer) library
+the file objects have these by default. Otherwise you should create an object to pass in. See the example below.
+
+Key | Description
+--------- | -------
+originalname | name of file
+buffer | file buffer
+size | file size
+
+As an example, another popular upload library for express is [express-fileupload](https://www.npmjs.com/package/express-fileupload). File objects obtained through this have the following properties:
+
+  `req.files.foo.name: "car.jpg"`
+
+  `req.files.foo.mimetype: The mimetype of your file`
+
+  `
+  req.files.foo.data: A buffer representation of your file
+  `
+
+In order to pass the file `req.files.foo` to Cosmic you would do:
+
+  `const mediaObj = {`
+
+  &nbsp;&nbsp;&nbsp;&nbsp;`
+  originalname: req.files.foo.name,
+  `
+
+  &nbsp;&nbsp;&nbsp;&nbsp;`
+  buffer: req.files.foo.data,
+  `
+
+  &nbsp;&nbsp;&nbsp;&nbsp;`
+  size: req.files.foo.size
+  `
+
+`
+}
+`
 
 
 ## Get Media
