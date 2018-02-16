@@ -29,7 +29,7 @@ const bucket = Cosmic.bucket({
 
 const zipObject = req.files[0] // Using Multer
 // OR:
-// const zipObject = { originalname: filename, buffer: filedata, size: filesize } // Not using Multer
+// const zipObject = { originalname: filename, buffer: filedata } // Not using Multer
 
 bucket.addExtension({
   zip: zipObject
@@ -73,7 +73,6 @@ Key | Description
 --------- | -------
 originalname | name of file
 buffer | file buffer
-size | file size
 
 As an example, another popular upload library for express is [express-fileupload](https://www.npmjs.com/package/express-fileupload). File objects obtained through this have the following properties:
 
@@ -95,10 +94,6 @@ In order to pass the file `req.files.foo` to Cosmic you would do:
 
   &nbsp;&nbsp;&nbsp;&nbsp;`
   buffer: req.files.foo.data,
-  `
-
-  &nbsp;&nbsp;&nbsp;&nbsp;`
-  size: req.files.foo.size
   `
 
 `
