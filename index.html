@@ -1276,6 +1276,12 @@ bucket.searchObjectType({
                 <br />random</td>
             </tr>
             <tr>
+              <td>q</td>
+              <td></td>
+              <td>String</td>
+              <td>Searches title and content properties for this string</td>
+            </tr>
+            <tr>
               <td>metafield_key</td>
               <td></td>
               <td>String</td>
@@ -1956,7 +1962,7 @@ bucket.addObject(params).then(<span class="hljs-function"><span class="hljs-para
         <blockquote>
           <p>Example Request</p>
         </blockquote> <pre class="highlight bash"><code>{
-  <span class="hljs-string">"media"</span>: <span class="hljs-string">"your-media-multipart-form-data"</span>,
+  <span class="hljs-string">"media"</span>: <span class="hljs-string">"your-media-object"</span>,
   <span class="hljs-string">"folder"</span>: <span class="hljs-string">"your-folder-slug"</span>,
   <span class="hljs-string">"metadata"</span>: {
     <span class="hljs-string">"caption"</span>: <span class="hljs-string">"Beautiful picture of the beach"</span>,
@@ -1966,8 +1972,13 @@ bucket.addObject(params).then(<span class="hljs-function"><span class="hljs-para
   <span class="hljs-attr">slug</span>: <span class="hljs-string">'bucket-slug'</span>,
   <span class="hljs-attr">write_key</span>: <span class="hljs-string">''</span>
 })
+
+<span class="hljs-keyword">const</span> media_object = req.files[<span class="hljs-number">0</span>] <span class="hljs-comment">// Using Multer</span>
+<span class="hljs-comment">// OR:</span>
+<span class="hljs-comment">// const media_object = { originalname: filename, buffer: filedata } // Not using Multer</span>
+
 bucket.addMedia({
-  <span class="hljs-attr">media</span>: <span class="hljs-string">'&lt;FILE_DATA&gt;'</span>,
+  <span class="hljs-attr">media</span>: media_object,
   <span class="hljs-attr">folder</span>: <span class="hljs-string">'your-folder-slug'</span>,
   <span class="hljs-attr">metadata</span>: {
     <span class="hljs-attr">caption</span>: <span class="hljs-string">'Beautiful picture of the beach'</span>,
@@ -1977,7 +1988,20 @@ bucket.addMedia({
   <span class="hljs-built_in">console</span>.log(data)
 }).catch(<span class="hljs-function"><span class="hljs-params">err</span> =&gt;</span> {
   <span class="hljs-built_in">console</span>.log(err)
-})</code></pre>
+})
+
+<span class="hljs-comment">/*
+As an example, another popular upload library for express is [express-fileupload](https://www.npmjs.com/package/express-fileupload). File objects obtained through this have the following properties:
+req.files.foo.name: "car.jpg"
+req.files.foo.mimetype: The mimetype of your file
+req.files.foo.data: A buffer representation of your file
+*/</span>
+
+<span class="hljs-comment">// In order to pass the file `req.files.foo` to Cosmic you would do:</span>
+<span class="hljs-keyword">const</span> media_object = {
+  <span class="hljs-attr">originalname</span>: req.files.foo.name,
+  <span class="hljs-attr">buffer</span>: req.files.foo.data,
+}</code></pre>
         <blockquote>
           <p>Example Response</p>
         </blockquote> <pre class="highlight json"><code>{
@@ -2003,7 +2027,7 @@ bucket.addMedia({
     ]
   }
 }</code></pre>
-        <p>The only required post value is <code>media</code> which is the name of your media sent. You can also add an optional <code>folder</code> and <code>metadata</code> params.</p>
+        <p>The only required post value is the <code>media</code> object. You can also add optional <code>folder</code> and <code>metadata</code> params.</p>
         <table>
           <thead>
             <tr>
@@ -2017,8 +2041,8 @@ bucket.addMedia({
             <tr>
               <td>media</td>
               <td>required</td>
-              <td>File</td>
-              <td>Media object</td>
+              <td>Media Object (see below)</td>
+              <td>Media object with specific properties</td>
             </tr>
             <tr>
               <td>folder</td>
@@ -2037,6 +2061,33 @@ bucket.addMedia({
               <td></td>
               <td>String</td>
               <td>Your Bucket write key</td>
+            </tr>
+          </tbody>
+        </table>
+        <h3 id="media-object">Media Object</h3>
+        <p>The Media Object must be an object with certain properties indicated below. If using the
+          <a href="https://www.npmjs.com/package/multer" target="blank">multer NPM module</a> the file objects have these by default. Otherwise you should create an object with these properties:</p>
+        <table>
+          <thead>
+            <tr>
+              <th>Parameter</th>
+              <th>Required</th>
+              <th>Type</th>
+              <th>Description</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>originalname</td>
+              <td>required</td>
+              <td>String</td>
+              <td>The name of your file (something.jpg)</td>
+            </tr>
+            <tr>
+              <td>buffer</td>
+              <td></td>
+              <td>File Buffer</td>
+              <td>The File Buffer</td>
             </tr>
           </tbody>
         </table>
@@ -2273,13 +2324,30 @@ bucket.deleteWebhook({
   <span class="hljs-attr">slug</span>: <span class="hljs-string">'bucket-slug'</span>,
   <span class="hljs-attr">write_key</span>: <span class="hljs-string">''</span>
 })
+
+<span class="hljs-keyword">const</span> zip_object = req.files[<span class="hljs-number">0</span>] <span class="hljs-comment">// Using Multer</span>
+<span class="hljs-comment">// OR:</span>
+<span class="hljs-comment">// const zip_object = { originalname: filename, buffer: filedata } // Not using Multer</span>
+
 bucket.addExtension({
-  <span class="hljs-attr">zip</span>: <span class="hljs-string">'&lt;ZIP_FILE_DATA&gt;'</span>
+  <span class="hljs-attr">zip</span>: zip_object
 }).then(<span class="hljs-function"><span class="hljs-params">data</span> =&gt;</span> {
   <span class="hljs-built_in">console</span>.log(data)
 }).catch(<span class="hljs-function"><span class="hljs-params">err</span> =&gt;</span> {
   <span class="hljs-built_in">console</span>.log(err)
-})</code></pre>
+})
+<span class="hljs-comment">/*
+As an example, another popular upload library for express is [express-fileupload](https://www.npmjs.com/package/express-fileupload). File objects obtained through this have the following properties:
+req.files.foo.name: "car.jpg"
+req.files.foo.mimetype: The mimetype of your file
+req.files.foo.data: A buffer representation of your file
+*/</span>
+
+<span class="hljs-comment">// In order to pass the file `req.files.foo` to Cosmic you would do:</span>
+<span class="hljs-keyword">const</span> media_object = {
+  <span class="hljs-attr">originalname</span>: req.files.foo.name,
+  <span class="hljs-attr">buffer</span>: req.files.foo.data,
+}</code></pre>
         <blockquote>
           <p>Example Response</p>
         </blockquote> <pre class="highlight json"><code>{
@@ -2308,14 +2376,41 @@ bucket.addExtension({
             <tr>
               <td>zip</td>
               <td>required</td>
-              <td>File</td>
-              <td>Media object</td>
+              <td>File Object (see below)</td>
+              <td>Zip object with specific properties</td>
             </tr>
             <tr>
               <td>write_key</td>
               <td></td>
               <td>String</td>
               <td>Your Bucket write key</td>
+            </tr>
+          </tbody>
+        </table>
+        <h3 id="file-object">File Object</h3>
+        <p>The File Object must be an object with certain properties indicated below. If using the
+          <a href="https://www.npmjs.com/package/multer" target="blank">multer NPM module</a> the file objects have these by default. Otherwise you should create an object with these properties:</p>
+        <table>
+          <thead>
+            <tr>
+              <th>Parameter</th>
+              <th>Required</th>
+              <th>Type</th>
+              <th>Description</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>originalname</td>
+              <td>required</td>
+              <td>String</td>
+              <td>The name of your file (something.jpg)</td>
+            </tr>
+            <tr>
+              <td>buffer</td>
+              <td></td>
+              <td>File Buffer</td>
+              <td>The File Buffer (must be zip file)</td>
             </tr>
           </tbody>
         </table>
