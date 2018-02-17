@@ -74,17 +74,17 @@ Adds an Extension to your Bucket.  The only required post value is `zip` which i
 
 Parameter | Required | Type | Description
 --------- | ------- | ----------- | -----------
-zip | required | Zip Object (see below) | Zip object with specific properties
+zip | required | File Object (see below) | Zip object with specific properties
 write_key | | String | Your Bucket write key
 
-### Zip Object
-The Zip Object must be an object with certain properties indicated below. If using the <a href="https://www.npmjs.com/package/multer" target="blank">multer NPM module</a> the file objects have these by default. Otherwise you should create an object with these properties:
+### File Object
+The File Object must be an object with certain properties indicated below. If using the <a href="https://www.npmjs.com/package/multer" target="blank">multer NPM module</a> the file objects have these by default. Otherwise you should create an object with these properties:
 
 
 Parameter | Required | Type | Description
 --------- | ------- | ----------- | -----------
 originalname | required | String | The name of your file (something.jpg)
-buffer | | File Buffer | The File Buffer
+buffer | | File Buffer | The File Buffer (must be zip file)
 
 ## Delete an Extension
 
