@@ -27,17 +27,29 @@ const bucket = Cosmic.bucket({
   write_key: ''
 })
 
-const zipObject = req.files[0] // Using Multer
+const zip_object = req.files[0] // Using Multer
 // OR:
-// const zipObject = { originalname: filename, buffer: filedata } // Not using Multer
+// const zip_object = { originalname: filename, buffer: filedata } // Not using Multer
 
 bucket.addExtension({
-  zip: zipObject
+  zip: zip_object
 }).then(data => {
   console.log(data)
 }).catch(err => {
   console.log(err)
 })
+/*
+As an example, another popular upload library for express is [express-fileupload](https://www.npmjs.com/package/express-fileupload). File objects obtained through this have the following properties:
+req.files.foo.name: "car.jpg"
+req.files.foo.mimetype: The mimetype of your file
+req.files.foo.data: A buffer representation of your file
+*/
+
+// In order to pass the file `req.files.foo` to Cosmic you would do:
+const media_object = {
+  originalname: req.files.foo.name,
+  buffer: req.files.foo.data,
+}
 ```
 
 
@@ -62,43 +74,17 @@ Adds an Extension to your Bucket.  The only required post value is `zip` which i
 
 Parameter | Required | Type | Description
 --------- | ------- | ----------- | -----------
-zip | required| MediaObj (see below) | Media object
+zip | required | Zip Object (see below) | Zip object with specific properties
 write_key | | String | Your Bucket write key
 
+### Zip Object
+The Zip Object must be an object with certain properties indicated below. If using the <a href="https://www.npmjs.com/package/multer" target="blank">multer NPM module</a> the file objects have these by default. Otherwise you should create an object with these properties:
 
-The MediaObj must be an object with the following keys. If using the [multer](https://www.npmjs.com/package/multer) library
-the file objects have these by default. Otherwise you should create an object to pass in. See the example below.
 
-Key | Description
---------- | -------
-originalname | name of file
-buffer | file buffer
-
-As an example, another popular upload library for express is [express-fileupload](https://www.npmjs.com/package/express-fileupload). File objects obtained through this have the following properties:
-
-  `req.files.foo.name: "car.jpg"`
-
-  `req.files.foo.mimetype: The mimetype of your file`
-
-  `
-  req.files.foo.data: A buffer representation of your file
-  `
-
-In order to pass the file `req.files.foo` to Cosmic you would do:
-
-  `const mediaObj = {`
-
-  &nbsp;&nbsp;&nbsp;&nbsp;`
-  originalname: req.files.foo.name,
-  `
-
-  &nbsp;&nbsp;&nbsp;&nbsp;`
-  buffer: req.files.foo.data,
-  `
-
-`
-}
-`
+Parameter | Required | Type | Description
+--------- | ------- | ----------- | -----------
+originalname | required | String | The name of your file (something.jpg)
+buffer | | File Buffer | The File Buffer
 
 ## Delete an Extension
 
