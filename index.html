@@ -435,6 +435,66 @@ Cosmic.deleteBucket({
             </tr>
           </tbody>
         </table>
+        <h1 id="users">Users</h1>
+        <h2 id="add-user-to-bucket">Add User to Bucket</h2>
+        <blockquote>
+          <p>Definition</p>
+        </blockquote> <pre class="highlight bash"><code>POST https://api.cosmicjs.com/v1/:bucket_slug/users</code></pre><pre class="highlight javascript"><code>bucket.addUser()</code></pre>
+        <blockquote>
+          <p>Example Request</p>
+        </blockquote> <pre class="highlight bash"><code>{
+  <span class="hljs-string">"email"</span>: <span class="hljs-string">"newuser@example.com"</span>,
+  <span class="hljs-string">"role"</span>: <span class="hljs-string">"editor"</span>
+}</code></pre><pre class="highlight javascript"><code><span class="hljs-keyword">const</span> bucket = Cosmic.bucket({
+  <span class="hljs-attr">slug</span>: <span class="hljs-string">'bucket-slug'</span>,
+  <span class="hljs-attr">write_key</span>: <span class="hljs-string">''</span>
+})
+<span class="hljs-keyword">const</span> params = {
+  <span class="hljs-string">"email"</span>: <span class="hljs-string">"newuser@example.com"</span>,
+  <span class="hljs-string">"role"</span>: <span class="hljs-string">"editor"</span>
+}
+bucket.addUser(params).then(<span class="hljs-function"><span class="hljs-params">data</span> =&gt;</span> {
+  <span class="hljs-built_in">console</span>.log(data)
+}).catch(<span class="hljs-function"><span class="hljs-params">err</span> =&gt;</span> {
+  <span class="hljs-built_in">console</span>.log(err)
+})</code></pre>
+        <blockquote>
+          <p>Example Response</p>
+        </blockquote> <pre class="highlight json"><code>{
+  <span class="hljs-attr">"status"</span>: <span class="hljs-number">200</span>,
+  <span class="hljs-attr">"message"</span>: <span class="hljs-string">"User added."</span>
+}</code></pre>
+        <p>Add a user to your Bucket. Authentication token is required and must have admin level access.</p>
+        <table>
+          <thead>
+            <tr>
+              <th>Parameter</th>
+              <th>Required</th>
+              <th>Type</th>
+              <th>Description</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>email</td>
+              <td>required</td>
+              <td>String</td>
+              <td>The new user&#39;s email</td>
+            </tr>
+            <tr>
+              <td>role</td>
+              <td>required</td>
+              <td>Enum</td>
+              <td>admin, developer, editor or contributor</td>
+            </tr>
+            <tr>
+              <td>write_key</td>
+              <td></td>
+              <td>String</td>
+              <td>Include if a write access key has been added to your Bucket</td>
+            </tr>
+          </tbody>
+        </table>
         <h1 id="object-types">Object Types</h1>
         <h2 id="add-object-type">Add Object Type</h2>
         <blockquote>
