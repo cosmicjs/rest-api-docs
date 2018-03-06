@@ -12,6 +12,7 @@ includes:
   - _errors
   - authentication
   - buckets
+  - users
   - object-types
   - objects
   - metafields
