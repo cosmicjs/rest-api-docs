@@ -28,7 +28,9 @@ const bucket = Cosmic.bucket({
 })
 const params = {
   "email": "newuser@example.com",
-  "role": "editor"
+  "role": "editor",
+  "first_name": "Quasar",
+  "last_name": "Jones"
 }
 bucket.addUser(params).then(data => {
   console.log(data)
