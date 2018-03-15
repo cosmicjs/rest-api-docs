@@ -86,7 +86,6 @@ curl "https://api.cosmicjs.com/v1/buckets" \
 ```
 
 ```javascript
-// Use the Cosmic.bucket method to connect to different Buckets in your account.
 const Cosmic = require('cosmicjs')({
   token: 'your-token-from-auth-request' // optional
 })
