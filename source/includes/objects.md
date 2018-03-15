@@ -140,22 +140,26 @@ bucket.getObjects()
 curl "https://api.cosmicjs.com/v1/wedding-site/objects?pretty=true&hide_metafields=true&limit=2"
 ```
 
-<script src="https://embed.runkit.com" data-element-id="runkit-get-objects"></script>
-<pre class="runkit" id="runkit-get-objects">
-const Cosmic = require('cosmicjs')
-const api = Cosmic()
-const bucket = api.bucket({
-  slug: 'wedding-site',
-  read_key: ''
-})
-bucket.getObjects({
-  limit: 2
-}).then(data => {
-  console.log(data)
-}).catch(err => {
-  console.log(err)
-})
-</pre>
+<script src="https://embed.runkit.com"></script>
+<pre class="runkit" id="runkit-get-objects"></pre>
+<script>var notebook = RunKit.createNotebook({
+    // the parent element for the new notebook
+    element: document.getElementById("runkit-get-objects"),
+    // specify the source of the notebook
+    source: "const Cosmic = require('cosmicjs')\n\
+const api = Cosmic()\n\
+const bucket = api.bucket({\n\
+  slug: 'wedding-site',\n\
+  read_key: ''\n\
+})\n\
+bucket.getObjects({\n\
+  limit: 2\n\
+}).then(data => {\n\
+  console.log(data)\n\
+}).catch(err => {\n\
+  console.log(err)\n\
+})"
+})</script>
 
 Returns all Objects from your Bucket.
 
@@ -168,6 +172,7 @@ status | | Enum | all, Return published and draft status Objects
 hide_metafields | | Enum | true, Hides metafields
 sort | | Enum | created_at, -created_at,<br />modified_at, -modified_at,<br />random
 locale | | String | Filter by locale
+filter[_id] | | String | Filter by Object IDs (comma separated for multiple)
 pretty | | Enum | true, Makes the response more reader-friendly
 read_key | | String | Your Bucket read key
 
@@ -190,22 +195,26 @@ bucket.getObject()
 curl "https://api.cosmicjs.com/v1/wedding-site/object/registry"
 ```
 
-<script src="https://embed.runkit.com" data-element-id="runkit-get-object"></script>
-<pre class="runkit" id="runkit-get-object">
-const Cosmic = require('cosmicjs')
-const api = Cosmic()
-const bucket = api.bucket({
-  slug: 'wedding-site',
-  read_key: ''
-})
-bucket.getObject({
-  slug: 'registry'
-}).then(data => {
-  console.log(data)
-}).catch(err => {
-  console.log(err)
-})
-</pre>
+<script src="https://embed.runkit.com"></script>
+<pre class="runkit" id="runkit-get-object"></pre>
+<script>var notebook = RunKit.createNotebook({
+    // the parent element for the new notebook
+    element: document.getElementById("runkit-get-object"),
+    // specify the source of the notebook
+    source: "const Cosmic = require('cosmicjs')\n\
+const api = Cosmic()\n\
+const bucket = api.bucket({\n\
+  slug: 'wedding-site',\n\
+  read_key: ''\n\
+})\n\
+bucket.getObject({\n\
+  slug: 'registry'\n\
+}).then(data => {\n\
+  console.log(data)\n\
+}).catch(err => {\n\
+  console.log(err)\n\
+})"
+})</script>
 
 Returns a single Object from your Bucket.
 
@@ -238,23 +247,27 @@ bucket.getObjectsByType()
 curl "https://api.cosmicjs.com/v1/wedding-site/object-type/groomsmen?limit=3"
 ```
 
-<script src="https://embed.runkit.com" data-element-id="runkit-get-objects-by-type"></script>
-<pre class="runkit" id="runkit-get-objects-by-type">
-const Cosmic = require('cosmicjs')
-const api = Cosmic()
-const bucket = api.bucket({
-  slug: 'wedding-site',
-  read_key: ''
-})
-bucket.getObjectsByType({
-  type_slug: 'groomsmen',
-  limit: 3
-}).then(data => {
-  console.log(data)
-}).catch(err => {
-  console.log(err)
-})
-</pre>
+<script src="https://embed.runkit.com"></script>
+<pre class="runkit" id="runkit-get-objects-by-type"></pre>
+<script>var notebook = RunKit.createNotebook({
+    // the parent element for the new notebook
+    element: document.getElementById("runkit-get-objects-by-type"),
+    // specify the source of the notebook
+    source: "const Cosmic = require('cosmicjs')\n\
+const api = Cosmic()\n\
+const bucket = api.bucket({\n\
+  slug: 'wedding-site',\n\
+  read_key: ''\n\
+})\n\
+bucket.getObjectsByType({\n\
+  type_slug: 'groomsmen',\n\
+  limit: 3\n\
+}).then(data => {\n\
+  console.log(data)\n\
+}).catch(err => {\n\
+  console.log(err)\n\
+})"
+})</script>
 
 
 Get Objects from an Object Type.
@@ -290,24 +303,28 @@ bucket.searchObjectType()
 curl "https://api.cosmicjs.com/v1/wedding-site/object-type/groomsmen/search?metafield_key=official-title&metafield_value=Best%20Man"
 ```
 
-<script src="https://embed.runkit.com" data-element-id="runkit-search-object-type"></script>
-<pre class="runkit" id="runkit-search-object-type">
-const Cosmic = require('cosmicjs')
-const api = Cosmic()
-const bucket = api.bucket({
-  slug: 'wedding-site',
-  read_key: ''
-})
-bucket.searchObjectType({
-  type_slug: 'groomsmen',
-  metafield_key: 'official-title',
-  metafield_value: 'Best Man'
-}).then(data => {
-  console.log(data)
-}).catch(err => {
-  console.log(err)
-})
-</pre>
+<script src="https://embed.runkit.com"></script>
+<pre class="runkit" id="runkit-search-object-type"></pre>
+<script>var notebook = RunKit.createNotebook({
+    // the parent element for the new notebook
+    element: document.getElementById("runkit-search-object-type"),
+    // specify the source of the notebook
+    source: "const Cosmic = require('cosmicjs')\n\
+const api = Cosmic()\n\
+const bucket = api.bucket({\n\
+  slug: 'wedding-site',\n\
+  read_key: ''\n\
+})\n\
+bucket.searchObjectType({\n\
+  type_slug: 'groomsmen',\n\
+  metafield_key: 'official-title',\n\
+  metafield_value: 'Best Man'\n\
+}).then(data => {\n\
+  console.log(data)\n\
+}).catch(err => {\n\
+  console.log(err)\n\
+})"
+})</script>
 
 
 Search Objects in an Object Type.

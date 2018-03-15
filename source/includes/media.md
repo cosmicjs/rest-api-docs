@@ -129,23 +129,27 @@ Cosmic.getMedia()
 curl "https://api.cosmicjs.com/v1/wedding-site/media?pretty=true&folder=groomsmen&limit=3"
 ```
 
-<script src="https://embed.runkit.com" data-element-id="runkit-get-media"></script>
-<pre class="runkit" id="runkit-get-media">
-const Cosmic = require('cosmicjs')
-const api = Cosmic()
-const bucket = api.bucket({
-  slug: 'wedding-site',
-  read_key: ''
-})
-bucket.getMedia({
-  folder: 'groomsmen',
-  limit: 3
-}).then(data => {
-  console.log(data)
-}).catch(err => {
-  console.log(err)
-})
-</pre>
+<script src="https://embed.runkit.com"></script>
+<pre class="runkit" id="runkit-get-media"></pre>
+<script>var notebook = RunKit.createNotebook({
+    // the parent element for the new notebook
+    element: document.getElementById("runkit-get-media"),
+    // specify the source of the notebook
+    source: "const Cosmic = require('cosmicjs')\n\
+const api = Cosmic()\n\
+const bucket = api.bucket({\n\
+  slug: 'wedding-site',\n\
+  read_key: ''\n\
+})\n\
+bucket.getMedia({\n\
+  folder: 'groomsmen',\n\
+  limit: 3\n\
+}).then(data => {\n\
+  console.log(data)\n\
+}).catch(err => {\n\
+  console.log(err)\n\
+})"
+})</script>
 
 You can add the `folder` parameter to get Media from a certain folder.
 

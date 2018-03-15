@@ -124,20 +124,24 @@ bucket.getObjectTypes()
 curl "https://api.cosmicjs.com/v1/wedding-site/object-types"
 ```
 
-<script src="https://embed.runkit.com" data-element-id="runkit-get-object-types"></script>
-<pre class="runkit" id="runkit-get-object-types">
-const Cosmic = require('cosmicjs')
-const api = Cosmic()
-const bucket = api.bucket({
-  slug: 'wedding-site',
-  read_key: ''
-})
-bucket.getObjectTypes().then(data => {
-  console.log(data)
-}).catch(err => {
-  console.log(err)
-})
-</pre>
+<script src="https://embed.runkit.com"></script>
+<pre class="runkit" id="runkit-get-object-types"></pre>
+<script>var notebook = RunKit.createNotebook({
+    // the parent element for the new notebook
+    element: document.getElementById("runkit-get-object-types"),
+    // specify the source of the notebook
+    source: "const Cosmic = require('cosmicjs')\n\
+const api = Cosmic()\n\
+const bucket = api.bucket({\n\
+  slug: 'wedding-site',\n\
+  read_key: ''\n\
+})\n\
+bucket.getObjectTypes().then(data => {\n\
+  console.log(data)\n\
+}).catch(err => {\n\
+  console.log(err)\n\
+})"
+})</script>
 
 Get all Object Types in your Bucket.
 
