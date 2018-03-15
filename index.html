@@ -302,8 +302,7 @@ Cosmic.addBucket({
           <p>Example Request</p>
         </blockquote> <pre class="highlight bash"><code>curl <span class="hljs-string">"https://api.cosmicjs.com/v1/buckets"</span> \
 -H <span class="hljs-string">"Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXV..."</span> \
--H <span class="hljs-string">"Content-Type: application/json"</span></code></pre><pre class="highlight javascript"><code><span class="hljs-comment">// Use the Cosmic.bucket method to connect to different Buckets in your account.</span>
-<span class="hljs-keyword">const</span> Cosmic = <span class="hljs-built_in">require</span>(<span class="hljs-string">'cosmicjs'</span>)({
+-H <span class="hljs-string">"Content-Type: application/json"</span></code></pre><pre class="highlight javascript"><code><span class="hljs-keyword">const</span> Cosmic = <span class="hljs-built_in">require</span>(<span class="hljs-string">'cosmicjs'</span>)({
   <span class="hljs-attr">token</span>: <span class="hljs-string">'your-token-from-auth-request'</span> <span class="hljs-comment">// optional</span>
 })
 Cosmic.getBuckets().then(<span class="hljs-function"><span class="hljs-params">data</span> =&gt;</span> {
