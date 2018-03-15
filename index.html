@@ -294,6 +294,51 @@ Cosmic.addBucket({
             </tr>
           </tbody>
         </table>
+        <h2 id="get-buckets">Get Buckets</h2>
+        <blockquote>
+          <p>Definition</p>
+        </blockquote> <pre class="highlight bash"><code>GET https://api.cosmicjs.com/v1/buckets</code></pre><pre class="highlight javascript"><code>Cosmic.getBuckets()</code></pre>
+        <blockquote>
+          <p>Example Request</p>
+        </blockquote> <pre class="highlight bash"><code>curl <span class="hljs-string">"https://api.cosmicjs.com/v1/buckets"</span> \
+-H <span class="hljs-string">"Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXV..."</span> \
+-H <span class="hljs-string">"Content-Type: application/json"</span></code></pre><pre class="highlight javascript"><code><span class="hljs-comment">// Use the Cosmic.bucket method to connect to different Buckets in your account.</span>
+<span class="hljs-keyword">const</span> Cosmic = <span class="hljs-built_in">require</span>(<span class="hljs-string">'cosmicjs'</span>)({
+  <span class="hljs-attr">token</span>: <span class="hljs-string">'your-token-from-auth-request'</span> <span class="hljs-comment">// optional</span>
+})
+Cosmic.getBuckets().then(<span class="hljs-function"><span class="hljs-params">data</span> =&gt;</span> {
+  <span class="hljs-built_in">console</span>.log(data)
+}).catch(<span class="hljs-function"><span class="hljs-params">err</span> =&gt;</span> {
+  <span class="hljs-built_in">console</span>.log(err)
+})</code></pre>
+        <p>Gets all Buckets connected to your account. Your authorization token in the header request is the only required property.</p>
+        <blockquote>
+          <p>Example Response</p>
+        </blockquote> <pre class="highlight json"><code>{
+  <span class="hljs-attr">"buckets"</span>: [
+    {
+      <span class="hljs-attr">"_id"</span>: <span class="hljs-string">"5a051c23ae05992b360005e7"</span>,
+      <span class="hljs-attr">"slug"</span>: <span class="hljs-string">"my-first-bucket"</span>,
+      <span class="hljs-attr">"title"</span>: <span class="hljs-string">"My First Bucket"</span>,
+      <span class="hljs-attr">"created_at"</span>: <span class="hljs-string">"2017-11-10T03:25:23.807Z"</span>,
+      <span class="hljs-attr">"modified_at"</span>: <span class="hljs-string">"2017-11-11T17:20:04.322Z"</span>
+    },
+    {
+      <span class="hljs-attr">"_id"</span>: <span class="hljs-string">"5a329f6769a130011900000c"</span>,
+      <span class="hljs-attr">"slug"</span>: <span class="hljs-string">"my-second-bucket"</span>,
+      <span class="hljs-attr">"title"</span>: <span class="hljs-string">"My Second Bucket"</span>,
+      <span class="hljs-attr">"created_at"</span>: <span class="hljs-string">"2017-12-14T15:57:27.274Z"</span>,
+      <span class="hljs-attr">"modified_at"</span>: <span class="hljs-string">"2018-01-14T04:06:29.630Z"</span>
+    },
+    {
+      <span class="hljs-attr">"_id"</span>: <span class="hljs-string">"5a329f6769a130011900000c"</span>,
+      <span class="hljs-attr">"slug"</span>: <span class="hljs-string">"my-third-bucket"</span>,
+      <span class="hljs-attr">"title"</span>: <span class="hljs-string">"My Third Bucket"</span>,
+      <span class="hljs-attr">"created_at"</span>: <span class="hljs-string">"2017-12-14T15:57:27.274Z"</span>,
+      <span class="hljs-attr">"modified_at"</span>: <span class="hljs-string">"2018-01-14T04:06:29.630Z"</span>
+    }
+  ]
+}</code></pre>
         <h2 id="connect-to-bucket">Connect to Bucket</h2>
         <blockquote>
           <p>Example Request</p>
@@ -643,21 +688,26 @@ bucket.addObjectType(params).then(<span class="hljs-function"><span class="hljs-
         <blockquote>
           <p>Example Request</p>
         </blockquote> <pre class="highlight bash"><code>curl <span class="hljs-string">"https://api.cosmicjs.com/v1/wedding-site/object-types"</span></code></pre>
-        <p>
-          <script src="https://embed.runkit.com" data-element-id="runkit-get-object-types"></script>
-        </p> <pre class="runkit" id="runkit-get-object-types">
-const Cosmic = require('cosmicjs')
-const api = Cosmic()
-const bucket = api.bucket({
-  slug: 'wedding-site',
-  read_key: ''
-})
-bucket.getObjectTypes().then(data => {
-  console.log(data)
-}).catch(err => {
-  console.log(err)
-})
-</pre>
+        <script src="https://embed.runkit.com"></script> <pre class="runkit" id="runkit-get-object-types"></pre>
+        <script>
+          var notebook = RunKit.createNotebook(
+          {
+            // the parent element for the new notebook
+            element: document.getElementById("runkit-get-object-types"),
+            // specify the source of the notebook
+            source: "const Cosmic = require('cosmicjs')\n\
+const api = Cosmic()\n\
+const bucket = api.bucket({\n\
+  slug: 'wedding-site',\n\
+  read_key: ''\n\
+})\n\
+bucket.getObjectTypes().then(data => {\n\
+  console.log(data)\n\
+}).catch(err => {\n\
+  console.log(err)\n\
+})"
+          })
+        </script>
         <p>Get all Object Types in your Bucket.</p>
         <table>
           <thead>
@@ -1015,23 +1065,28 @@ bucket.addObject(params).then(<span class="hljs-function"><span class="hljs-para
         <blockquote>
           <p>Example Request</p>
         </blockquote> <pre class="highlight bash"><code>curl <span class="hljs-string">"https://api.cosmicjs.com/v1/wedding-site/objects?pretty=true&amp;hide_metafields=true&amp;limit=2"</span></code></pre>
-        <p>
-          <script src="https://embed.runkit.com" data-element-id="runkit-get-objects"></script>
-        </p> <pre class="runkit" id="runkit-get-objects">
-const Cosmic = require('cosmicjs')
-const api = Cosmic()
-const bucket = api.bucket({
-  slug: 'wedding-site',
-  read_key: ''
-})
-bucket.getObjects({
-  limit: 2
-}).then(data => {
-  console.log(data)
-}).catch(err => {
-  console.log(err)
-})
-</pre>
+        <script src="https://embed.runkit.com"></script> <pre class="runkit" id="runkit-get-objects"></pre>
+        <script>
+          var notebook = RunKit.createNotebook(
+          {
+            // the parent element for the new notebook
+            element: document.getElementById("runkit-get-objects"),
+            // specify the source of the notebook
+            source: "const Cosmic = require('cosmicjs')\n\
+const api = Cosmic()\n\
+const bucket = api.bucket({\n\
+  slug: 'wedding-site',\n\
+  read_key: ''\n\
+})\n\
+bucket.getObjects({\n\
+  limit: 2\n\
+}).then(data => {\n\
+  console.log(data)\n\
+}).catch(err => {\n\
+  console.log(err)\n\
+})"
+          })
+        </script>
         <p>Returns all Objects from your Bucket.</p>
         <table>
           <thead>
@@ -1082,6 +1137,12 @@ bucket.getObjects({
               <td>Filter by locale</td>
             </tr>
             <tr>
+              <td>filter[_id]</td>
+              <td></td>
+              <td>String</td>
+              <td>Filter by Object IDs (comma separated for multiple)</td>
+            </tr>
+            <tr>
               <td>pretty</td>
               <td></td>
               <td>Enum</td>
@@ -1102,23 +1163,28 @@ bucket.getObjects({
         <blockquote>
           <p>Example Request</p>
         </blockquote> <pre class="highlight bash"><code>curl <span class="hljs-string">"https://api.cosmicjs.com/v1/wedding-site/object/registry"</span></code></pre>
-        <p>
-          <script src="https://embed.runkit.com" data-element-id="runkit-get-object"></script>
-        </p> <pre class="runkit" id="runkit-get-object">
-const Cosmic = require('cosmicjs')
-const api = Cosmic()
-const bucket = api.bucket({
-  slug: 'wedding-site',
-  read_key: ''
-})
-bucket.getObject({
-  slug: 'registry'
-}).then(data => {
-  console.log(data)
-}).catch(err => {
-  console.log(err)
-})
-</pre>
+        <script src="https://embed.runkit.com"></script> <pre class="runkit" id="runkit-get-object"></pre>
+        <script>
+          var notebook = RunKit.createNotebook(
+          {
+            // the parent element for the new notebook
+            element: document.getElementById("runkit-get-object"),
+            // specify the source of the notebook
+            source: "const Cosmic = require('cosmicjs')\n\
+const api = Cosmic()\n\
+const bucket = api.bucket({\n\
+  slug: 'wedding-site',\n\
+  read_key: ''\n\
+})\n\
+bucket.getObject({\n\
+  slug: 'registry'\n\
+}).then(data => {\n\
+  console.log(data)\n\
+}).catch(err => {\n\
+  console.log(err)\n\
+})"
+          })
+        </script>
         <p>Returns a single Object from your Bucket.</p>
         <table>
           <thead>
@@ -1181,24 +1247,29 @@ bucket.getObject({
         <blockquote>
           <p>Example Request</p>
         </blockquote> <pre class="highlight bash"><code>curl <span class="hljs-string">"https://api.cosmicjs.com/v1/wedding-site/object-type/groomsmen?limit=3"</span></code></pre>
-        <p>
-          <script src="https://embed.runkit.com" data-element-id="runkit-get-objects-by-type"></script>
-        </p> <pre class="runkit" id="runkit-get-objects-by-type">
-const Cosmic = require('cosmicjs')
-const api = Cosmic()
-const bucket = api.bucket({
-  slug: 'wedding-site',
-  read_key: ''
-})
-bucket.getObjectsByType({
-  type_slug: 'groomsmen',
-  limit: 3
-}).then(data => {
-  console.log(data)
-}).catch(err => {
-  console.log(err)
-})
-</pre>
+        <script src="https://embed.runkit.com"></script> <pre class="runkit" id="runkit-get-objects-by-type"></pre>
+        <script>
+          var notebook = RunKit.createNotebook(
+          {
+            // the parent element for the new notebook
+            element: document.getElementById("runkit-get-objects-by-type"),
+            // specify the source of the notebook
+            source: "const Cosmic = require('cosmicjs')\n\
+const api = Cosmic()\n\
+const bucket = api.bucket({\n\
+  slug: 'wedding-site',\n\
+  read_key: ''\n\
+})\n\
+bucket.getObjectsByType({\n\
+  type_slug: 'groomsmen',\n\
+  limit: 3\n\
+}).then(data => {\n\
+  console.log(data)\n\
+}).catch(err => {\n\
+  console.log(err)\n\
+})"
+          })
+        </script>
         <p>Get Objects from an Object Type.</p>
         <table>
           <thead>
@@ -1281,25 +1352,30 @@ bucket.getObjectsByType({
         <blockquote>
           <p>Example Request</p>
         </blockquote> <pre class="highlight bash"><code>curl <span class="hljs-string">"https://api.cosmicjs.com/v1/wedding-site/object-type/groomsmen/search?metafield_key=official-title&amp;metafield_value=Best%20Man"</span></code></pre>
-        <p>
-          <script src="https://embed.runkit.com" data-element-id="runkit-search-object-type"></script>
-        </p> <pre class="runkit" id="runkit-search-object-type">
-const Cosmic = require('cosmicjs')
-const api = Cosmic()
-const bucket = api.bucket({
-  slug: 'wedding-site',
-  read_key: ''
-})
-bucket.searchObjectType({
-  type_slug: 'groomsmen',
-  metafield_key: 'official-title',
-  metafield_value: 'Best Man'
-}).then(data => {
-  console.log(data)
-}).catch(err => {
-  console.log(err)
-})
-</pre>
+        <script src="https://embed.runkit.com"></script> <pre class="runkit" id="runkit-search-object-type"></pre>
+        <script>
+          var notebook = RunKit.createNotebook(
+          {
+            // the parent element for the new notebook
+            element: document.getElementById("runkit-search-object-type"),
+            // specify the source of the notebook
+            source: "const Cosmic = require('cosmicjs')\n\
+const api = Cosmic()\n\
+const bucket = api.bucket({\n\
+  slug: 'wedding-site',\n\
+  read_key: ''\n\
+})\n\
+bucket.searchObjectType({\n\
+  type_slug: 'groomsmen',\n\
+  metafield_key: 'official-title',\n\
+  metafield_value: 'Best Man'\n\
+}).then(data => {\n\
+  console.log(data)\n\
+}).catch(err => {\n\
+  console.log(err)\n\
+})"
+          })
+        </script>
         <p>Search Objects in an Object Type.</p>
         <table>
           <thead>
@@ -2172,24 +2248,29 @@ req.files.foo.data: A buffer representation of your file
         <blockquote>
           <p>Example Request</p>
         </blockquote> <pre class="highlight bash"><code>curl <span class="hljs-string">"https://api.cosmicjs.com/v1/wedding-site/media?pretty=true&amp;folder=groomsmen&amp;limit=3"</span></code></pre>
-        <p>
-          <script src="https://embed.runkit.com" data-element-id="runkit-get-media"></script>
-        </p> <pre class="runkit" id="runkit-get-media">
-const Cosmic = require('cosmicjs')
-const api = Cosmic()
-const bucket = api.bucket({
-  slug: 'wedding-site',
-  read_key: ''
-})
-bucket.getMedia({
-  folder: 'groomsmen',
-  limit: 3
-}).then(data => {
-  console.log(data)
-}).catch(err => {
-  console.log(err)
-})
-</pre>
+        <script src="https://embed.runkit.com"></script> <pre class="runkit" id="runkit-get-media"></pre>
+        <script>
+          var notebook = RunKit.createNotebook(
+          {
+            // the parent element for the new notebook
+            element: document.getElementById("runkit-get-media"),
+            // specify the source of the notebook
+            source: "const Cosmic = require('cosmicjs')\n\
+const api = Cosmic()\n\
+const bucket = api.bucket({\n\
+  slug: 'wedding-site',\n\
+  read_key: ''\n\
+})\n\
+bucket.getMedia({\n\
+  folder: 'groomsmen',\n\
+  limit: 3\n\
+}).then(data => {\n\
+  console.log(data)\n\
+}).catch(err => {\n\
+  console.log(err)\n\
+})"
+          })
+        </script>
         <p>You can add the <code>folder</code> parameter to get Media from a certain folder.</p>
         <h3 id="imgix">Imgix</h3>
         <p>
