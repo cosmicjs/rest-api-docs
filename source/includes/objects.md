@@ -172,7 +172,7 @@ status | | Enum | all, Return published and draft status Objects
 hide_metafields | | Enum | true, Hides metafields
 sort | | Enum | created_at, -created_at,<br />modified_at, -modified_at,<br />random
 locale | | String | Filter by locale
-filter[_id] | | String | Filter by Object IDs (comma separated for multiple)
+filters[_id] | | String | Filter by Object IDs (comma separated for multiple)
 pretty | | Enum | true, Makes the response more reader-friendly
 read_key | | String | Your Bucket read key
 
