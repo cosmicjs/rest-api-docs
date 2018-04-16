@@ -206,7 +206,7 @@ Cosmic.addBucket({
   }
 }</code></pre>
         <p><code>title</code> is the only required property. If no <code>slug</code> is present, the title will be
-          <a href="https://www.npmjs.com/package/url-slug" target="_blank">converted to a slug</a>. See the table below for the other optional properties. The Bucket request matches the <code>bucket.json</code> file located in Your Bucket Dashboard &gt; Import Export.</p>
+          <a href="https://www.npmjs.com/package/url-slug" target="_blank">converted to a slug</a>. See the table below for the other optional properties. The Bucket request matches the <code>bucket.json</code> file located in Your Bucket Dashboard &gt; Import / Export.</p>
         <table>
           <thead>
             <tr>
@@ -454,7 +454,8 @@ Cosmic.deleteBucket({
   <span class="hljs-attr">"status"</span>: <span class="hljs-string">"200"</span>,
   <span class="hljs-attr">"message"</span>: <span class="hljs-string">"Bucket deleted"</span>
 }</code></pre>
-        <p>Delete an existing Object in your Bucket.</p>
+        <p>
+          <span class="hljs-keyword">DANGER!</span> Deletes the whole Bucket. This cannot be undone.</p>
         <table>
           <thead>
             <tr>
@@ -476,6 +477,156 @@ Cosmic.deleteBucket({
               <td>required</td>
               <td>String</td>
               <td>You can only delete Buckets that you have created / own.</td>
+            </tr>
+          </tbody>
+        </table>
+        <h2 id="import-bucket">Import Bucket</h2>
+        <blockquote>
+          <p>Definition</p>
+        </blockquote> <pre class="highlight bash"><code>POST https://api.cosmicjs.com/v1/buckets/:bucket_id/import</code></pre><pre class="highlight javascript"><code>Cosmic.importBucket()</code></pre>
+        <blockquote>
+          <p>Example Request</p>
+        </blockquote> <pre class="highlight bash"><code>curl -X POST <span class="hljs-string">"https://api.cosmicjs.com/v1/buckets/5ace13795a39fb49db87ac95/import"</span> \
+-H <span class="hljs-string">"Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXV..."</span> \
+-H <span class="hljs-string">"Content-Type: application/json"</span> \
+-d <span class="hljs-string">'{ "bucket": { "title": "My New Bucket" } }'</span></code></pre><pre class="highlight javascript"><code><span class="hljs-keyword">const</span> Cosmic = <span class="hljs-built_in">require</span>(<span class="hljs-string">'cosmicjs'</span>)({
+  <span class="hljs-attr">token</span>: <span class="hljs-string">'your-token-from-auth-request'</span> <span class="hljs-comment">// required</span>
+})
+<span class="hljs-keyword">const</span> params = {
+  <span class="hljs-string">"id"</span>: <span class="hljs-string">"5ace13795a39fb49db87ac95"</span>, <span class="hljs-comment">// Bucket id</span>
+  <span class="hljs-string">"bucket"</span>: { <span class="hljs-comment">// import data</span>
+    <span class="hljs-string">"object_types"</span>: [...],
+    <span class="hljs-string">"objects"</span>: [...],
+    <span class="hljs-string">"media"</span>: [...]
+  }
+}
+Cosmic.importBucket(params).then(<span class="hljs-function"><span class="hljs-params">data</span> =&gt;</span> {
+  <span class="hljs-built_in">console</span>.log(data)
+}).catch(<span class="hljs-function"><span class="hljs-params">err</span> =&gt;</span> {
+  <span class="hljs-built_in">console</span>.log(err)
+})</code></pre>
+        <blockquote>
+          <p>Example Response</p>
+        </blockquote> <pre class="highlight json"><code>{
+  "bucket": {
+    "_id": "5ace13795a39fb49db87ac95",
+    "slug": "same-bucket-slug",
+    "title": "Same Bucket Title",
+    "object_types": [...], // all new Object Types
+    "objects": [...], // all new Objects
+    "media": [...] // all new Media
+  }
+}</code></pre>
+        <p>
+          <span class="hljs-keyword">DANGER!</span> The Bucket import method removes all current data: Object Types, Objects and Media and replaces it with new data. This cannot be undone.</p>
+        <p>The Bucket data schema matches the <code>bucket.json</code> file located in Your Bucket Dashboard &gt; Import / Export. </p>
+        <table>
+          <thead>
+            <tr>
+              <th>Parameter</th>
+              <th>Required</th>
+              <th>Type</th>
+              <th>Description</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>object_types</td>
+              <td></td>
+              <td>Array</td>
+              <td>Populate your Bucket with Object Types. See
+                <a href="#object-types">Object Types</a> for model.</td>
+            </tr>
+            <tr>
+              <td>objects</td>
+              <td></td>
+              <td>Array</td>
+              <td>Populate your Bucket with Objects. See
+                <a href="#objects">Objects</a> for model.</td>
+            </tr>
+            <tr>
+              <td>media</td>
+              <td></td>
+              <td>Array</td>
+              <td>Populate your Bucket with Media. See
+                <a href="#media">Media</a> for model.</td>
+            </tr>
+            <tr>
+              <td>media_folders</td>
+              <td></td>
+              <td>Array</td>
+              <td>Populate your Bucket with Media Folders. See
+                <a href="#media">Media</a> for model.</td>
+            </tr>
+            <tr>
+              <td>webhooks</td>
+              <td></td>
+              <td>Array</td>
+              <td>Populate your Bucket with
+                <a href="https://cosmicjs.com/docs/webhooks" target="_blank">Webhooks</a>. See
+                <a href="#webhooks">Webhooks</a> for model.</td>
+            </tr>
+            <tr>
+              <td>extensions</td>
+              <td></td>
+              <td>Array</td>
+              <td>Populate your Bucket with
+                <a href="https://cosmicjs.com/docs/extensions" target="_blank">Extensions</a>. See
+                <a href="#extensions">Extensions</a> for model.</td>
+            </tr>
+          </tbody>
+        </table>
+        <h2 id="deploy-app">Deploy App</h2>
+        <blockquote>
+          <p>Definition</p>
+        </blockquote> <pre class="highlight bash"><code>POST https://api.cosmicjs.com/v1/buckets/:bucket_id/deploy</code></pre><pre class="highlight javascript"><code>Cosmic.deployApp()</code></pre>
+        <blockquote>
+          <p>Example Request</p>
+        </blockquote> <pre class="highlight bash"><code>curl -X POST <span class="hljs-string">"https://api.cosmicjs.com/v1/buckets/5ace13795a39fb49db87ac95/deploy"</span> \
+-H <span class="hljs-string">"Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXV..."</span> \
+-H <span class="hljs-string">"Content-Type: application/json"</span> \
+-d <span class="hljs-string">'{ "repo_url": "https://github.com/cosmicjs/portfolio-website", "repo_branch": "master" }'</span></code></pre><pre class="highlight javascript"><code><span class="hljs-keyword">const</span> Cosmic = <span class="hljs-built_in">require</span>(<span class="hljs-string">'cosmicjs'</span>)({
+  <span class="hljs-attr">token</span>: <span class="hljs-string">'your-token-from-auth-request'</span> <span class="hljs-comment">// required</span>
+})
+<span class="hljs-keyword">const</span> params = {
+  <span class="hljs-string">"id"</span>: <span class="hljs-string">"5ace13795a39fb49db87ac95"</span>,
+  <span class="hljs-string">"repo_url"</span>: <span class="hljs-string">"https://github.com/cosmicjs/portfolio-website"</span>,
+  <span class="hljs-string">"repo_branch"</span>: <span class="hljs-string">"master"</span>
+}
+Cosmic.deployApp(params).then(<span class="hljs-function"><span class="hljs-params">data</span> =&gt;</span> {
+  <span class="hljs-built_in">console</span>.log(data)
+}).catch(<span class="hljs-function"><span class="hljs-params">err</span> =&gt;</span> {
+  <span class="hljs-built_in">console</span>.log(err)
+})</code></pre>
+        <blockquote>
+          <p>Example Response</p>
+        </blockquote> <pre class="highlight json"><code>{
+  <span class="hljs-attr">"code"</span>: <span class="hljs-number">200</span>,
+  <span class="hljs-attr">"status"</span>: <span class="hljs-string">"success"</span>,
+  <span class="hljs-attr">"message"</span>: <span class="hljs-string">"App deploying.  You will receive an email when the deployment is completed successfully."</span>
+}</code></pre>
+        <p>The Bucket deploy App action replaces the currently deployed App connected to this Bucket (if one exists).</p>
+        <table>
+          <thead>
+            <tr>
+              <th>Parameter</th>
+              <th>Required</th>
+              <th>Type</th>
+              <th>Description</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>repo_url</td>
+              <td></td>
+              <td>String</td>
+              <td>Link to public (or private, if GitHub account connected) repository</td>
+            </tr>
+            <tr>
+              <td>repo_branch</td>
+              <td></td>
+              <td>String</td>
+              <td>Repo branch to deploy. Defaults to <code>master</code> if none specified.</td>
             </tr>
           </tbody>
         </table>
