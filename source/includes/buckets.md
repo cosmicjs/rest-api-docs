@@ -49,7 +49,7 @@ Cosmic.addBucket({
 }
 ```
 
-`title` is the only required property.  If no `slug` is present, the title will be <a href="https://www.npmjs.com/package/url-slug" target="_blank">converted to a slug</a>.  See the table below for the other optional properties.  The Bucket request matches the `bucket.json` file located in Your Bucket Dashboard > Import Export.
+`title` is the only required property.  If no `slug` is present, the title will be <a href="https://www.npmjs.com/package/url-slug" target="_blank">converted to a slug</a>.  See the table below for the other optional properties.  The Bucket request matches the `bucket.json` file located in Your Bucket Dashboard > Import / Export.
 
 Parameter | Required | Type | Description
 --------- | ------- | ----------- | -----------
@@ -246,9 +246,145 @@ Cosmic.deleteBucket({
 ```
 
 
-Delete an existing Object in your Bucket.
+<span class="hljs-keyword">DANGER!</span> Deletes the whole Bucket.  This cannot be undone.
 
 Parameter | Required | Type | Description
 --------- | ------- | ----------- | -----------
 id | required | String | The Bucket id found as "_id"
 token | required | String | You can only delete Buckets that you have created / own.
+
+
+
+
+
+
+
+
+## Import Bucket
+
+
+> Definition
+
+```bash
+POST https://api.cosmicjs.com/v1/buckets/:bucket_id/import
+```
+
+```javascript
+Cosmic.importBucket()
+```
+
+> Example Request
+
+```bash
+curl -X POST "https://api.cosmicjs.com/v1/buckets/5ace13795a39fb49db87ac95/import" \
+-H "Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXV..." \
+-H "Content-Type: application/json" \
+-d '{ "bucket": { "title": "My New Bucket" } }'
+```
+
+```javascript
+const Cosmic = require('cosmicjs')({
+  token: 'your-token-from-auth-request' // required
+})
+const params = {
+  "id": "5ace13795a39fb49db87ac95", // Bucket id
+  "bucket": { // import data
+    "object_types": [...],
+    "objects": [...],
+    "media": [...]
+  }
+}
+Cosmic.importBucket(params).then(data => {
+  console.log(data)
+}).catch(err => {
+  console.log(err)
+})
+```
+
+> Example Response
+
+```json
+{
+  "bucket": {
+    "_id": "5ace13795a39fb49db87ac95",
+    "slug": "same-bucket-slug",
+    "title": "Same Bucket Title",
+    "object_types": [...], // all new Object Types
+    "objects": [...], // all new Objects
+    "media": [...] // all new Media
+  }
+}
+```
+
+<span class="hljs-keyword">DANGER!</span> The Bucket import method removes all current data: Object Types, Objects and Media and replaces it with new data.  This cannot be undone.
+
+The Bucket data schema  matches the `bucket.json` file located in Your Bucket Dashboard > Import / Export.  
+
+Parameter | Required | Type | Description
+--------- | ------- | ----------- | -----------
+object_types |  | Array | Populate your Bucket with Object Types.  See <a href="#object-types">Object Types</a> for model.
+objects |  | Array | Populate your Bucket with Objects. See <a href="#objects">Objects</a> for model.
+media |  | Array | Populate your Bucket with Media. See <a href="#media">Media</a> for model.
+media_folders |  | Array | Populate your Bucket with Media Folders. See <a href="#media">Media</a> for model.
+webhooks |  | Array | Populate your Bucket with <a href="https://cosmicjs.com/docs/webhooks" target="_blank">Webhooks</a>. See <a href="#webhooks">Webhooks</a> for model.
+extensions |  | Array | Populate your Bucket with <a href="https://cosmicjs.com/docs/extensions" target="_blank">Extensions</a>. See <a href="#extensions">Extensions</a> for model.
+
+
+
+
+
+## Deploy App
+
+
+> Definition
+
+```bash
+POST https://api.cosmicjs.com/v1/buckets/:bucket_id/deploy
+```
+
+```javascript
+Cosmic.deployApp()
+```
+
+> Example Request
+
+```bash
+curl -X POST "https://api.cosmicjs.com/v1/buckets/5ace13795a39fb49db87ac95/deploy" \
+-H "Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXV..." \
+-H "Content-Type: application/json" \
+-d '{ "repo_url": "https://github.com/cosmicjs/portfolio-website", "repo_branch": "master" }'
+```
+
+```javascript
+const Cosmic = require('cosmicjs')({
+  token: 'your-token-from-auth-request' // required
+})
+const params = {
+  "id": "5ace13795a39fb49db87ac95",
+  "repo_url": "https://github.com/cosmicjs/portfolio-website",
+  "repo_branch": "master"
+}
+Cosmic.deployApp(params).then(data => {
+  console.log(data)
+}).catch(err => {
+  console.log(err)
+})
+```
+
+> Example Response
+
+```json
+{
+  "code": 200,
+  "status": "success",
+  "message": "App deploying.  You will receive an email when the deployment is completed successfully."
+}
+```
+
+The Bucket deploy App action replaces the currently deployed App connected to this Bucket (if one exists).
+
+Parameter | Required | Type | Description
+--------- | ------- | ----------- | -----------
+repo_url |  | String | Link to public (or private, if GitHub account connected) repository
+repo_branch |  | String | Repo branch to deploy.  Defaults to `master` if none specified.
+
