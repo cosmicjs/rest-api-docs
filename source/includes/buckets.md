@@ -287,7 +287,7 @@ const Cosmic = require('cosmicjs')({
   token: 'your-token-from-auth-request' // required
 })
 const params = {
-  "id": "5ace13795a39fb49db87ac95", // Bucket id
+  "id": "5ace13795a39fb49db87ac95", // Bucket id found in Bucket Settings > Basic Settings
   "bucket": { // import data
     "object_types": [...],
     "objects": [...],
@@ -360,7 +360,7 @@ const Cosmic = require('cosmicjs')({
   token: 'your-token-from-auth-request' // required
 })
 const params = {
-  "id": "5ace13795a39fb49db87ac95",
+  "id": "5ace13795a39fb49db87ac95", // Bucket id found in Bucket Settings > Basic Settings
   "repo_url": "https://github.com/cosmicjs/portfolio-website",
   "repo_branch": "master"
 }
