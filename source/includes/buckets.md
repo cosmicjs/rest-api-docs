@@ -188,11 +188,7 @@ const api = Cosmic()
 const bucket = api.bucket({
   slug: 'wedding-site'
 })
-bucket.getBucket().then(data => {
-  console.log(data)
-}).catch(err => {
-  console.log(err)
-})
+const data = (await bucket.getBucket()).bucket
 </pre>
 
 
