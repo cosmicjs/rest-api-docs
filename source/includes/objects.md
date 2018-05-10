@@ -268,7 +268,7 @@ console.log(filter)"
 })</script>
 
 
-Get Objects based on search variables. (the method seachObjects is now deprecated)
+Get Objects based on search variables. (the method searchObjectType is now deprecated)
 
 
 
