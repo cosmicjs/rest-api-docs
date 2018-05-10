@@ -401,11 +401,7 @@ const api = Cosmic()
 const bucket = api.bucket({
   slug: 'wedding-site'
 })
-bucket.getBucket().then(data => {
-  console.log(data)
-}).catch(err => {
-  console.log(err)
-})
+const data = (await bucket.getBucket()).bucket
 </pre>
         <p>Returns the entire Bucket including Object Types, Objects, Media and more. If you would like to restrict read access to your Bucket, you can do so in Your Bucket &gt; Basic Settings.</p>
         <table>
@@ -848,14 +844,9 @@ bucket.addObjectType(params).then(<span class="hljs-function"><span class="hljs-
             source: "const Cosmic = require('cosmicjs')\n\
 const api = Cosmic()\n\
 const bucket = api.bucket({\n\
-  slug: 'wedding-site',\n\
-  read_key: ''\n\
+  slug: 'simple-blog-website'\n\
 })\n\
-bucket.getObjectTypes().then(data => {\n\
-  console.log(data)\n\
-}).catch(err => {\n\
-  console.log(err)\n\
-})"
+const data = (await bucket.getObjectTypes()).object_types"
           })
         </script>
         <p>Get all Object Types in your Bucket.</p>
@@ -1226,18 +1217,12 @@ bucket.addObject(params).then(<span class="hljs-function"><span class="hljs-para
 const api = Cosmic()\n\
 const bucket = api.bucket({\n\
   slug: 'wedding-site',\n\
-  read_key: ''\n\
 })\n\
-bucket.getObjects({\n\
-  limit: 2\n\
-}).then(data => {\n\
-  console.log(data)\n\
-}).catch(err => {\n\
-  console.log(err)\n\
-})"
+// Get all Objects from a Bucket\n\
+const data = (await bucket.getObjects()).objects"
           })
         </script>
-        <p>Returns all Objects from your Bucket.</p>
+        <p>Returns Objects from your Bucket.</p>
         <table>
           <thead>
             <tr>
@@ -1248,6 +1233,12 @@ bucket.getObjects({\n\
             </tr>
           </thead>
           <tbody>
+            <tr>
+              <td>type</td>
+              <td></td>
+              <td>String</td>
+              <td>The Object Type slug</td>
+            </tr>
             <tr>
               <td>limit</td>
               <td></td>
@@ -1287,6 +1278,30 @@ bucket.getObjects({\n\
               <td>Filter by locale</td>
             </tr>
             <tr>
+              <td>q</td>
+              <td></td>
+              <td>String</td>
+              <td>Searches title and content properties for this string</td>
+            </tr>
+            <tr>
+              <td>metafield_key</td>
+              <td></td>
+              <td>String</td>
+              <td>Metafield key to search for</td>
+            </tr>
+            <tr>
+              <td>metafield_value</td>
+              <td></td>
+              <td>String</td>
+              <td>Metafield contains value</td>
+            </tr>
+            <tr>
+              <td>metafield_object_id</td>
+              <td></td>
+              <td>String</td>
+              <td>Object Metafield Object ID (stored as Metafield value)</td>
+            </tr>
+            <tr>
               <td>filters[_id]</td>
               <td></td>
               <td>String</td>
@@ -1312,6 +1327,76 @@ bucket.getObjects({\n\
             </tr>
           </tbody>
         </table>
+        <h3 id="get-objects-by-type">Get Objects by Type</h3>
+        <blockquote>
+          <p>Definition</p>
+        </blockquote> <pre class="highlight bash"><code>GET https://api.cosmicjs.com/v1/:bucket_slug/objects?<span class="hljs-built_in">type</span>=:type_slug</code></pre><pre class="highlight javascript"><code>bucket.getObjects({
+  <span class="hljs-comment">// params</span>
+})</code></pre>
+        <blockquote>
+          <p>Example Request</p>
+        </blockquote> <pre class="highlight bash"><code>curl <span class="hljs-string">"https://api.cosmicjs.com/v1/wedding-site/objects?type=groomsmen&amp;limit=3"</span></code></pre>
+        <script src="https://embed.runkit.com"></script> <pre class="runkit" id="runkit-get-objects-by-type"></pre>
+        <script>
+          var notebook = RunKit.createNotebook(
+          {
+            // the parent element for the new notebook
+            element: document.getElementById("runkit-get-objects-by-type"),
+            // specify the source of the notebook
+            source: "const Cosmic = require('cosmicjs')\n\
+const api = Cosmic()\n\
+const bucket = api.bucket({\n\
+  slug: 'wedding-site',\n\
+})\n\
+// Specify an Object Type\n\
+const data = (await bucket.getObjects({\n\
+  type: 'groomsmen',\n\
+  limit: 3\n\
+})).objects"
+          })
+        </script>
+        <p>Get Objects from an Object Type using getObject method and the type param (the method getObjectsByType is now deprecated).</p>
+        <h3 id="search-and-filter-objects">Search and Filter Objects</h3>
+        <blockquote>
+          <p>Search</p>
+        </blockquote> <pre class="highlight bash"><code>GET https://api.cosmicjs.com/v1/:bucket_slug/objects?<span class="hljs-built_in">type</span>=:type_slug&amp;q=:search_text
+GET https://api.cosmicjs.com/v1/:bucket_slug/objects?<span class="hljs-built_in">type</span>=:type_slug&amp;metafield_key=:metafield_key_text&amp;metafield_value=:metafield_value_text
+GET https://api.cosmicjs.com/v1/:bucket_slug/objects?<span class="hljs-built_in">type</span>=:type_slug&amp;filters[_id]=:object_id_1,:object_id_2</code></pre><pre class="highlight javascript"><code>bucket.getObjects({
+  <span class="hljs-comment">// params</span>
+})</code></pre>
+        <blockquote>
+          <p>Example Request</p>
+        </blockquote> <pre class="highlight bash"><code>curl <span class="hljs-string">"https://api.cosmicjs.com/v1/wedding-site/objects?type=groomsmen&amp;metafield_key=official-title&amp;metafield_value=Best%20Man"</span></code></pre>
+        <script src="https://embed.runkit.com"></script> <pre class="runkit" id="runkit-search-object-type"></pre>
+        <script>
+          var notebook = RunKit.createNotebook(
+          {
+            // the parent element for the new notebook
+            element: document.getElementById("runkit-search-object-type"),
+            // specify the source of the notebook
+            source: "const Cosmic = require('cosmicjs')\n\
+const api = Cosmic()\n\
+const bucket = api.bucket({\n\
+  slug: 'wedding-site'\n\
+})\n\n\
+// Search Objects \n\
+const search = (await bucket.getObjects({\n\
+  type: 'groomsmen',\n\
+  metafield_key: 'official-title',\n\
+  metafield_value: 'Best Man'\n\
+})).objects\n\
+console.log(search)\n\n\
+// Filter Objects \n\
+const filter = (await bucket.getObjects({\n\
+  type: 'groomsmen',\n\
+  filters: {\n\
+    _id: '55b3da7740d7a3791b000009,55b3da7740d7a3791b00000a'\n\
+  }\n\
+})).objects\n\
+console.log(filter)"
+          })
+        </script>
+        <p>Get Objects based on search variables.</p>
         <h2 id="get-object">Get Object</h2>
         <blockquote>
           <p>Definition</p>
@@ -1329,16 +1414,11 @@ bucket.getObjects({\n\
             source: "const Cosmic = require('cosmicjs')\n\
 const api = Cosmic()\n\
 const bucket = api.bucket({\n\
-  slug: 'wedding-site',\n\
-  read_key: ''\n\
+  slug: 'wedding-site'\n\
 })\n\
-bucket.getObject({\n\
+const data = (await bucket.getObject({\n\
   slug: 'registry'\n\
-}).then(data => {\n\
-  console.log(data)\n\
-}).catch(err => {\n\
-  console.log(err)\n\
-})"
+})).object"
           })
         </script>
         <p>Returns a single Object from your Bucket.</p>
@@ -1375,241 +1455,6 @@ bucket.getObject({\n\
               <td></td>
               <td>Enum</td>
               <td>true, Hides metafields</td>
-            </tr>
-            <tr>
-              <td>locale</td>
-              <td></td>
-              <td>String</td>
-              <td>Filter by locale</td>
-            </tr>
-            <tr>
-              <td>pretty</td>
-              <td></td>
-              <td>Enum</td>
-              <td>true, Makes the response more reader-friendly</td>
-            </tr>
-            <tr>
-              <td>read_key</td>
-              <td></td>
-              <td>String</td>
-              <td>Your Bucket read key</td>
-            </tr>
-          </tbody>
-        </table>
-        <h2 id="get-objects-by-type">Get Objects by Type</h2>
-        <blockquote>
-          <p>Definition</p>
-        </blockquote> <pre class="highlight bash"><code>GET https://api.cosmicjs.com/v1/:bucket_slug/object-type/:type_slug</code></pre><pre class="highlight javascript"><code>bucket.getObjectsByType()</code></pre>
-        <blockquote>
-          <p>Example Request</p>
-        </blockquote> <pre class="highlight bash"><code>curl <span class="hljs-string">"https://api.cosmicjs.com/v1/wedding-site/object-type/groomsmen?limit=3"</span></code></pre>
-        <script src="https://embed.runkit.com"></script> <pre class="runkit" id="runkit-get-objects-by-type"></pre>
-        <script>
-          var notebook = RunKit.createNotebook(
-          {
-            // the parent element for the new notebook
-            element: document.getElementById("runkit-get-objects-by-type"),
-            // specify the source of the notebook
-            source: "const Cosmic = require('cosmicjs')\n\
-const api = Cosmic()\n\
-const bucket = api.bucket({\n\
-  slug: 'wedding-site',\n\
-  read_key: ''\n\
-})\n\
-bucket.getObjectsByType({\n\
-  type_slug: 'groomsmen',\n\
-  limit: 3\n\
-}).then(data => {\n\
-  console.log(data)\n\
-}).catch(err => {\n\
-  console.log(err)\n\
-})"
-          })
-        </script>
-        <p>Get Objects from an Object Type.</p>
-        <table>
-          <thead>
-            <tr>
-              <th>Parameter</th>
-              <th>Required</th>
-              <th>Type</th>
-              <th>Description</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>type_slug</td>
-              <td>required</td>
-              <td>String</td>
-              <td>The Object Type slug</td>
-            </tr>
-            <tr>
-              <td>limit</td>
-              <td></td>
-              <td>Number</td>
-              <td>The number of Objects to return</td>
-            </tr>
-            <tr>
-              <td>skip</td>
-              <td></td>
-              <td>Number</td>
-              <td>The number of Objects to skip</td>
-            </tr>
-            <tr>
-              <td>status</td>
-              <td></td>
-              <td>Enum</td>
-              <td>all, Return published and draft status Objects</td>
-            </tr>
-            <tr>
-              <td>revision</td>
-              <td></td>
-              <td>String</td>
-              <td>The revision_id of the Object Revision</td>
-            </tr>
-            <tr>
-              <td>hide_metafields</td>
-              <td></td>
-              <td>Enum</td>
-              <td>true, Hides metafields</td>
-            </tr>
-            <tr>
-              <td>sort</td>
-              <td></td>
-              <td>Enum</td>
-              <td>created_at, -created_at,
-                <br />modified_at, -modified_at,
-                <br />random</td>
-            </tr>
-            <tr>
-              <td>locale</td>
-              <td></td>
-              <td>String</td>
-              <td>Filter by locale</td>
-            </tr>
-            <tr>
-              <td>pretty</td>
-              <td></td>
-              <td>Enum</td>
-              <td>true, Makes the response more reader-friendly</td>
-            </tr>
-            <tr>
-              <td>read_key</td>
-              <td></td>
-              <td>String</td>
-              <td>Your Bucket read key</td>
-            </tr>
-          </tbody>
-        </table>
-        <h2 id="search-objects">Search Objects</h2>
-        <blockquote>
-          <p>Definition</p>
-        </blockquote> <pre class="highlight bash"><code>GET https://api.cosmicjs.com/v1/:bucket_slug/object-type/:type_slug/search</code></pre><pre class="highlight javascript"><code>bucket.searchObjectType()</code></pre>
-        <blockquote>
-          <p>Example Request</p>
-        </blockquote> <pre class="highlight bash"><code>curl <span class="hljs-string">"https://api.cosmicjs.com/v1/wedding-site/object-type/groomsmen/search?metafield_key=official-title&amp;metafield_value=Best%20Man"</span></code></pre>
-        <script src="https://embed.runkit.com"></script> <pre class="runkit" id="runkit-search-object-type"></pre>
-        <script>
-          var notebook = RunKit.createNotebook(
-          {
-            // the parent element for the new notebook
-            element: document.getElementById("runkit-search-object-type"),
-            // specify the source of the notebook
-            source: "const Cosmic = require('cosmicjs')\n\
-const api = Cosmic()\n\
-const bucket = api.bucket({\n\
-  slug: 'wedding-site',\n\
-  read_key: ''\n\
-})\n\
-bucket.searchObjectType({\n\
-  type_slug: 'groomsmen',\n\
-  metafield_key: 'official-title',\n\
-  metafield_value: 'Best Man'\n\
-}).then(data => {\n\
-  console.log(data)\n\
-}).catch(err => {\n\
-  console.log(err)\n\
-})"
-          })
-        </script>
-        <p>Search Objects in an Object Type.</p>
-        <table>
-          <thead>
-            <tr>
-              <th>Parameter</th>
-              <th>Required</th>
-              <th>Type</th>
-              <th>Description</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>type_slug</td>
-              <td></td>
-              <td>String</td>
-              <td>The Object Type slug</td>
-            </tr>
-            <tr>
-              <td>limit</td>
-              <td></td>
-              <td>Number</td>
-              <td>The number of Objects to return</td>
-            </tr>
-            <tr>
-              <td>skip</td>
-              <td></td>
-              <td>Number</td>
-              <td>The number of Objects to skip</td>
-            </tr>
-            <tr>
-              <td>status</td>
-              <td></td>
-              <td>Enum</td>
-              <td>all, Return published and draft status Objects</td>
-            </tr>
-            <tr>
-              <td>hide_metafields</td>
-              <td></td>
-              <td>Enum</td>
-              <td>true, Hides metafields</td>
-            </tr>
-            <tr>
-              <td>sort</td>
-              <td></td>
-              <td>Enum</td>
-              <td>created_at, -created_at,
-                <br />modified_at, -modified_at,
-                <br />random</td>
-            </tr>
-            <tr>
-              <td>q</td>
-              <td></td>
-              <td>String</td>
-              <td>Searches title and content properties for this string</td>
-            </tr>
-            <tr>
-              <td>metafield_key</td>
-              <td></td>
-              <td>String</td>
-              <td>Metafield key to search for</td>
-            </tr>
-            <tr>
-              <td>metafield_value</td>
-              <td></td>
-              <td>String</td>
-              <td>Exact Metafield value to match</td>
-            </tr>
-            <tr>
-              <td>metafield_value_has</td>
-              <td></td>
-              <td>String</td>
-              <td>Metafield value contains this string</td>
-            </tr>
-            <tr>
-              <td>metafield_object_slug</td>
-              <td></td>
-              <td>String</td>
-              <td>Object Metafield Object slug</td>
             </tr>
             <tr>
               <td>locale</td>
@@ -2417,14 +2262,10 @@ const bucket = api.bucket({\n\
   slug: 'wedding-site',\n\
   read_key: ''\n\
 })\n\
-bucket.getMedia({\n\
+const data = (await bucket.getMedia({\n\
   folder: 'groomsmen',\n\
   limit: 3\n\
-}).then(data => {\n\
-  console.log(data)\n\
-}).catch(err => {\n\
-  console.log(err)\n\
-})"
+})).media"
           })
         </script>
         <p>You can add the <code>folder</code> parameter to get Media from a certain folder.</p>
