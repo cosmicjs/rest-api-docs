@@ -183,7 +183,7 @@ Cosmic.authenticate({
         <blockquote>
           <p>Example Request</p>
         </blockquote> <pre class="highlight bash"><code>curl -X POST <span class="hljs-string">"https://api.cosmicjs.com/v1/buckets"</span> \
--H <span class="hljs-string">"Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXV..."</span> \
+-H <span class="hljs-string">"Authorization: Bearer &lt;ACCESS_TOKEN&gt;"</span> \
 -H <span class="hljs-string">"Content-Type: application/json"</span> \
 -d <span class="hljs-string">'{"title": "My New Bucket"}'</span></code></pre><pre class="highlight javascript"><code><span class="hljs-keyword">const</span> Cosmic = <span class="hljs-built_in">require</span>(<span class="hljs-string">'cosmicjs'</span>)({
   <span class="hljs-attr">token</span>: <span class="hljs-string">'your-token-from-auth-request'</span> <span class="hljs-comment">// required</span>
@@ -301,7 +301,7 @@ Cosmic.addBucket({
         <blockquote>
           <p>Example Request</p>
         </blockquote> <pre class="highlight bash"><code>curl <span class="hljs-string">"https://api.cosmicjs.com/v1/buckets"</span> \
--H <span class="hljs-string">"Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXV..."</span> \
+-H <span class="hljs-string">"Authorization: Bearer &lt;ACCESS_TOKEN&gt;"</span> \
 -H <span class="hljs-string">"Content-Type: application/json"</span></code></pre><pre class="highlight javascript"><code><span class="hljs-keyword">const</span> Cosmic = <span class="hljs-built_in">require</span>(<span class="hljs-string">'cosmicjs'</span>)({
   <span class="hljs-attr">token</span>: <span class="hljs-string">'your-token-from-auth-request'</span> <span class="hljs-comment">// optional</span>
 })
@@ -434,7 +434,8 @@ const data = (await bucket.getBucket()).bucket
         </blockquote> <pre class="highlight bash"><code>DELETE https://api.cosmicjs.com/v1/buckets/:bucket_id</code></pre><pre class="highlight javascript"><code>Cosmic.deleteBucket()</code></pre>
         <blockquote>
           <p>Example Request</p>
-        </blockquote> <pre class="highlight bash"><code>DELETE https://api.cosmicjs.com/v1/buckets/:bucket_id</code></pre><pre class="highlight javascript"><code><span class="hljs-keyword">const</span> Cosmic = <span class="hljs-built_in">require</span>(<span class="hljs-string">'cosmicjs'</span>)){
+        </blockquote> <pre class="highlight bash"><code>curl -X DELETE <span class="hljs-string">"https://api.cosmicjs.com/v1/buckets/:bucket_id"</span> \
+-H <span class="hljs-string">"Authorization: Bearer &lt;ACCESS_TOKEN&gt;"</span></code></pre><pre class="highlight javascript"><code><span class="hljs-keyword">const</span> Cosmic = <span class="hljs-built_in">require</span>(<span class="hljs-string">'cosmicjs'</span>)){
   <span class="hljs-attr">token</span>: <span class="hljs-string">'your-token-from-auth-request'</span> <span class="hljs-comment">// required</span>
 })
 Cosmic.deleteBucket({
@@ -483,7 +484,7 @@ Cosmic.deleteBucket({
         <blockquote>
           <p>Example Request</p>
         </blockquote> <pre class="highlight bash"><code>curl -X POST <span class="hljs-string">"https://api.cosmicjs.com/v1/buckets/5ace13795a39fb49db87ac95/import"</span> \
--H <span class="hljs-string">"Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXV..."</span> \
+-H <span class="hljs-string">"Authorization: Bearer &lt;ACCESS_TOKEN&gt;"</span> \
 -H <span class="hljs-string">"Content-Type: application/json"</span> \
 -d <span class="hljs-string">'{ "bucket": { "title": "My New Bucket" } }'</span></code></pre><pre class="highlight javascript"><code><span class="hljs-keyword">const</span> Cosmic = <span class="hljs-built_in">require</span>(<span class="hljs-string">'cosmicjs'</span>)({
   <span class="hljs-attr">token</span>: <span class="hljs-string">'your-token-from-auth-request'</span> <span class="hljs-comment">// required</span>
@@ -579,7 +580,7 @@ Cosmic.importBucket(params).then(<span class="hljs-function"><span class="hljs-p
         <blockquote>
           <p>Example Request</p>
         </blockquote> <pre class="highlight bash"><code>curl -X POST <span class="hljs-string">"https://api.cosmicjs.com/v1/buckets/5ace13795a39fb49db87ac95/deploy"</span> \
--H <span class="hljs-string">"Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXV..."</span> \
+-H <span class="hljs-string">"Authorization: Bearer &lt;ACCESS_TOKEN&gt;"</span> \
 -H <span class="hljs-string">"Content-Type: application/json"</span> \
 -d <span class="hljs-string">'{ "repo_url": "https://github.com/cosmicjs/portfolio-website", "repo_branch": "master" }'</span></code></pre><pre class="highlight javascript"><code><span class="hljs-keyword">const</span> Cosmic = <span class="hljs-built_in">require</span>(<span class="hljs-string">'cosmicjs'</span>)({
   <span class="hljs-attr">token</span>: <span class="hljs-string">'your-token-from-auth-request'</span> <span class="hljs-comment">// required</span>
@@ -703,15 +704,18 @@ bucket.addUser(params).then(<span class="hljs-function"><span class="hljs-params
         <h2 id="get-users">Get Users</h2>
         <blockquote>
           <p>Definition</p>
-        </blockquote> <pre class="highlight bash"><code>GET https://api.cosmicjs.com/v1/:bucket_slug/users</code></pre><pre class="highlight javascript"><code>bucket.getUsers()</code></pre><pre class="highlight javascript"><code><span class="hljs-keyword">const</span> bucket = Cosmic.bucket({
-  <span class="hljs-attr">slug</span>: <span class="hljs-string">'bucket-slug'</span>,
-  <span class="hljs-attr">write_key</span>: <span class="hljs-string">''</span>
+        </blockquote> <pre class="highlight bash"><code>GET https://api.cosmicjs.com/v1/:bucket_slug/users</code></pre><pre class="highlight javascript"><code>bucket.getUsers()</code></pre>
+        <blockquote>
+          <p>Example Request</p>
+        </blockquote> <pre class="highlight javascript"><code><span class="hljs-keyword">const</span> bucket = Cosmic.bucket({
+  <span class="hljs-attr">slug</span>: <span class="hljs-string">'bucket-slug'</span>
 })
 bucket.getUsers().then(<span class="hljs-function"><span class="hljs-params">data</span> =&gt;</span> {
   <span class="hljs-built_in">console</span>.log(data)
 }).catch(<span class="hljs-function"><span class="hljs-params">err</span> =&gt;</span> {
   <span class="hljs-built_in">console</span>.log(err)
-})</code></pre>
+})</code></pre><pre class="highlight bash"><code>curl <span class="hljs-string">"https://api.cosmicjs.com/v1/creative-agency/users"</span> \
+-H <span class="hljs-string">"Authorization: Bearer &lt;ACCESS_TOKEN&gt;"</span></code></pre>
         <blockquote>
           <p>Example Response</p>
         </blockquote> <pre class="highlight json"><code>{
@@ -723,7 +727,13 @@ bucket.getUsers().then(<span class="hljs-function"><span class="hljs-params">dat
       <span class="hljs-attr">"email"</span>: <span class="hljs-string">"starman@milkyway.com"</span>,
       <span class="hljs-attr">"username"</span>: <span class="hljs-string">"starman"</span>,
       <span class="hljs-attr">"bio"</span>: <span class="hljs-string">"Enjoy traveling at the speed of light, black holes and supernovas are my jam."</span>,
-      <span class="hljs-attr">"avatar_url"</span>: <span class="hljs-string">"https://cosmicjs.imgix.net/1c3690c0-9dbc-11e7-b30d-b3b3f0076a4f-me.jpg"</span>
+      <span class="hljs-attr">"avatar_url"</span>: <span class="hljs-string">"https://cosmicjs.imgix.net/1c3690c0-9dbc-11e7-b30d-b3b3f0076a4f-me.jpg"</span>,
+      <span class="hljs-attr">"website"</span>: <span class="hljs-string">"https://starman.com"</span>,
+      <span class="hljs-attr">"twitter"</span>: <span class="hljs-string">"https://twitter.com/starman"</span>,
+      <span class="hljs-attr">"linkedin"</span>: <span class="hljs-string">"http://linkedin.com/in/starman"</span>,
+      <span class="hljs-attr">"github"</span>: <span class="hljs-string">"http://github.com/starman"</span>,
+      <span class="hljs-attr">"company"</span>: <span class="hljs-string">"Starman Inc."</span>,
+      <span class="hljs-attr">"location"</span>: <span class="hljs-string">"Neptune"</span>
     },
     {
       <span class="hljs-attr">"_id"</span>: <span class="hljs-string">"56d66b2f903a79b904000001"</span>,
@@ -732,7 +742,13 @@ bucket.getUsers().then(<span class="hljs-function"><span class="hljs-params">dat
       <span class="hljs-attr">"email"</span>: <span class="hljs-string">"quasar@milkyway.com"</span>,
       <span class="hljs-attr">"username"</span>: <span class="hljs-string">"quasar"</span>,
       <span class="hljs-attr">"bio"</span>: <span class="hljs-string">"I contain massive black holes and may evolve into a galaxy."</span>,
-      <span class="hljs-attr">"avatar_url"</span>: <span class="hljs-string">"https://cosmic-s3.imgix.net/08544a00-eaa3-11e7-8c73-5dadcfada90e-wave.jpg"</span>
+      <span class="hljs-attr">"avatar_url"</span>: <span class="hljs-string">"https://cosmic-s3.imgix.net/08544a00-eaa3-11e7-8c73-5dadcfada90e-wave.jpg"</span>,
+      <span class="hljs-attr">"website"</span>: <span class="hljs-string">"https://quasar.com"</span>,
+      <span class="hljs-attr">"twitter"</span>: <span class="hljs-string">"https://twitter.com/quasar"</span>,
+      <span class="hljs-attr">"linkedin"</span>: <span class="hljs-string">"http://linkedin.com/in/quasar"</span>,
+      <span class="hljs-attr">"github"</span>: <span class="hljs-string">"http://github.com/quasar"</span>,
+      <span class="hljs-attr">"company"</span>: <span class="hljs-string">"Quasar Inc."</span>,
+      <span class="hljs-attr">"location"</span>: <span class="hljs-string">"Titan"</span>
     }
   ],
   <span class="hljs-attr">"total"</span>: <span class="hljs-number">2</span>
@@ -763,7 +779,13 @@ bucket.getUser(params).then(<span class="hljs-function"><span class="hljs-params
     <span class="hljs-attr">"email"</span>: <span class="hljs-string">"starman@milkyway.com"</span>,
     <span class="hljs-attr">"username"</span>: <span class="hljs-string">"starman"</span>,
     <span class="hljs-attr">"bio"</span>: <span class="hljs-string">"Enjoy traveling at the speed of light, black holes and supernovas are my jam."</span>,
-    <span class="hljs-attr">"avatar_url"</span>: <span class="hljs-string">"https://cosmicjs.imgix.net/1c3690c0-9dbc-11e7-b30d-b3b3f0076a4f-me.jpg"</span>
+    <span class="hljs-attr">"avatar_url"</span>: <span class="hljs-string">"https://cosmicjs.imgix.net/1c3690c0-9dbc-11e7-b30d-b3b3f0076a4f-me.jpg"</span>,
+    <span class="hljs-attr">"website"</span>: <span class="hljs-string">"https://starman.com"</span>,
+    <span class="hljs-attr">"twitter"</span>: <span class="hljs-string">"https://twitter.com/starman"</span>,
+    <span class="hljs-attr">"linkedin"</span>: <span class="hljs-string">"http://linkedin.com/in/starman"</span>,
+    <span class="hljs-attr">"github"</span>: <span class="hljs-string">"http://github.com/starman"</span>,
+    <span class="hljs-attr">"company"</span>: <span class="hljs-string">"Starman Inc."</span>,
+    <span class="hljs-attr">"location"</span>: <span class="hljs-string">"Neptune"</span>
   }
 }</code></pre>
         <p>Get a single user from your Bucket. Authentication token is required in the header (see Authentication section). Must have admin level access.</p>
