@@ -71,11 +71,11 @@ GET https://api.cosmicjs.com/v1/:bucket_slug/users
 bucket.getUsers()
 ```
 
+> Example Request
 
 ```javascript
 const bucket = Cosmic.bucket({
-  slug: 'bucket-slug',
-  write_key: ''
+  slug: 'bucket-slug'
 })
 bucket.getUsers().then(data => {
   console.log(data)
@@ -83,6 +83,12 @@ bucket.getUsers().then(data => {
   console.log(err)
 })
 ```
+
+```bash
+curl "https://api.cosmicjs.com/v1/creative-agency/users" \
+-H "Authorization: Bearer <ACCESS_TOKEN>"
+```
+
 
 > Example Response
 
@@ -96,7 +102,13 @@ bucket.getUsers().then(data => {
       "email": "starman@milkyway.com",
       "username": "starman",
       "bio": "Enjoy traveling at the speed of light, black holes and supernovas are my jam.",
-      "avatar_url": "https://cosmicjs.imgix.net/1c3690c0-9dbc-11e7-b30d-b3b3f0076a4f-me.jpg"
+      "avatar_url": "https://cosmicjs.imgix.net/1c3690c0-9dbc-11e7-b30d-b3b3f0076a4f-me.jpg",
+      "website": "https://starman.com",
+      "twitter": "https://twitter.com/starman",
+      "linkedin": "http://linkedin.com/in/starman",
+      "github": "http://github.com/starman",
+      "company": "Starman Inc.",
+      "location": "Neptune"
     },
     {
       "_id": "56d66b2f903a79b904000001",
@@ -105,7 +117,13 @@ bucket.getUsers().then(data => {
       "email": "quasar@milkyway.com",
       "username": "quasar",
       "bio": "I contain massive black holes and may evolve into a galaxy.",
-      "avatar_url": "https://cosmic-s3.imgix.net/08544a00-eaa3-11e7-8c73-5dadcfada90e-wave.jpg"
+      "avatar_url": "https://cosmic-s3.imgix.net/08544a00-eaa3-11e7-8c73-5dadcfada90e-wave.jpg",
+      "website": "https://quasar.com",
+      "twitter": "https://twitter.com/quasar",
+      "linkedin": "http://linkedin.com/in/quasar",
+      "github": "http://github.com/quasar",
+      "company": "Quasar Inc.",
+      "location": "Titan"
     }
   ],
   "total": 2
@@ -153,7 +171,13 @@ bucket.getUser(params).then(data => {
     "email": "starman@milkyway.com",
     "username": "starman",
     "bio": "Enjoy traveling at the speed of light, black holes and supernovas are my jam.",
-    "avatar_url": "https://cosmicjs.imgix.net/1c3690c0-9dbc-11e7-b30d-b3b3f0076a4f-me.jpg"
+    "avatar_url": "https://cosmicjs.imgix.net/1c3690c0-9dbc-11e7-b30d-b3b3f0076a4f-me.jpg",
+    "website": "https://starman.com",
+    "twitter": "https://twitter.com/starman",
+    "linkedin": "http://linkedin.com/in/starman",
+    "github": "http://github.com/starman",
+    "company": "Starman Inc.",
+    "location": "Neptune"
   }
 }
 ```
