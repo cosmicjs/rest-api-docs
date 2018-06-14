@@ -700,6 +700,91 @@ bucket.addUser(params).then(<span class="hljs-function"><span class="hljs-params
             </tr>
           </tbody>
         </table>
+        <h2 id="get-users">Get Users</h2>
+        <blockquote>
+          <p>Definition</p>
+        </blockquote> <pre class="highlight bash"><code>GET https://api.cosmicjs.com/v1/:bucket_slug/users</code></pre><pre class="highlight javascript"><code>bucket.getUsers()</code></pre><pre class="highlight javascript"><code><span class="hljs-keyword">const</span> bucket = Cosmic.bucket({
+  <span class="hljs-attr">slug</span>: <span class="hljs-string">'bucket-slug'</span>,
+  <span class="hljs-attr">write_key</span>: <span class="hljs-string">''</span>
+})
+bucket.getUsers().then(<span class="hljs-function"><span class="hljs-params">data</span> =&gt;</span> {
+  <span class="hljs-built_in">console</span>.log(data)
+}).catch(<span class="hljs-function"><span class="hljs-params">err</span> =&gt;</span> {
+  <span class="hljs-built_in">console</span>.log(err)
+})</code></pre>
+        <blockquote>
+          <p>Example Response</p>
+        </blockquote> <pre class="highlight json"><code>{
+  <span class="hljs-attr">"users"</span>: [
+    {
+      <span class="hljs-attr">"_id"</span>: <span class="hljs-string">"5357ef811693be2118000001"</span>,
+      <span class="hljs-attr">"first_name"</span>: <span class="hljs-string">"Starman"</span>,
+      <span class="hljs-attr">"last_name"</span>: <span class="hljs-string">"Jones"</span>,
+      <span class="hljs-attr">"email"</span>: <span class="hljs-string">"starman@milkyway.com"</span>,
+      <span class="hljs-attr">"username"</span>: <span class="hljs-string">"starman"</span>,
+      <span class="hljs-attr">"bio"</span>: <span class="hljs-string">"Enjoy traveling at the speed of light, black holes and supernovas are my jam."</span>,
+      <span class="hljs-attr">"avatar_url"</span>: <span class="hljs-string">"https://cosmicjs.imgix.net/1c3690c0-9dbc-11e7-b30d-b3b3f0076a4f-me.jpg"</span>
+    },
+    {
+      <span class="hljs-attr">"_id"</span>: <span class="hljs-string">"56d66b2f903a79b904000001"</span>,
+      <span class="hljs-attr">"first_name"</span>: <span class="hljs-string">"Quasar"</span>,
+      <span class="hljs-attr">"last_name"</span>: <span class="hljs-string">"Jones"</span>,
+      <span class="hljs-attr">"email"</span>: <span class="hljs-string">"quasar@milkyway.com"</span>,
+      <span class="hljs-attr">"username"</span>: <span class="hljs-string">"quasar"</span>,
+      <span class="hljs-attr">"bio"</span>: <span class="hljs-string">"I contain massive black holes and may evolve into a galaxy."</span>,
+      <span class="hljs-attr">"avatar_url"</span>: <span class="hljs-string">"https://cosmic-s3.imgix.net/08544a00-eaa3-11e7-8c73-5dadcfada90e-wave.jpg"</span>
+    }
+  ],
+  <span class="hljs-attr">"total"</span>: <span class="hljs-number">2</span>
+}</code></pre>
+        <p>Get users in your Bucket. Authentication token is required in the header (see Authentication section). Must have admin level access.</p>
+        <h2 id="get-user">Get User</h2>
+        <blockquote>
+          <p>Definition</p>
+        </blockquote> <pre class="highlight bash"><code>GET https://api.cosmicjs.com/v1/:bucket_slug/users/:user_id</code></pre><pre class="highlight javascript"><code>bucket.getUser()</code></pre><pre class="highlight javascript"><code><span class="hljs-keyword">const</span> bucket = Cosmic.bucket({
+  <span class="hljs-attr">slug</span>: <span class="hljs-string">'bucket-slug'</span>,
+  <span class="hljs-attr">write_key</span>: <span class="hljs-string">''</span>
+})
+<span class="hljs-keyword">const</span> params = {
+  <span class="hljs-attr">id</span>: <span class="hljs-string">'5357ef811693be2118000001'</span>
+}
+bucket.getUser(params).then(<span class="hljs-function"><span class="hljs-params">data</span> =&gt;</span> {
+  <span class="hljs-built_in">console</span>.log(data)
+}).catch(<span class="hljs-function"><span class="hljs-params">err</span> =&gt;</span> {
+  <span class="hljs-built_in">console</span>.log(err)
+})</code></pre>
+        <blockquote>
+          <p>Example Response</p>
+        </blockquote> <pre class="highlight json"><code>{
+  <span class="hljs-attr">"user"</span>: {
+    <span class="hljs-attr">"_id"</span>: <span class="hljs-string">"5357ef811693be2118000001"</span>,
+    <span class="hljs-attr">"first_name"</span>: <span class="hljs-string">"Starman"</span>,
+    <span class="hljs-attr">"last_name"</span>: <span class="hljs-string">"Jones"</span>,
+    <span class="hljs-attr">"email"</span>: <span class="hljs-string">"starman@milkyway.com"</span>,
+    <span class="hljs-attr">"username"</span>: <span class="hljs-string">"starman"</span>,
+    <span class="hljs-attr">"bio"</span>: <span class="hljs-string">"Enjoy traveling at the speed of light, black holes and supernovas are my jam."</span>,
+    <span class="hljs-attr">"avatar_url"</span>: <span class="hljs-string">"https://cosmicjs.imgix.net/1c3690c0-9dbc-11e7-b30d-b3b3f0076a4f-me.jpg"</span>
+  }
+}</code></pre>
+        <p>Get a single user from your Bucket. Authentication token is required in the header (see Authentication section). Must have admin level access.</p>
+        <table>
+          <thead>
+            <tr>
+              <th>Parameter</th>
+              <th>Required</th>
+              <th>Type</th>
+              <th>Description</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>id</td>
+              <td>required</td>
+              <td>String</td>
+              <td>User&#39;s id (found as <code>_id</code> param)</td>
+            </tr>
+          </tbody>
+        </table>
         <h1 id="object-types">Object Types</h1>
         <h2 id="add-object-type">Add Object Type</h2>
         <blockquote>
