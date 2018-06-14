@@ -147,8 +147,7 @@ bucket.getUser()
 
 ```javascript
 const bucket = Cosmic.bucket({
-  slug: 'bucket-slug',
-  write_key: ''
+  slug: 'bucket-slug'
 })
 const params = {
   id: '5357ef811693be2118000001'
