@@ -18,7 +18,7 @@ Cosmic.addBucket()
 
 ```bash
 curl -X POST "https://api.cosmicjs.com/v1/buckets" \
--H "Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXV..." \
+-H "Authorization: Bearer <ACCESS_TOKEN>" \
 -H "Content-Type: application/json" \
 -d '{"title": "My New Bucket"}'
 ```
@@ -81,7 +81,7 @@ Cosmic.getBuckets()
 
 ```bash
 curl "https://api.cosmicjs.com/v1/buckets" \
--H "Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXV..." \
+-H "Authorization: Bearer <ACCESS_TOKEN>" \
 -H "Content-Type: application/json"
 ```
 
@@ -188,11 +188,7 @@ const api = Cosmic()
 const bucket = api.bucket({
   slug: 'wedding-site'
 })
-bucket.getBucket().then(data => {
-  console.log(data)
-}).catch(err => {
-  console.log(err)
-})
+const data = (await bucket.getBucket()).bucket
 </pre>
 
 
@@ -220,7 +216,8 @@ Cosmic.deleteBucket()
 > Example Request
 
 ```bash
-DELETE https://api.cosmicjs.com/v1/buckets/:bucket_id
+curl -X DELETE "https://api.cosmicjs.com/v1/buckets/:bucket_id" \
+-H "Authorization: Bearer <ACCESS_TOKEN>"
 ```
 
 ```javascript
@@ -277,7 +274,7 @@ Cosmic.importBucket()
 
 ```bash
 curl -X POST "https://api.cosmicjs.com/v1/buckets/5ace13795a39fb49db87ac95/import" \
--H "Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXV..." \
+-H "Authorization: Bearer <ACCESS_TOKEN>" \
 -H "Content-Type: application/json" \
 -d '{ "bucket": { "title": "My New Bucket" } }'
 ```
@@ -350,7 +347,7 @@ Cosmic.deployApp()
 
 ```bash
 curl -X POST "https://api.cosmicjs.com/v1/buckets/5ace13795a39fb49db87ac95/deploy" \
--H "Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXV..." \
+-H "Authorization: Bearer <ACCESS_TOKEN>" \
 -H "Content-Type: application/json" \
 -d '{ "repo_url": "https://github.com/cosmicjs/portfolio-website", "repo_branch": "master" }'
 ```

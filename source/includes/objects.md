@@ -150,32 +150,126 @@ curl "https://api.cosmicjs.com/v1/wedding-site/objects?pretty=true&hide_metafiel
 const api = Cosmic()\n\
 const bucket = api.bucket({\n\
   slug: 'wedding-site',\n\
-  read_key: ''\n\
 })\n\
-bucket.getObjects({\n\
-  limit: 2\n\
-}).then(data => {\n\
-  console.log(data)\n\
-}).catch(err => {\n\
-  console.log(err)\n\
-})"
+// Get all Objects from a Bucket\n\
+const data = (await bucket.getObjects()).objects"
 })</script>
 
-Returns all Objects from your Bucket.
+Returns Objects from your Bucket.
 
 
 Parameter | Required | Type | Description
 --------- | ------- | ----------- | -----------
+type | | String | The Object Type slug
 limit | | Number | The number of Objects to return
 skip | | Number | The number of Objects to skip
 status | | Enum | all, Return published and draft status Objects
 hide_metafields | | Enum | true, Hides metafields
 sort | | Enum | created_at, -created_at,<br />modified_at, -modified_at,<br />random
 locale | | String | Filter by locale
+q | | String | Searches title and content properties for this string
+metafield_key | | String | Metafield key to search for
+metafield_value | | String | Metafield contains value
+metafield_object_id | | String | Object Metafield Object ID (stored as Metafield value)
 filters[_id] | | String | Filter by Object IDs (comma separated for multiple)
 filters[connected_to] | | String | Returns Objects that reference the specified Object ID (String)
 pretty | | Enum | true, Makes the response more reader-friendly
 read_key | | String | Your Bucket read key
+
+### Get Objects by Type
+
+> Definition
+
+```bash
+GET https://api.cosmicjs.com/v1/:bucket_slug/objects?type=:type_slug
+```
+
+```javascript
+bucket.getObjects({
+  // params
+})
+```
+
+> Example Request
+
+```bash
+curl "https://api.cosmicjs.com/v1/wedding-site/objects?type=groomsmen&limit=3"
+```
+
+<script src="https://embed.runkit.com"></script>
+<pre class="runkit" id="runkit-get-objects-by-type"></pre>
+<script>var notebook = RunKit.createNotebook({
+    // the parent element for the new notebook
+    element: document.getElementById("runkit-get-objects-by-type"),
+    // specify the source of the notebook
+    source: "const Cosmic = require('cosmicjs')\n\
+const api = Cosmic()\n\
+const bucket = api.bucket({\n\
+  slug: 'wedding-site',\n\
+})\n\
+// Specify an Object Type\n\
+const data = (await bucket.getObjects({\n\
+  type: 'groomsmen',\n\
+  limit: 3\n\
+})).objects"
+})</script>
+
+
+Get Objects from an Object Type using getObject method and the type param (the method getObjectsByType is now deprecated).
+
+### Search and Filter Objects
+
+> Search
+
+```bash
+GET https://api.cosmicjs.com/v1/:bucket_slug/objects?type=:type_slug&q=:search_text
+GET https://api.cosmicjs.com/v1/:bucket_slug/objects?type=:type_slug&metafield_key=:metafield_key_text&metafield_value=:metafield_value_text
+GET https://api.cosmicjs.com/v1/:bucket_slug/objects?type=:type_slug&filters[_id]=:object_id_1,:object_id_2
+```
+
+```javascript
+bucket.getObjects({
+  // params
+})
+```
+
+> Example Request
+
+```bash
+curl "https://api.cosmicjs.com/v1/wedding-site/objects?type=groomsmen&metafield_key=official-title&metafield_value=Best%20Man"
+```
+
+<script src="https://embed.runkit.com"></script>
+<pre class="runkit" id="runkit-search-object-type"></pre>
+<script>var notebook = RunKit.createNotebook({
+    // the parent element for the new notebook
+    element: document.getElementById("runkit-search-object-type"),
+    // specify the source of the notebook
+    source: "const Cosmic = require('cosmicjs')\n\
+const api = Cosmic()\n\
+const bucket = api.bucket({\n\
+  slug: 'wedding-site'\n\
+})\n\n\
+// Search Objects \n\
+const search = (await bucket.getObjects({\n\
+  type: 'groomsmen',\n\
+  metafield_key: 'official-title',\n\
+  metafield_value: 'Best Man'\n\
+})).objects\n\
+console.log(search)\n\n\
+// Filter Objects \n\
+const filter = (await bucket.getObjects({\n\
+  type: 'groomsmen',\n\
+  filters: {\n\
+    _id: '55b3da7740d7a3791b000009,55b3da7740d7a3791b00000a'\n\
+  }\n\
+})).objects\n\
+console.log(filter)"
+})</script>
+
+
+Get Objects based on search variables. (the method searchObjectType is now deprecated)
+
 
 
 ## Get Object
@@ -205,16 +299,11 @@ curl "https://api.cosmicjs.com/v1/wedding-site/object/registry"
     source: "const Cosmic = require('cosmicjs')\n\
 const api = Cosmic()\n\
 const bucket = api.bucket({\n\
-  slug: 'wedding-site',\n\
-  read_key: ''\n\
+  slug: 'wedding-site'\n\
 })\n\
-bucket.getObject({\n\
+const data = (await bucket.getObject({\n\
   slug: 'registry'\n\
-}).then(data => {\n\
-  console.log(data)\n\
-}).catch(err => {\n\
-  console.log(err)\n\
-})"
+})).object"
 })</script>
 
 Returns a single Object from your Bucket.
@@ -230,122 +319,6 @@ locale | | String | Filter by locale
 pretty | | Enum | true, Makes the response more reader-friendly
 read_key | | String | Your Bucket read key
 
-## Get Objects by Type
-
-> Definition
-
-```bash
-GET https://api.cosmicjs.com/v1/:bucket_slug/object-type/:type_slug
-```
-
-```javascript
-bucket.getObjectsByType()
-```
-
-> Example Request
-
-```bash
-curl "https://api.cosmicjs.com/v1/wedding-site/object-type/groomsmen?limit=3"
-```
-
-<script src="https://embed.runkit.com"></script>
-<pre class="runkit" id="runkit-get-objects-by-type"></pre>
-<script>var notebook = RunKit.createNotebook({
-    // the parent element for the new notebook
-    element: document.getElementById("runkit-get-objects-by-type"),
-    // specify the source of the notebook
-    source: "const Cosmic = require('cosmicjs')\n\
-const api = Cosmic()\n\
-const bucket = api.bucket({\n\
-  slug: 'wedding-site',\n\
-  read_key: ''\n\
-})\n\
-bucket.getObjectsByType({\n\
-  type_slug: 'groomsmen',\n\
-  limit: 3\n\
-}).then(data => {\n\
-  console.log(data)\n\
-}).catch(err => {\n\
-  console.log(err)\n\
-})"
-})</script>
-
-
-Get Objects from an Object Type.
-
-Parameter | Required | Type | Description
---------- | ------- | ----------- | -----------
-type_slug | required | String | The Object Type slug
-limit | | Number | The number of Objects to return
-skip | | Number | The number of Objects to skip
-status | | Enum | all, Return published and draft status Objects
-revision | | String | The revision_id of the Object Revision
-hide_metafields | | Enum | true, Hides metafields
-sort | | Enum | created_at, -created_at,<br />modified_at, -modified_at,<br />random
-locale | | String | Filter by locale
-pretty | | Enum | true, Makes the response more reader-friendly
-read_key | | String | Your Bucket read key
-
-## Search Objects
-
-> Definition
-
-```bash
-GET https://api.cosmicjs.com/v1/:bucket_slug/object-type/:type_slug/search
-```
-
-```javascript
-bucket.searchObjectType()
-```
-
-> Example Request
-
-```bash
-curl "https://api.cosmicjs.com/v1/wedding-site/object-type/groomsmen/search?metafield_key=official-title&metafield_value=Best%20Man"
-```
-
-<script src="https://embed.runkit.com"></script>
-<pre class="runkit" id="runkit-search-object-type"></pre>
-<script>var notebook = RunKit.createNotebook({
-    // the parent element for the new notebook
-    element: document.getElementById("runkit-search-object-type"),
-    // specify the source of the notebook
-    source: "const Cosmic = require('cosmicjs')\n\
-const api = Cosmic()\n\
-const bucket = api.bucket({\n\
-  slug: 'wedding-site',\n\
-  read_key: ''\n\
-})\n\
-bucket.searchObjectType({\n\
-  type_slug: 'groomsmen',\n\
-  metafield_key: 'official-title',\n\
-  metafield_value: 'Best Man'\n\
-}).then(data => {\n\
-  console.log(data)\n\
-}).catch(err => {\n\
-  console.log(err)\n\
-})"
-})</script>
-
-
-Search Objects in an Object Type.
-
-Parameter | Required | Type | Description
---------- | ------- | ----------- | -----------
-type_slug | | String | The Object Type slug
-limit | | Number | The number of Objects to return
-skip | | Number | The number of Objects to skip
-status | | Enum | all, Return published and draft status Objects
-hide_metafields | | Enum | true, Hides metafields
-sort | | Enum | created_at, -created_at,<br />modified_at, -modified_at,<br />random
-q | | String | Searches title and content properties for this string
-metafield_key | | String | Metafield key to search for
-metafield_value | | String | Exact Metafield value to match
-metafield_value_has | | String | Metafield value contains this string
-metafield_object_slug | | String | Object Metafield Object slug
-locale | | String | Filter by locale
-pretty | | Enum | true, Makes the response more reader-friendly
-read_key | | String | Your Bucket read key
 
 ## Edit Object
 

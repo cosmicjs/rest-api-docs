@@ -141,14 +141,10 @@ const bucket = api.bucket({\n\
   slug: 'wedding-site',\n\
   read_key: ''\n\
 })\n\
-bucket.getMedia({\n\
+const data = (await bucket.getMedia({\n\
   folder: 'groomsmen',\n\
   limit: 3\n\
-}).then(data => {\n\
-  console.log(data)\n\
-}).catch(err => {\n\
-  console.log(err)\n\
-})"
+})).media"
 })</script>
 
 You can add the `folder` parameter to get Media from a certain folder.

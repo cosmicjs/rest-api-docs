@@ -133,14 +133,9 @@ curl "https://api.cosmicjs.com/v1/wedding-site/object-types"
     source: "const Cosmic = require('cosmicjs')\n\
 const api = Cosmic()\n\
 const bucket = api.bucket({\n\
-  slug: 'wedding-site',\n\
-  read_key: ''\n\
+  slug: 'simple-blog-website'\n\
 })\n\
-bucket.getObjectTypes().then(data => {\n\
-  console.log(data)\n\
-}).catch(err => {\n\
-  console.log(err)\n\
-})"
+const data = (await bucket.getObjectTypes()).object_types"
 })</script>
 
 Get all Object Types in your Bucket.
