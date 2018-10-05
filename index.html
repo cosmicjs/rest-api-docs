@@ -1853,6 +1853,20 @@ bucket.deleteObject({
       <span class="hljs-attr">"value"</span>: <span class="hljs-string">""</span>
     },
     {
+      <span class="hljs-attr">"type"</span>: <span class="hljs-string">"json"</span>,
+      <span class="hljs-attr">"title"</span>: <span class="hljs-string">"JSON Data"</span>,
+      <span class="hljs-attr">"key"</span>: <span class="hljs-string">"json_data"</span>,
+      <span class="hljs-attr">"value"</span>: {
+          <span class="hljs-attr">"strings"</span>: <span class="hljs-string">"cheese"</span>,
+          <span class="hljs-attr">"arrays"</span>: [<span class="hljs-string">"Bradbury"</span>,<span class="hljs-string">"Charles"</span>,<span class="hljs-string">"Ramono"</span>,<span class="hljs-string">"the last Jedi"</span>,<span class="hljs-string">"Liotta"</span>],
+          <span class="hljs-attr">"objects"</span>: {
+            <span class="hljs-attr">"bools"</span>: <span class="hljs-literal">true</span>,
+            <span class="hljs-attr">"nestable"</span>: <span class="hljs-literal">true</span>
+          }
+        }
+      }
+    },
+    {
       <span class="hljs-attr">"type"</span>: <span class="hljs-string">"radio-buttons"</span>,
       <span class="hljs-attr">"title"</span>: <span class="hljs-string">"Deposit Required"</span>,
       <span class="hljs-attr">"key"</span>: <span class="hljs-string">"deposit_required"</span>,
@@ -1945,7 +1959,7 @@ bucket.deleteObject({
               <td>text, textarea, html-textarea,
                 <br />select-dropdown, object, objects,
                 <br />file, date, radio-buttons, check-boxes,
-                <br />repeater, parent, markdown</td>
+                <br />repeater, parent, markdown, json</td>
             </tr>
             <tr>
               <td>title</td>
