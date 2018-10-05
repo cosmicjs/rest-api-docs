@@ -80,6 +80,20 @@ Metafields are powerful components that can be added to Objects and Object Types
       "value": ""
     },
     {
+      "type": "json",
+      "title": "JSON Data",
+      "key": "json_data",
+      "value": {
+          "strings": "cheese",
+          "arrays": ["Bradbury","Charles","Ramono","the last Jedi","Liotta"],
+          "objects": {
+            "bools": true,
+            "nestable": true
+          }
+        }
+      }
+    },
+    {
       "type": "radio-buttons",
       "title": "Deposit Required",
       "key": "deposit_required",
@@ -159,7 +173,7 @@ Metafields are powerful components that can be added to Objects and Object Types
 
 Parameter | Required | Type | Description
 --------- | ------- | ----------- | -----------
-type | required | Enum | text, textarea, html-textarea, <br />select-dropdown, object, objects, <br />file, date, radio-buttons, check-boxes, <br />repeater, parent, markdown
+type | required | Enum | text, textarea, html-textarea, <br />select-dropdown, object, objects, <br />file, date, radio-buttons, check-boxes, <br />repeater, parent, markdown, json
 title | required | String | Your Metafield title
 key | required | String | Unique identifier for your Metafield
 value | | String | Metafield value
