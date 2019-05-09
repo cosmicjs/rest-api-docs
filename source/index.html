@@ -34,21 +34,21 @@
   </head>
 
   <body class="<%= page_classes %>" data-languages="<%= JSON.stringify(langs) %>">
+    <div style="background: #fff; z-index: 100; position: fixed; width: 100%">
+      <div style="background: rgba(255,229,100,.3); padding: 20px; text-align: center; border-bottom: 5px solid #e7c000">These are the old docs. Go the the <a href="https://cosmicjs.com/docs/rest-api">new Cosmic JS REST API documentation</a>.</div>
+    </div>
     <a href="#" id="nav-button">
       <span>
         NAV
         <%- image_tag('navbar.png') %>
       </span>
     </a>
-    <div class="tocify-wrapper">
+    <div class="tocify-wrapper" style="padding-top: 55px">
       <div style="text-align: center; margin-top: 15px">
         <a href="https://cosmicjs.com" style="text-decoration: none">
           <img src="https://cosmicjs.com/images/logo.svg" width="60"/><br />
           <h2 style="color: #fff;">REST API</h2>
         </a>
-        <div style="height: 30px;">
-          <a style="color: #29ABE2;" class="github-button" href="https://github.com/cosmicjs/rest-api-docs" data-show-count="true" aria-label="Star cosmicjs/rest-api-docs on GitHub">Star</a>
-        </div>
       </div>
       <% if (langs) { %>
         <div class="lang-selector">
@@ -74,7 +74,7 @@
         </ul>
       <% } %>
     </div>
-    <div class="page-wrapper">
+    <div class="page-wrapper" style="padding-top: 55px">
       <div class="dark-box"></div>
       <div class="content">
         <% for(var i=0; i<includes.length; i++) { %>
